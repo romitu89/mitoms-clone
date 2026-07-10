@@ -66,9 +66,12 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [showConsultation, setShowConsultation] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [desktopServicesOpen, setDesktopServicesOpen] = useState(false);
 
   const openConsultation = () => {
     setIsOpen(false);
+    setMobileServicesOpen(false);
+    setDesktopServicesOpen(false);
     setShowConsultation(true);
   };
 
@@ -105,28 +108,48 @@ export default function Navbar() {
             </Link>
 
             {/* Services Dropdown */}
-            <div className="group relative">
+            <div
+              className="relative"
+              onMouseLeave={() => setDesktopServicesOpen(false)}
+            >
               <Link
                 href="/services"
-                className="relative flex items-center gap-1.5 text-[15px] font-semibold text-[#07112F] transition-colors duration-300 hover:text-[#4B22FF]"
+                onMouseEnter={() => setDesktopServicesOpen(true)}
+                onFocus={() => setDesktopServicesOpen(true)}
+                className={`group/services-link relative flex items-center gap-1.5 text-[15px] font-semibold transition-colors duration-300 ${
+                  desktopServicesOpen
+                    ? "text-[#4B22FF]"
+                    : "text-[#07112F] hover:text-[#4B22FF]"
+                }`}
               >
                 Services
 
                 <ChevronDown
                   size={16}
-                  className="transition-transform duration-300 group-hover:rotate-180"
+                  className={`transition-transform duration-300 ${
+                    desktopServicesOpen ? "rotate-180" : ""
+                  }`}
                 />
 
-                <span className="absolute -bottom-2 left-0 h-[3px] w-0 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D] transition-all duration-300 group-hover:w-full" />
+                <span
+                  className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D] transition-all duration-300 ${
+                    desktopServicesOpen ? "w-full" : "w-0"
+                  }`}
+                />
               </Link>
 
-              {/* Invisible hover bridge */}
-              <div className="absolute left-1/2 top-full h-7 w-[560px] -translate-x-1/2" />
-
-              {/* Dropdown Box */}
-              <div className="pointer-events-none invisible absolute left-1/2 top-[calc(100%+26px)] w-[680px] -translate-x-1/2 translate-y-3 opacity-0 transition-all duration-300 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+              {/* Dropdown wrapper */}
+              <div
+                onMouseEnter={() => setDesktopServicesOpen(true)}
+                className={`absolute left-1/2 top-full w-[680px] -translate-x-1/2 pt-4 transition-all duration-300 ${
+                  desktopServicesOpen
+                    ? "pointer-events-auto visible translate-y-0 opacity-100"
+                    : "pointer-events-none invisible translate-y-3 opacity-0"
+                }`}
+              >
                 <div className="relative overflow-hidden rounded-[26px] border border-[#e7e2f5] bg-white p-5 shadow-[0_28px_80px_rgba(20,15,60,0.18)]">
                   <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#FF315D]/10 blur-3xl" />
+
                   <div className="pointer-events-none absolute -bottom-24 -left-20 h-56 w-56 rounded-full bg-[#4B22FF]/10 blur-3xl" />
 
                   <div className="relative grid grid-cols-2 gap-3">
@@ -137,6 +160,7 @@ export default function Navbar() {
                         <Link
                           key={service.title}
                           href={service.href}
+                          onClick={() => setDesktopServicesOpen(false)}
                           className="group/service flex items-start gap-4 rounded-[18px] border border-transparent p-4 transition-all duration-300 hover:border-[#e7e2f5] hover:bg-[#faf9ff] hover:shadow-[0_12px_28px_rgba(38,27,104,0.07)]"
                         >
                           <div
@@ -188,6 +212,7 @@ export default function Navbar() {
               className="group relative text-[15px] font-semibold text-[#07112F] transition-colors duration-300 hover:text-[#4B22FF]"
             >
               Portfolio
+
               <span className="absolute -bottom-2 left-0 h-[3px] w-0 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D] transition-all duration-300 group-hover:w-full" />
             </Link>
 
@@ -196,6 +221,7 @@ export default function Navbar() {
               className="group relative text-[15px] font-semibold text-[#07112F] transition-colors duration-300 hover:text-[#4B22FF]"
             >
               About Us
+
               <span className="absolute -bottom-2 left-0 h-[3px] w-0 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D] transition-all duration-300 group-hover:w-full" />
             </Link>
 
@@ -204,6 +230,7 @@ export default function Navbar() {
               className="group relative text-[15px] font-semibold text-[#07112F] transition-colors duration-300 hover:text-[#4B22FF]"
             >
               Contact Us
+
               <span className="absolute -bottom-2 left-0 h-[3px] w-0 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D] transition-all duration-300 group-hover:w-full" />
             </Link>
           </nav>
