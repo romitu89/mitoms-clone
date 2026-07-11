@@ -1,6 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ConsultationModal from "./ConsultationModal";
@@ -14,7 +19,6 @@ import {
   PenTool,
   Code2,
   TrendingUp,
-  CheckCircle2,
   Smartphone,
   Cloud,
   Brain,
@@ -274,6 +278,36 @@ type TypewriterSegment = {
   underlineClassName?: string;
 };
 
+function subscribeToReducedMotion(onChange: () => void) {
+  const mediaQuery = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  );
+
+  mediaQuery.addEventListener("change", onChange);
+
+  return () => {
+    mediaQuery.removeEventListener("change", onChange);
+  };
+}
+
+function getReducedMotionSnapshot() {
+  return window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+}
+
+function getReducedMotionServerSnapshot() {
+  return false;
+}
+
+function usePrefersReducedMotion() {
+  return useSyncExternalStore(
+    subscribeToReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot,
+  );
+}
+
 function TypewriterText({
   segments,
   speed = 95,
@@ -292,65 +326,66 @@ function TypewriterText({
   const [visibleCharacters, setVisibleCharacters] = useState(0);
   const { elementRef, hasStarted } =
     useStartWhenVisible<HTMLSpanElement>(0.12);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const fullText = segments.map((segment) => segment.text).join("");
   const totalCharacters = fullText.length;
+  const displayedCharacters = prefersReducedMotion
+    ? totalCharacters
+    : visibleCharacters;
 
   useEffect(() => {
-    if (!hasStarted || totalCharacters === 0) {
+    if (
+      !hasStarted ||
+      prefersReducedMotion ||
+      totalCharacters === 0 ||
+      visibleCharacters >= totalCharacters
+    ) {
       return;
     }
 
-    let timeoutId: ReturnType<typeof setTimeout> | undefined;
-    let intervalId: ReturnType<typeof setInterval> | undefined;
-
-    setVisibleCharacters(0);
-
-    timeoutId = setTimeout(() => {
-      intervalId = setInterval(() => {
-        setVisibleCharacters((current) => {
-          const next = Math.min(current + 1, totalCharacters);
-
-          if (next >= totalCharacters && intervalId) {
-            clearInterval(intervalId);
-          }
-
-          return next;
-        });
-      }, speed);
-    }, delay);
+    const timeoutId = window.setTimeout(
+      () => {
+        setVisibleCharacters((current) =>
+          Math.min(current + 1, totalCharacters),
+        );
+      },
+      visibleCharacters === 0 ? delay : speed,
+    );
 
     return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
+      window.clearTimeout(timeoutId);
     };
-  }, [delay, hasStarted, speed, totalCharacters]);
-
-  let remainingCharacters = visibleCharacters;
+  }, [
+    delay,
+    hasStarted,
+    prefersReducedMotion,
+    speed,
+    totalCharacters,
+    visibleCharacters,
+  ]);
 
   const renderSegments = (showTypedText: boolean) =>
     segments.map((segment, index) => {
+      const segmentStart = segments
+        .slice(0, index)
+        .reduce(
+          (total, currentSegment) =>
+            total + currentSegment.text.length,
+          0,
+        );
+
       const characterCount = showTypedText
         ? Math.max(
             0,
-            Math.min(segment.text.length, remainingCharacters),
+            Math.min(
+              segment.text.length,
+              displayedCharacters - segmentStart,
+            ),
           )
         : segment.text.length;
 
       const visibleText = segment.text.slice(0, characterCount);
-
-      if (showTypedText) {
-        remainingCharacters = Math.max(
-          0,
-          remainingCharacters - segment.text.length,
-        );
-      }
-
       const segmentComplete =
         characterCount === segment.text.length;
 
@@ -376,7 +411,9 @@ function TypewriterText({
     });
 
   const showCursor =
-    hasStarted && visibleCharacters < totalCharacters;
+    hasStarted &&
+    !prefersReducedMotion &&
+    visibleCharacters < totalCharacters;
 
   return (
     <span
@@ -433,70 +470,86 @@ function LoopingTypewriterText({
   >("typing");
   const { elementRef, hasStarted } =
     useStartWhenVisible<HTMLSpanElement>(0.2);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
-    if (!hasStarted || text.length === 0) {
+    if (
+      !hasStarted ||
+      prefersReducedMotion ||
+      text.length === 0
+    ) {
       return;
     }
 
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (reduceMotion) {
-      setVisibleCharacters(text.length);
-      setPhase("holding");
-      return;
-    }
-
-    let timeoutId: ReturnType<typeof setTimeout>;
+    let timeoutDelay = restartDelay;
+    let nextAction: () => void = () => {
+      setPhase("typing");
+    };
 
     if (phase === "typing") {
       if (visibleCharacters < text.length) {
-        timeoutId = setTimeout(() => {
+        timeoutDelay = typingSpeed;
+        nextAction = () => {
           setVisibleCharacters((current) =>
             Math.min(current + 1, text.length),
           );
-        }, typingSpeed);
+        };
       } else {
-        timeoutId = setTimeout(() => {
-          setPhase("holding");
-        }, typingSpeed);
+        timeoutDelay = holdDuration;
+        nextAction = () => {
+          setPhase("deleting");
+        };
       }
-    } else if (phase === "holding") {
-      timeoutId = setTimeout(() => {
-        setPhase("deleting");
-      }, holdDuration);
     } else if (phase === "deleting") {
       if (visibleCharacters > 0) {
-        timeoutId = setTimeout(() => {
-          setVisibleCharacters((current) => Math.max(current - 1, 0));
-        }, deletingSpeed);
+        timeoutDelay = deletingSpeed;
+        nextAction = () => {
+          setVisibleCharacters((current) =>
+            Math.max(current - 1, 0),
+          );
+        };
       } else {
-        timeoutId = setTimeout(() => {
+        timeoutDelay = restartDelay;
+        nextAction = () => {
           setPhase("restarting");
-        }, deletingSpeed);
+        };
       }
-    } else {
-      timeoutId = setTimeout(() => {
+    } else if (phase === "restarting") {
+      timeoutDelay = restartDelay;
+      nextAction = () => {
         setPhase("typing");
-      }, restartDelay);
+      };
+    } else {
+      timeoutDelay = holdDuration;
+      nextAction = () => {
+        setPhase("deleting");
+      };
     }
 
-    return () => clearTimeout(timeoutId);
+    const timeoutId = window.setTimeout(
+      nextAction,
+      timeoutDelay,
+    );
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
   }, [
     deletingSpeed,
     hasStarted,
     holdDuration,
     phase,
+    prefersReducedMotion,
     restartDelay,
     text,
     typingSpeed,
     visibleCharacters,
   ]);
 
-  const visibleText = text.slice(0, visibleCharacters);
-  const showCursor = hasStarted;
+  const visibleText = prefersReducedMotion
+    ? text
+    : text.slice(0, visibleCharacters);
+  const showCursor = hasStarted && !prefersReducedMotion;
 
   return (
     <span
