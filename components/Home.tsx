@@ -181,6 +181,42 @@ const heroCards = [
   },
 ];
 
+function useStartWhenVisible<T extends HTMLElement>(threshold = 0.2) {
+  const elementRef = useRef<T>(null);
+  const [hasStarted, setHasStarted] = useState(false);
+
+  useEffect(() => {
+    const element = elementRef.current;
+
+    if (!element || hasStarted) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        setHasStarted(true);
+        observer.unobserve(entry.target);
+      },
+      {
+        threshold,
+        rootMargin: "0px 0px -6% 0px",
+      },
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [hasStarted, threshold]);
+
+  return { elementRef, hasStarted };
+}
+
 function AnimatedCounter({
   target,
   suffix,
@@ -189,72 +225,304 @@ function AnimatedCounter({
   suffix: string;
 }) {
   const [count, setCount] = useState(0);
-  const counterRef = useRef<HTMLSpanElement>(null);
-  const hasAnimated = useRef(false);
+  const { elementRef, hasStarted } =
+    useStartWhenVisible<HTMLSpanElement>(0.3);
 
   useEffect(() => {
-    const element = counterRef.current;
-
-    if (!element) {
+    if (!hasStarted) {
       return;
     }
 
     let animationFrameId = 0;
+    const duration = 1700;
+    const startTime = performance.now();
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting || hasAnimated.current) {
-          return;
-        }
+    const animate = (currentTime: number) => {
+      const progress = Math.min(
+        (currentTime - startTime) / duration,
+        1,
+      );
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
 
-        hasAnimated.current = true;
-        observer.disconnect();
+      setCount(Math.round(target * easedProgress));
 
-        const reduceMotion = window.matchMedia(
-          "(prefers-reduced-motion: reduce)",
-        ).matches;
-
-        if (reduceMotion) {
-          setCount(target);
-          return;
-        }
-
-        const duration = 1600;
-        const startTime = performance.now();
-
-        const animate = (currentTime: number) => {
-          const progress = Math.min((currentTime - startTime) / duration, 1);
-          const easedProgress = 1 - Math.pow(1 - progress, 3);
-
-          setCount(Math.round(target * easedProgress));
-
-          if (progress < 1) {
-            animationFrameId = requestAnimationFrame(animate);
-          } else {
-            setCount(target);
-          }
-        };
-
+      if (progress < 1) {
         animationFrameId = requestAnimationFrame(animate);
-      },
-      { threshold: 0.45 },
-    );
-
-    observer.observe(element);
-
-    return () => {
-      observer.disconnect();
-
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
+      } else {
+        setCount(target);
       }
     };
-  }, [target]);
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [hasStarted, target]);
 
   return (
-    <span ref={counterRef}>
+    <span ref={elementRef}>
       {count}
       {suffix}
+    </span>
+  );
+}
+
+type TypewriterSegment = {
+  text: string;
+  className?: string;
+  underlineClassName?: string;
+};
+
+function TypewriterText({
+  segments,
+  speed = 95,
+  delay = 100,
+  display = "inline",
+  className = "",
+  cursorClassName = "bg-current",
+}: {
+  segments: TypewriterSegment[];
+  speed?: number;
+  delay?: number;
+  display?: "inline" | "block";
+  className?: string;
+  cursorClassName?: string;
+}) {
+  const [visibleCharacters, setVisibleCharacters] = useState(0);
+  const { elementRef, hasStarted } =
+    useStartWhenVisible<HTMLSpanElement>(0.12);
+
+  const fullText = segments.map((segment) => segment.text).join("");
+  const totalCharacters = fullText.length;
+
+  useEffect(() => {
+    if (!hasStarted || totalCharacters === 0) {
+      return;
+    }
+
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    let intervalId: ReturnType<typeof setInterval> | undefined;
+
+    setVisibleCharacters(0);
+
+    timeoutId = setTimeout(() => {
+      intervalId = setInterval(() => {
+        setVisibleCharacters((current) => {
+          const next = Math.min(current + 1, totalCharacters);
+
+          if (next >= totalCharacters && intervalId) {
+            clearInterval(intervalId);
+          }
+
+          return next;
+        });
+      }, speed);
+    }, delay);
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [delay, hasStarted, speed, totalCharacters]);
+
+  let remainingCharacters = visibleCharacters;
+
+  const renderSegments = (showTypedText: boolean) =>
+    segments.map((segment, index) => {
+      const characterCount = showTypedText
+        ? Math.max(
+            0,
+            Math.min(segment.text.length, remainingCharacters),
+          )
+        : segment.text.length;
+
+      const visibleText = segment.text.slice(0, characterCount);
+
+      if (showTypedText) {
+        remainingCharacters = Math.max(
+          0,
+          remainingCharacters - segment.text.length,
+        );
+      }
+
+      const segmentComplete =
+        characterCount === segment.text.length;
+
+      return (
+        <span
+          key={`${segment.text}-${index}`}
+          className={`${segment.className ?? ""} ${
+            segment.underlineClassName ? "relative inline-block" : ""
+          }`}
+        >
+          {visibleText}
+
+          {showTypedText &&
+            segment.underlineClassName &&
+            segmentComplete && (
+              <span
+                className={segment.underlineClassName}
+                aria-hidden="true"
+              />
+            )}
+        </span>
+      );
+    });
+
+  const showCursor =
+    hasStarted && visibleCharacters < totalCharacters;
+
+  return (
+    <span
+      ref={elementRef}
+      aria-label={fullText}
+      className={`${
+        display === "block" ? "grid w-fit" : "inline-grid"
+      } ${className}`}
+    >
+      {/* Keeps the final text width reserved, so headings do not jump. */}
+      <span
+        aria-hidden="true"
+        className="invisible col-start-1 row-start-1 whitespace-pre"
+      >
+        {renderSegments(false)}
+      </span>
+
+      <span
+        aria-hidden="true"
+        className="col-start-1 row-start-1 whitespace-pre"
+      >
+        {renderSegments(true)}
+
+        {showCursor && (
+          <span
+            className={`ml-1 inline-block h-[0.88em] w-[2px] animate-pulse align-[-0.08em] ${cursorClassName}`}
+          />
+        )}
+      </span>
+    </span>
+  );
+}
+
+function LoopingTypewriterText({
+  text,
+  typingSpeed = 135,
+  deletingSpeed = 75,
+  holdDuration = 1400,
+  restartDelay = 350,
+  className = "",
+  cursorClassName = "bg-current",
+}: {
+  text: string;
+  typingSpeed?: number;
+  deletingSpeed?: number;
+  holdDuration?: number;
+  restartDelay?: number;
+  className?: string;
+  cursorClassName?: string;
+}) {
+  const [visibleCharacters, setVisibleCharacters] = useState(0);
+  const [phase, setPhase] = useState<
+    "typing" | "holding" | "deleting" | "restarting"
+  >("typing");
+  const { elementRef, hasStarted } =
+    useStartWhenVisible<HTMLSpanElement>(0.2);
+
+  useEffect(() => {
+    if (!hasStarted || text.length === 0) {
+      return;
+    }
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reduceMotion) {
+      setVisibleCharacters(text.length);
+      setPhase("holding");
+      return;
+    }
+
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    if (phase === "typing") {
+      if (visibleCharacters < text.length) {
+        timeoutId = setTimeout(() => {
+          setVisibleCharacters((current) =>
+            Math.min(current + 1, text.length),
+          );
+        }, typingSpeed);
+      } else {
+        timeoutId = setTimeout(() => {
+          setPhase("holding");
+        }, typingSpeed);
+      }
+    } else if (phase === "holding") {
+      timeoutId = setTimeout(() => {
+        setPhase("deleting");
+      }, holdDuration);
+    } else if (phase === "deleting") {
+      if (visibleCharacters > 0) {
+        timeoutId = setTimeout(() => {
+          setVisibleCharacters((current) => Math.max(current - 1, 0));
+        }, deletingSpeed);
+      } else {
+        timeoutId = setTimeout(() => {
+          setPhase("restarting");
+        }, deletingSpeed);
+      }
+    } else {
+      timeoutId = setTimeout(() => {
+        setPhase("typing");
+      }, restartDelay);
+    }
+
+    return () => clearTimeout(timeoutId);
+  }, [
+    deletingSpeed,
+    hasStarted,
+    holdDuration,
+    phase,
+    restartDelay,
+    text,
+    typingSpeed,
+    visibleCharacters,
+  ]);
+
+  const visibleText = text.slice(0, visibleCharacters);
+  const showCursor = hasStarted;
+
+  return (
+    <span
+      ref={elementRef}
+      aria-label={text}
+      className={`inline-grid ${className}`}
+    >
+      <span
+        aria-hidden="true"
+        className="invisible col-start-1 row-start-1 whitespace-pre"
+      >
+        {text}
+      </span>
+
+      <span
+        aria-hidden="true"
+        className="col-start-1 row-start-1 whitespace-pre"
+      >
+        {visibleText}
+
+        {showCursor && (
+          <span
+            className={`ml-1 inline-block h-[0.88em] w-[2px] animate-pulse align-[-0.08em] ${cursorClassName}`}
+          />
+        )}
+      </span>
     </span>
   );
 }
@@ -361,20 +629,37 @@ export default function Home() {
           {/* LEFT CONTENT */}
           <div className="relative z-30">
             <p className="mb-5 text-[12px] font-bold uppercase tracking-[0.31em] text-[#5438ff]">
-              WE BUILD. <span className="text-[#ff2f8b]">YOU GROW.</span>
+              WE BUILD.{" "}
+              <TypewriterText
+                segments={[
+                  { text: "YOU GROW.", className: "text-[#ff2f8b]" },
+                ]}
+                speed={115}
+                delay={180}
+                cursorClassName="bg-[#ff2f8b]"
+              />
             </p>
 
             <h1 className="max-w-[560px] text-[46px] font-bold leading-[1.07] tracking-[-0.045em] text-[#081232] sm:text-[56px] lg:text-[62px] xl:text-[66px]">
               Digital Solutions
               <br />
               That Drive
-              <span className="mt-1 block font-serif text-[58px] font-medium italic leading-[0.9] tracking-[-0.07em] text-[#ff2488] sm:text-[72px] lg:text-[82px]">
-                Real{" "}
-                <span className="relative inline-block text-[#4a25ff]">
-                  Impact
-                  <span className="absolute -bottom-2 left-2 h-[3px] w-[95%] -rotate-3 rounded-full bg-[#4a25ff]" />
-                </span>
-              </span>
+              <TypewriterText
+                display="block"
+                className="mt-1 font-serif text-[58px] font-medium italic leading-[0.9] tracking-[-0.07em] sm:text-[72px] lg:text-[82px]"
+                speed={125}
+                delay={380}
+                cursorClassName="bg-[#4a25ff]"
+                segments={[
+                  { text: "Real ", className: "text-[#ff2488]" },
+                  {
+                    text: "Impact",
+                    className: "text-[#4a25ff]",
+                    underlineClassName:
+                      "absolute -bottom-2 left-2 h-[3px] w-[95%] -rotate-3 rounded-full bg-[#4a25ff]",
+                  },
+                ]}
+              />
             </h1>
 
             <p className="mt-9 max-w-[535px] text-[16px] font-medium leading-[1.85] text-[#27314f]/80">
@@ -493,10 +778,24 @@ export default function Home() {
 
           <div className="relative z-20 text-center">
             <p className="text-[12px] font-bold uppercase tracking-[0.36em] text-[#d75cff] drop-shadow-[0_0_12px_rgba(215,92,255,0.85)]">
-              Our Process
+              <TypewriterText
+                segments={[
+                  { text: "Our Process", className: "text-[#d75cff]" },
+                ]}
+                speed={105}
+                cursorClassName="bg-[#d75cff]"
+              />
             </p>
             <h2 className="mx-auto mt-4 max-w-[700px] text-[32px] font-bold leading-[1.22] tracking-[-0.035em] text-white sm:text-[42px]">
-              We Turn Ideas Into <span className="text-[#ff18d4]">Impactful</span>
+              We Turn Ideas Into{" "}
+              <TypewriterText
+                segments={[
+                  { text: "Impactful", className: "text-[#ff18d4]" },
+                ]}
+                speed={110}
+                delay={260}
+                cursorClassName="bg-[#ff18d4]"
+              />
               <br />
               Digital Experiences
             </h2>
@@ -563,10 +862,24 @@ export default function Home() {
       <section className="mx-auto max-w-[1320px] px-5 py-20 sm:px-8 lg:px-10">
         <div className="text-center">
           <p className="text-xs font-bold uppercase tracking-[0.30em] text-[#ff2f7d]">
-            What We Do
+            <TypewriterText
+              segments={[
+                { text: "What We Do", className: "text-[#ff2f7d]" },
+              ]}
+              speed={105}
+              cursorClassName="bg-[#ff2f7d]"
+            />
           </p>
           <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
-            End-to-End Solutions for Your <span className="text-[#4b22ff]">Business</span>
+            End-to-End Solutions for Your{" "}
+            <TypewriterText
+              segments={[
+                { text: "Business", className: "text-[#4b22ff]" },
+              ]}
+              speed={110}
+              delay={220}
+              cursorClassName="bg-[#4b22ff]"
+            />
           </h2>
         </div>
 
@@ -617,12 +930,38 @@ export default function Home() {
           {/* LEFT CONTENT */}
           <div className="lg:pl-2">
             <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#5b35ff]">
-              Innovative Solutions
+              <TypewriterText
+                segments={[
+                  {
+                    text: "Innovative Solutions",
+                    className: "text-[#5b35ff]",
+                  },
+                ]}
+                speed={100}
+                cursorClassName="bg-[#5b35ff]"
+              />
             </p>
 
             <h2 className="mt-5 max-w-[440px] text-[31px] font-bold leading-[1.20] tracking-[-0.035em] text-[#081232] sm:text-[39px]">
-              Ideas to <span className="text-[#4b22ff]">Impact</span> – <br />
-              We Make It <span className="text-[#ff2f7d]">Happen</span>
+              Ideas to{" "}
+              <TypewriterText
+                segments={[
+                  { text: "Impact", className: "text-[#4b22ff]" },
+                ]}
+                speed={115}
+                delay={160}
+                cursorClassName="bg-[#4b22ff]"
+              />{" "}
+              – <br />
+              We Make It{" "}
+              <TypewriterText
+                segments={[
+                  { text: "Happen", className: "text-[#ff2f7d]" },
+                ]}
+                speed={115}
+                delay={650}
+                cursorClassName="bg-[#ff2f7d]"
+              />
             </h2>
 
             <p className="mt-6 max-w-[450px] text-[14px] font-medium leading-7 text-[#34405f]/68">
@@ -768,7 +1107,14 @@ export default function Home() {
               </h2>
 
               <p className="mt-1 font-['Brush_Script_MT','Segoe_Script','Lucida_Handwriting',cursive] text-[40px] font-normal italic leading-[0.9] tracking-[0.02em] text-white sm:text-[50px] drop-shadow-[0_2px_8px_rgba(255,255,255,0.15)]">
-                Amazing Together!
+                <LoopingTypewriterText
+                  text="Amazing Together!"
+                  typingSpeed={135}
+                  deletingSpeed={75}
+                  holdDuration={1400}
+                  restartDelay={350}
+                  cursorClassName="bg-white"
+                />
               </p>
             </div>
 
