@@ -361,82 +361,83 @@ export default function AboutPage() {
         <div className="pointer-events-none absolute -left-28 top-1/3 h-80 w-80 rounded-full bg-[#4b22ff]/5 blur-[110px]" />
 
         <div className="relative mx-auto grid max-w-[1320px] items-center gap-14 lg:grid-cols-2">
-          {/* Visual */}
-          <div className="relative min-h-[480px]">
-            <div className="absolute left-0 top-0 h-[400px] w-[88%] overflow-hidden rounded-[30px] bg-[linear-gradient(145deg,#07112f_0%,#20105c_55%,#7d1d72_100%)] shadow-[0_30px_70px_rgba(15,12,57,0.20)]">
-              <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-[#1685ff]/25 blur-[90px]" />
+         {/* Visual */}
+<div className="relative pb-6">
+  {/* Back card */}
+  <div className="relative h-[430px] w-[92%] overflow-hidden rounded-[30px] bg-[linear-gradient(145deg,#07112f_0%,#20105c_55%,#7d1d72_100%)] shadow-[0_30px_70px_rgba(15,12,57,0.20)]">
+    <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-[#1685ff]/25 blur-[90px]" />
 
-              <div className="pointer-events-none absolute -bottom-24 -right-20 h-80 w-80 rounded-full bg-[#ff315d]/35 blur-[95px]" />
+    <div className="pointer-events-none absolute -bottom-24 -right-20 h-80 w-80 rounded-full bg-[#ff315d]/35 blur-[95px]" />
 
-              <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:22px_22px]" />
+    <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:22px_22px]" />
 
-              <svg
-                className="pointer-events-none absolute bottom-0 left-0 h-[190px] w-full opacity-60"
-                viewBox="0 0 650 200"
-                fill="none"
-                preserveAspectRatio="none"
-              >
-                <defs>
-                  <linearGradient
-                    id="storyLine"
-                    x1="0"
-                    y1="0"
-                    x2="650"
-                    y2="0"
-                  >
-                    <stop stopColor="#20b8ff" />
-                    <stop offset="0.5" stopColor="#7746ff" />
-                    <stop offset="1" stopColor="#ff315d" />
-                  </linearGradient>
-                </defs>
+    <svg
+      className="pointer-events-none absolute bottom-0 left-0 h-[190px] w-full opacity-60"
+      viewBox="0 0 650 200"
+      fill="none"
+      preserveAspectRatio="none"
+    >
+      <defs>
+        <linearGradient
+          id="storyLine"
+          x1="0"
+          y1="0"
+          x2="650"
+          y2="0"
+        >
+          <stop stopColor="#20b8ff" />
+          <stop offset="0.5" stopColor="#7746ff" />
+          <stop offset="1" stopColor="#ff315d" />
+        </linearGradient>
+      </defs>
 
-                <path
-                  d="M-30 170C80 80 170 210 285 125C390 48 485 175 690 38"
-                  stroke="url(#storyLine)"
-                  strokeWidth="2.2"
-                />
+      <path
+        d="M-30 170C80 80 170 210 285 125C390 48 485 175 690 38"
+        stroke="url(#storyLine)"
+        strokeWidth="2.2"
+      />
 
-                <path
-                  d="M-20 195C100 115 195 235 315 158C430 84 520 205 680 85"
-                  stroke="white"
-                  strokeOpacity="0.14"
-                  strokeWidth="1.2"
-                  strokeDasharray="5 8"
-                />
-              </svg>
+      <path
+        d="M-20 195C100 115 195 235 315 158C430 84 520 205 680 85"
+        stroke="white"
+        strokeOpacity="0.14"
+        strokeWidth="1.2"
+        strokeDasharray="5 8"
+      />
+    </svg>
 
-              <div className="relative z-10 flex h-full flex-col justify-between p-8 text-white sm:p-10">
-                <div>
-                  <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#ff83b7]">
-                    Our Foundation
-                  </p>
+    <div className="relative z-10 flex h-full flex-col p-8 text-white sm:p-10">
+      <div>
+        <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#ff83b7]">
+          Our Foundation
+        </p>
 
-                  <h3 className="mt-5 max-w-[410px] text-[32px] font-bold leading-[1.15] tracking-[-0.035em] sm:text-[38px]">
-                    Technology Should Make Business Better
-                  </h3>
-                </div>
+        <h3 className="mt-5 max-w-[410px] text-[32px] font-bold leading-[1.15] tracking-[-0.035em] sm:text-[38px]">
+          Technology Should Make Business Better
+        </h3>
+      </div>
 
-                <p className="max-w-[420px] text-[13px] font-medium leading-7 text-white/65">
-                  We believe technology becomes valuable when it simplifies
-                  work, creates better experiences and helps people achieve more.
-                </p>
-              </div>
-            </div>
+      <p className="mt-8 max-w-[420px] pr-6 text-[13px] font-medium leading-7 text-white/65">
+        We believe technology becomes valuable when it simplifies work,
+        creates better experiences and helps people achieve more.
+      </p>
+    </div>
+  </div>
 
-            <div className="absolute bottom-0 right-0 z-20 w-[74%] rounded-[25px] border border-[#e4dff2] bg-white p-6 shadow-[0_25px_60px_rgba(32,22,92,0.15)] sm:p-7">
-              <MessageSquareText size={30} className="text-[#4b22ff]" />
+  {/* Front quote card */}
+  <div className="relative z-20 -mt-16 ml-auto w-[78%] rounded-[25px] border border-[#e4dff2] bg-white p-6 shadow-[0_25px_60px_rgba(32,22,92,0.15)] sm:p-7">
+    <MessageSquareText size={30} className="text-[#4b22ff]" />
 
-              <p className="mt-4 text-[17px] font-bold leading-7 text-[#081232] sm:text-[19px]">
-                “We treat every client&apos;s vision with the same care,
-                responsibility and commitment as our own.”
-              </p>
+    <p className="mt-4 text-[17px] font-bold leading-7 text-[#081232] sm:text-[19px]">
+      “We treat every client&apos;s vision with the same care,
+      responsibility and commitment as our own.”
+    </p>
 
-              <p className="mt-4 text-[11px] font-bold uppercase tracking-[0.18em] text-[#ff315d]">
-                The MITOMS Approach
-              </p>
-            </div>
-          </div>
-
+    <p className="mt-4 text-[11px] font-bold uppercase tracking-[0.18em] text-[#ff315d]">
+      The MITOMS Approach
+    </p>
+  </div>
+</div>
           {/* Story content */}
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#4b22ff]">

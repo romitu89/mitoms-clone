@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -63,10 +64,22 @@ const services = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+
   const [isOpen, setIsOpen] = useState(false);
   const [showConsultation, setShowConsultation] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [desktopServicesOpen, setDesktopServicesOpen] = useState(false);
+
+  const isActive = (href: string) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
+  const servicesActive = isActive("/services");
 
   const openConsultation = () => {
     setIsOpen(false);
@@ -85,7 +98,11 @@ export default function Navbar() {
       <header className="sticky top-0 z-50 border-b border-[#ebe8f5]/70 bg-white/95 shadow-[0_8px_30px_rgba(21,17,65,0.04)] backdrop-blur-md">
         <div className="mx-auto flex h-24 max-w-[1320px] items-center justify-between px-5 lg:px-10">
           {/* Logo */}
-          <Link href="/" onClick={closeMobileMenu}>
+          <Link
+            href="/"
+            onClick={closeMobileMenu}
+            aria-label="MITOMS home"
+          >
             <Image
               src="/images/home/logo.png"
               alt="MITOMS"
@@ -98,13 +115,23 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-9 lg:flex">
+            {/* Home */}
             <Link
               href="/"
-              className="group relative text-[15px] font-semibold text-[#4B22FF]"
+              aria-current={isActive("/") ? "page" : undefined}
+              className={`group relative text-[15px] font-semibold transition-colors duration-300 ${
+                isActive("/")
+                  ? "text-[#4B22FF]"
+                  : "text-[#07112F] hover:text-[#4B22FF]"
+              }`}
             >
               Home
 
-              <span className="absolute -bottom-2 left-0 h-[3px] w-full rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D]" />
+              <span
+                className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D] transition-all duration-300 ${
+                  isActive("/") ? "w-full" : "w-0 group-hover:w-full"
+                }`}
+              />
             </Link>
 
             {/* Services Dropdown */}
@@ -114,10 +141,11 @@ export default function Navbar() {
             >
               <Link
                 href="/services"
+                aria-current={servicesActive ? "page" : undefined}
                 onMouseEnter={() => setDesktopServicesOpen(true)}
                 onFocus={() => setDesktopServicesOpen(true)}
                 className={`group/services-link relative flex items-center gap-1.5 text-[15px] font-semibold transition-colors duration-300 ${
-                  desktopServicesOpen
+                  desktopServicesOpen || servicesActive
                     ? "text-[#4B22FF]"
                     : "text-[#07112F] hover:text-[#4B22FF]"
                 }`}
@@ -133,12 +161,14 @@ export default function Navbar() {
 
                 <span
                   className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D] transition-all duration-300 ${
-                    desktopServicesOpen ? "w-full" : "w-0"
+                    desktopServicesOpen || servicesActive
+                      ? "w-full"
+                      : "w-0 group-hover/services-link:w-full"
                   }`}
                 />
               </Link>
 
-              {/* Dropdown wrapper */}
+              {/* Desktop Dropdown */}
               <div
                 onMouseEnter={() => setDesktopServicesOpen(true)}
                 className={`absolute left-1/2 top-full w-[680px] -translate-x-1/2 pt-4 transition-all duration-300 ${
@@ -155,13 +185,23 @@ export default function Navbar() {
                   <div className="relative grid grid-cols-2 gap-3">
                     {services.map((service) => {
                       const Icon = service.icon;
+                      const serviceIsActive = isActive(service.href);
 
                       return (
                         <Link
                           key={service.title}
                           href={service.href}
-                          onClick={() => setDesktopServicesOpen(false)}
-                          className="group/service flex items-start gap-4 rounded-[18px] border border-transparent p-4 transition-all duration-300 hover:border-[#e7e2f5] hover:bg-[#faf9ff] hover:shadow-[0_12px_28px_rgba(38,27,104,0.07)]"
+                          aria-current={
+                            serviceIsActive ? "page" : undefined
+                          }
+                          onClick={() =>
+                            setDesktopServicesOpen(false)
+                          }
+                          className={`group/service flex items-start gap-4 rounded-[18px] border p-4 transition-all duration-300 ${
+                            serviceIsActive
+                              ? "border-[#cec4ff] bg-[#f5f2ff] shadow-[0_12px_28px_rgba(75,34,255,0.10)]"
+                              : "border-transparent hover:border-[#e7e2f5] hover:bg-[#faf9ff] hover:shadow-[0_12px_28px_rgba(38,27,104,0.07)]"
+                          }`}
                         >
                           <div
                             className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-[15px] bg-gradient-to-br ${service.iconBg} text-white shadow-[0_10px_24px_rgba(75,34,255,0.18)] transition-transform duration-300 group-hover/service:-rotate-6 group-hover/service:scale-105`}
@@ -170,7 +210,13 @@ export default function Navbar() {
                           </div>
 
                           <div className="min-w-0">
-                            <h3 className="text-[14px] font-bold text-[#081232] transition-colors duration-300 group-hover/service:text-[#4B22FF]">
+                            <h3
+                              className={`text-[14px] font-bold transition-colors duration-300 ${
+                                serviceIsActive
+                                  ? "text-[#4B22FF]"
+                                  : "text-[#081232] group-hover/service:text-[#4B22FF]"
+                              }`}
+                            >
                               {service.title}
                             </h3>
 
@@ -190,7 +236,8 @@ export default function Navbar() {
                       </p>
 
                       <p className="mt-1 text-[11px] font-medium text-white/65">
-                        Talk to our team and get a practical recommendation.
+                        Talk to our team and get a practical
+                        recommendation.
                       </p>
                     </div>
 
@@ -207,31 +254,71 @@ export default function Navbar() {
               </div>
             </div>
 
+            {/* Portfolio */}
             <Link
               href="/portfolio"
-              className="group relative text-[15px] font-semibold text-[#07112F] transition-colors duration-300 hover:text-[#4B22FF]"
+              aria-current={
+                isActive("/portfolio") ? "page" : undefined
+              }
+              className={`group relative text-[15px] font-semibold transition-colors duration-300 ${
+                isActive("/portfolio")
+                  ? "text-[#4B22FF]"
+                  : "text-[#07112F] hover:text-[#4B22FF]"
+              }`}
             >
               Portfolio
 
-              <span className="absolute -bottom-2 left-0 h-[3px] w-0 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D] transition-all duration-300 group-hover:w-full" />
+              <span
+                className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D] transition-all duration-300 ${
+                  isActive("/portfolio")
+                    ? "w-full"
+                    : "w-0 group-hover:w-full"
+                }`}
+              />
             </Link>
 
+            {/* About */}
             <Link
               href="/about"
-              className="group relative text-[15px] font-semibold text-[#07112F] transition-colors duration-300 hover:text-[#4B22FF]"
+              aria-current={isActive("/about") ? "page" : undefined}
+              className={`group relative text-[15px] font-semibold transition-colors duration-300 ${
+                isActive("/about")
+                  ? "text-[#4B22FF]"
+                  : "text-[#07112F] hover:text-[#4B22FF]"
+              }`}
             >
               About Us
 
-              <span className="absolute -bottom-2 left-0 h-[3px] w-0 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D] transition-all duration-300 group-hover:w-full" />
+              <span
+                className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D] transition-all duration-300 ${
+                  isActive("/about")
+                    ? "w-full"
+                    : "w-0 group-hover:w-full"
+                }`}
+              />
             </Link>
 
+            {/* Contact */}
             <Link
               href="/contact"
-              className="group relative text-[15px] font-semibold text-[#07112F] transition-colors duration-300 hover:text-[#4B22FF]"
+              aria-current={
+                isActive("/contact") ? "page" : undefined
+              }
+              className={`group relative text-[15px] font-semibold transition-colors duration-300 ${
+                isActive("/contact")
+                  ? "text-[#4B22FF]"
+                  : "text-[#07112F] hover:text-[#4B22FF]"
+              }`}
             >
               Contact Us
 
-              <span className="absolute -bottom-2 left-0 h-[3px] w-0 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D] transition-all duration-300 group-hover:w-full" />
+              <span
+                className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D] transition-all duration-300 ${
+                  isActive("/contact")
+                    ? "w-full"
+                    : "w-0 group-hover:w-full"
+                }`}
+              />
             </Link>
           </nav>
 
@@ -250,6 +337,7 @@ export default function Navbar() {
             type="button"
             onClick={() => setIsOpen((current) => !current)}
             aria-label="Toggle navigation menu"
+            aria-expanded={isOpen}
             className="cursor-pointer rounded-lg border border-[#ded9ed] p-2 text-[#07112F] transition-colors hover:border-[#4B22FF] hover:text-[#4B22FF] lg:hidden"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -260,12 +348,24 @@ export default function Navbar() {
         {isOpen && (
           <div className="border-t border-[#ebe8f5] bg-white shadow-[0_20px_45px_rgba(23,18,67,0.08)] lg:hidden">
             <div className="flex flex-col px-5 py-5">
+              {/* Mobile Home */}
               <Link
                 href="/"
+                aria-current={isActive("/") ? "page" : undefined}
                 onClick={closeMobileMenu}
-                className="border-b border-[#ece8f5] py-4 text-[15px] font-semibold text-[#07112F]"
+                className={`border-b border-[#ece8f5] py-4 text-[15px] font-semibold transition-colors ${
+                  isActive("/")
+                    ? "text-[#4B22FF]"
+                    : "text-[#07112F]"
+                }`}
               >
-                Home
+                <div className="flex items-center justify-between">
+                  <span>Home</span>
+
+                  {isActive("/") && (
+                    <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D]" />
+                  )}
+                </div>
               </Link>
 
               {/* Mobile Services Dropdown */}
@@ -275,9 +375,20 @@ export default function Navbar() {
                   onClick={() =>
                     setMobileServicesOpen((current) => !current)
                   }
-                  className="flex w-full cursor-pointer items-center justify-between py-4 text-left text-[15px] font-semibold text-[#07112F]"
+                  aria-expanded={mobileServicesOpen}
+                  className={`flex w-full cursor-pointer items-center justify-between py-4 text-left text-[15px] font-semibold transition-colors ${
+                    servicesActive
+                      ? "text-[#4B22FF]"
+                      : "text-[#07112F]"
+                  }`}
                 >
-                  Services
+                  <div className="flex items-center gap-3">
+                    <span>Services</span>
+
+                    {servicesActive && (
+                      <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D]" />
+                    )}
+                  </div>
 
                   <ChevronDown
                     size={18}
@@ -291,13 +402,21 @@ export default function Navbar() {
                   <div className="space-y-2 pb-4">
                     {services.map((service) => {
                       const Icon = service.icon;
+                      const serviceIsActive = isActive(service.href);
 
                       return (
                         <Link
                           key={service.title}
                           href={service.href}
+                          aria-current={
+                            serviceIsActive ? "page" : undefined
+                          }
                           onClick={closeMobileMenu}
-                          className="flex items-center gap-3 rounded-[14px] bg-[#faf9ff] px-3 py-3"
+                          className={`flex items-center gap-3 rounded-[14px] border px-3 py-3 transition-all duration-300 ${
+                            serviceIsActive
+                              ? "border-[#cec4ff] bg-[#f3efff] shadow-[0_8px_20px_rgba(75,34,255,0.08)]"
+                              : "border-transparent bg-[#faf9ff]"
+                          }`}
                         >
                           <div
                             className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-[12px] bg-gradient-to-br ${service.iconBg} text-white`}
@@ -305,8 +424,14 @@ export default function Navbar() {
                             <Icon size={19} />
                           </div>
 
-                          <div>
-                            <p className="text-[13px] font-semibold text-[#081232]">
+                          <div className="min-w-0 flex-1">
+                            <p
+                              className={`text-[13px] font-semibold ${
+                                serviceIsActive
+                                  ? "text-[#4B22FF]"
+                                  : "text-[#081232]"
+                              }`}
+                            >
                               {service.title}
                             </p>
 
@@ -314,6 +439,10 @@ export default function Navbar() {
                               {service.description}
                             </p>
                           </div>
+
+                          {serviceIsActive && (
+                            <span className="h-2 w-2 shrink-0 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D]" />
+                          )}
                         </Link>
                       );
                     })}
@@ -321,7 +450,11 @@ export default function Navbar() {
                     <Link
                       href="/services"
                       onClick={closeMobileMenu}
-                      className="flex items-center justify-center gap-2 rounded-[12px] border border-[#ded8f4] py-3 text-[12px] font-bold text-[#4B22FF]"
+                      className={`flex items-center justify-center gap-2 rounded-[12px] border py-3 text-[12px] font-bold transition-colors ${
+                        pathname === "/services"
+                          ? "border-[#4B22FF] bg-[#f3efff] text-[#4B22FF]"
+                          : "border-[#ded8f4] text-[#4B22FF]"
+                      }`}
                     >
                       View All Services
                       <ArrowRight size={15} />
@@ -330,30 +463,73 @@ export default function Navbar() {
                 )}
               </div>
 
+              {/* Mobile Portfolio */}
               <Link
                 href="/portfolio"
+                aria-current={
+                  isActive("/portfolio") ? "page" : undefined
+                }
                 onClick={closeMobileMenu}
-                className="border-b border-[#ece8f5] py-4 text-[15px] font-semibold text-[#07112F]"
+                className={`border-b border-[#ece8f5] py-4 text-[15px] font-semibold transition-colors ${
+                  isActive("/portfolio")
+                    ? "text-[#4B22FF]"
+                    : "text-[#07112F]"
+                }`}
               >
-                Portfolio
+                <div className="flex items-center justify-between">
+                  <span>Portfolio</span>
+
+                  {isActive("/portfolio") && (
+                    <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D]" />
+                  )}
+                </div>
               </Link>
 
+              {/* Mobile About */}
               <Link
                 href="/about"
+                aria-current={
+                  isActive("/about") ? "page" : undefined
+                }
                 onClick={closeMobileMenu}
-                className="border-b border-[#ece8f5] py-4 text-[15px] font-semibold text-[#07112F]"
+                className={`border-b border-[#ece8f5] py-4 text-[15px] font-semibold transition-colors ${
+                  isActive("/about")
+                    ? "text-[#4B22FF]"
+                    : "text-[#07112F]"
+                }`}
               >
-                About Us
+                <div className="flex items-center justify-between">
+                  <span>About Us</span>
+
+                  {isActive("/about") && (
+                    <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D]" />
+                  )}
+                </div>
               </Link>
 
+              {/* Mobile Contact */}
               <Link
                 href="/contact"
+                aria-current={
+                  isActive("/contact") ? "page" : undefined
+                }
                 onClick={closeMobileMenu}
-                className="border-b border-[#ece8f5] py-4 text-[15px] font-semibold text-[#07112F]"
+                className={`border-b border-[#ece8f5] py-4 text-[15px] font-semibold transition-colors ${
+                  isActive("/contact")
+                    ? "text-[#4B22FF]"
+                    : "text-[#07112F]"
+                }`}
               >
-                Contact Us
+                <div className="flex items-center justify-between">
+                  <span>Contact Us</span>
+
+                  {isActive("/contact") && (
+                    <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D]" />
+                  )}
+                </div>
               </Link>
 
+              {/* Mobile CTA */}
               <button
                 type="button"
                 onClick={openConsultation}
