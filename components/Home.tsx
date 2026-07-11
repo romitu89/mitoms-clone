@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import ConsultationModal from "./ConsultationModal";
 import {
   Star,
@@ -20,14 +21,15 @@ import {
   Server,
   BarChart3,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 const imgPath = "/images/home/";
 
 const stats = [
-  { icon: Star, value: "10+", label: "Years Experience" },
-  { icon: Rocket, value: "500+", label: "Projects Delivered" },
-  { icon: Users, value: "250+", label: "Happy Clients" },
-  { icon: Globe, value: "25+", label: "Countries Served" },
+  { icon: Star, target: 10, suffix: "+", label: "Years Experience" },
+  { icon: Rocket, target: 500, suffix: "+", label: "Projects Delivered" },
+  { icon: Users, target: 250, suffix: "+", label: "Happy Clients" },
+  { icon: Globe, target: 25, suffix: "+", label: "Countries Served" },
 ];
 
 const process = [
@@ -98,6 +100,7 @@ const services = [
     icon: Code2, 
     no: "01", 
     title: "Web Development",
+    href: "/services/web-development",
     image: "laptop.png",
     description: "High-performance websites that are secure, scalable and built to convert."
   },
@@ -105,6 +108,7 @@ const services = [
     icon: Smartphone, 
     no: "02", 
     title: "Mobile App Development",
+    href: "/services/mobile-app-development",
     image: "mobile.png",
     description: "Engaging mobile apps for iOS & Android that deliver real value."
   },
@@ -112,6 +116,7 @@ const services = [
     icon: PenTool, 
     no: "03", 
     title: "UI/UX Design",
+    href: "/services/ui-ux-design",
     image: "knowledge.png",
     description: "Creative, user-centric designs that turn ideas into delightful experiences."
   },
@@ -119,6 +124,7 @@ const services = [
     icon: Cloud, 
     no: "04", 
     title: "Cloud Solutions",
+    href: "/services/cloud-solutions",
     image: "cloud.png",
     description: "Scalable, secure and cost-effective cloud solutions for modern businesses."
   },
@@ -126,6 +132,7 @@ const services = [
     icon: Brain, 
     no: "05", 
     title: "AI & Digital Transformation",
+    href: "/services/ai-digital-transformation",
     image: "ai.png",
     description: "Reimagine your business with technology that makes you future-ready."
   },
@@ -133,6 +140,7 @@ const services = [
     icon: Server, 
     no: "06", 
     title: "IT Consulting",
+    href: "/services/it-consulting",
     image: "machine.png",
     description: "Strategic consulting to solve complex challenges and unlock growth."
   },
@@ -142,6 +150,7 @@ const heroCards = [
   {
     icon: Code2,
     title: "Web Development",
+    href: "/services/web-development",
     text: "Modern scalable websites",
     pos: "left-[16%] top-[4%]",
     iconBg: "from-[#4b22ff] to-[#7b5cff]",
@@ -149,6 +158,7 @@ const heroCards = [
   {
     icon: Smartphone,
     title: "Mobile Apps",
+    href: "/services/mobile-app-development",
     text: "iOS & Android solutions",
     pos: "right-[0%] top-[21%]",
     iconBg: "from-[#ff2f7d] to-[#ff7ca8]",
@@ -156,6 +166,7 @@ const heroCards = [
   {
     icon: Cloud,
     title: "Cloud Solutions",
+    href: "/services/cloud-solutions",
     text: "Secure cloud architecture",
     pos: "left-[6%] bottom-[27%]",
     iconBg: "from-[#00b8ff] to-[#4b22ff]",
@@ -163,38 +174,121 @@ const heroCards = [
   {
     icon: Brain,
     title: "AI Automation",
+    href: "/services/ai-digital-transformation",
     text: "Smarter business workflows",
     pos: "right-[3%] bottom-[16%]",
     iconBg: "from-[#ff2f7d] to-[#4b22ff]",
   },
 ];
 
+function AnimatedCounter({
+  target,
+  suffix,
+}: {
+  target: number;
+  suffix: string;
+}) {
+  const [count, setCount] = useState(0);
+  const counterRef = useRef<HTMLSpanElement>(null);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    const element = counterRef.current;
+
+    if (!element) {
+      return;
+    }
+
+    let animationFrameId = 0;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || hasAnimated.current) {
+          return;
+        }
+
+        hasAnimated.current = true;
+        observer.disconnect();
+
+        const reduceMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        if (reduceMotion) {
+          setCount(target);
+          return;
+        }
+
+        const duration = 1600;
+        const startTime = performance.now();
+
+        const animate = (currentTime: number) => {
+          const progress = Math.min((currentTime - startTime) / duration, 1);
+          const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+          setCount(Math.round(target * easedProgress));
+
+          if (progress < 1) {
+            animationFrameId = requestAnimationFrame(animate);
+          } else {
+            setCount(target);
+          }
+        };
+
+        animationFrameId = requestAnimationFrame(animate);
+      },
+      { threshold: 0.45 },
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [target]);
+
+  return (
+    <span ref={counterRef}>
+      {count}
+      {suffix}
+    </span>
+  );
+}
+
 function HeroFloatingCard({
   icon: Icon,
   title,
+  href,
   text,
   pos,
   iconBg,
 }: {
-  icon: any;
+  icon: LucideIcon;
   title: string;
+  href: string;
   text: string;
   pos: string;
   iconBg: string;
 }) {
   return (
-    <div
-      className={`absolute ${pos} z-40 hidden w-[215px] rounded-[28px] bg-white/95 p-[14px] shadow-[0_18px_40px_rgba(35,27,84,0.14)] ring-1 ring-white/80 backdrop-blur md:block`}
+    <Link
+      href={href}
+      aria-label={`Explore ${title}`}
+      className={`group absolute ${pos} z-40 hidden w-[215px] rounded-[28px] bg-white/95 p-[14px] shadow-[0_18px_40px_rgba(35,27,84,0.14)] ring-1 ring-white/80 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_rgba(35,27,84,0.19)] md:block`}
     >
       <div className="flex items-center gap-3">
         <div
-          className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-[18px] bg-gradient-to-br ${iconBg} text-white shadow-[0_10px_22px_rgba(75,34,255,0.22)]`}
+          className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-[18px] bg-gradient-to-br ${iconBg} text-white shadow-[0_10px_22px_rgba(75,34,255,0.22)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105`}
         >
           <Icon className="h-6 w-6" />
         </div>
 
         <div>
-          <h4 className="text-[14px] font-bold leading-tight text-[#081232]">
+          <h4 className="text-[14px] font-bold leading-tight text-[#081232] transition-colors duration-300 group-hover:text-[#4b22ff]">
             {title}
           </h4>
           <p className="mt-1 text-[10px] font-semibold leading-tight text-[#27314f]/60">
@@ -202,7 +296,7 @@ function HeroFloatingCard({
           </p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -215,7 +309,7 @@ function ProcessStep({
   circle,
   noColor,
 }: {
-  icon: any;
+  icon: LucideIcon;
   no: string;
   title: string;
   text: string;
@@ -301,12 +395,12 @@ export default function Home() {
                 </span>
               </button>
 
-              <a
+              <Link
                 href="/portfolio"
                 className="inline-flex h-[48px] items-center justify-center rounded-[10px] border border-[#dfe3f1] bg-white px-7 text-[13px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(16,24,60,0.06)]"
               >
                 View Our Work <span className="ml-4 text-[#4b22ff]">→</span>
-              </a>
+              </Link>
             </div>
 
             <div className="mt-14 grid max-w-[620px] grid-cols-2 gap-3 sm:grid-cols-4">
@@ -324,7 +418,7 @@ export default function Home() {
 
                     <div className="min-w-0">
                       <h3 className="text-[22px] font-bold leading-none tracking-[-0.02em] text-[#3f24ff]">
-                        {item.value}
+                        <AnimatedCounter target={item.target} suffix={item.suffix} />
                       </h3>
                       <p className="mt-2 text-[10px] font-medium leading-[1.35] text-[#27314f]/65">
                         {item.label}
@@ -480,8 +574,10 @@ export default function Home() {
           {services.map((item) => {
             const Icon = item.icon;
             return (
-              <div
+              <Link
                 key={item.no}
+                href={item.href}
+                aria-label={`Explore ${item.title}`}
                 className="group relative overflow-hidden rounded-2xl border border-[#dfe4f5] bg-[#020b2b] p-6 text-white shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
               >
                 {/* Brighter Background Image */}
@@ -502,11 +598,12 @@ export default function Home() {
                   <p className="mt-5 text-sm leading-7 text-white/70">
                     {item.description}
                   </p>
-                  <p className="mt-6 text-sm font-semibold text-[#ff2f7d] transition-transform duration-300 group-hover:translate-x-2">
-                    Explore →
-                  </p>
+                  <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#ff2f7d] transition-transform duration-300 group-hover:translate-x-2">
+                    Explore Service
+                    <span aria-hidden="true">→</span>
+                  </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
@@ -695,13 +792,13 @@ export default function Home() {
                 <span className="ml-4 text-[18px] text-[#ff2f7d]">→</span>
               </button>
 
-              <a
+              <Link
                 href="/portfolio"
                 className="inline-flex h-[48px] min-w-[158px] items-center justify-center rounded-[8px] border border-white/30 bg-white/[0.03] px-5 text-[11px] font-semibold text-white backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:bg-white/10"
               >
                 View Our Work
                 <span className="ml-4 text-[17px]">→</span>
-              </a>
+              </Link>
 
               {/* Paper plane */}
               <div className="relative hidden h-14 w-16 items-center justify-center xl:flex">
