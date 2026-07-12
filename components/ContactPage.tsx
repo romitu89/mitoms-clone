@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -90,6 +90,107 @@ const benefits = [
   },
 ];
 
+
+function TypewriterOnce({
+  text,
+  speed = 115,
+  delay = 250,
+  display = "inline",
+  className = "",
+  cursorClassName = "bg-current",
+}: {
+  text: string;
+  speed?: number;
+  delay?: number;
+  display?: "inline" | "block";
+  className?: string;
+  cursorClassName?: string;
+}) {
+  const elementRef = useRef<HTMLSpanElement>(null);
+  const [hasStarted, setHasStarted] = useState(false);
+  const [visibleCharacters, setVisibleCharacters] = useState(0);
+
+  useEffect(() => {
+    const element = elementRef.current;
+
+    if (!element || hasStarted) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasStarted(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.25,
+        rootMargin: "0px 0px -5% 0px",
+      },
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [hasStarted]);
+
+  useEffect(() => {
+    if (!hasStarted || visibleCharacters >= text.length) {
+      return;
+    }
+
+    const timeoutId = setTimeout(
+      () => {
+        setVisibleCharacters((current) =>
+          Math.min(current + 1, text.length),
+        );
+      },
+      visibleCharacters === 0 ? delay : speed,
+    );
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [delay, hasStarted, speed, text, visibleCharacters]);
+
+  const isTyping =
+    hasStarted && visibleCharacters < text.length;
+
+  const layoutClassName =
+    display === "block" ? "grid w-fit" : "inline-grid";
+
+  return (
+    <span
+      ref={elementRef}
+      aria-label={text}
+      className={`${layoutClassName} whitespace-nowrap`}
+    >
+      <span
+        aria-hidden="true"
+        className={`invisible col-start-1 row-start-1 whitespace-nowrap ${className}`}
+      >
+        {text}
+      </span>
+
+      <span
+        aria-hidden="true"
+        className={`col-start-1 row-start-1 whitespace-nowrap ${className}`}
+      >
+        {text.slice(0, visibleCharacters)}
+
+        {isTyping && (
+          <span
+            className={`ml-1 inline-block h-[0.88em] w-[2px] animate-pulse align-[-0.06em] ${cursorClassName}`}
+          />
+        )}
+      </span>
+    </span>
+  );
+}
+
 const frequentlyAskedQuestions = [
   {
     question: "What information should I include in my enquiry?",
@@ -127,7 +228,7 @@ export default function ContactPage() {
   return (
     <main className="overflow-hidden bg-white text-[#07112f] antialiased">
       {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-[#fbfaff] px-5 pb-24 pt-20 sm:px-8 lg:px-10 lg:pb-28 lg:pt-24">
+      <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-16 pt-14 sm:px-6 sm:pb-20 sm:pt-18 lg:px-10 lg:pb-28 lg:pt-24">
         {/* Background glows */}
         <div className="pointer-events-none absolute -left-32 top-10 h-[380px] w-[380px] rounded-full bg-[#4b22ff]/10 blur-[120px]" />
 
@@ -143,22 +244,30 @@ export default function ContactPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-[#ddd6ff] bg-white/75 px-4 py-2 shadow-[0_8px_24px_rgba(75,34,255,0.06)] backdrop-blur">
               <MessageSquareText size={15} className="text-[#4b22ff]" />
 
-              <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#4b22ff]">
-                Let&apos;s Talk
-              </span>
+              <TypewriterOnce
+                text="Let&apos;s Talk"
+                speed={100}
+                delay={120}
+                className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#4b22ff]"
+                cursorClassName="bg-[#4b22ff]"
+              />
             </div>
 
-            <h1 className="mt-6 text-[42px] font-bold leading-[1.08] tracking-[-0.045em] text-[#081232] sm:text-[54px] lg:text-[64px]">
+            <h1 className="mt-6 text-[36px] font-bold leading-[1.09] tracking-[-0.045em] text-[#081232] sm:text-[50px] lg:text-[64px]">
               Have an Idea?
               <span className="mt-2 block">
                 Let&apos;s Build Something{" "}
-                <span className="bg-gradient-to-r from-[#4b22ff] via-[#7439ff] to-[#ff315d] bg-clip-text text-transparent">
-                  Remarkable
-                </span>
+                <TypewriterOnce
+                  text="Remarkable"
+                  speed={120}
+                  delay={320}
+                  className="bg-gradient-to-r from-[#4b22ff] via-[#7439ff] to-[#ff315d] bg-clip-text text-transparent"
+                  cursorClassName="bg-[#ff315d]"
+                />
               </span>
             </h1>
 
-            <p className="mx-auto mt-6 max-w-[680px] text-[15px] font-medium leading-8 text-[#34405f]/70 sm:text-[16px]">
+            <p className="mx-auto mt-5 max-w-[680px] text-[14px] font-medium leading-7 text-[#34405f]/70 sm:mt-6 sm:text-[16px] sm:leading-8">
               Tell us about your project, business goals or technology
               challenges. Our team will help you identify the right solution and
               practical next steps.
@@ -166,28 +275,33 @@ export default function ContactPage() {
           </div>
 
           {/* Contact cards */}
-          <div className="mt-14 grid gap-5 md:grid-cols-3">
+          <div className="mt-10 grid gap-4 sm:mt-12 md:grid-cols-3 md:gap-5">
             {contactCards.map((item) => {
               const Icon = item.icon;
 
               const content = (
-                <div className="group flex h-full items-center gap-5 rounded-[22px] border border-[#e7e2f5] bg-white/90 p-5 shadow-[0_14px_40px_rgba(38,27,104,0.07)] backdrop-blur transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_50px_rgba(75,34,255,0.12)]">
+                <div className="group flex h-full min-w-0 items-center gap-4 rounded-[20px] border border-[#e7e2f5] bg-white/90 p-4 shadow-[0_14px_40px_rgba(38,27,104,0.07)] backdrop-blur transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_50px_rgba(75,34,255,0.12)] sm:gap-5 sm:rounded-[22px] sm:p-5">
                   <div
                     className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] bg-gradient-to-br ${item.iconBg} text-white shadow-[0_12px_26px_rgba(75,34,255,0.20)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105`}
                   >
                     <Icon size={25} strokeWidth={2} />
                   </div>
 
-                  <div>
-                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#4b22ff]">
-                      {item.title}
+                  <div className="min-w-0">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#4b22ff] sm:text-[11px] sm:tracking-[0.18em]">
+                      <TypewriterOnce
+                        text={item.title}
+                        speed={85}
+                        delay={120}
+                        cursorClassName="bg-[#4b22ff]"
+                      />
                     </p>
 
                     <p className="mt-1 text-[12px] font-medium leading-5 text-[#52607a]/60">
                       {item.description}
                     </p>
 
-                    <p className="mt-2 text-[14px] font-bold text-[#081232]">
+                    <p className="mt-2 break-words text-[13px] font-bold leading-5 text-[#081232] sm:text-[14px]">
                       {item.value}
                     </p>
                   </div>
@@ -209,12 +323,15 @@ export default function ContactPage() {
       </section>
 
       {/* CONTACT FORM SECTION */}
-      <section className="relative px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+      <section
+        id="contact-form"
+        className="relative scroll-mt-24 px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-24"
+      >
         <div className="pointer-events-none absolute left-[-150px] top-[20%] h-[350px] w-[350px] rounded-full bg-[#4b22ff]/5 blur-[120px]" />
 
-        <div className="relative mx-auto grid max-w-[1320px] overflow-hidden rounded-[30px] border border-[#e4dff3] bg-white shadow-[0_30px_90px_rgba(19,14,65,0.12)] lg:grid-cols-[0.86fr_1.14fr]">
+        <div className="relative mx-auto grid max-w-[1320px] overflow-hidden rounded-[24px] border border-[#e4dff3] bg-white shadow-[0_30px_90px_rgba(19,14,65,0.12)] sm:rounded-[30px] lg:grid-cols-[0.86fr_1.14fr]">
           {/* LEFT INFORMATION */}
-          <div className="relative overflow-hidden bg-[linear-gradient(145deg,#06112f_0%,#18104f_45%,#5c175c_78%,#ff315d_145%)] p-7 text-white sm:p-10 lg:min-h-[760px] lg:p-12">
+          <div className="relative overflow-hidden bg-[linear-gradient(145deg,#06112f_0%,#18104f_45%,#5c175c_78%,#ff315d_145%)] p-5 text-white sm:p-8 lg:min-h-[760px] lg:p-12">
             <div className="pointer-events-none absolute -left-28 top-24 h-72 w-72 rounded-full bg-[#1685ff]/25 blur-[95px]" />
 
             <div className="pointer-events-none absolute -bottom-20 -right-16 h-80 w-80 rounded-full bg-[#ff315d]/35 blur-[95px]" />
@@ -260,31 +377,41 @@ export default function ContactPage() {
 
             <div className="relative z-10">
               <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#ff80bb]">
-                Start a Conversation
+                <TypewriterOnce
+                  text="Start a Conversation"
+                  speed={90}
+                  delay={120}
+                  cursorClassName="bg-[#ff80bb]"
+                />
               </p>
 
-              <h2 className="mt-5 max-w-[440px] text-[36px] font-bold leading-[1.12] tracking-[-0.04em] sm:text-[44px]">
+              <h2 className="mt-4 max-w-[440px] text-[31px] font-bold leading-[1.14] tracking-[-0.04em] sm:mt-5 sm:text-[42px] lg:text-[44px]">
                 Your Next Digital
-                <span className="mt-1 block font-serif text-[48px] font-medium italic text-[#ff88bd] sm:text-[55px]">
-                  Success Story
-                </span>
+                <TypewriterOnce
+                  text="Success Story"
+                  display="block"
+                  speed={120}
+                  delay={260}
+                  className="mt-1 pb-[0.08em] font-serif text-[40px] font-medium italic leading-[1.05] text-[#ff88bd] sm:text-[51px] lg:text-[55px]"
+                  cursorClassName="bg-[#ff88bd]"
+                />
                 Starts Here
               </h2>
 
-              <p className="mt-6 max-w-[430px] text-[14px] font-medium leading-7 text-white/68">
+              <p className="mt-5 max-w-[430px] text-[13px] font-medium leading-7 text-white/68 sm:mt-6 sm:text-[14px]">
                 Whether you need a new website, mobile application, cloud
                 solution or expert technology guidance, our team is ready to
                 help.
               </p>
 
-              <div className="mt-10 space-y-5">
+              <div className="mt-8 space-y-4 sm:mt-10 sm:space-y-5">
                 {benefits.map((item) => {
                   const Icon = item.icon;
 
                   return (
                     <div
                       key={item.title}
-                      className="flex gap-4 rounded-[20px] border border-white/12 bg-white/[0.07] p-4 backdrop-blur"
+                      className="flex gap-3 rounded-[18px] border border-white/12 bg-white/[0.07] p-3.5 backdrop-blur sm:gap-4 sm:rounded-[20px] sm:p-4"
                     >
                       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-white/10 text-[#ff8dc1]">
                         <Icon size={21} />
@@ -304,14 +431,14 @@ export default function ContactPage() {
                 })}
               </div>
 
-              <div className="mt-10 border-t border-white/10 pt-8">
+              <div className="mt-8 border-t border-white/10 pt-6 sm:mt-10 sm:pt-8">
                 <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/45">
                   Prefer Email?
                 </p>
 
                 <a
                   href="mailto:info@mitoms.com"
-                  className="group mt-3 inline-flex items-center gap-3 text-[17px] font-bold text-white transition-colors hover:text-[#ff8dc1]"
+                  className="group mt-3 inline-flex max-w-full items-center gap-3 break-all text-[15px] font-bold text-white transition-colors hover:text-[#ff8dc1] sm:text-[17px]"
                 >
                   <Mail size={19} />
                   info@mitoms.com
@@ -325,7 +452,7 @@ export default function ContactPage() {
           </div>
 
           {/* RIGHT FORM */}
-          <div className="relative bg-[#fbfaff] p-6 sm:p-10 lg:p-12">
+          <div className="relative min-w-0 bg-[#fbfaff] p-5 sm:p-8 lg:p-12">
             <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#4b22ff]/8 blur-[90px]" />
 
             <div className="pointer-events-none absolute -bottom-24 left-[-70px] h-64 w-64 rounded-full bg-[#ff315d]/8 blur-[90px]" />
@@ -333,10 +460,15 @@ export default function ContactPage() {
             {!submitted ? (
               <div className="relative z-10">
                 <p className="text-[11px] font-bold uppercase tracking-[0.27em] text-[#4b22ff]">
-                  Project Enquiry
+                  <TypewriterOnce
+                    text="Project Enquiry"
+                    speed={90}
+                    delay={120}
+                    cursorClassName="bg-[#4b22ff]"
+                  />
                 </p>
 
-                <h2 className="mt-3 text-[30px] font-bold tracking-[-0.035em] text-[#081232] sm:text-[36px]">
+                <h2 className="mt-3 text-[27px] font-bold leading-[1.15] tracking-[-0.035em] text-[#081232] sm:text-[34px] lg:text-[36px]">
                   Tell Us About Your Project
                 </h2>
 
@@ -345,7 +477,7 @@ export default function ContactPage() {
                   possible. Our team will review your enquiry and contact you.
                 </p>
 
-                <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+                <form onSubmit={handleSubmit} className="mt-7 space-y-4 sm:mt-8">
                   {/* Name and email */}
                   <div className="grid gap-4 sm:grid-cols-2">
                     <label className="group block">
@@ -365,7 +497,7 @@ export default function ContactPage() {
                           name="name"
                           autoComplete="name"
                           placeholder="Enter your name"
-                          className="h-14 w-full rounded-[15px] border border-[#e1ddec] bg-white pl-12 pr-4 text-[13px] font-semibold text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
+                          className="h-[52px] w-full rounded-[14px] border border-[#e1ddec] bg-white pl-11 pr-3 text-[12px] font-semibold text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)] sm:h-14 sm:rounded-[15px] sm:pl-12 sm:pr-4 sm:text-[13px]"
                         />
                       </div>
                     </label>
@@ -456,7 +588,7 @@ export default function ContactPage() {
                           required
                           name="service"
                           defaultValue=""
-                          className="h-14 w-full appearance-none rounded-[15px] border border-[#e1ddec] bg-white pl-12 pr-11 text-[13px] font-semibold text-[#34405f] outline-none transition-all focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
+                          className="h-[52px] w-full appearance-none rounded-[14px] border border-[#e1ddec] bg-white pl-11 pr-10 text-[12px] font-semibold text-[#34405f] outline-none transition-all focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)] sm:h-14 sm:rounded-[15px] sm:pl-12 sm:pr-11 sm:text-[13px]"
                         >
                           <option value="" disabled>
                             Select service
@@ -528,14 +660,14 @@ export default function ContactPage() {
                         name="message"
                         rows={6}
                         placeholder="Tell us about your project, goals, required features and expected timeline..."
-                        className="w-full resize-none rounded-[15px] border border-[#e1ddec] bg-white py-4 pl-12 pr-4 text-[13px] font-semibold leading-6 text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
+                        className="w-full resize-none rounded-[14px] border border-[#e1ddec] bg-white py-3.5 pl-11 pr-3 text-[12px] font-semibold leading-6 text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)] sm:rounded-[15px] sm:py-4 sm:pl-12 sm:pr-4 sm:text-[13px]"
                       />
                     </div>
                   </label>
 
                   <button
                     type="submit"
-                    className="group flex h-14 w-full cursor-pointer items-center justify-center gap-3 rounded-[15px] bg-gradient-to-r from-[#4b22ff] via-[#7138ff] to-[#ff315d] px-6 text-[13px] font-bold text-white shadow-[0_15px_32px_rgba(75,34,255,0.25)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_42px_rgba(255,49,93,0.25)]"
+                    className="group flex min-h-[52px] w-full cursor-pointer items-center justify-center gap-3 rounded-[14px] bg-gradient-to-r from-[#4b22ff] via-[#7138ff] to-[#ff315d] px-5 text-[12px] font-bold text-white shadow-[0_15px_32px_rgba(75,34,255,0.25)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_42px_rgba(255,49,93,0.25)] sm:h-14 sm:rounded-[15px] sm:px-6 sm:text-[13px]"
                   >
                     Send Project Enquiry
 
@@ -545,7 +677,7 @@ export default function ContactPage() {
                     />
                   </button>
 
-                  <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 pt-1 text-[10px] font-bold text-[#4a5671]/55">
+                  <div className="flex flex-col items-start gap-2 pt-1 text-[10px] font-bold text-[#4a5671]/55 min-[430px]:flex-row min-[430px]:flex-wrap min-[430px]:items-center min-[430px]:justify-center min-[430px]:gap-x-6">
                     <span className="flex items-center gap-1.5">
                       <CheckCircle2 size={14} className="text-[#4b22ff]" />
                       Free Consultation
@@ -565,7 +697,7 @@ export default function ContactPage() {
               </div>
             ) : (
               /* SUCCESS MESSAGE */
-              <div className="relative z-10 flex min-h-[650px] flex-col items-center justify-center text-center">
+              <div className="relative z-10 flex min-h-[500px] flex-col items-center justify-center px-1 text-center sm:min-h-[650px]">
                 <div className="relative">
                   <div className="absolute inset-[-25px] rounded-full bg-[#4b22ff]/10 blur-2xl" />
 
@@ -575,10 +707,15 @@ export default function ContactPage() {
                 </div>
 
                 <p className="mt-8 text-[11px] font-bold uppercase tracking-[0.28em] text-[#4b22ff]">
-                  Enquiry Received
+                  <TypewriterOnce
+                    text="Enquiry Received"
+                    speed={90}
+                    delay={120}
+                    cursorClassName="bg-[#4b22ff]"
+                  />
                 </p>
 
-                <h2 className="mt-3 text-[38px] font-bold tracking-[-0.04em] text-[#081232]">
+                <h2 className="mt-3 text-[32px] font-bold tracking-[-0.04em] text-[#081232] sm:text-[38px]">
                   Thank You!
                 </h2>
 
@@ -602,20 +739,31 @@ export default function ContactPage() {
       </section>
 
       {/* QUICK HELP */}
-      <section className="bg-[#fbfaff] px-5 py-20 sm:px-8 lg:px-10">
+      <section className="bg-[#fbfaff] px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-20">
         <div className="mx-auto max-w-[1320px]">
           <div className="mx-auto max-w-[720px] text-center">
             <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#ff315d]">
-              How Can We Help?
+              <TypewriterOnce
+                text="How Can We Help?"
+                speed={90}
+                delay={120}
+                cursorClassName="bg-[#ff315d]"
+              />
             </p>
 
             <h2 className="mt-4 text-[32px] font-bold tracking-[-0.035em] text-[#081232] sm:text-[42px]">
               Start With the Option That{" "}
-              <span className="text-[#4b22ff]">Works for You</span>
+              <TypewriterOnce
+                text="Works for You"
+                speed={115}
+                delay={250}
+                className="text-[#4b22ff]"
+                cursorClassName="bg-[#4b22ff]"
+              />
             </h2>
           </div>
 
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
+          <div className="mt-9 grid gap-4 sm:mt-12 md:grid-cols-3 md:gap-5">
             {[
               {
                 icon: MessageSquareText,
@@ -651,7 +799,7 @@ export default function ContactPage() {
                 <a
                   key={item.title}
                   href={item.href}
-                  className="group relative overflow-hidden rounded-[24px] border border-[#e4dff2] bg-white p-7 shadow-[0_12px_34px_rgba(35,25,88,0.06)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(75,34,255,0.12)]"
+                  className="group relative overflow-hidden rounded-[21px] border border-[#e4dff2] bg-white p-5 shadow-[0_12px_34px_rgba(35,25,88,0.06)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(75,34,255,0.12)] sm:rounded-[24px] sm:p-7"
                 >
                   <div className="pointer-events-none absolute -right-14 -top-16 h-44 w-44 rounded-full bg-[#4b22ff]/5 blur-3xl transition-all duration-500 group-hover:bg-[#ff315d]/8" />
 
@@ -685,16 +833,28 @@ export default function ContactPage() {
       </section>
 
       {/* FAQ */}
-      <section className="px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+      <section className="px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-24">
         <div className="mx-auto grid max-w-[1180px] gap-12 lg:grid-cols-[0.72fr_1.28fr]">
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#4b22ff]">
-              Common Questions
+              <TypewriterOnce
+                text="Common Questions"
+                speed={90}
+                delay={120}
+                cursorClassName="bg-[#4b22ff]"
+              />
             </p>
 
             <h2 className="mt-4 text-[32px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px]">
               Before You
-              <span className="block text-[#ff315d]">Contact Us</span>
+              <TypewriterOnce
+                text="Contact Us"
+                display="block"
+                speed={115}
+                delay={220}
+                className="text-[#ff315d]"
+                cursorClassName="bg-[#ff315d]"
+              />
             </h2>
 
             <p className="mt-5 max-w-[400px] text-[13px] font-medium leading-7 text-[#34405f]/65">
@@ -718,15 +878,15 @@ export default function ContactPage() {
             {frequentlyAskedQuestions.map((item, index) => (
               <details
                 key={item.question}
-                className="group rounded-[20px] border border-[#e4dff1] bg-white p-5 shadow-[0_10px_30px_rgba(34,24,85,0.05)] open:border-[#cfc5ff] open:shadow-[0_16px_38px_rgba(75,34,255,0.08)]"
+                className="group rounded-[18px] border border-[#e4dff1] bg-white p-4 shadow-[0_10px_30px_rgba(34,24,85,0.05)] open:border-[#cfc5ff] open:shadow-[0_16px_38px_rgba(75,34,255,0.08)] sm:rounded-[20px] sm:p-5"
               >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-5">
-                  <div className="flex items-center gap-4">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 sm:gap-5">
+                  <div className="flex min-w-0 items-center gap-3 sm:gap-4">
                     <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[12px] bg-[#f0ecff] text-[11px] font-bold text-[#4b22ff]">
                       {String(index + 1).padStart(2, "0")}
                     </span>
 
-                    <h3 className="text-[14px] font-bold text-[#081232] sm:text-[15px]">
+                    <h3 className="min-w-0 text-[13px] font-bold leading-5 text-[#081232] sm:text-[15px]">
                       {item.question}
                     </h3>
                   </div>
@@ -747,8 +907,8 @@ export default function ContactPage() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="px-5 pb-8 sm:px-8 lg:px-10">
-        <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[26px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff315d_125%)] px-7 py-12 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:px-10 lg:px-14">
+      <section className="px-4 pb-8 sm:px-6 lg:px-10">
+        <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[22px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff315d_125%)] px-5 py-10 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:rounded-[26px] sm:px-8 sm:py-12 lg:px-14">
           <div className="pointer-events-none absolute -left-20 -top-28 h-72 w-72 rounded-full bg-[#1685ff]/20 blur-[90px]" />
 
           <div className="pointer-events-none absolute -bottom-28 right-[-40px] h-80 w-80 rounded-full bg-[#ff315d]/35 blur-[95px]" />
@@ -758,7 +918,12 @@ export default function ContactPage() {
           <div className="relative z-10 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
             <div>
               <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-[#ff84b8]">
-                Ready to Get Started?
+                <TypewriterOnce
+                  text="Ready to Get Started?"
+                  speed={90}
+                  delay={120}
+                  cursorClassName="bg-[#ff84b8]"
+                />
               </p>
 
               <h2 className="mt-3 max-w-[650px] text-[30px] font-bold tracking-[-0.035em] sm:text-[38px]">
@@ -773,7 +938,7 @@ export default function ContactPage() {
 
             <a
               href="mailto:info@mitoms.com?subject=Project Enquiry"
-              className="group inline-flex h-13 shrink-0 items-center justify-center gap-3 rounded-[14px] bg-white px-7 py-4 text-[12px] font-bold text-[#17163b] shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1"
+              className="group inline-flex min-h-[50px] w-full shrink-0 items-center justify-center gap-3 rounded-[14px] bg-white px-7 py-4 text-[12px] font-bold text-[#17163b] shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 sm:w-auto"
             >
               Contact Our Team
 
