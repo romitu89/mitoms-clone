@@ -599,7 +599,7 @@ function HeroFloatingCard({
     <Link
       href={href}
       aria-label={`Explore ${title}`}
-      className={`group absolute ${pos} z-40 hidden w-[215px] rounded-[28px] bg-white/95 p-[14px] shadow-[0_18px_40px_rgba(35,27,84,0.14)] ring-1 ring-white/80 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_rgba(35,27,84,0.19)] md:block`}
+      className={`group absolute ${pos} z-40 hidden w-[215px] rounded-[28px] bg-white/95 p-[14px] shadow-[0_18px_40px_rgba(35,27,84,0.14)] ring-1 ring-white/80 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_rgba(35,27,84,0.19)] lg:block`}
     >
       <div className="flex items-center gap-3">
         <div
@@ -668,7 +668,7 @@ export default function Home() {
   return (
     <main className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
       {/* HERO SECTION */}
-      <section className="relative min-h-[650px] overflow-hidden bg-[#fbfaff]">
+      <section className="relative overflow-hidden bg-[#fbfaff] lg:min-h-[650px]">
         <Image
           src={`${imgPath}hero-bg-glow.png`}
           alt=""
@@ -678,10 +678,10 @@ export default function Home() {
           className="pointer-events-none object-cover object-center opacity-95"
         />
 
-        <div className="relative z-10 mx-auto grid max-w-[1320px] grid-cols-1 items-center px-6 pb-6 pt-11 lg:grid-cols-[0.92fr_1.08fr] lg:px-10">
+        <div className="relative z-10 mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-8 px-4 pb-10 pt-10 sm:px-6 sm:pt-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-4 lg:px-10 lg:pb-6 lg:pt-11">
           {/* LEFT CONTENT */}
           <div className="relative z-30">
-            <p className="mb-5 text-[12px] font-bold uppercase tracking-[0.31em] text-[#5438ff]">
+            <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.24em] text-[#5438ff] sm:mb-5 sm:text-[12px] sm:tracking-[0.31em]">
               WE BUILD.{" "}
               <TypewriterText
                 segments={[
@@ -693,13 +693,13 @@ export default function Home() {
               />
             </p>
 
-            <h1 className="max-w-[560px] text-[46px] font-bold leading-[1.07] tracking-[-0.045em] text-[#081232] sm:text-[56px] lg:text-[62px] xl:text-[66px]">
+            <h1 className="max-w-[620px] overflow-visible text-[38px] font-bold leading-[1.08] tracking-[-0.045em] text-[#081232] sm:text-[52px] lg:text-[60px] xl:text-[66px]">
               Digital Solutions
               <br />
               That Drive
               <TypewriterText
                 display="block"
-                className="mt-1 font-serif text-[58px] font-medium italic leading-[0.9] tracking-[-0.07em] sm:text-[72px] lg:text-[82px]"
+                className="mt-1 overflow-visible pb-[0.12em] pr-[0.08em] font-serif text-[48px] font-medium italic leading-[0.94] tracking-[-0.065em] sm:text-[68px] lg:text-[78px] xl:text-[82px]"
                 speed={125}
                 delay={380}
                 cursorClassName="bg-[#4a25ff]"
@@ -715,17 +715,17 @@ export default function Home() {
               />
             </h1>
 
-            <p className="mt-9 max-w-[535px] text-[16px] font-medium leading-[1.85] text-[#27314f]/80">
+            <p className="mt-6 max-w-[535px] text-[14px] font-medium leading-7 text-[#27314f]/80 sm:mt-8 sm:text-[16px] sm:leading-[1.85]">
               We partner with forward-thinking businesses to design, build and
               scale digital products and solutions that create measurable growth
               and lasting impact.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-6">
+            <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 lg:gap-6">
               <button
                 type="button"
                 onClick={openConsultation}
-                className="group inline-flex h-[48px] cursor-pointer items-center justify-center rounded-[10px] bg-gradient-to-r from-[#4525ff] to-[#ff315f] px-7 text-[13px] font-bold tracking-[-0.01em] text-white shadow-[0_12px_28px_rgba(80,45,255,0.28)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(80,45,255,0.34)]"
+                className="group inline-flex min-h-[48px] w-full cursor-pointer items-center justify-center rounded-[10px] bg-gradient-to-r from-[#4525ff] to-[#ff315f] px-6 text-[13px] font-bold tracking-[-0.01em] text-white shadow-[0_12px_28px_rgba(80,45,255,0.28)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(80,45,255,0.34)] sm:w-auto sm:px-7"
               >
                 Get Free Consultation
                 <span className="ml-3 text-lg transition-transform duration-300 group-hover:translate-x-1">
@@ -735,20 +735,20 @@ export default function Home() {
 
               <Link
                 href="/portfolio"
-                className="inline-flex h-[48px] items-center justify-center rounded-[10px] border border-[#dfe3f1] bg-white px-7 text-[13px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(16,24,60,0.06)]"
+                className="inline-flex min-h-[48px] w-full items-center justify-center rounded-[10px] border border-[#dfe3f1] bg-white px-6 text-[13px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(16,24,60,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#4b22ff] hover:text-[#4b22ff] sm:w-auto sm:px-7"
               >
                 View Our Work <span className="ml-4 text-[#4b22ff]">→</span>
               </Link>
             </div>
 
-            <div className="mt-14 grid max-w-[620px] grid-cols-2 gap-3 sm:grid-cols-4">
+            <div className="mt-9 grid max-w-[620px] grid-cols-2 gap-3 sm:mt-12 sm:grid-cols-4 lg:mt-14">
               {stats.map((item) => {
                 const Icon = item.icon;
 
                 return (
                   <div
                     key={item.label}
-                    className="flex min-h-[92px] items-center gap-3 rounded-[18px] border border-[#e9e6f5] bg-white/75 px-4 py-4 shadow-[0_8px_24px_rgba(34,24,88,0.05)] backdrop-blur"
+                    className="flex min-h-[88px] min-w-0 items-center gap-2.5 rounded-[16px] border border-[#e9e6f5] bg-white/75 px-3 py-3.5 shadow-[0_8px_24px_rgba(34,24,88,0.05)] backdrop-blur sm:min-h-[92px] sm:gap-3 sm:rounded-[18px] sm:px-4 sm:py-4"
                   >
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] bg-[#f1edff] text-[#542cff]">
                       <Icon className="h-5 w-5 stroke-[2]" />
@@ -769,7 +769,7 @@ export default function Home() {
           </div>
 
           {/* RIGHT VISUAL */}
-          <div className="relative min-h-[545px] lg:min-h-[570px]">
+          <div className="relative min-h-[360px] sm:min-h-[470px] lg:min-h-[570px]">
             <Image
               src={`${imgPath}hero-3d-m.png`}
               alt="MITOMS 3D M"
@@ -777,7 +777,7 @@ export default function Home() {
               height={650}
               priority
               unoptimized
-              className="absolute left-[51%] top-[55%] z-20 w-[94%] max-w-[650px] -translate-x-1/2 -translate-y-1/2 object-contain"
+              className="absolute left-1/2 top-1/2 z-20 w-[102%] max-w-[650px] -translate-x-1/2 -translate-y-1/2 object-contain sm:w-[96%] lg:left-[51%] lg:top-[55%] lg:w-[94%]"
             />
 
             <Image
@@ -786,7 +786,7 @@ export default function Home() {
               width={70}
               height={70}
               unoptimized
-              className="absolute left-[8%] top-[26%] z-30 w-[48px]"
+              className="absolute left-[5%] top-[24%] z-30 w-[34px] sm:left-[8%] sm:top-[26%] sm:w-[48px]"
             />
 
             <Image
@@ -795,7 +795,7 @@ export default function Home() {
               width={55}
               height={55}
               unoptimized
-              className="absolute left-[23%] top-[39%] z-30 w-[34px]"
+              className="absolute left-[20%] top-[39%] z-30 w-[24px] sm:left-[23%] sm:w-[34px]"
             />
 
             <Image
@@ -804,7 +804,7 @@ export default function Home() {
               width={65}
               height={65}
               unoptimized
-              className="absolute right-[6%] top-[39%] z-30 w-[45px]"
+              className="absolute right-[4%] top-[37%] z-30 w-[30px] sm:right-[6%] sm:top-[39%] sm:w-[45px]"
             />
 
             <Image
@@ -813,7 +813,7 @@ export default function Home() {
               width={65}
               height={65}
               unoptimized
-              className="absolute right-[13%] top-[56%] z-30 w-[42px]"
+              className="absolute right-[10%] top-[58%] z-30 w-[28px] sm:right-[13%] sm:top-[56%] sm:w-[42px]"
             />
 
             {heroCards.map((card) => (
@@ -824,8 +824,8 @@ export default function Home() {
       </section>
 
       {/* PROCESS */}
-      <section className="px-4 py-8 sm:px-8 lg:px-10">
-        <div className="relative mx-auto max-w-[1440px] overflow-hidden rounded-[16px] border border-white/15 bg-[#041033] px-6 pb-12 pt-8 text-white shadow-[0_22px_70px_rgba(4,10,35,0.28)] sm:rounded-[22px] lg:px-12 lg:pb-14">
+      <section className="px-4 py-6 sm:px-6 sm:py-8 lg:px-10">
+        <div className="relative mx-auto max-w-[1440px] overflow-hidden rounded-[16px] border border-white/15 bg-[#041033] px-4 pb-10 pt-8 text-white shadow-[0_22px_70px_rgba(4,10,35,0.28)] sm:rounded-[22px] sm:px-7 sm:pb-12 lg:px-12 lg:pb-14">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_13%_48%,rgba(71,26,255,0.22),transparent_20%),radial-gradient(circle_at_46%_47%,rgba(255,43,126,0.14),transparent_18%),radial-gradient(circle_at_83%_50%,rgba(0,87,255,0.18),transparent_20%)]" />
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(1,8,30,0.75),rgba(3,13,45,0.2),rgba(1,8,30,0.75))]" />
 
@@ -839,7 +839,7 @@ export default function Home() {
                 cursorClassName="bg-[#d75cff]"
               />
             </p>
-            <h2 className="mx-auto mt-4 max-w-[700px] text-[32px] font-bold leading-[1.22] tracking-[-0.035em] text-white sm:text-[42px]">
+            <h2 className="mx-auto mt-4 max-w-[700px] text-[27px] font-bold leading-[1.2] tracking-[-0.035em] text-white sm:text-[38px] lg:text-[42px]">
               We Turn Ideas Into{" "}
               <TypewriterText
                 segments={[
@@ -852,7 +852,7 @@ export default function Home() {
               <br />
               Digital Experiences
             </h2>
-            <p className="mt-5 text-[14px] font-medium text-white/62">
+            <p className="mx-auto mt-4 max-w-[540px] text-[12px] font-medium leading-6 text-white/62 sm:mt-5 sm:text-[14px]">
               A seamless process designed to deliver value at every step.
             </p>
           </div>
@@ -902,7 +902,7 @@ export default function Home() {
               ))}
             </svg>
 
-            <div className="grid gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-6">
+            <div className="grid grid-cols-1 gap-x-6 gap-y-12 min-[430px]:grid-cols-2 lg:grid-cols-6 lg:gap-x-7">
               {process.map((item) => (
                 <ProcessStep key={item.no} {...item} />
               ))}
@@ -912,7 +912,7 @@ export default function Home() {
       </section>
 
       {/* SERVICES - WHAT WE DO */}
-      <section className="mx-auto max-w-[1320px] px-5 py-20 sm:px-8 lg:px-10">
+      <section className="mx-auto max-w-[1320px] px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-20">
         <div className="text-center">
           <p className="text-xs font-bold uppercase tracking-[0.30em] text-[#ff2f7d]">
             <TypewriterText
@@ -923,7 +923,7 @@ export default function Home() {
               cursorClassName="bg-[#ff2f7d]"
             />
           </p>
-          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
+          <h2 className="mt-3 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] sm:text-4xl">
             End-to-End Solutions for Your{" "}
             <TypewriterText
               segments={[
@@ -936,7 +936,7 @@ export default function Home() {
           </h2>
         </div>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-9 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
           {services.map((item) => {
             const Icon = item.icon;
             return (
@@ -944,7 +944,7 @@ export default function Home() {
                 key={item.no}
                 href={item.href}
                 aria-label={`Explore ${item.title}`}
-                className="group relative overflow-hidden rounded-2xl border border-[#dfe4f5] bg-[#020b2b] p-6 text-white shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                className="group relative min-h-[340px] overflow-hidden rounded-2xl border border-[#dfe4f5] bg-[#020b2b] p-5 text-white shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl sm:min-h-[360px] sm:p-6"
               >
                 {/* Brighter Background Image */}
                 <div className="absolute inset-0 opacity-30 transition-all duration-500 group-hover:opacity-50">
@@ -976,10 +976,10 @@ export default function Home() {
       </section>
 
       {/* ========== IMPACT - सिर्फ Build & Implement का टेक्स्ट ठीक किया ========== */}
-      <section className="relative overflow-hidden px-5 pb-10 pt-10 sm:px-8 lg:px-10">
+      <section className="relative overflow-hidden px-4 pb-12 pt-10 sm:px-6 sm:pb-14 lg:px-10">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_68%_43%,rgba(98,47,255,0.055),transparent_31%)]" />
 
-        <div className="relative mx-auto grid max-w-[1320px] items-center gap-6 lg:grid-cols-[0.68fr_1.32fr]">
+        <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 lg:grid-cols-[0.68fr_1.32fr] lg:gap-6">
           {/* LEFT CONTENT */}
           <div className="lg:pl-2">
             <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#5b35ff]">
@@ -995,7 +995,7 @@ export default function Home() {
               />
             </p>
 
-            <h2 className="mt-5 max-w-[440px] text-[31px] font-bold leading-[1.20] tracking-[-0.035em] text-[#081232] sm:text-[39px]">
+            <h2 className="mt-5 max-w-[500px] text-[29px] font-bold leading-[1.18] tracking-[-0.035em] text-[#081232] sm:text-[37px] lg:text-[39px]">
               Ideas to{" "}
               <TypewriterText
                 segments={[
@@ -1046,15 +1046,15 @@ export default function Home() {
           </div>
 
           {/* RIGHT ORBIT DIAGRAM */}
-          <div className="relative min-h-[510px]">
+          <div className="relative min-h-[430px] md:min-h-[510px]">
             {/* Dotted orbit */}
-            <div className="absolute left-1/2 top-1/2 h-[405px] w-[405px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[2px] border-dashed border-[#d4c9ff]" />
+            <div className="absolute left-1/2 top-[42%] h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[2px] border-dashed border-[#d4c9ff] md:top-1/2 md:h-[405px] md:w-[405px]" />
 
             {/* Soft background glow */}
-            <div className="pointer-events-none absolute left-1/2 top-1/2 h-[455px] w-[455px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(91,41,255,0.08),transparent_68%)]" />
+            <div className="pointer-events-none absolute left-1/2 top-[42%] h-[325px] w-[325px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(91,41,255,0.08),transparent_68%)] md:top-1/2 md:h-[455px] md:w-[455px]" />
 
             {/* Center gradient circle */}
-            <div className="absolute left-1/2 top-1/2 z-20 flex h-[184px] w-[184px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border border-[#8b46dd]/70 bg-[linear-gradient(180deg,#0b1026_0%,#161236_38%,#25114d_68%,#8b23b8_100%)] text-center text-[20px] font-bold leading-[1.75] text-white shadow-[0_0_0_6px_rgba(157,70,255,0.05),0_18px_40px_rgba(42,18,94,0.22),0_0_18px_rgba(190,70,255,0.18)]">
+            <div className="absolute left-1/2 top-[42%] z-20 flex h-[150px] w-[150px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border border-[#8b46dd]/70 bg-[linear-gradient(180deg,#0b1026_0%,#161236_38%,#25114d_68%,#8b23b8_100%)] text-center text-[16px] font-bold leading-[1.65] text-white shadow-[0_0_0_6px_rgba(157,70,255,0.05),0_18px_40px_rgba(42,18,94,0.22),0_0_18px_rgba(190,70,255,0.18)] md:top-1/2 md:h-[184px] md:w-[184px] md:text-[20px] md:leading-[1.75]">
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(132,76,255,0.38),transparent_34%)]" />
               <div className="pointer-events-none absolute bottom-[-6px] left-1/2 h-[92px] w-[150px] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,58,221,0.52)_0%,rgba(181,41,206,0.34)_45%,transparent_80%)] blur-xl" />
               <span className="relative z-10">
@@ -1066,8 +1066,56 @@ export default function Home() {
               </span>
             </div>
 
+            {/* Mobile orbit details */}
+            <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 gap-3 md:hidden">
+              {[
+                {
+                  icon: Search,
+                  title: "Research",
+                  text: "Validate opportunities",
+                },
+                {
+                  icon: Rocket,
+                  title: "Design",
+                  text: "Visualize the solution",
+                },
+                {
+                  icon: Code2,
+                  title: "Build",
+                  text: "Scalable implementation",
+                },
+                {
+                  icon: BarChart3,
+                  title: "Optimize",
+                  text: "Improve performance",
+                },
+              ].map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <div
+                    key={item.title}
+                    className="flex min-w-0 items-center gap-3 rounded-[16px] border border-[#e8e1fa] bg-white p-3 shadow-[0_8px_24px_rgba(53,35,118,0.07)]"
+                  >
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[12px] bg-[#f1edff] text-[#5b35ff]">
+                      <Icon className="h-4 w-4" />
+                    </div>
+
+                    <div className="min-w-0">
+                      <p className="text-[11px] font-bold text-[#10183a]">
+                        {item.title}
+                      </p>
+                      <p className="mt-1 text-[9px] font-semibold leading-4 text-[#46516e]/62">
+                        {item.text}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
             {/* Research text */}
-            <div className="absolute left-[0%] top-[8%] w-[220px] text-right">
+            <div className="absolute left-[0%] top-[8%] hidden w-[220px] text-right md:block">
               <h3 className="text-[13px] font-semibold text-[#10183a]">
                 Research &amp; Insights
               </h3>
@@ -1079,12 +1127,12 @@ export default function Home() {
             </div>
 
             {/* Research icon */}
-            <div className="absolute left-[31.2%] top-[21.1%] z-30 flex h-[70px] w-[70px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#f4efff] border border-[#ebe2ff] text-[#6b4dff] shadow-[0_3px_10px_rgba(91,50,255,0.06)]">
+            <div className="absolute left-[31.2%] top-[21.1%] z-30 hidden h-[70px] w-[70px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#ebe2ff] bg-[#f4efff] text-[#6b4dff] shadow-[0_3px_10px_rgba(91,50,255,0.06)] md:flex">
               <Search className="h-8 w-8 stroke-[2.2]" />
             </div>
 
             {/* Design text */}
-            <div className="absolute right-[0%] top-[8%] w-[220px]">
+            <div className="absolute right-[0%] top-[8%] hidden w-[220px] md:block">
               <h3 className="text-[13px] font-semibold text-[#10183a]">
                 Design &amp; Prototype
               </h3>
@@ -1098,12 +1146,12 @@ export default function Home() {
             </div>
 
             {/* Design icon */}
-            <div className="absolute left-[68.8%] top-[21.1%] z-30 flex h-[70px] w-[70px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#f4efff] border border-[#ebe2ff] text-[#6b4dff] shadow-[0_3px_10px_rgba(91,50,255,0.06)]">
+            <div className="absolute left-[68.8%] top-[21.1%] z-30 hidden h-[70px] w-[70px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#ebe2ff] bg-[#f4efff] text-[#6b4dff] shadow-[0_3px_10px_rgba(91,50,255,0.06)] md:flex">
               <Rocket className="h-8 w-8 stroke-[2.2]" />
             </div>
 
             {/* ===== Build & Implement - यहाँ पर टेक्स्ट ठीक किया ===== */}
-            <div className="absolute bottom-[7%] left-[0%] w-[225px] text-right">
+            <div className="absolute bottom-[7%] left-[0%] hidden w-[225px] text-right md:block">
               <h3 className="text-[13px] font-semibold text-[#10183a]">
                 Build &amp; Implement
               </h3>
@@ -1115,12 +1163,12 @@ export default function Home() {
             </div>
 
             {/* Build icon */}
-            <div className="absolute bottom-[21.1%] left-[31.2%] z-30 flex h-[70px] w-[70px] -translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full bg-[#f4efff] border border-[#ebe2ff] text-[#6b4dff] shadow-[0_3px_10px_rgba(91,50,255,0.06)]">
+            <div className="absolute bottom-[21.1%] left-[31.2%] z-30 hidden h-[70px] w-[70px] -translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border border-[#ebe2ff] bg-[#f4efff] text-[#6b4dff] shadow-[0_3px_10px_rgba(91,50,255,0.06)] md:flex">
               <Code2 className="h-8 w-8 stroke-[2.2]" />
             </div>
 
             {/* Measure text */}
-            <div className="absolute bottom-[7%] right-[0%] w-[225px]">
+            <div className="absolute bottom-[7%] right-[0%] hidden w-[225px] md:block">
               <h3 className="text-[13px] font-semibold text-[#10183a]">
                 Measure &amp; Optimize
               </h3>
@@ -1134,7 +1182,7 @@ export default function Home() {
             </div>
 
             {/* Measure icon */}
-            <div className="absolute bottom-[21.1%] left-[68.8%] z-30 flex h-[70px] w-[70px] -translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full bg-[#f4efff] border border-[#ebe2ff] text-[#6b4dff] shadow-[0_3px_10px_rgba(91,50,255,0.06)]">
+            <div className="absolute bottom-[21.1%] left-[68.8%] z-30 hidden h-[70px] w-[70px] -translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border border-[#ebe2ff] bg-[#f4efff] text-[#6b4dff] shadow-[0_3px_10px_rgba(91,50,255,0.06)] md:flex">
               <BarChart3 className="h-8 w-8 stroke-[2.2]" />
             </div>
           </div>
@@ -1142,8 +1190,8 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="px-5 sm:px-8 lg:px-7">
-        <div className="relative mx-auto max-w-[1380px] overflow-hidden rounded-t-[12px] border border-white/15 bg-[linear-gradient(100deg,#07183f_0%,#09153a_30%,#24104f_58%,#64145f_80%,#ff2f7d_100%)] px-7 py-6 text-white shadow-[0_18px_50px_rgba(13,12,55,0.22)] sm:px-10 lg:px-14">
+      <section className="px-4 sm:px-6 lg:px-7">
+        <div className="relative mx-auto max-w-[1380px] overflow-hidden rounded-t-[12px] border border-white/15 bg-[linear-gradient(100deg,#07183f_0%,#09153a_30%,#24104f_58%,#64145f_80%,#ff2f7d_100%)] px-5 py-8 text-white shadow-[0_18px_50px_rgba(13,12,55,0.22)] sm:px-8 sm:py-7 lg:px-14 lg:py-6">
           {/* Glow and decorative curves */}
           <div className="pointer-events-none absolute -bottom-24 right-[-20px] h-64 w-64 rounded-full bg-[#ff2f7d]/32 blur-3xl" />
           <div className="pointer-events-none absolute bottom-[-92px] right-[-40px] h-40 w-[360px] -rotate-6 rounded-[50%] border border-white/10" />
@@ -1152,14 +1200,14 @@ export default function Home() {
             bg-gradient-to-r from-[#1eb8ff] via-[#7b3cff] to-[#ff2f7d]
             shadow-[0_0_10px_#1eb8ff,0_0_22px_#6a4dff,0_0_36px_#ff2f7d,0_6px_28px_rgba(255,47,125,.55)]" />
 
-          <div className="relative z-10 grid items-center gap-7 lg:grid-cols-[1.15fr_0.85fr_1.3fr]">
+          <div className="relative z-10 grid items-center gap-6 lg:grid-cols-[1.15fr_0.85fr_1.3fr] lg:gap-7">
             {/* Left heading */}
             <div className="lg:pr-8">
               <h2 className="text-[22px] font-bold tracking-[-0.025em] sm:text-[27px]">
                 Let&apos;s Build Something
               </h2>
 
-              <p className="mt-1 font-['Brush_Script_MT','Segoe_Script','Lucida_Handwriting',cursive] text-[40px] font-normal italic leading-[0.9] tracking-[0.02em] text-white sm:text-[50px] drop-shadow-[0_2px_8px_rgba(255,255,255,0.15)]">
+              <p className="mt-2 overflow-visible pb-[0.12em] pr-[0.08em] font-['Brush_Script_MT','Segoe_Script','Lucida_Handwriting',cursive] text-[36px] font-normal italic leading-[0.95] tracking-[0.02em] text-white drop-shadow-[0_2px_8px_rgba(255,255,255,0.15)] sm:text-[48px] lg:text-[50px]">
                 <LoopingTypewriterText
                   text="Amazing Together!"
                   typingSpeed={135}
@@ -1181,11 +1229,11 @@ export default function Home() {
             </div>
 
             {/* Right actions */}
-            <div className="flex flex-wrap items-center gap-4 lg:justify-end">
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 lg:justify-end">
               <button
                 type="button"
                 onClick={openConsultation}
-                className="inline-flex h-[48px] min-w-[200px] cursor-pointer items-center justify-center rounded-[8px] bg-white px-5 text-[11px] font-bold tracking-[0.01em] text-[#17163b] shadow-[0_10px_25px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(0,0,0,0.24)]"
+                className="inline-flex h-[48px] w-full cursor-pointer items-center justify-center rounded-[8px] bg-white px-5 text-[11px] font-bold tracking-[0.01em] text-[#17163b] shadow-[0_10px_25px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(0,0,0,0.24)] sm:w-auto sm:min-w-[200px]"
               >
                 Get Free Consultation
                 <span className="ml-4 text-[18px] text-[#ff2f7d]">→</span>
@@ -1193,7 +1241,7 @@ export default function Home() {
 
               <Link
                 href="/portfolio"
-                className="inline-flex h-[48px] min-w-[158px] items-center justify-center rounded-[8px] border border-white/30 bg-white/[0.03] px-5 text-[11px] font-semibold text-white backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:bg-white/10"
+                className="inline-flex h-[48px] w-full items-center justify-center rounded-[8px] border border-white/30 bg-white/[0.03] px-5 text-[11px] font-semibold text-white backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:bg-white/10 sm:w-auto sm:min-w-[158px]"
               >
                 View Our Work
                 <span className="ml-4 text-[17px]">→</span>
