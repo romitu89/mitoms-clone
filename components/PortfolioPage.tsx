@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -72,8 +72,8 @@ const projects: Project[] = [
     imageAlt: "Artmilap culture and artist networking platform homepage",
     imageMode: "desktop",
     icon: Palette,
-    accent: "from-[#6D31FF] via-[#9A45FF] to-[#FF315D]",
-    glow: "bg-[#7B3CFF]/25",
+    accent: "from-[#4F1DBA] via-[#793DDC] to-[#A65CEB]",
+    glow: "bg-[#793DDC]/24",
     badge: "Web + Mobile Product",
     features: [
       "Verified artist profiles and talent portfolios",
@@ -181,23 +181,146 @@ const capabilities = [
     icon: Workflow,
     title: "Business-First Planning",
     text: "Every experience is structured around the audience, business objective and practical user journey.",
+    iconBg: "from-[#4B22FF] to-[#7B5CFF]",
   },
   {
     icon: MonitorSmartphone,
     title: "Responsive Experiences",
     text: "Layouts are designed to feel clear and usable across desktop, tablet and mobile screens.",
+    iconBg: "from-[#FF2F7D] to-[#FF7CA8]",
   },
   {
     icon: Code2,
     title: "Modern Development",
     text: "Clean front-end implementation supports performance, maintainability and future growth.",
+    iconBg: "from-[#00B8FF] to-[#4B22FF]",
   },
   {
     icon: Rocket,
     title: "Outcome-Focused Delivery",
     text: "The final product is built to improve visibility, enquiries, engagement or operational access.",
+    iconBg: "from-[#FF2F7D] to-[#4B22FF]",
   },
 ];
+
+
+function TypewriterText({
+  text,
+  speed = 100,
+  delay = 120,
+  display = "inline",
+  nowrap = false,
+  className = "",
+  cursorClassName = "bg-current",
+}: {
+  text: string;
+  speed?: number;
+  delay?: number;
+  display?: "inline" | "block";
+  nowrap?: boolean;
+  className?: string;
+  cursorClassName?: string;
+}) {
+  const elementRef = useRef<HTMLSpanElement>(null);
+  const [hasStarted, setHasStarted] = useState(false);
+  const [visibleCharacters, setVisibleCharacters] = useState(0);
+
+  useEffect(() => {
+    const element = elementRef.current;
+
+    if (!element || hasStarted) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        setHasStarted(true);
+        observer.disconnect();
+      },
+      {
+        threshold: 0.18,
+        rootMargin: "0px 0px -5% 0px",
+      },
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [hasStarted]);
+
+  useEffect(() => {
+    if (!hasStarted || visibleCharacters >= text.length) {
+      return;
+    }
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    const timeoutId = window.setTimeout(
+      () => {
+        setVisibleCharacters((current) => {
+          if (reducedMotion) {
+            return text.length;
+          }
+
+          return Math.min(current + 1, text.length);
+        });
+      },
+      visibleCharacters === 0 ? delay : speed,
+    );
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [delay, hasStarted, speed, text, visibleCharacters]);
+
+  const isTyping =
+    hasStarted && visibleCharacters < text.length;
+
+  const layoutClassName =
+    display === "block"
+      ? "grid w-fit max-w-full"
+      : "inline-grid max-w-full";
+
+  const whitespaceClassName = nowrap
+    ? "whitespace-nowrap"
+    : "whitespace-normal";
+
+  return (
+    <span
+      ref={elementRef}
+      aria-label={text}
+      className={`${layoutClassName} ${whitespaceClassName}`}
+    >
+      <span
+        aria-hidden="true"
+        className={`invisible col-start-1 row-start-1 ${whitespaceClassName} ${className}`}
+      >
+        {text}
+      </span>
+
+      <span
+        aria-hidden="true"
+        className={`col-start-1 row-start-1 ${whitespaceClassName} ${className}`}
+      >
+        {text.slice(0, visibleCharacters)}
+
+        {isTyping && (
+          <span
+            className={`ml-1 inline-block h-[0.88em] w-[2px] animate-pulse align-[-0.06em] ${cursorClassName}`}
+          />
+        )}
+      </span>
+    </span>
+  );
+}
 
 function DesktopFrame({ project }: { project: Project }) {
   return (
@@ -266,16 +389,23 @@ function DetailItem({
   icon: Icon,
   label,
   value,
+  accent,
 }: {
   icon: LucideIcon;
   label: string;
   value: string;
+  accent: string;
 }) {
   return (
     <div className="rounded-[16px] border border-[#e6e1f2] bg-white/[0.76] p-4 backdrop-blur">
-      <div className="flex items-center gap-2 text-[#4B22FF]">
-        <Icon size={15} />
-        <p className="text-[9px] font-bold uppercase tracking-[0.16em]">
+      <div className="flex items-center gap-2.5">
+        <span
+          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-[9px] bg-gradient-to-br ${accent} text-white shadow-[0_6px_16px_rgba(27,22,75,0.12)]`}
+        >
+          <Icon size={14} />
+        </span>
+
+        <p className="text-[9px] font-bold uppercase tracking-[0.16em] text-[#081232]">
           {label}
         </p>
       </div>
@@ -300,7 +430,7 @@ function ProjectSection({
   return (
     <article
       id={project.name.toLowerCase().replaceAll(" ", "-")}
-      className="relative scroll-mt-28 overflow-hidden rounded-[30px] border border-[#e2ddec] bg-white shadow-[0_24px_76px_rgba(30,20,80,0.10)]"
+      className="relative scroll-mt-24 overflow-hidden rounded-[24px] border sm:scroll-mt-28 sm:rounded-[30px] border-[#e2ddec] bg-white shadow-[0_24px_76px_rgba(30,20,80,0.10)]"
     >
       <div
         className={`absolute inset-x-0 top-0 z-30 h-[5px] bg-gradient-to-r ${project.accent}`}
@@ -333,7 +463,9 @@ function ProjectSection({
               {project.name}
             </h2>
 
-            <p className="mt-3 max-w-[640px] text-[12px] font-bold leading-6 text-[#4B22FF] sm:text-[13px]">
+            <p
+              className={`mt-3 max-w-[640px] bg-gradient-to-r ${project.accent} bg-clip-text text-[12px] font-bold leading-6 text-transparent sm:text-[13px]`}
+            >
               {project.category}
             </p>
 
@@ -346,21 +478,25 @@ function ProjectSection({
                 icon={BriefcaseBusiness}
                 label="Client"
                 value={project.client}
+                accent={project.accent}
               />
               <DetailItem
                 icon={Clock3}
                 label="Project Status"
                 value={project.duration}
+                accent={project.accent}
               />
               <DetailItem
                 icon={Globe2}
                 label="Industry"
                 value={project.industry}
+                accent={project.accent}
               />
               <DetailItem
                 icon={MonitorSmartphone}
                 label="Platform"
                 value={project.platform}
+                accent={project.accent}
               />
             </div>
 
@@ -400,13 +536,30 @@ function ProjectSection({
       <div className="grid gap-0 border-t border-[#e6e1f2] xl:grid-cols-2">
         <div className="p-5 sm:p-8 lg:p-9 xl:p-10">
           <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-[#f0ecff] text-[#4B22FF]">
+            <div
+              className={`flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br ${project.accent} text-white shadow-[0_10px_22px_rgba(35,25,88,0.16)]`}
+            >
               <Layers3 size={21} />
             </div>
 
             <div>
-              <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#ff315d]">
-                Product Experience
+              <p
+                className={`text-[9px] font-bold uppercase tracking-[0.18em] ${
+                  project.number === "01"
+                    ? "text-[#CDAE3D]"
+                    : "text-[#FF315D]"
+                }`}
+              >
+                <TypewriterText
+                  text="Product Experience"
+                  speed={76}
+                  delay={100}
+                  cursorClassName={
+                    project.number === "01"
+                      ? "bg-[#F4E178]"
+                      : "bg-[#FF2F7D]"
+                  }
+                />
               </p>
               <h3 className="mt-1 text-[20px] font-bold text-[#081232]">
                 Main Features
@@ -418,12 +571,17 @@ function ProjectSection({
             {project.features.map((feature) => (
               <div
                 key={feature}
-                className="flex items-start gap-3 rounded-[14px] bg-[#f8f6ff] px-4 py-3.5"
+                className={`flex items-start gap-3 rounded-[14px] border px-4 py-3.5 ${
+                  project.number === "01"
+                    ? "border-[#E2D7F5] bg-[linear-gradient(135deg,#FBF9FF,#F3EEFC)]"
+                    : "border-[#ece7fb] bg-[linear-gradient(135deg,#fbfaff,#f5f1ff)]"
+                }`}
               >
-                <CheckCircle2
-                  size={16}
-                  className="mt-0.5 shrink-0 text-[#4B22FF]"
-                />
+                <span
+                  className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${project.accent} text-white`}
+                >
+                  <CheckCircle2 size={13} />
+                </span>
                 <p className="text-[11px] font-semibold leading-5 text-[#34405f]/72">
                   {feature}
                 </p>
@@ -432,15 +590,53 @@ function ProjectSection({
           </div>
         </div>
 
-        <div className="border-t border-[#e6e1f2] bg-[#07112F] p-5 text-white sm:p-8 lg:p-9 xl:border-l xl:border-t-0 xl:p-10">
-          <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-white/[0.09] text-[#ff74a0]">
+        <div
+          className={`relative overflow-hidden border-t border-[#e6e1f2] p-5 text-white sm:p-8 lg:p-9 xl:border-l xl:border-t-0 xl:p-10 ${
+            project.number === "01"
+              ? "bg-[linear-gradient(145deg,#181030_0%,#290D40_55%,#3A164F_120%)]"
+              : "bg-[linear-gradient(145deg,#061330_0%,#17104b_52%,#5e155b_115%)]"
+          }`}
+        >
+          <div
+            className={`pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full blur-[85px] ${
+              project.number === "01"
+                ? "bg-[#793DDC]/24"
+                : "bg-[#FF315D]/18"
+            }`}
+          />
+          <div
+            className={`pointer-events-none absolute -bottom-24 -left-20 h-64 w-64 rounded-full blur-[85px] ${
+              project.number === "01"
+                ? "bg-[#F4E178]/12"
+                : "bg-[#4B22FF]/20"
+            }`}
+          />
+
+          <div className="relative z-10 flex items-center gap-3">
+            <div
+              className={`flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br ${project.accent} text-white shadow-[0_10px_24px_rgba(0,0,0,0.18)]`}
+            >
               <Rocket size={21} />
             </div>
 
             <div>
-              <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#ff74a0]">
-                Result and Impact
+              <p
+                className={`text-[9px] font-bold uppercase tracking-[0.18em] ${
+                  project.number === "01"
+                    ? "text-[#F4E178]"
+                    : "text-[#FF7CA8]"
+                }`}
+              >
+                <TypewriterText
+                  text="Result and Impact"
+                  speed={76}
+                  delay={100}
+                  cursorClassName={
+                    project.number === "01"
+                      ? "bg-[#F4E178]"
+                      : "bg-[#FF7CA8]"
+                  }
+                />
               </p>
               <h3 className="mt-1 text-[20px] font-bold text-white">
                 Value Created
@@ -448,11 +644,11 @@ function ProjectSection({
             </div>
           </div>
 
-          <p className="mt-6 text-[12px] font-medium leading-7 text-white/68">
+          <p className="relative z-10 mt-6 text-[12px] font-medium leading-7 text-white/68">
             {project.impact}
           </p>
 
-          <div className="mt-7">
+          <div className="relative z-10 mt-7">
             <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-white/42">
               Technologies and Capabilities
             </p>
@@ -461,7 +657,11 @@ function ProjectSection({
               {project.technologies.map((technology) => (
                 <span
                   key={technology}
-                  className="rounded-full border border-white/12 bg-white/[0.06] px-3 py-2 text-[9px] font-bold text-white/72"
+                  className={`rounded-full px-3 py-2 text-[9px] font-bold ${
+                    project.number === "01"
+                      ? "border border-[#A782E8]/28 bg-[#793DDC]/10 text-[#F7EAA0]"
+                      : "border border-white/12 bg-white/[0.06] text-white/72"
+                  }`}
                 >
                   {technology}
                 </span>
@@ -486,19 +686,47 @@ export default function PortfolioPage() {
           <div className="pointer-events-none absolute -right-40 top-[-110px] h-[520px] w-[520px] rounded-full bg-[#FF315D]/12 blur-[140px]" />
           <div className="pointer-events-none absolute inset-0 opacity-[0.25] [background-image:radial-gradient(circle_at_1px_1px,rgba(75,34,255,0.12)_1px,transparent_1px)] [background-size:27px_27px]" />
 
-          <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 sm:gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:gap-14">
+          <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 sm:gap-12 xl:grid-cols-[0.88fr_1.12fr] xl:gap-14">
             <div className="relative z-20">
               <div className="inline-flex items-center gap-2 rounded-full border border-[#ddd6ff] bg-white/80 px-4 py-2 shadow-[0_8px_24px_rgba(75,34,255,0.06)] backdrop-blur">
-                <Sparkles size={15} className="text-[#4B22FF]" />
-                <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#4B22FF]">
-                  Selected Work
-                </span>
+                <Sparkles size={15} className="text-[#FF2F7D]" />
+                <TypewriterText
+                  text="Selected Work"
+                  speed={88}
+                  delay={100}
+                  nowrap
+                  className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#FF2F7D]"
+                  cursorClassName="bg-[#FF2F7D]"
+                />
               </div>
 
-              <h1 className="mt-6 max-w-[720px] text-[38px] font-bold leading-[1.08] tracking-[-0.045em] text-[#081232] min-[430px]:text-[42px] sm:mt-7 sm:text-[54px] sm:tracking-[-0.05em] lg:text-[62px] xl:text-[68px]">
-                Digital Products
-                <span className="mt-2 block bg-gradient-to-r from-[#4B22FF] via-[#7B3CFF] to-[#FF315D] bg-clip-text text-transparent">
-                  Built for Real Impact
+              <h1 className="mt-6 max-w-[860px] font-bold tracking-[-0.045em] text-[#081232] sm:mt-7 sm:tracking-[-0.05em]">
+                <span className="block text-[38px] leading-[1.08] min-[430px]:text-[42px] sm:text-[54px] lg:text-[58px] xl:text-[58px] 2xl:text-[62px]">
+                  Digital Products
+                </span>
+
+                {/* Mobile: keep the complete highlighted phrase on one line */}
+                <span className="mt-2 flex max-w-full overflow-visible pb-[0.14em] text-[29px] leading-[1.08] min-[370px]:text-[31px] min-[430px]:text-[34px] sm:hidden">
+                  <TypewriterText
+                    text="Built for Real Impact"
+                    speed={105}
+                    delay={220}
+                    nowrap
+                    className="pb-[0.08em] bg-gradient-to-r from-[#4B22FF] via-[#7B3CFF] to-[#FF2F7D] bg-clip-text text-transparent"
+                    cursorClassName="bg-[#FF2F7D]"
+                  />
+                </span>
+
+                {/* Tablet and laptop: same gradient as Culture and Healthcare */}
+                <span className="mt-2 hidden overflow-visible pb-[0.12em] text-[48px] leading-[1.08] sm:flex lg:text-[52px] xl:text-[50px] 2xl:text-[54px]">
+                  <TypewriterText
+                    text="Built for Real Impact"
+                    speed={105}
+                    delay={220}
+                    nowrap
+                    className="pb-[0.06em] bg-gradient-to-r from-[#4B22FF] via-[#7B3CFF] to-[#FF2F7D] bg-clip-text text-transparent"
+                    cursorClassName="bg-[#FF2F7D]"
+                  />
                 </span>
               </h1>
 
@@ -533,22 +761,41 @@ export default function PortfolioPage() {
                 </a>
               </div>
 
-              <div className="mt-9 grid max-w-[650px] grid-cols-2 gap-3 sm:mt-10 sm:grid-cols-4">
+              <div className="mt-9 grid max-w-[680px] grid-cols-2 gap-3 sm:mt-10 sm:grid-cols-4">
                 {[
-                  ["03", "Featured Projects"],
-                  ["03", "Industry Verticals"],
-                  ["100%", "Responsive Design"],
-                  ["Web + App", "Product Coverage"],
-                ].map(([value, label]) => (
+                  {
+                    value: "03",
+                    label: "Featured Projects",
+                    color: "text-[#4B22FF]",
+                  },
+                  {
+                    value: "03",
+                    label: "Industry Verticals",
+                    color: "text-[#FF315D]",
+                  },
+                  {
+                    value: "100%",
+                    label: "Responsive Design",
+                    color: "text-[#00C8FF]",
+                  },
+                  {
+                    value: "Web + App",
+                    label: "Product Coverage",
+                    color:
+                      "bg-gradient-to-r from-[#4B22FF] via-[#7B3CFF] to-[#FF2F7D] bg-clip-text text-transparent",
+                  },
+                ].map((item) => (
                   <div
-                    key={label}
-                    className="rounded-[17px] border border-[#e5e0f1] bg-white/75 px-4 py-4 shadow-[0_10px_28px_rgba(35,25,88,0.05)] backdrop-blur"
+                    key={item.label}
+                    className="min-w-0 rounded-[17px] border border-[#e5e0f1] bg-white/75 px-2.5 py-4 sm:px-3.5 shadow-[0_10px_28px_rgba(35,25,88,0.05)] backdrop-blur sm:px-4"
                   >
-                    <p className="text-[19px] font-bold text-[#4B22FF]">
-                      {value}
+                    <p
+                      className={`whitespace-nowrap overflow-visible pb-[0.12em] text-[16px] font-bold leading-[1.08] sm:text-[18px] xl:text-[16px] 2xl:text-[18px] ${item.color}`}
+                    >
+                      {item.value}
                     </p>
-                    <p className="mt-1 text-[9px] font-semibold leading-4 text-[#34405f]/58">
-                      {label}
+                    <p className="mt-2 text-[9px] font-semibold leading-4 text-[#34405f]/58">
+                      {item.label}
                     </p>
                   </div>
                 ))}
@@ -556,7 +803,7 @@ export default function PortfolioPage() {
             </div>
 
             {/* HERO COLLAGE */}
-            <div className="relative mx-auto min-h-[300px] w-full max-w-[760px] sm:min-h-[500px] lg:min-h-[570px]">
+            <div className="relative mx-auto min-h-[300px] w-full max-w-[820px] sm:min-h-[500px] xl:min-h-[570px]">
               <div className="absolute left-1/2 top-[58px] z-20 w-[96%] -translate-x-1/2 sm:left-[2%] sm:top-[9%] sm:w-[88%] sm:translate-x-0">
                 <DesktopFrame project={projects[0]} />
               </div>
@@ -571,11 +818,11 @@ export default function PortfolioPage() {
 
               <div className="absolute right-0 top-0 z-40 max-w-[210px] rounded-[15px] border border-[#e2ddec] bg-white px-3 py-2.5 shadow-[0_14px_34px_rgba(35,27,84,0.12)] sm:right-[1%] sm:top-[1%] sm:max-w-none sm:rounded-[18px] sm:px-4 sm:py-3 sm:shadow-[0_18px_42px_rgba(35,27,84,0.12)]">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-[13px] bg-[#f0ecff] text-[#4B22FF]">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-[13px] bg-gradient-to-br from-[#4B22FF] to-[#FF2F7D] text-white shadow-[0_10px_22px_rgba(75,34,255,0.20)]">
                     <BadgeCheck size={20} />
                   </div>
                   <div>
-                    <p className="text-[9px] font-bold uppercase tracking-[0.16em] text-[#FF315D]">
+                    <p className="text-[9px] font-bold uppercase tracking-[0.16em] text-[#FF2F7D]">
                       Real Projects
                     </p>
                     <p className="mt-1 text-[12px] font-bold text-[#081232]">
@@ -592,12 +839,29 @@ export default function PortfolioPage() {
         <section className="px-4 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-24">
           <div className="mx-auto max-w-[1320px]">
             <div className="mx-auto max-w-[780px] text-center">
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#FF315D]">
-                How We Create Value
+              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#FF2F7D]">
+                <TypewriterText
+                  text="How We Create Value"
+                  speed={86}
+                  delay={100}
+                  cursorClassName="bg-[#FF2F7D]"
+                />
               </p>
-              <h2 className="mt-4 text-[34px] font-bold tracking-[-0.04em] text-[#081232] sm:text-[44px]">
-                From Business Need to{" "}
-                <span className="text-[#4B22FF]">Purposeful Experience</span>
+              <h2 className="mt-4 font-bold tracking-[-0.04em] text-[#081232]">
+                <span className="block text-[31px] leading-[1.15] sm:text-[40px] lg:text-[44px]">
+                  From Business Need to
+                </span>
+
+                <span className="mt-1 flex justify-center overflow-visible pb-[0.1em] text-[31px] leading-[1.15] sm:text-[40px] lg:text-[44px]">
+                  <TypewriterText
+                    text="Purposeful Experience"
+                    speed={105}
+                    delay={220}
+                    nowrap
+                    className="pb-[0.06em] bg-gradient-to-r from-[#4B22FF] via-[#7B3CFF] to-[#FF2F7D] bg-clip-text text-transparent"
+                    cursorClassName="bg-[#FF2F7D]"
+                  />
+                </span>
               </h2>
               <p className="mt-5 text-[13px] font-medium leading-7 text-[#34405f]/65">
                 The projects combine strategy, design and development to make
@@ -613,9 +877,11 @@ export default function PortfolioPage() {
                 return (
                   <article
                     key={capability.title}
-                    className="group rounded-[23px] border border-[#e4dff0] bg-white p-6 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:border-[#cec4ff] hover:shadow-[0_22px_48px_rgba(75,34,255,0.11)]"
+                    className="group rounded-[21px] border border-[#e4dff0] bg-white p-5 sm:rounded-[23px] sm:p-6 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:border-[#cec4ff] hover:shadow-[0_22px_48px_rgba(75,34,255,0.11)]"
                   >
-                    <div className="flex h-[52px] w-[52px] items-center justify-center rounded-[17px] bg-gradient-to-br from-[#4B22FF] to-[#FF315D] text-white shadow-[0_12px_26px_rgba(75,34,255,0.20)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105">
+                    <div
+                      className={`flex h-[52px] w-[52px] items-center justify-center rounded-[17px] bg-gradient-to-br ${capability.iconBg} text-white shadow-[0_12px_26px_rgba(75,34,255,0.20)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105`}
+                    >
                       <Icon size={24} />
                     </div>
                     <h3 className="mt-5 text-[18px] font-bold text-[#081232]">
@@ -639,13 +905,28 @@ export default function PortfolioPage() {
           <div className="mx-auto max-w-[1320px]">
             <div className="flex flex-col justify-between gap-6 xl:flex-row xl:items-end">
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#FF315D]">
-                  Featured Case Studies
+                <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#FF2F7D]">
+                  <TypewriterText
+                    text="Featured Case Studies"
+                    speed={86}
+                    delay={100}
+                    cursorClassName="bg-[#FF2F7D]"
+                  />
                 </p>
-                <h2 className="mt-4 max-w-[760px] text-[36px] font-bold leading-[1.1] tracking-[-0.04em] text-[#081232] sm:text-[48px]">
-                  Real Work Across{" "}
-                  <span className="text-[#4B22FF]">
-                    Culture and Healthcare
+                <h2 className="mt-4 max-w-[820px] font-bold tracking-[-0.04em] text-[#081232]">
+                  <span className="block text-[34px] leading-[1.12] sm:text-[43px] lg:text-[48px]">
+                    Real Work Across
+                  </span>
+
+                  <span className="mt-1 flex overflow-visible pb-[0.1em] text-[34px] leading-[1.12] sm:text-[43px] lg:text-[48px]">
+                    <TypewriterText
+                      text="Culture and Healthcare"
+                      speed={105}
+                      delay={220}
+                      nowrap
+                      className="pb-[0.06em] bg-gradient-to-r from-[#4B22FF] via-[#7B3CFF] to-[#FF2F7D] bg-clip-text text-transparent"
+                      cursorClassName="bg-[#FF2F7D]"
+                    />
                   </span>
                 </h2>
               </div>
@@ -690,7 +971,7 @@ export default function PortfolioPage() {
                     className={`rounded-[26px] p-px sm:rounded-[34px] lg:rounded-[38px] ${
                       index % 2 === 0
                         ? "bg-gradient-to-br from-[#ebe6ff] via-white to-[#ffe5ef]"
-                        : "bg-gradient-to-br from-[#dff7f1] via-white to-[#e8e4ff]"
+                        : "bg-gradient-to-br from-[#e7f2ff] via-white to-[#ffe7f0]"
                     }`}
                   >
                     <div className="rounded-[25px] bg-white/55 p-1.5 sm:rounded-[33px] sm:p-2.5 lg:rounded-[37px] lg:p-3">
@@ -702,7 +983,7 @@ export default function PortfolioPage() {
                     <div className="mt-10 flex items-center gap-2 sm:mt-12 sm:gap-4 lg:mt-14">
                       <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#d9d2e8] to-[#d9d2e8]" />
 
-                      <div className="inline-flex items-center gap-2 rounded-full bg-[#f0ecff] px-4 py-2 text-[9px] font-bold uppercase tracking-[0.16em] text-[#4B22FF]">
+                      <div className="inline-flex items-center gap-2 rounded-full bg-[linear-gradient(90deg,#f1edff,#fff0f5)] px-4 py-2 text-[9px] font-bold uppercase tracking-[0.16em] text-[#7B3CFF]">
                         Next Project
                         <ArrowRight size={13} />
                       </div>
@@ -720,12 +1001,31 @@ export default function PortfolioPage() {
         <section className="px-4 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-24">
           <div className="mx-auto grid max-w-[1320px] gap-8 rounded-[24px] border border-[#e2ddec] bg-white p-5 shadow-[0_22px_70px_rgba(30,20,80,0.07)] sm:rounded-[30px] sm:p-8 lg:p-10 xl:grid-cols-[0.9fr_1.1fr] xl:items-center xl:p-12">
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#f0ecff] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#4B22FF]">
-                <Network size={14} />
-                One Team, Multiple Capabilities
+              <span className="inline-flex items-center gap-2 rounded-full bg-[linear-gradient(90deg,#f1edff,#fff0f5)] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#FF315D]">
+                <Network size={14} className="text-[#FF2F7D]" />
+
+                <TypewriterText
+                  text="One Team, Multiple Capabilities"
+                  speed={76}
+                  delay={100}
+                  cursorClassName="bg-[#FF2F7D]"
+                />
               </span>
-              <h2 className="mt-5 text-[31px] font-bold leading-[1.13] tracking-[-0.04em] text-[#081232] sm:text-[40px]">
-                Strategy, Design and Development Working Together
+              <h2 className="mt-5 font-bold tracking-[-0.04em] text-[#081232]">
+                <span className="block text-[30px] leading-[1.14] sm:text-[38px] lg:text-[40px]">
+                  Strategy, Design and Development
+                </span>
+
+                <span className="mt-1 flex overflow-visible pb-[0.1em] text-[30px] leading-[1.14] sm:text-[38px] lg:text-[40px]">
+                  <TypewriterText
+                    text="Working Together"
+                    speed={105}
+                    delay={220}
+                    nowrap
+                    className="pb-[0.06em] bg-gradient-to-r from-[#4B22FF] via-[#7B3CFF] to-[#FF2F7D] bg-clip-text text-transparent"
+                    cursorClassName="bg-[#FF2F7D]"
+                  />
+                </span>
               </h2>
               <p className="mt-5 max-w-[590px] text-[13px] font-medium leading-7 text-[#34405f]/68">
                 From early product planning to responsive implementation, the
@@ -737,24 +1037,48 @@ export default function PortfolioPage() {
 
             <div className="grid gap-3 sm:grid-cols-2">
               {[
-                [Users, "Audience Understanding", "Clear journeys based on who will use the product and what they need to accomplish."],
-                [Layers3, "Experience Architecture", "Content, screens and actions organised into a simple, understandable structure."],
-                [ShieldCheck, "Reliable Implementation", "Responsive interfaces built with maintainable and suitable front-end technologies."],
-                [Rocket, "Launch and Growth", "Products prepared to support visibility, enquiries, engagement and future evolution."],
-              ].map(([icon, title, text]) => {
-                const Icon = icon as LucideIcon;
+                {
+                  icon: Users,
+                  title: "Audience Understanding",
+                  text: "Clear journeys based on who will use the product and what they need to accomplish.",
+                  gradient: "from-[#4B22FF] to-[#7B5CFF]",
+                },
+                {
+                  icon: Layers3,
+                  title: "Experience Architecture",
+                  text: "Content, screens and actions organised into a simple, understandable structure.",
+                  gradient: "from-[#FF2F7D] to-[#FF7CA8]",
+                },
+                {
+                  icon: ShieldCheck,
+                  title: "Reliable Implementation",
+                  text: "Responsive interfaces built with maintainable and suitable front-end technologies.",
+                  gradient: "from-[#00B8FF] to-[#4B22FF]",
+                },
+                {
+                  icon: Rocket,
+                  title: "Launch and Growth",
+                  text: "Products prepared to support visibility, enquiries, engagement and future evolution.",
+                  gradient: "from-[#FF2F7D] to-[#4B22FF]",
+                },
+              ].map((item) => {
+                const Icon = item.icon;
 
                 return (
                   <div
-                    key={title as string}
+                    key={item.title}
                     className="rounded-[18px] border border-[#e6e1f2] bg-[#fbfaff] p-5"
                   >
-                    <Icon size={20} className="text-[#4B22FF]" />
+                    <div
+                      className={`flex h-10 w-10 items-center justify-center rounded-[13px] bg-gradient-to-br ${item.gradient} text-white shadow-[0_8px_20px_rgba(75,34,255,0.16)]`}
+                    >
+                      <Icon size={20} />
+                    </div>
                     <h3 className="mt-4 text-[14px] font-bold text-[#081232]">
-                      {title as string}
+                      {item.title}
                     </h3>
                     <p className="mt-2 text-[11px] font-medium leading-5 text-[#34405f]/62">
-                      {text as string}
+                      {item.text}
                     </p>
                   </div>
                 );
@@ -772,11 +1096,29 @@ export default function PortfolioPage() {
 
             <div className="relative z-10 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-[#ff84b8]">
-                  Have a Project in Mind?
+                <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-[#FF7CA8]">
+                  <TypewriterText
+                    text="Have a Project in Mind?"
+                    speed={82}
+                    delay={100}
+                    cursorClassName="bg-[#FF7CA8]"
+                  />
                 </p>
-                <h2 className="mt-3 max-w-[760px] text-[31px] font-bold tracking-[-0.035em] sm:text-[40px]">
-                  Let&apos;s Build a Digital Experience That Supports Your Next Stage of Growth
+                <h2 className="mt-3 max-w-[790px] font-bold tracking-[-0.035em]">
+                  <span className="block text-[30px] leading-[1.16] sm:text-[38px] lg:text-[40px]">
+                    Let&apos;s Build a Digital Experience
+                  </span>
+
+                  <span className="mt-1 block text-[30px] leading-[1.16] sm:text-[38px] lg:text-[40px]">
+                    That Supports Your{" "}
+                    <TypewriterText
+                      text="Next Stage of Growth"
+                      speed={100}
+                      delay={260}
+                      className="text-[#FF7CA8]"
+                      cursorClassName="bg-[#FF7CA8]"
+                    />
+                  </span>
                 </h2>
                 <p className="mt-3 max-w-[690px] text-[13px] font-medium leading-7 text-white/65">
                   Share your idea, current challenge or business requirement and

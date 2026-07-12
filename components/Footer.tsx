@@ -2,21 +2,21 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-[#030817] text-white">
+    <footer className="relative overflow-hidden bg-[#030817] text-white antialiased">
       {/* Dark gradient background */}
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#030817_0%,#061127_48%,#030817_100%)]" />
 
       {/* Top neon light */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#22b8ff] via-[#6b46ff] to-[#ff2f7d] shadow-[0_0_14px_#22b8ff,0_0_28px_#6b46ff,0_0_46px_#ff2f7d]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#22b8ff] via-[#6b46ff] to-[#ff2f7d] shadow-[0_0_14px_#22b8ff,0_0_28px_#6b46ff,0_0_46px_#ff2f7d] motion-safe:animate-[pulse_4s_ease-in-out_infinite]" />
 
       {/* Top blue glow */}
-      <div className="pointer-events-none absolute left-[-120px] top-[-140px] h-[340px] w-[340px] rounded-full bg-[#087cff]/10 blur-[120px]" />
+      <div className="pointer-events-none absolute left-[-180px] top-[-170px] h-[300px] w-[300px] rounded-full bg-[#087cff]/10 blur-[110px] motion-safe:animate-[pulse_6s_ease-in-out_infinite] sm:left-[-120px] sm:top-[-140px] sm:h-[340px] sm:w-[340px] sm:blur-[120px]" />
 
       {/* Top pink glow */}
-      <div className="pointer-events-none absolute right-[-100px] top-[-130px] h-[320px] w-[320px] rounded-full bg-[#ff2f7d]/12 blur-[120px]" />
+      <div className="pointer-events-none absolute right-[-170px] top-[-160px] h-[290px] w-[290px] rounded-full bg-[#ff2f7d]/12 blur-[110px] motion-safe:animate-[pulse_7s_ease-in-out_infinite] motion-safe:[animation-delay:1.2s] sm:right-[-100px] sm:top-[-130px] sm:h-[320px] sm:w-[320px] sm:blur-[120px]" />
 
       {/* Bottom center blue glow */}
-      <div className="pointer-events-none absolute -bottom-48 left-1/2 h-[430px] w-[950px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(38,118,255,0.16)_0%,rgba(44,71,194,0.07)_38%,transparent_72%)] blur-[95px]" />
+      <div className="pointer-events-none absolute -bottom-44 left-1/2 h-[320px] w-[620px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(38,118,255,0.16)_0%,rgba(44,71,194,0.07)_38%,transparent_72%)] blur-[80px] motion-safe:animate-[pulse_8s_ease-in-out_infinite] sm:-bottom-48 sm:h-[430px] sm:w-[950px] sm:blur-[95px]" />
 
       {/* Bottom left glow */}
       <div className="pointer-events-none absolute bottom-[-120px] left-[-90px] h-[280px] w-[280px] rounded-full bg-[#1f9cff]/10 blur-[105px]" />
@@ -26,7 +26,7 @@ export default function Footer() {
 
       {/* Bottom star field */}
       <div
-        className="pointer-events-none absolute bottom-0 left-0 right-0 h-[250px] opacity-70"
+        className="pointer-events-none absolute bottom-0 left-0 right-0 h-[190px] opacity-55 sm:h-[250px] sm:opacity-70"
         style={{
           backgroundImage: `
             radial-gradient(circle at 8% 78%, rgba(255,255,255,.95) 0 1px, transparent 1.8px),
@@ -44,11 +44,11 @@ export default function Footer() {
       />
 
       {/* Larger twinkling stars */}
-      <div className="pointer-events-none absolute bottom-[42px] left-[12%] h-1.5 w-1.5 animate-pulse rounded-full bg-white shadow-[0_0_8px_#fff,0_0_18px_#5aa7ff]" />
-      <div className="pointer-events-none absolute bottom-[86px] left-[29%] h-1 w-1 animate-pulse rounded-full bg-[#7fb7ff] shadow-[0_0_7px_#7fb7ff,0_0_16px_#4d67ff]" />
-      <div className="pointer-events-none absolute bottom-[58px] left-[47%] h-1.5 w-1.5 animate-pulse rounded-full bg-white shadow-[0_0_8px_#fff,0_0_18px_#9a6bff]" />
-      <div className="pointer-events-none absolute bottom-[94px] left-[66%] h-1 w-1 animate-pulse rounded-full bg-[#ff72c5] shadow-[0_0_7px_#ff72c5,0_0_16px_#ff2f9b]" />
-      <div className="pointer-events-none absolute bottom-[48px] left-[84%] h-1.5 w-1.5 animate-pulse rounded-full bg-white shadow-[0_0_8px_#fff,0_0_18px_#5a8fff]" />
+      <div className="pointer-events-none absolute bottom-[42px] left-[12%] h-1.5 w-1.5 motion-safe:animate-pulse rounded-full bg-white shadow-[0_0_8px_#fff,0_0_18px_#5aa7ff]" />
+      <div className="pointer-events-none absolute bottom-[86px] left-[29%] h-1 w-1 motion-safe:animate-[pulse_2.8s_ease-in-out_infinite] rounded-full bg-[#7fb7ff] shadow-[0_0_7px_#7fb7ff,0_0_16px_#4d67ff]" />
+      <div className="pointer-events-none absolute bottom-[58px] left-[47%] h-1.5 w-1.5 motion-safe:animate-pulse rounded-full bg-white shadow-[0_0_8px_#fff,0_0_18px_#9a6bff]" />
+      <div className="pointer-events-none absolute bottom-[94px] left-[66%] h-1 w-1 motion-safe:animate-[pulse_3.4s_ease-in-out_infinite] rounded-full bg-[#ff72c5] shadow-[0_0_7px_#ff72c5,0_0_16px_#ff2f9b]" />
+      <div className="pointer-events-none absolute bottom-[48px] left-[84%] h-1.5 w-1.5 motion-safe:animate-pulse rounded-full bg-white shadow-[0_0_8px_#fff,0_0_18px_#5a8fff]" />
 
       {/* Star sparkle crosses */}
       <div className="pointer-events-none absolute bottom-[120px] left-[38%] h-3 w-[1px] bg-white/80 shadow-[0_0_8px_#7ca8ff]">
@@ -60,7 +60,7 @@ export default function Footer() {
 
       {/* Dot mesh */}
       <div
-        className="pointer-events-none absolute bottom-0 left-0 right-0 h-[245px] opacity-[0.24]"
+        className="pointer-events-none absolute bottom-0 left-0 right-0 h-[190px] opacity-[0.18] sm:h-[245px] sm:opacity-[0.24]"
         style={{
           backgroundImage:
             "radial-gradient(circle, rgba(68,104,255,0.9) 1.25px, transparent 1.4px)",
@@ -74,7 +74,7 @@ export default function Footer() {
 
       {/* Curved neon lines */}
       <svg
-        className="pointer-events-none absolute bottom-0 left-0 h-[220px] w-full opacity-80"
+        className="pointer-events-none absolute bottom-0 left-0 hidden h-[220px] w-full opacity-80 sm:block"
         viewBox="0 0 1600 260"
         fill="none"
         preserveAspectRatio="none"
@@ -150,7 +150,7 @@ export default function Footer() {
 
       {/* Right top decorative curve */}
       <svg
-        className="pointer-events-none absolute right-0 top-4 h-[95px] w-[190px] opacity-50"
+        className="pointer-events-none absolute right-0 top-4 hidden h-[95px] w-[190px] opacity-50 md:block"
         viewBox="0 0 190 95"
         fill="none"
       >
@@ -169,40 +169,41 @@ export default function Footer() {
         />
       </svg>
 
-      <div className="relative z-10 mx-auto max-w-[1320px] px-5 py-14 sm:px-8 lg:px-10">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+      <div className="relative z-10 mx-auto max-w-[1320px] px-4 py-12 sm:px-6 sm:py-14 lg:px-10 lg:py-16">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-9 sm:gap-x-10 sm:gap-y-10 lg:grid-cols-[1.25fr_0.78fr_1fr_0.9fr] lg:gap-8 xl:gap-10">
           {/* Brand */}
-          <div>
-            <Link href="/" className="flex items-center gap-3">
-              <div className="bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-5xl font-extrabold text-transparent">
+          <div className="col-span-2 min-w-0 lg:col-span-1">
+            <Link href="/" className="group inline-flex items-center gap-3">
+              <div className="bg-gradient-to-br from-[#22b8ff] via-[#6b46ff] to-[#ff2f7d] bg-clip-text text-[42px] font-extrabold leading-none text-transparent transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-105 sm:text-5xl">
                 M
               </div>
 
               <div>
-                <h2 className="text-2xl font-extrabold">MITOMS</h2>
+                <h2 className="text-xl font-extrabold tracking-[-0.02em] sm:text-2xl">MITOMS</h2>
 
-                <p className="text-xs font-semibold text-white/70">
+                <p className="mt-0.5 text-[10px] font-semibold text-white/65 sm:text-xs sm:text-white/70">
                   Technologies Pvt. Ltd.
                 </p>
               </div>
             </Link>
 
-            <p className="mt-6 max-w-sm text-sm leading-7 text-white/65">
+            <p className="mt-5 max-w-md text-[13px] leading-7 text-white/62 sm:mt-6 sm:text-sm sm:text-white/65">
               We build modern digital products, websites, apps and growth
               solutions for ambitious businesses.
             </p>
           </div>
 
           {/* Company */}
-          <div className="lg:border-l lg:border-white/10 lg:pl-10">
-            <h3 className="mb-5 text-lg font-bold">Company</h3>
+          <div className="min-w-0 border-t border-white/10 pt-7 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 xl:pl-10">
+            <h3 className="mb-4 text-[16px] font-bold text-white sm:mb-5 sm:text-lg">Company</h3>
 
-            <ul className="space-y-3 text-sm text-white/65">
+            <ul className="space-y-3 text-[13px] text-white/62 sm:text-sm sm:text-white/65">
               <li>
                 <Link
                   href="/about"
-                  className="transition-colors duration-300 hover:text-white"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#6b46ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#6b46ff]" />
                   About Us
                 </Link>
               </li>
@@ -210,17 +211,19 @@ export default function Footer() {
               <li>
                 <Link
                   href="/portfolio"
-                  className="transition-colors duration-300 hover:text-white"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#6b46ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#6b46ff]" />
                   Portfolio
                 </Link>
               </li>
 
               <li>
                 <Link
-                  href="/services"
-                  className="transition-colors duration-300 hover:text-white"
+                  href="/services/web-development"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#6b46ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#6b46ff]" />
                   Services
                 </Link>
               </li>
@@ -228,8 +231,9 @@ export default function Footer() {
               <li>
                 <Link
                   href="/contact"
-                  className="transition-colors duration-300 hover:text-white"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#6b46ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#6b46ff]" />
                   Contact Us
                 </Link>
               </li>
@@ -237,69 +241,75 @@ export default function Footer() {
           </div>
 
           {/* Services */}
-          <div className="lg:border-l lg:border-white/10 lg:pl-10">
-            <h3 className="mb-5 text-lg font-bold">Services</h3>
+          <div className="min-w-0 border-t border-white/10 pt-7 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 xl:pl-10">
+            <h3 className="mb-4 text-[16px] font-bold text-white sm:mb-5 sm:text-lg">Services</h3>
 
-            <ul className="space-y-3 text-sm text-white/65">
+            <ul className="space-y-3 text-[13px] text-white/62 sm:text-sm sm:text-white/65">
               <li>
                 <Link
-                  href="/services"
-                  className="transition-colors duration-300 hover:text-white"
+                  href="/services/web-development"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#6b46ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#6b46ff]" />
                   Website Development
                 </Link>
               </li>
 
               <li>
                 <Link
-                  href="/services"
-                  className="transition-colors duration-300 hover:text-white"
+                  href="/services/mobile-app-development"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#6b46ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#6b46ff]" />
                   Mobile App Development
                 </Link>
               </li>
 
               <li>
                 <Link
-                  href="/services"
-                  className="transition-colors duration-300 hover:text-white"
+                  href="/services/ui-ux-design"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#6b46ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#6b46ff]" />
                   UI/UX Design
                 </Link>
               </li>
 
               <li>
                 <Link
-                  href="/services"
-                  className="transition-colors duration-300 hover:text-white"
+                  href="/services/cloud-solutions"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
-                  Digital Marketing
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#6b46ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#6b46ff]" />
+                  Cloud Solutions
                 </Link>
               </li>
             </ul>
           </div>
 
           {/* Contact */}
-          <div className="lg:border-l lg:border-white/10 lg:pl-10">
-            <h3 className="mb-5 text-lg font-bold">Contact</h3>
+          <div className="col-span-2 min-w-0 border-t border-white/10 pt-7 lg:col-span-1 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 xl:pl-10">
+            <h3 className="mb-4 text-[16px] font-bold text-white sm:mb-5 sm:text-lg">Contact</h3>
 
-            <ul className="space-y-3 text-sm text-white/65">
-              <li>India</li>
+            <ul className="grid gap-3 text-[13px] text-white/62 min-[430px]:grid-cols-3 min-[430px]:items-center sm:text-sm sm:text-white/65 lg:grid-cols-1">
+              <li className="min-w-0">India</li>
 
               <li>
                 <a
                   href="mailto:info@mitoms.com"
-                  className="transition-colors duration-300 hover:text-white"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
-                  info@mitoms.com
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#ff2f7d] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#ff2f7d]" />
+                  <span className="break-words">info@mitoms.com</span>
                 </a>
               </li>
 
               <li>
                 <a
                   href="tel:+910000000000"
-                  className="transition-colors duration-300 hover:text-white"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#22b8ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#22b8ff]" />
                   +91 00000 00000
                 </a>
               </li>
@@ -307,20 +317,20 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-white/55 md:flex-row md:items-center md:justify-between">
+        <div className="mt-10 flex flex-col items-center gap-4 border-t border-white/10 pt-6 text-center text-[12px] leading-6 text-white/50 sm:mt-12 sm:text-sm md:flex-row md:justify-between md:text-left">
           <p>© 2026 MITOMS Technologies Pvt. Ltd. All rights reserved.</p>
 
-          <div className="flex flex-wrap gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:justify-end">
             <Link
               href="/privacy-policy"
-              className="transition-colors duration-300 hover:text-white"
+              className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
             >
               Privacy Policy
             </Link>
 
             <Link
               href="/terms"
-              className="transition-colors duration-300 hover:text-white"
+              className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
             >
               Terms
             </Link>

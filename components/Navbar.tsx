@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -81,6 +81,36 @@ export default function Navbar() {
 
   const servicesActive = isActive("/services");
 
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") {
+        return;
+      }
+
+      setIsOpen(false);
+      setMobileServicesOpen(false);
+      setDesktopServicesOpen(false);
+    };
+
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isOpen]);
+
   const openConsultation = () => {
     setIsOpen(false);
     setMobileServicesOpen(false);
@@ -96,7 +126,7 @@ export default function Navbar() {
   return (
     <>
       <header className="sticky top-0 z-50 border-b border-[#ebe8f5]/70 bg-white/95 shadow-[0_8px_30px_rgba(21,17,65,0.04)] backdrop-blur-md">
-        <div className="mx-auto flex h-24 max-w-[1320px] items-center justify-between px-5 lg:px-10">
+        <div className="mx-auto flex h-20 max-w-[1320px] items-center justify-between gap-4 px-4 sm:h-[88px] sm:px-6 xl:h-24 xl:px-10">
           {/* Logo */}
           <Link
             href="/"
@@ -109,12 +139,12 @@ export default function Navbar() {
               width={360}
               height={100}
               priority
-              className="h-[80px] w-auto object-contain"
+              className="h-[58px] w-auto max-w-[210px] object-contain sm:h-[66px] sm:max-w-[245px] xl:h-[80px] xl:max-w-none"
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden items-center gap-9 lg:flex">
+          <nav className="hidden items-center gap-6 xl:flex 2xl:gap-9">
             {/* Home */}
             <Link
               href="/"
@@ -142,8 +172,11 @@ export default function Navbar() {
               <Link
                 href="/services"
                 aria-current={servicesActive ? "page" : undefined}
+                aria-haspopup="menu"
+                aria-expanded={desktopServicesOpen}
                 onMouseEnter={() => setDesktopServicesOpen(true)}
                 onFocus={() => setDesktopServicesOpen(true)}
+                onClick={() => setDesktopServicesOpen(false)}
                 className={`group/services-link relative flex items-center gap-1.5 text-[15px] font-semibold transition-colors duration-300 ${
                   desktopServicesOpen || servicesActive
                     ? "text-[#4B22FF]"
@@ -170,8 +203,9 @@ export default function Navbar() {
 
               {/* Desktop Dropdown */}
               <div
+                role="menu"
                 onMouseEnter={() => setDesktopServicesOpen(true)}
-                className={`absolute left-1/2 top-full w-[680px] -translate-x-1/2 pt-4 transition-all duration-300 ${
+                className={`absolute left-1/2 top-full w-[min(680px,calc(100vw-3rem))] -translate-x-1/2 pt-4 transition-all duration-300 ${
                   desktopServicesOpen
                     ? "pointer-events-auto visible translate-y-0 opacity-100"
                     : "pointer-events-none invisible translate-y-3 opacity-0"
@@ -326,7 +360,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={openConsultation}
-            className="hidden cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-r from-[#4B22FF] to-[#FF315D] px-7 py-3 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(75,34,255,0.24)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(255,49,93,0.25)] lg:flex"
+            className="hidden shrink-0 cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-r from-[#4B22FF] to-[#FF315D] px-5 py-3 text-[13px] font-semibold text-white shadow-[0_12px_28px_rgba(75,34,255,0.24)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(255,49,93,0.25)] xl:flex 2xl:px-7 2xl:text-sm"
           >
             Get Free Consultation
             <ArrowRight size={18} />
@@ -336,9 +370,10 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setIsOpen((current) => !current)}
-            aria-label="Toggle navigation menu"
+            aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-controls="mobile-navigation"
             aria-expanded={isOpen}
-            className="cursor-pointer rounded-lg border border-[#ded9ed] p-2 text-[#07112F] transition-colors hover:border-[#4B22FF] hover:text-[#4B22FF] lg:hidden"
+            className="cursor-pointer rounded-lg border border-[#ded9ed] p-2 text-[#07112F] transition-colors hover:border-[#4B22FF] hover:text-[#4B22FF] xl:hidden"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -346,8 +381,11 @@ export default function Navbar() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="border-t border-[#ebe8f5] bg-white shadow-[0_20px_45px_rgba(23,18,67,0.08)] lg:hidden">
-            <div className="flex flex-col px-5 py-5">
+          <div
+            id="mobile-navigation"
+            className="max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-[#ebe8f5] bg-white shadow-[0_20px_45px_rgba(23,18,67,0.08)] sm:max-h-[calc(100dvh-5.5rem)] xl:hidden"
+          >
+            <div className="flex flex-col px-4 py-4 sm:px-6 sm:py-5">
               {/* Mobile Home */}
               <Link
                 href="/"
@@ -435,7 +473,7 @@ export default function Navbar() {
                               {service.title}
                             </p>
 
-                            <p className="mt-0.5 text-[10px] font-medium text-[#52607A]/60">
+                            <p className="mt-0.5 break-words text-[10px] font-medium leading-4 text-[#52607A]/60">
                               {service.description}
                             </p>
                           </div>
@@ -533,7 +571,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={openConsultation}
-                className="mt-6 flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#4B22FF] to-[#FF315D] py-3.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(75,34,255,0.20)]"
+                className="mt-5 flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#4B22FF] to-[#FF315D] px-5 py-3.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(75,34,255,0.20)]"
               >
                 Get Free Consultation
                 <ArrowRight size={18} />
