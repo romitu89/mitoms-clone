@@ -647,11 +647,11 @@ function ProcessStep({
         <Icon className="relative z-10 h-[34px] w-[34px] stroke-[2.1] text-white" />
       </div>
 
-      <h3 className={`mt-8 text-[22px] font-bold leading-none ${noColor}`}>{no}</h3>
-      <h4 className="mt-4 text-[20px] font-bold leading-none text-white drop-shadow-[0_6px_10px_rgba(0,0,0,0.55)]">
+      <h3 className={`mt-8 text-[23px] font-bold leading-none ${noColor}`}>{no}</h3>
+      <h4 className="mt-4 text-[21px] font-bold leading-none text-white drop-shadow-[0_6px_10px_rgba(0,0,0,0.55)]">
         {title}
       </h4>
-      <p className="mt-5 max-w-[175px] text-[14px] font-medium leading-[1.85] text-white/72">
+      <p className="mt-5 max-w-[190px] text-[16px] font-medium leading-[1.72] text-white/86">
         {text}
       </p>
     </div>
@@ -681,7 +681,7 @@ export default function Home() {
         <div className="relative z-10 mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-8 px-4 pb-10 pt-10 sm:px-6 sm:pt-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-4 lg:px-10 lg:pb-6 lg:pt-11">
           {/* LEFT CONTENT */}
           <div className="relative z-30">
-            <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.24em] text-[#5438ff] sm:mb-5 sm:text-[12px] sm:tracking-[0.31em]">
+            <p className="mb-4 text-[12px] font-bold uppercase tracking-[0.22em] text-[#5438ff] sm:mb-5 sm:text-[13px] sm:tracking-[0.31em]">
               WE BUILD.{" "}
               <TypewriterText
                 segments={[
@@ -715,7 +715,7 @@ export default function Home() {
               />
             </h1>
 
-            <p className="mt-6 max-w-[535px] text-[14px] font-medium leading-7 text-[#27314f]/80 sm:mt-8 sm:text-[16px] sm:leading-[1.85]">
+            <p className="mt-6 max-w-[575px] text-[16px] font-medium leading-7 text-[#27314f]/92 sm:mt-8 sm:text-[17px] sm:leading-[1.8]">
               We partner with forward-thinking businesses to design, build and
               scale digital products and solutions that create measurable growth
               and lasting impact.
@@ -725,7 +725,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={openConsultation}
-                className="group inline-flex min-h-[48px] w-full cursor-pointer items-center justify-center rounded-[10px] bg-gradient-to-r from-[#4525ff] to-[#ff315f] px-6 text-[13px] font-bold tracking-[-0.01em] text-white shadow-[0_12px_28px_rgba(80,45,255,0.28)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(80,45,255,0.34)] sm:w-auto sm:px-7"
+                className="group inline-flex min-h-[48px] w-full cursor-pointer items-center justify-center rounded-[10px] bg-gradient-to-r from-[#4525ff] to-[#ff315f] px-6 text-[14px] font-bold tracking-[-0.01em] text-white shadow-[0_12px_28px_rgba(80,45,255,0.28)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(80,45,255,0.34)] sm:w-auto sm:px-7"
               >
                 Get Free Consultation
                 <span className="ml-3 text-lg transition-transform duration-300 group-hover:translate-x-1">
@@ -735,7 +735,7 @@ export default function Home() {
 
               <Link
                 href="/portfolio"
-                className="inline-flex min-h-[48px] w-full items-center justify-center rounded-[10px] border border-[#dfe3f1] bg-white px-6 text-[13px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(16,24,60,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#4b22ff] hover:text-[#4b22ff] sm:w-auto sm:px-7"
+                className="inline-flex min-h-[48px] w-full items-center justify-center rounded-[10px] border border-[#dfe3f1] bg-white px-6 text-[14px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(16,24,60,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#4b22ff] hover:text-[#4b22ff] sm:w-auto sm:px-7"
               >
                 View Our Work <span className="ml-4 text-[#4b22ff]">→</span>
               </Link>
@@ -758,7 +758,7 @@ export default function Home() {
                       <h3 className="text-[22px] font-bold leading-none tracking-[-0.02em] text-[#3f24ff]">
                         <AnimatedCounter target={item.target} suffix={item.suffix} />
                       </h3>
-                      <p className="mt-2 text-[10px] font-medium leading-[1.35] text-[#27314f]/65">
+                      <p className="mt-2 text-[12px] font-medium leading-[1.45] text-[#27314f]/82">
                         {item.label}
                       </p>
                     </div>
@@ -830,7 +830,7 @@ export default function Home() {
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(1,8,30,0.75),rgba(3,13,45,0.2),rgba(1,8,30,0.75))]" />
 
           <div className="relative z-20 text-center">
-            <p className="text-[12px] font-bold uppercase tracking-[0.36em] text-[#d75cff] drop-shadow-[0_0_12px_rgba(215,92,255,0.85)]">
+            <p className="text-[13px] font-bold uppercase tracking-[0.34em] text-[#d75cff] drop-shadow-[0_0_12px_rgba(215,92,255,0.85)]">
               <TypewriterText
                 segments={[
                   { text: "Our Process", className: "text-[#d75cff]" },
@@ -839,20 +839,44 @@ export default function Home() {
                 cursorClassName="bg-[#d75cff]"
               />
             </p>
-            <h2 className="mx-auto mt-4 max-w-[700px] text-[27px] font-bold leading-[1.2] tracking-[-0.035em] text-white sm:text-[38px] lg:text-[42px]">
-              We Turn Ideas Into{" "}
-              <TypewriterText
-                segments={[
-                  { text: "Impactful", className: "text-[#ff18d4]" },
-                ]}
-                speed={110}
-                delay={260}
-                cursorClassName="bg-[#ff18d4]"
-              />
-              <br />
-              Digital Experiences
+            <h2 className="mx-auto mt-4 max-w-[700px] font-bold tracking-[-0.035em] text-white">
+              {/* Mobile: balanced heading */}
+              <span className="block text-[27px] leading-[1.18] sm:hidden">
+                We Turn Ideas Into
+              </span>
+
+              <span className="mt-1 flex items-baseline justify-center whitespace-nowrap text-[27px] leading-[1.18] sm:hidden">
+                <TypewriterText
+                  segments={[
+                    { text: "Impactful", className: "text-[#ff18d4]" },
+                  ]}
+                  speed={110}
+                  delay={260}
+                  cursorClassName="bg-[#ff18d4]"
+                />
+                <span className="ml-2">Digital</span>
+              </span>
+
+              <span className="mt-1 block text-[27px] leading-[1.18] sm:hidden">
+                Experiences
+              </span>
+
+              {/* Tablet and desktop: original layout */}
+              <span className="hidden text-[38px] leading-[1.2] sm:block lg:text-[42px]">
+                We Turn Ideas Into{" "}
+                <TypewriterText
+                  segments={[
+                    { text: "Impactful", className: "text-[#ff18d4]" },
+                  ]}
+                  speed={110}
+                  delay={260}
+                  cursorClassName="bg-[#ff18d4]"
+                />
+                <br />
+                Digital Experiences
+              </span>
             </h2>
-            <p className="mx-auto mt-4 max-w-[540px] text-[12px] font-medium leading-6 text-white/62 sm:mt-5 sm:text-[14px]">
+            <p className="mx-auto mt-4 max-w-[580px] text-[15px] font-medium leading-7 text-white/82 sm:mt-5 sm:text-[16px] sm:leading-7">
               A seamless process designed to deliver value at every step.
             </p>
           </div>
@@ -914,7 +938,7 @@ export default function Home() {
       {/* SERVICES - WHAT WE DO */}
       <section className="mx-auto max-w-[1320px] px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-20">
         <div className="text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.30em] text-[#ff2f7d]">
+          <p className="text-[13px] font-bold uppercase tracking-[0.28em] text-[#ff2f7d]">
             <TypewriterText
               segments={[
                 { text: "What We Do", className: "text-[#ff2f7d]" },
@@ -960,11 +984,11 @@ export default function Home() {
                 <div className="relative z-10">
                   <p className="text-2xl font-extrabold text-[#00c8ff]">{item.no}</p>
                   <Icon className="mt-5 h-10 w-10 text-[#ff2f7d]" />
-                  <h3 className="mt-5 text-xl font-semibold leading-tight">{item.title}</h3>
-                  <p className="mt-5 text-sm leading-7 text-white/70">
+                  <h3 className="mt-5 text-[21px] font-semibold leading-tight">{item.title}</h3>
+                  <p className="mt-5 text-[16px] font-medium leading-7 text-white/86">
                     {item.description}
                   </p>
-                  <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#ff2f7d] transition-transform duration-300 group-hover:translate-x-2">
+                  <div className="mt-6 inline-flex items-center gap-2 text-[15px] font-semibold text-[#ff2f7d] transition-transform duration-300 group-hover:translate-x-2">
                     Explore Service
                     <span aria-hidden="true">→</span>
                   </div>
@@ -982,7 +1006,7 @@ export default function Home() {
         <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 lg:grid-cols-[0.68fr_1.32fr] lg:gap-6">
           {/* LEFT CONTENT */}
           <div className="lg:pl-2">
-            <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#5b35ff]">
+            <p className="text-[12px] font-bold uppercase tracking-[0.28em] text-[#5b35ff]">
               <TypewriterText
                 segments={[
                   {
@@ -1017,7 +1041,7 @@ export default function Home() {
               />
             </h2>
 
-            <p className="mt-6 max-w-[450px] text-[14px] font-medium leading-7 text-[#34405f]/68">
+            <p className="mt-6 max-w-[490px] text-[16px] font-medium leading-7 text-[#34405f]/88">
               We turn your ideas into powerful digital products through
               innovation, technology and strategy.
             </p>
@@ -1036,7 +1060,7 @@ export default function Home() {
                     <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#f0ecff] text-[#6238ff]">
                       <Icon className="h-3.5 w-3.5 stroke-[2.2]" />
                     </div>
-                    <span className="text-[12px] font-medium text-[#24304f]/78">
+                    <span className="text-[15px] font-medium leading-6 text-[#24304f]/92">
                       {item.text}
                     </span>
                   </div>
@@ -1102,10 +1126,10 @@ export default function Home() {
                     </div>
 
                     <div className="min-w-0">
-                      <p className="text-[11px] font-bold text-[#10183a]">
+                      <p className="text-[12px] font-bold text-[#10183a]">
                         {item.title}
                       </p>
-                      <p className="mt-1 text-[9px] font-semibold leading-4 text-[#46516e]/62">
+                      <p className="mt-1 text-[11px] font-semibold leading-[1.45] text-[#46516e]/82">
                         {item.text}
                       </p>
                     </div>
@@ -1116,10 +1140,10 @@ export default function Home() {
 
             {/* Research text */}
             <div className="absolute left-[0%] top-[8%] hidden w-[220px] text-right md:block">
-              <h3 className="text-[13px] font-semibold text-[#10183a]">
+              <h3 className="text-[14px] font-semibold text-[#10183a]">
                 Research &amp; Insights
               </h3>
-              <p className="mt-2 text-[11px] font-semibold leading-[1.8] text-[#46516e]/68">
+              <p className="mt-2 text-[13px] font-semibold leading-[1.7] text-[#46516e]/84">
                 We analyze, validate and
                 <br />
                 uncover opportunities.
@@ -1133,10 +1157,10 @@ export default function Home() {
 
             {/* Design text */}
             <div className="absolute right-[0%] top-[8%] hidden w-[220px] md:block">
-              <h3 className="text-[13px] font-semibold text-[#10183a]">
+              <h3 className="text-[14px] font-semibold text-[#10183a]">
                 Design &amp; Prototype
               </h3>
-              <p className="mt-2 text-[11px] font-semibold leading-[1.8] text-[#46516e]/68">
+              <p className="mt-2 text-[13px] font-semibold leading-[1.7] text-[#46516e]/84">
                 We create wireframes
                 <br />
                 and prototypes to
@@ -1152,10 +1176,10 @@ export default function Home() {
 
             {/* ===== Build & Implement - यहाँ पर टेक्स्ट ठीक किया ===== */}
             <div className="absolute bottom-[7%] left-[0%] hidden w-[225px] text-right md:block">
-              <h3 className="text-[13px] font-semibold text-[#10183a]">
+              <h3 className="text-[14px] font-semibold text-[#10183a]">
                 Build &amp; Implement
               </h3>
-              <p className="mt-2 text-[11px] font-semibold leading-[1.8] text-[#46516e]/68">
+              <p className="mt-2 text-[13px] font-semibold leading-[1.7] text-[#46516e]/84">
                 We build with precision
                 <br />
                 and scalable architecture.
@@ -1169,10 +1193,10 @@ export default function Home() {
 
             {/* Measure text */}
             <div className="absolute bottom-[7%] right-[0%] hidden w-[225px] md:block">
-              <h3 className="text-[13px] font-semibold text-[#10183a]">
+              <h3 className="text-[14px] font-semibold text-[#10183a]">
                 Measure &amp; Optimize
               </h3>
-              <p className="mt-2 text-[11px] font-semibold leading-[1.8] text-[#46516e]/68">
+              <p className="mt-2 text-[13px] font-semibold leading-[1.7] text-[#46516e]/84">
                 We measure performance
                 <br />
                 and continuously
@@ -1221,7 +1245,7 @@ export default function Home() {
 
             {/* Center copy */}
             <div className="border-white/10 lg:border-l lg:pl-8">
-              <p className="max-w-[300px] text-[12px] font-medium leading-6 text-white/72">
+              <p className="max-w-[350px] text-[14px] font-medium leading-6 text-white/88">
                 Have a project in mind? Let&apos;s turn your
                 <br className="hidden xl:block" />
                 idea into a powerful digital solution.
@@ -1233,7 +1257,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={openConsultation}
-                className="inline-flex h-[48px] w-full cursor-pointer items-center justify-center rounded-[8px] bg-white px-5 text-[11px] font-bold tracking-[0.01em] text-[#17163b] shadow-[0_10px_25px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(0,0,0,0.24)] sm:w-auto sm:min-w-[200px]"
+                className="inline-flex h-[48px] w-full cursor-pointer items-center justify-center rounded-[8px] bg-white px-5 text-[13px] font-bold tracking-[0.01em] text-[#17163b] shadow-[0_10px_25px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(0,0,0,0.24)] sm:w-auto sm:min-w-[200px]"
               >
                 Get Free Consultation
                 <span className="ml-4 text-[18px] text-[#ff2f7d]">→</span>
@@ -1241,7 +1265,7 @@ export default function Home() {
 
               <Link
                 href="/portfolio"
-                className="inline-flex h-[48px] w-full items-center justify-center rounded-[8px] border border-white/30 bg-white/[0.03] px-5 text-[11px] font-semibold text-white backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:bg-white/10 sm:w-auto sm:min-w-[158px]"
+                className="inline-flex h-[48px] w-full items-center justify-center rounded-[8px] border border-white/30 bg-white/[0.03] px-5 text-[13px] font-semibold text-white backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:bg-white/10 sm:w-auto sm:min-w-[158px]"
               >
                 View Our Work
                 <span className="ml-4 text-[17px]">→</span>
