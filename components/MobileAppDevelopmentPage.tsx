@@ -460,16 +460,16 @@ export default function MobileAppDevelopmentPage() {
                 />
               </div>
 
-              <h1 className="mt-6 max-w-[670px] text-[36px] font-bold leading-[1.09] tracking-[-0.05em] text-[#081232] sm:mt-7 sm:text-[52px] lg:text-[66px]">
+              <h1 className="mt-6 max-w-[700px] overflow-visible text-[36px] font-bold leading-[1.09] tracking-[-0.05em] text-[#081232] sm:mt-7 sm:text-[52px] lg:text-[66px]">
                 Mobile Experiences
-                <span className="mt-2 block">
+                <span className="mt-2 block overflow-visible pr-[0.18em]">
                   Users Love to{" "}
                   <TypewriterText
                     text="Use"
                     speed={135}
                     delay={300}
                     nowrap
-                    className="bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff315d] bg-clip-text text-transparent"
+                    className="overflow-visible pb-[0.06em] pr-[0.16em] tracking-[-0.012em] bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff315d] bg-clip-text text-transparent"
                     cursorClassName="bg-[#ff315d]"
                   />
                 </span>

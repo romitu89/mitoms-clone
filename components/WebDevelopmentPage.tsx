@@ -438,7 +438,7 @@ export default function WebDevelopmentPage() {
                     speed={125}
                     delay={300}
                     nowrap
-                    className="bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff315d] bg-clip-text text-transparent"
+                    className="overflow-visible pb-[0.06em] pr-[0.08em] tracking-[-0.015em] bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff315d] bg-clip-text text-transparent"
                     cursorClassName="bg-[#ff315d]"
                   />
                 </span>
