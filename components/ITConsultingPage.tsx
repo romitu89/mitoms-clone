@@ -47,35 +47,35 @@ const consultingCapabilities = [
     title: "Solution Architecture",
     description:
       "Scalable application and infrastructure architecture designed around your requirements.",
-    gradient: "from-[#00aef0] to-[#4b22ff]",
+    gradient: "from-[#00b8ff] to-[#4b22ff]",
   },
   {
     icon: RefreshCcw,
     title: "Digital Modernization",
     description:
       "Modernize outdated systems, workflows and platforms without unnecessary disruption.",
-    gradient: "from-[#8b3dff] to-[#ff315d]",
+    gradient: "from-[#743cff] to-[#ff2f7d]",
   },
   {
     icon: ShieldCheck,
     title: "Security Consulting",
     description:
       "Identify technology risks and improve the security of applications, data and infrastructure.",
-    gradient: "from-[#ff315d] to-[#ff72a3]",
+    gradient: "from-[#ff2f7d] to-[#ff7ca8]",
   },
   {
     icon: Cloud,
     title: "Cloud Consulting",
     description:
       "Select, migrate and optimize cloud services according to performance and business needs.",
-    gradient: "from-[#4b22ff] to-[#00aef0]",
+    gradient: "from-[#4b22ff] to-[#00b8ff]",
   },
   {
     icon: Gauge,
     title: "Technology Optimization",
     description:
       "Improve system performance, reliability, maintainability and operational efficiency.",
-    gradient: "from-[#ff315d] to-[#8b3dff]",
+    gradient: "from-[#ff2f7d] to-[#743cff]",
   },
 ];
 
@@ -424,7 +424,7 @@ function ExpertiseCard({
   return (
     <div className="rounded-[19px] border border-white/10 bg-white/[0.055] p-5 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.08] sm:rounded-[22px] sm:p-6">
       <div className="flex items-center gap-3">
-        <div className="flex h-12 w-12 items-center justify-center rounded-[15px] bg-gradient-to-br from-[#4b22ff] to-[#ff315d] text-white shadow-[0_12px_25px_rgba(75,34,255,0.24)]">
+        <div className="flex h-12 w-12 items-center justify-center rounded-[15px] bg-gradient-to-br from-[#4b22ff] to-[#ff2f7d] text-white shadow-[0_12px_25px_rgba(75,34,255,0.24)]">
           <Icon size={22} />
         </div>
 
@@ -435,7 +435,7 @@ function ExpertiseCard({
         {items.map((item) => (
           <span
             key={item}
-            className="rounded-full border border-white/10 bg-white/[0.07] px-3 py-2 text-[11px] font-semibold text-white/68"
+            className="rounded-full border border-white/10 bg-white/[0.07] px-3 py-2 text-[12px] font-semibold text-white/82"
           >
             {item}
           </span>
@@ -454,14 +454,14 @@ export default function ITConsultingPage() {
 
   return (
     <>
-      <main className="overflow-hidden bg-white text-[#07112f] antialiased">
+      <main className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
         {/* HERO SECTION */}
-        <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-14 pt-12 sm:px-6 sm:pb-18 sm:pt-16 lg:px-10 lg:pb-24 lg:pt-20">
+        <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-14 pt-10 sm:px-6 sm:pb-18 sm:pt-12 lg:px-10 lg:pb-24 lg:pt-11">
           <div className="pointer-events-none absolute -left-32 top-[-80px] h-[430px] w-[430px] rounded-full bg-[#4b22ff]/10 blur-[125px]" />
 
-          <div className="pointer-events-none absolute -right-32 top-[-80px] h-[430px] w-[430px] rounded-full bg-[#ff315d]/10 blur-[125px]" />
+          <div className="pointer-events-none absolute -right-32 top-[-80px] h-[430px] w-[430px] rounded-full bg-[#ff2f7d]/10 blur-[125px]" />
 
-          <div className="pointer-events-none absolute bottom-[-220px] left-1/2 h-[420px] w-[900px] -translate-x-1/2 rounded-full bg-[#673aff]/6 blur-[110px]" />
+          <div className="pointer-events-none absolute bottom-[-220px] left-1/2 h-[420px] w-[900px] -translate-x-1/2 rounded-full bg-[#743cff]/6 blur-[110px]" />
 
           <div className="pointer-events-none absolute inset-0 opacity-[0.27] [background-image:radial-gradient(circle_at_1px_1px,rgba(75,34,255,0.13)_1px,transparent_1px)] [background-size:26px_26px]" />
 
@@ -475,7 +475,7 @@ export default function ITConsultingPage() {
                   text="IT Consulting Services"
                   speed={85}
                   delay={100}
-                  className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#4b22ff]"
+                  className="text-[12px] font-bold uppercase tracking-[0.22em] text-[#4b22ff]"
                   cursorClassName="bg-[#4b22ff]"
                 />
               </div>
@@ -489,13 +489,13 @@ export default function ITConsultingPage() {
                     speed={125}
                     delay={300}
                     nowrap
-                    className="bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff315d] bg-clip-text text-transparent"
-                    cursorClassName="bg-[#ff315d]"
+                    className="bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff2f7d] bg-clip-text text-transparent"
+                    cursorClassName="bg-[#ff2f7d]"
                   />
                 </span>
               </h1>
 
-              <p className="mt-5 max-w-[620px] text-[14px] font-medium leading-7 text-[#34405f]/72 sm:mt-7 sm:text-[16px] sm:leading-8">
+              <p className="mt-5 max-w-[620px] text-[16px] font-medium leading-7 text-[#27314f]/90 sm:mt-7 sm:text-[17px] sm:leading-[1.8]">
                 We help businesses plan, modernize and optimize technology with
                 practical strategies that improve performance, reduce risk and
                 support long-term growth.
@@ -505,7 +505,7 @@ export default function ITConsultingPage() {
                 <button
                   type="button"
                   onClick={openConsultation}
-                  className="group inline-flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-3 rounded-[12px] bg-gradient-to-r from-[#4b22ff] to-[#ff315d] px-6 text-[13px] font-bold text-white shadow-[0_14px_30px_rgba(75,34,255,0.24)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_38px_rgba(255,49,93,0.24)] sm:w-auto sm:px-7"
+                  className="group inline-flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-3 rounded-[12px] bg-gradient-to-r from-[#4525ff] to-[#ff315f] px-6 text-[14px] font-bold text-white shadow-[0_14px_30px_rgba(75,34,255,0.24)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_38px_rgba(255,49,93,0.24)] sm:w-auto sm:px-7"
                 >
                   Discuss Your IT Strategy
 
@@ -517,7 +517,7 @@ export default function ITConsultingPage() {
 
                 <Link
                   href="/contact"
-                  className="group inline-flex min-h-[50px] w-full items-center justify-center gap-3 rounded-[12px] border border-[#ddd8ee] bg-white px-6 text-[13px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(22,17,62,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#4b22ff] hover:text-[#4b22ff] sm:w-auto sm:px-7"
+                  className="group inline-flex min-h-[50px] w-full items-center justify-center gap-3 rounded-[12px] border border-[#ddd8ee] bg-white px-6 text-[14px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(22,17,62,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#4b22ff] hover:text-[#4b22ff] sm:w-auto sm:px-7"
                 >
                   Talk to Our Team
 
@@ -558,7 +558,7 @@ export default function ITConsultingPage() {
                         <Icon size={17} />
                       </div>
 
-                      <span className="min-w-0 text-[10px] font-bold leading-4 text-[#24304f] sm:text-[11px]">
+                      <span className="min-w-0 text-[12px] font-bold leading-5 text-[#24304f] sm:text-[12px]">
                         {item.title}
                       </span>
                     </div>
@@ -603,7 +603,7 @@ export default function ITConsultingPage() {
 
               <div className="absolute right-[0%] top-[18%] z-30 hidden w-[220px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#ff315d] to-[#ff72a3] text-white">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#ff2f7d] to-[#ff7ca8] text-white">
                     <Layers3 size={21} />
                   </div>
 
@@ -621,7 +621,7 @@ export default function ITConsultingPage() {
 
               <div className="absolute bottom-[8%] left-[3%] z-30 hidden w-[220px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#00aef0] to-[#4b22ff] text-white">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#00b8ff] to-[#4b22ff] text-white">
                    <RefreshCcw size={21} />
                   </div>
 
@@ -639,7 +639,7 @@ export default function ITConsultingPage() {
 
               <div className="absolute bottom-[2%] right-[1%] z-30 hidden w-[220px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
                 <div className="flex items-center gap-3">
-  <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#8b3dff] to-[#ff315d] text-white">
+  <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#743cff] to-[#ff2f7d] text-white">
     <BarChart3 size={21} />
   </div>
 
@@ -664,7 +664,7 @@ export default function ITConsultingPage() {
 
           <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 sm:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#4b22ff]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#4b22ff]">
                 <TypewriterText
                   text="Technology With Direction"
                   speed={82}
@@ -673,32 +673,32 @@ export default function ITConsultingPage() {
                 />
               </p>
 
-              <h2 className="mt-4 max-w-[680px] font-bold tracking-[-0.04em] text-[#081232]">
-                {/* Mobile */}
-                <span className="block text-[29px] leading-[1.14] sm:hidden">
+              <h2 className="mt-4 max-w-[680px] overflow-visible font-bold tracking-[-0.035em] text-[#081232]">
+                {/* Mobile: fixed three-line layout */}
+                <span className="block whitespace-nowrap text-[27px] leading-[1.16] min-[390px]:text-[29px] sm:hidden">
                   Build a Smarter
                 </span>
 
-                <span className="mt-1 flex items-baseline text-[29px] leading-[1.14] sm:hidden">
+                <span className="mt-1 flex items-baseline whitespace-nowrap text-[27px] leading-[1.16] min-[390px]:text-[29px] sm:hidden">
                   Technology{" "}
                   <TypewriterText
                     text="Roadmap"
                     speed={105}
                     delay={220}
                     nowrap
-                    className="ml-2 text-[#ff315d]"
-                    cursorClassName="bg-[#ff315d]"
+                    className="ml-2 overflow-visible pb-[0.04em] pr-[0.06em] text-[#ff2f7d]"
+                    cursorClassName="bg-[#ff2f7d]"
                   />
                 </span>
 
-                <span className="mt-1 block overflow-visible pb-[0.1em] text-[29px] leading-[1.14] sm:hidden">
+                <span className="mt-1 block overflow-visible pb-[0.1em] text-[27px] leading-[1.16] min-[390px]:text-[29px] sm:hidden">
                   <TypewriterText
                     text="for Your Business"
                     speed={105}
                     delay={900}
                     nowrap
-                    className="pb-[0.06em] text-[#ff315d]"
-                    cursorClassName="bg-[#ff315d]"
+                    className="overflow-visible pb-[0.06em] pr-[0.08em] text-[#ff2f7d]"
+                    cursorClassName="bg-[#ff2f7d]"
                   />
                 </span>
 
@@ -712,18 +712,18 @@ export default function ITConsultingPage() {
                     text="Roadmap for Your Business"
                     speed={105}
                     delay={220}
-                    className="text-[#ff315d]"
-                    cursorClassName="bg-[#ff315d]"
+                    className="text-[#ff2f7d]"
+                    cursorClassName="bg-[#ff2f7d]"
                   />
                 </span>
               </h2>
 
-              <p className="mt-6 max-w-[610px] text-[14px] font-medium leading-8 text-[#34405f]/68">
+              <p className="mt-6 max-w-[610px] text-[16px] font-medium leading-8 text-[#27314f]/88">
                 Technology should help the business operate better, serve
                 customers more effectively and respond quickly to change.
               </p>
 
-              <p className="mt-5 max-w-[610px] text-[14px] font-medium leading-8 text-[#34405f]/68">
+              <p className="mt-5 max-w-[610px] text-[16px] font-medium leading-8 text-[#27314f]/88">
                 We review your systems, processes and goals before recommending
                 practical improvements that your team can realistically
                 implement and maintain.
@@ -732,7 +732,7 @@ export default function ITConsultingPage() {
               <button
                 type="button"
                 onClick={openConsultation}
-                className="group mt-7 inline-flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-3 rounded-[13px] bg-[#081232] px-6 text-[12px] font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#4b22ff] sm:mt-8 sm:w-auto sm:px-7"
+                className="group mt-7 inline-flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-3 rounded-[13px] bg-[#081232] px-6 text-[13px] font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#4b22ff] sm:mt-8 sm:w-auto sm:px-7"
               >
                 Request an IT Assessment
 
@@ -762,7 +762,7 @@ export default function ITConsultingPage() {
                       {item.title}
                     </h3>
 
-                    <p className="mt-2 text-[12px] font-medium leading-6 text-[#34405f]/62">
+                    <p className="mt-2 text-[14px] font-medium leading-6 text-[#27314f]/84">
                       {item.description}
                     </p>
                   </div>
@@ -776,13 +776,13 @@ export default function ITConsultingPage() {
         <section className="bg-[#fbfaff] px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-24">
           <div className="mx-auto max-w-[1320px]">
             <div className="mx-auto max-w-[810px] text-center">
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#ff315d]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#ff2f7d]">
                 <TypewriterText
                   text="Consulting Services"
                   speed={90}
                   delay={100}
                   nowrap
-                  cursorClassName="bg-[#ff315d]"
+                  cursorClassName="bg-[#ff2f7d]"
                 />
               </p>
 
@@ -831,7 +831,7 @@ export default function ITConsultingPage() {
                 </span>
               </h2>
 
-              <p className="mx-auto mt-5 max-w-[700px] text-[14px] font-medium leading-7 text-[#34405f]/65">
+              <p className="mx-auto mt-5 max-w-[700px] text-[16px] font-medium leading-7 text-[#27314f]/86">
                 Our consulting services help organizations understand their
                 current environment and make better technology decisions.
               </p>
@@ -846,10 +846,10 @@ export default function ITConsultingPage() {
                     key={item.number}
                     className="group relative overflow-hidden rounded-[21px] border border-[#e4dff1] bg-white p-5 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(75,34,255,0.12)] sm:rounded-[24px] sm:p-7"
                   >
-                    <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#4b22ff]/5 blur-3xl transition-colors duration-500 group-hover:bg-[#ff315d]/8" />
+                    <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#4b22ff]/5 blur-3xl transition-colors duration-500 group-hover:bg-[#ff2f7d]/8" />
 
                     <div className="relative flex items-start justify-between">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-[18px] bg-gradient-to-br from-[#4b22ff] to-[#ff315d] text-white shadow-[0_12px_26px_rgba(75,34,255,0.20)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-[18px] bg-gradient-to-br from-[#4b22ff] to-[#ff2f7d] text-white shadow-[0_12px_26px_rgba(75,34,255,0.20)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105">
                         <Icon size={25} />
                       </div>
 
@@ -862,7 +862,7 @@ export default function ITConsultingPage() {
                       {item.title}
                     </h3>
 
-                    <p className="relative mt-3 text-[13px] font-medium leading-7 text-[#34405f]/62">
+                    <p className="relative mt-3 text-[15px] font-medium leading-7 text-[#27314f]/86">
                       {item.description}
                     </p>
 
@@ -890,7 +890,7 @@ export default function ITConsultingPage() {
           <div className="mx-auto max-w-[1320px]">
             <div className="grid items-end gap-8 lg:grid-cols-2">
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#4b22ff]">
+                <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#4b22ff]">
                   <TypewriterText
                     text="Business Outcomes"
                     speed={88}
@@ -899,19 +899,19 @@ export default function ITConsultingPage() {
                   />
                 </p>
 
-                <h2 className="mt-4 max-w-[640px] text-[34px] font-bold leading-[1.16] tracking-[-0.04em] text-[#081232] sm:text-[44px]">
+                <h2 className="mt-4 max-w-[640px] text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
                   Turn Technology Challenges Into{" "}
                   <TypewriterText
                     text="Business Opportunities"
                     speed={105}
                     delay={220}
-                    className="text-[#ff315d]"
-                    cursorClassName="bg-[#ff315d]"
+                    className="text-[#ff2f7d]"
+                    cursorClassName="bg-[#ff2f7d]"
                   />
                 </h2>
               </div>
 
-              <p className="max-w-[580px] text-[14px] font-medium leading-8 text-[#34405f]/67 lg:justify-self-end">
+              <p className="max-w-[580px] text-[16px] font-medium leading-8 text-[#27314f]/88 lg:justify-self-end">
                 Our recommendations are designed to improve the way your
                 technology supports people, processes, customers and business
                 growth.
@@ -941,7 +941,7 @@ export default function ITConsultingPage() {
                       {item.title}
                     </h3>
 
-                    <p className="mt-3 text-[12px] font-medium leading-6 text-[#34405f]/62">
+                    <p className="mt-3 text-[14px] font-medium leading-6 text-[#27314f]/84">
                       {item.description}
                     </p>
                   </div>
@@ -959,12 +959,12 @@ export default function ITConsultingPage() {
             <div className="pointer-events-none absolute inset-0 opacity-[0.10] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:24px_24px]" />
 
             <div className="relative z-10 mx-auto max-w-[820px] text-center">
-              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#d96bff]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.28em] text-[#d75cff]">
                 <TypewriterText
                   text="Consulting Expertise"
                   speed={88}
                   delay={100}
-                  cursorClassName="bg-[#d96bff]"
+                  cursorClassName="bg-[#d75cff]"
                 />
               </p>
 
@@ -1013,7 +1013,7 @@ export default function ITConsultingPage() {
                 </span>
               </h2>
 
-              <p className="mx-auto mt-5 max-w-[700px] text-[14px] font-medium leading-7 text-white/62">
+              <p className="mx-auto mt-5 max-w-[700px] text-[16px] font-medium leading-7 text-white/82">
                 We review the complete technology environment rather than
                 evaluating one system or platform in isolation.
               </p>
@@ -1031,7 +1031,7 @@ export default function ITConsultingPage() {
         <section className="px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="mx-auto max-w-[1320px]">
             <div className="mx-auto max-w-[810px] text-center">
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#4b22ff]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#4b22ff]">
                 <TypewriterText
                   text="Our Consulting Process"
                   speed={85}
@@ -1053,8 +1053,8 @@ export default function ITConsultingPage() {
                     speed={105}
                     delay={220}
                     nowrap
-                    className="ml-2 text-[#ff315d]"
-                    cursorClassName="bg-[#ff315d]"
+                    className="ml-2 text-[#ff2f7d]"
+                    cursorClassName="bg-[#ff2f7d]"
                   />
                 </span>
 
@@ -1068,13 +1068,13 @@ export default function ITConsultingPage() {
                     text="Successful Implementation"
                     speed={105}
                     delay={220}
-                    className="text-[#ff315d]"
-                    cursorClassName="bg-[#ff315d]"
+                    className="text-[#ff2f7d]"
+                    cursorClassName="bg-[#ff2f7d]"
                   />
                 </span>
               </h2>
 
-              <p className="mx-auto mt-5 max-w-[700px] text-[14px] font-medium leading-7 text-[#34405f]/65">
+              <p className="mx-auto mt-5 max-w-[700px] text-[16px] font-medium leading-7 text-[#27314f]/86">
                 A structured consulting process ensures that recommendations
                 remain realistic, prioritized and connected to business needs.
               </p>
@@ -1090,7 +1090,7 @@ export default function ITConsultingPage() {
                     className="group relative rounded-[23px] border border-[#e4dff0] bg-white p-6 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_22px_48px_rgba(75,34,255,0.11)]"
                   >
                     <div className="flex items-center justify-between">
-                      <div className="flex h-[66px] w-[66px] items-center justify-center rounded-full bg-gradient-to-br from-[#4b22ff] to-[#ff315d] text-white shadow-[0_14px_30px_rgba(75,34,255,0.22)] transition-transform duration-300 group-hover:rotate-6 group-hover:scale-105">
+                      <div className="flex h-[66px] w-[66px] items-center justify-center rounded-full bg-gradient-to-br from-[#4b22ff] to-[#ff2f7d] text-white shadow-[0_14px_30px_rgba(75,34,255,0.22)] transition-transform duration-300 group-hover:rotate-6 group-hover:scale-105">
                         <Icon size={27} />
                       </div>
 
@@ -1103,7 +1103,7 @@ export default function ITConsultingPage() {
                       {item.title}
                     </h3>
 
-                    <p className="mt-3 text-[13px] font-medium leading-7 text-[#34405f]/62">
+                    <p className="mt-3 text-[15px] font-medium leading-7 text-[#27314f]/86">
                       {item.description}
                     </p>
                   </div>
@@ -1115,56 +1115,57 @@ export default function ITConsultingPage() {
 
         {/* WHY MITOMS */}
         <section className="relative bg-[#fbfaff] px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-24">
-          <div className="pointer-events-none absolute right-[-140px] top-1/4 h-96 w-96 rounded-full bg-[#ff315d]/5 blur-[120px]" />
+          <div className="pointer-events-none absolute right-[-140px] top-1/4 h-96 w-96 rounded-full bg-[#ff2f7d]/5 blur-[120px]" />
 
           <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 sm:gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#ff315d]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#ff2f7d]">
                 <TypewriterText
                   text="Why Choose MITOMS"
                   speed={90}
                   delay={100}
                   nowrap
-                  cursorClassName="bg-[#ff315d]"
+                  cursorClassName="bg-[#ff2f7d]"
                 />
               </p>
 
-              <h2 className="mt-4 max-w-[700px] font-bold tracking-[-0.04em] text-[#081232]">
+              <h2 className="mt-4 max-w-[700px] overflow-visible font-bold tracking-[-0.035em] text-[#081232]">
                 {/* Mobile */}
-                <span className="block whitespace-nowrap text-[25px] leading-[1.15] min-[390px]:text-[28px] sm:hidden">
+                <span className="block whitespace-nowrap text-[27px] leading-[1.16] min-[390px]:text-[29px] sm:hidden">
                   Technology Consulting
                 </span>
 
-                <span className="mt-1 flex items-baseline whitespace-nowrap text-[25px] leading-[1.15] min-[390px]:text-[28px] sm:hidden">
+                <span className="mt-1 flex items-baseline whitespace-nowrap text-[27px] leading-[1.16] min-[390px]:text-[29px] sm:hidden">
                   Focused on{" "}
                   <TypewriterText
                     text="Practical Results"
                     speed={110}
                     delay={220}
                     nowrap
-                    className="ml-2 text-[#4b22ff]"
+                    className="ml-2 overflow-visible pb-[0.04em] pr-[0.08em] tracking-[-0.015em] text-[#4b22ff]"
                     cursorClassName="bg-[#4b22ff]"
                   />
                 </span>
 
-                {/* Tablet and desktop */}
-                <span className="hidden text-[38px] leading-[1.16] sm:inline lg:text-[44px]">
-                  Technology Consulting Focused on{" "}
+                {/* Tablet, laptop and desktop: balanced two-line layout */}
+                <span className="hidden whitespace-nowrap text-[34px] leading-[1.16] sm:block lg:text-[38px] xl:text-[42px]">
+                  Technology Consulting
                 </span>
 
-                <span className="hidden text-[38px] leading-[1.16] sm:inline lg:text-[44px]">
+                <span className="mt-1 hidden items-baseline whitespace-nowrap text-[34px] leading-[1.16] sm:flex lg:text-[38px] xl:text-[42px]">
+                  Focused on{" "}
                   <TypewriterText
                     text="Practical Results"
                     speed={110}
                     delay={220}
                     nowrap
-                    className="text-[#4b22ff]"
+                    className="ml-2 overflow-visible pb-[0.05em] pr-[0.08em] tracking-[-0.015em] text-[#4b22ff]"
                     cursorClassName="bg-[#4b22ff]"
                   />
                 </span>
               </h2>
 
-              <p className="mt-6 max-w-[610px] text-[14px] font-medium leading-8 text-[#34405f]/67">
+              <p className="mt-6 max-w-[610px] text-[16px] font-medium leading-8 text-[#27314f]/88">
                 We combine business understanding with design, engineering,
                 cloud and product-development experience. This helps us provide
                 recommendations that are practical to implement.
@@ -1197,10 +1198,10 @@ export default function ITConsultingPage() {
                   <div className="flex items-start gap-2">
                     <Check
                       size={17}
-                      className="mt-0.5 shrink-0 text-[#ff315d]"
+                      className="mt-0.5 shrink-0 text-[#ff2f7d]"
                     />
 
-                    <p className="text-[12px] font-bold leading-6 text-[#24304f]/82">
+                    <p className="text-[14px] font-bold leading-6 text-[#24304f]/90">
                       {benefit}
                     </p>
                   </div>
@@ -1214,7 +1215,7 @@ export default function ITConsultingPage() {
         <section className="px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="mx-auto grid max-w-[1180px] gap-9 sm:gap-12 lg:grid-cols-[0.72fr_1.28fr]">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#4b22ff]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#4b22ff]">
                 <TypewriterText
                   text="Frequently Asked Questions"
                   speed={80}
@@ -1223,7 +1224,7 @@ export default function ITConsultingPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[34px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[42px]">
+              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
                 Questions About
                 <TypewriterText
                   text="IT Consulting"
@@ -1231,12 +1232,12 @@ export default function ITConsultingPage() {
                   speed={110}
                   delay={220}
                   nowrap
-                  className="text-[#ff315d]"
-                  cursorClassName="bg-[#ff315d]"
+                  className="text-[#ff2f7d]"
+                  cursorClassName="bg-[#ff2f7d]"
                 />
               </h2>
 
-              <p className="mt-5 max-w-[410px] text-[13px] font-medium leading-7 text-[#34405f]/65">
+              <p className="mt-5 max-w-[410px] text-[15px] font-medium leading-7 text-[#27314f]/86">
                 Common questions businesses ask before beginning an IT
                 consulting or technology-assessment engagement.
               </p>
@@ -1267,7 +1268,7 @@ export default function ITConsultingPage() {
                         {String(index + 1).padStart(2, "0")}
                       </span>
 
-                      <h3 className="min-w-0 text-[13px] font-bold leading-5 text-[#081232] sm:text-[15px]">
+                      <h3 className="min-w-0 text-[14px] font-bold leading-6 text-[#081232] sm:text-[16px]">
                         {item.question}
                       </h3>
                     </div>
@@ -1278,7 +1279,7 @@ export default function ITConsultingPage() {
                     />
                   </summary>
 
-                  <p className="mt-4 border-t border-[#ebe7f4] pt-4 text-[13px] font-medium leading-7 text-[#34405f]/65 sm:ml-[52px]">
+                  <p className="mt-4 border-t border-[#ebe7f4] pt-4 text-[15px] font-medium leading-7 text-[#27314f]/86 sm:ml-[52px]">
                     {item.answer}
                   </p>
                 </details>
@@ -1289,21 +1290,21 @@ export default function ITConsultingPage() {
 
         {/* FINAL CTA */}
         <section className="px-4 pb-8 sm:px-6 lg:px-10">
-          <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[22px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff315d_125%)] px-5 py-10 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:rounded-[26px] sm:px-8 sm:py-12 lg:px-14">
+          <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[22px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff2f7d_125%)] px-5 py-10 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:rounded-[26px] sm:px-8 sm:py-12 lg:px-14">
             <div className="pointer-events-none absolute -left-20 -top-28 h-72 w-72 rounded-full bg-[#1685ff]/20 blur-[90px]" />
 
-            <div className="pointer-events-none absolute -bottom-28 right-[-40px] h-80 w-80 rounded-full bg-[#ff315d]/35 blur-[95px]" />
+            <div className="pointer-events-none absolute -bottom-28 right-[-40px] h-80 w-80 rounded-full bg-[#ff2f7d]/35 blur-[95px]" />
 
             <div className="pointer-events-none absolute inset-0 opacity-[0.10] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:22px_22px]" />
 
             <div className="relative z-10 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-[#ff84b8]">
+                <p className="text-[12px] font-bold uppercase tracking-[0.24em] text-[#ff7ca8]">
                   <TypewriterText
                     text="Plan Your Technology Future"
                     speed={84}
                     delay={100}
-                    cursorClassName="bg-[#ff84b8]"
+                    cursorClassName="bg-[#ff7ca8]"
                   />
                 </p>
 
@@ -1311,7 +1312,7 @@ export default function ITConsultingPage() {
                   Need a Clear Technology Roadmap for Your Business?
                 </h2>
 
-                <p className="mt-3 max-w-[670px] text-[13px] font-medium leading-7 text-white/65">
+                <p className="mt-3 max-w-[670px] text-[15px] font-medium leading-7 text-white/84">
                   Share your current technology challenges with our team and
                   receive a practical recommendation for your next steps.
                 </p>
@@ -1320,13 +1321,13 @@ export default function ITConsultingPage() {
               <button
                 type="button"
                 onClick={openConsultation}
-                className="group inline-flex min-h-[50px] w-full shrink-0 cursor-pointer items-center justify-center gap-3 rounded-[14px] bg-white px-7 py-4 text-[12px] font-bold text-[#17163b] shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 sm:w-auto"
+                className="group inline-flex min-h-[50px] w-full shrink-0 cursor-pointer items-center justify-center gap-3 rounded-[14px] bg-white px-7 py-4 text-[13px] font-bold text-[#17163b] shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 sm:w-auto"
               >
                 Book IT Consultation
 
                 <ArrowRight
                   size={18}
-                  className="text-[#ff315d] transition-transform duration-300 group-hover:translate-x-1"
+                  className="text-[#ff2f7d] transition-transform duration-300 group-hover:translate-x-1"
                 />
               </button>
             </div>

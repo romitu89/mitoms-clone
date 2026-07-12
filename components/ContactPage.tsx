@@ -57,7 +57,7 @@ const contactCards = [
     description: "Serving clients across India and globally.",
     value: "India",
     href: "",
-    iconBg: "from-[#ff315d] to-[#ff72a3]",
+    iconBg: "from-[#ff2f7d] to-[#ff7ca8]",
   },
   {
     icon: Clock3,
@@ -65,7 +65,7 @@ const contactCards = [
     description: "We usually respond within one business day.",
     value: "Within 24 Hours",
     href: "",
-    iconBg: "from-[#00aef0] to-[#4b22ff]",
+    iconBg: "from-[#00b8ff] to-[#4b22ff]",
   },
 ];
 
@@ -226,13 +226,13 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="overflow-hidden bg-white text-[#07112f] antialiased">
+    <main className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
       {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-16 pt-14 sm:px-6 sm:pb-20 sm:pt-18 lg:px-10 lg:pb-28 lg:pt-24">
+      <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-16 pt-10 sm:px-6 sm:pb-20 sm:pt-12 lg:px-10 lg:pb-28 lg:pt-11">
         {/* Background glows */}
         <div className="pointer-events-none absolute -left-32 top-10 h-[380px] w-[380px] rounded-full bg-[#4b22ff]/10 blur-[120px]" />
 
-        <div className="pointer-events-none absolute -right-24 top-[-80px] h-[390px] w-[390px] rounded-full bg-[#ff315d]/10 blur-[120px]" />
+        <div className="pointer-events-none absolute -right-24 top-[-80px] h-[390px] w-[390px] rounded-full bg-[#ff2f7d]/10 blur-[120px]" />
 
         <div className="pointer-events-none absolute bottom-[-200px] left-1/2 h-[420px] w-[850px] -translate-x-1/2 rounded-full bg-[#693bff]/5 blur-[100px]" />
 
@@ -248,7 +248,7 @@ export default function ContactPage() {
                 text="Let&apos;s Talk"
                 speed={100}
                 delay={120}
-                className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#4b22ff]"
+                className="text-[12px] font-bold uppercase tracking-[0.22em] text-[#4b22ff]"
                 cursorClassName="bg-[#4b22ff]"
               />
             </div>
@@ -261,13 +261,13 @@ export default function ContactPage() {
                   text="Remarkable"
                   speed={120}
                   delay={320}
-                  className="overflow-visible pb-[0.06em] pr-[0.16em] tracking-[-0.012em] bg-gradient-to-r from-[#4b22ff] via-[#7439ff] to-[#ff315d] bg-clip-text text-transparent"
-                  cursorClassName="bg-[#ff315d]"
+                  className="overflow-visible pb-[0.06em] pr-[0.16em] tracking-[-0.012em] bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff2f7d] bg-clip-text text-transparent"
+                  cursorClassName="bg-[#ff2f7d]"
                 />
               </span>
             </h1>
 
-            <p className="mx-auto mt-5 max-w-[680px] text-[14px] font-medium leading-7 text-[#34405f]/70 sm:mt-6 sm:text-[16px] sm:leading-8">
+            <p className="mx-auto mt-5 max-w-[700px] text-[16px] font-medium leading-7 text-[#27314f]/90 sm:mt-6 sm:text-[17px] sm:leading-[1.8]">
               Tell us about your project, business goals or technology
               challenges. Our team will help you identify the right solution and
               practical next steps.
@@ -288,7 +288,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="min-w-0">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#4b22ff] sm:text-[11px] sm:tracking-[0.18em]">
+                    <p className="text-[12px] font-bold uppercase tracking-[0.15em] text-[#4b22ff] sm:text-[12px] sm:tracking-[0.17em]">
                       <TypewriterOnce
                         text={item.title}
                         speed={85}
@@ -297,11 +297,11 @@ export default function ContactPage() {
                       />
                     </p>
 
-                    <p className="mt-1 text-[12px] font-medium leading-5 text-[#52607a]/60">
+                    <p className="mt-1 text-[14px] font-medium leading-6 text-[#27314f]/82">
                       {item.description}
                     </p>
 
-                    <p className="mt-2 break-words text-[13px] font-bold leading-5 text-[#081232] sm:text-[14px]">
+                    <p className="mt-2 break-words text-[14px] font-bold leading-5 text-[#081232] sm:text-[15px]">
                       {item.value}
                     </p>
                   </div>
@@ -331,10 +331,10 @@ export default function ContactPage() {
 
         <div className="relative mx-auto grid max-w-[1320px] overflow-hidden rounded-[24px] border border-[#e4dff3] bg-white shadow-[0_30px_90px_rgba(19,14,65,0.12)] sm:rounded-[30px] lg:grid-cols-[0.86fr_1.14fr]">
           {/* LEFT INFORMATION */}
-          <div className="relative overflow-hidden bg-[linear-gradient(145deg,#06112f_0%,#18104f_45%,#5c175c_78%,#ff315d_145%)] p-5 text-white sm:p-8 lg:min-h-[760px] lg:p-12">
-            <div className="pointer-events-none absolute -left-28 top-24 h-72 w-72 rounded-full bg-[#1685ff]/25 blur-[95px]" />
+          <div className="relative overflow-hidden bg-[linear-gradient(145deg,#06112f_0%,#18104f_45%,#5c175c_78%,#ff2f7d_145%)] p-5 text-white sm:p-8 lg:min-h-[760px] lg:p-12">
+            <div className="pointer-events-none absolute -left-28 top-24 h-72 w-72 rounded-full bg-[#00b8ff]/25 blur-[95px]" />
 
-            <div className="pointer-events-none absolute -bottom-20 -right-16 h-80 w-80 rounded-full bg-[#ff315d]/35 blur-[95px]" />
+            <div className="pointer-events-none absolute -bottom-20 -right-16 h-80 w-80 rounded-full bg-[#ff2f7d]/35 blur-[95px]" />
 
             <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:23px_23px]" />
 
@@ -354,9 +354,9 @@ export default function ContactPage() {
                   y2="0"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stopColor="#24baff" stopOpacity="0.2" />
+                  <stop stopColor="#00b8ff" stopOpacity="0.2" />
                   <stop offset="0.5" stopColor="#7a4cff" stopOpacity="0.8" />
-                  <stop offset="1" stopColor="#ff3b95" stopOpacity="0.8" />
+                  <stop offset="1" stopColor="#ff2f7d" stopOpacity="0.8" />
                 </linearGradient>
               </defs>
 
@@ -376,12 +376,12 @@ export default function ContactPage() {
             </svg>
 
             <div className="relative z-10">
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#ff80bb]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#ff7ca8]">
                 <TypewriterOnce
                   text="Start a Conversation"
                   speed={90}
                   delay={120}
-                  cursorClassName="bg-[#ff80bb]"
+                  cursorClassName="bg-[#ff7ca8]"
                 />
               </p>
 
@@ -392,13 +392,13 @@ export default function ContactPage() {
                   display="block"
                   speed={120}
                   delay={260}
-                  className="mt-1 pb-[0.08em] font-serif text-[40px] font-medium italic leading-[1.05] text-[#ff88bd] sm:text-[51px] lg:text-[55px]"
-                  cursorClassName="bg-[#ff88bd]"
+                  className="mt-1 pb-[0.08em] font-serif text-[40px] font-medium italic leading-[1.05] text-[#ff7ca8] sm:text-[51px] lg:text-[55px]"
+                  cursorClassName="bg-[#ff7ca8]"
                 />
                 Starts Here
               </h2>
 
-              <p className="mt-5 max-w-[430px] text-[13px] font-medium leading-7 text-white/68 sm:mt-6 sm:text-[14px]">
+              <p className="mt-5 max-w-[440px] text-[15px] font-medium leading-7 text-white/84 sm:mt-6 sm:text-[16px]">
                 Whether you need a new website, mobile application, cloud
                 solution or expert technology guidance, our team is ready to
                 help.
@@ -413,16 +413,16 @@ export default function ContactPage() {
                       key={item.title}
                       className="flex gap-3 rounded-[18px] border border-white/12 bg-white/[0.07] p-3.5 backdrop-blur sm:gap-4 sm:rounded-[20px] sm:p-4"
                     >
-                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-white/10 text-[#ff8dc1]">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-white/10 text-[#ff7ca8]">
                         <Icon size={21} />
                       </div>
 
                       <div>
-                        <h3 className="text-[14px] font-bold text-white">
+                        <h3 className="text-[15px] font-bold text-white">
                           {item.title}
                         </h3>
 
-                        <p className="mt-1 text-[12px] font-medium leading-5 text-white/58">
+                        <p className="mt-1 text-[14px] font-medium leading-6 text-white/80">
                           {item.description}
                         </p>
                       </div>
@@ -432,13 +432,13 @@ export default function ContactPage() {
               </div>
 
               <div className="mt-8 border-t border-white/10 pt-6 sm:mt-10 sm:pt-8">
-                <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/45">
+                <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-white/72">
                   Prefer Email?
                 </p>
 
                 <a
                   href="mailto:info@mitoms.com"
-                  className="group mt-3 inline-flex max-w-full items-center gap-3 break-all text-[15px] font-bold text-white transition-colors hover:text-[#ff8dc1] sm:text-[17px]"
+                  className="group mt-3 inline-flex max-w-full items-center gap-3 break-all text-[15px] font-bold text-white transition-colors hover:text-[#ff7ca8] sm:text-[17px]"
                 >
                   <Mail size={19} />
                   info@mitoms.com
@@ -455,11 +455,11 @@ export default function ContactPage() {
           <div className="relative min-w-0 bg-[#fbfaff] p-5 sm:p-8 lg:p-12">
             <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#4b22ff]/8 blur-[90px]" />
 
-            <div className="pointer-events-none absolute -bottom-24 left-[-70px] h-64 w-64 rounded-full bg-[#ff315d]/8 blur-[90px]" />
+            <div className="pointer-events-none absolute -bottom-24 left-[-70px] h-64 w-64 rounded-full bg-[#ff2f7d]/8 blur-[90px]" />
 
             {!submitted ? (
               <div className="relative z-10">
-                <p className="text-[11px] font-bold uppercase tracking-[0.27em] text-[#4b22ff]">
+                <p className="text-[12px] font-bold uppercase tracking-[0.25em] text-[#4b22ff]">
                   <TypewriterOnce
                     text="Project Enquiry"
                     speed={90}
@@ -472,7 +472,7 @@ export default function ContactPage() {
                   Tell Us About Your Project
                 </h2>
 
-                <p className="mt-3 max-w-[560px] text-[13px] font-medium leading-7 text-[#34405f]/65">
+                <p className="mt-3 max-w-[580px] text-[15px] font-medium leading-7 text-[#27314f]/86">
                   Complete the form below and provide as much information as
                   possible. Our team will review your enquiry and contact you.
                 </p>
@@ -481,8 +481,8 @@ export default function ContactPage() {
                   {/* Name and email */}
                   <div className="grid gap-4 sm:grid-cols-2">
                     <label className="group block">
-                      <span className="mb-2 block text-[12px] font-bold text-[#202b48]">
-                        Full Name <span className="text-[#ff315d]">*</span>
+                      <span className="mb-2 block text-[13px] font-bold text-[#202b48]">
+                        Full Name <span className="text-[#ff2f7d]">*</span>
                       </span>
 
                       <div className="relative">
@@ -497,14 +497,14 @@ export default function ContactPage() {
                           name="name"
                           autoComplete="name"
                           placeholder="Enter your name"
-                          className="h-[52px] w-full rounded-[14px] border border-[#e1ddec] bg-white pl-11 pr-3 text-[12px] font-semibold text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)] sm:h-14 sm:rounded-[15px] sm:pl-12 sm:pr-4 sm:text-[13px]"
+                          className="h-[52px] w-full rounded-[14px] border border-[#e1ddec] bg-white pl-11 pr-3 text-[13px] font-semibold text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)] sm:h-14 sm:rounded-[15px] sm:pl-12 sm:pr-4 sm:text-[14px]"
                         />
                       </div>
                     </label>
 
                     <label className="group block">
-                      <span className="mb-2 block text-[12px] font-bold text-[#202b48]">
-                        Email Address <span className="text-[#ff315d]">*</span>
+                      <span className="mb-2 block text-[13px] font-bold text-[#202b48]">
+                        Email Address <span className="text-[#ff2f7d]">*</span>
                       </span>
 
                       <div className="relative">
@@ -528,7 +528,7 @@ export default function ContactPage() {
                   {/* Phone and company */}
                   <div className="grid gap-4 sm:grid-cols-2">
                     <label className="group block">
-                      <span className="mb-2 block text-[12px] font-bold text-[#202b48]">
+                      <span className="mb-2 block text-[13px] font-bold text-[#202b48]">
                         Phone Number
                       </span>
 
@@ -549,7 +549,7 @@ export default function ContactPage() {
                     </label>
 
                     <label className="group block">
-                      <span className="mb-2 block text-[12px] font-bold text-[#202b48]">
+                      <span className="mb-2 block text-[13px] font-bold text-[#202b48]">
                         Company Name
                       </span>
 
@@ -573,9 +573,9 @@ export default function ContactPage() {
                   {/* Service and budget */}
                   <div className="grid gap-4 sm:grid-cols-2">
                     <label className="block">
-                      <span className="mb-2 block text-[12px] font-bold text-[#202b48]">
+                      <span className="mb-2 block text-[13px] font-bold text-[#202b48]">
                         Service Required{" "}
-                        <span className="text-[#ff315d]">*</span>
+                        <span className="text-[#ff2f7d]">*</span>
                       </span>
 
                       <div className="relative">
@@ -588,7 +588,7 @@ export default function ContactPage() {
                           required
                           name="service"
                           defaultValue=""
-                          className="h-[52px] w-full appearance-none rounded-[14px] border border-[#e1ddec] bg-white pl-11 pr-10 text-[12px] font-semibold text-[#34405f] outline-none transition-all focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)] sm:h-14 sm:rounded-[15px] sm:pl-12 sm:pr-11 sm:text-[13px]"
+                          className="h-[52px] w-full appearance-none rounded-[14px] border border-[#e1ddec] bg-white pl-11 pr-10 text-[13px] font-semibold text-[#34405f] outline-none transition-all focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)] sm:h-14 sm:rounded-[15px] sm:pl-12 sm:pr-11 sm:text-[14px]"
                         >
                           <option value="" disabled>
                             Select service
@@ -609,7 +609,7 @@ export default function ContactPage() {
                     </label>
 
                     <label className="block">
-                      <span className="mb-2 block text-[12px] font-bold text-[#202b48]">
+                      <span className="mb-2 block text-[13px] font-bold text-[#202b48]">
                         Estimated Budget
                       </span>
 
@@ -645,8 +645,8 @@ export default function ContactPage() {
 
                   {/* Message */}
                   <label className="group block">
-                    <span className="mb-2 block text-[12px] font-bold text-[#202b48]">
-                      Project Details <span className="text-[#ff315d]">*</span>
+                    <span className="mb-2 block text-[13px] font-bold text-[#202b48]">
+                      Project Details <span className="text-[#ff2f7d]">*</span>
                     </span>
 
                     <div className="relative">
@@ -660,14 +660,14 @@ export default function ContactPage() {
                         name="message"
                         rows={6}
                         placeholder="Tell us about your project, goals, required features and expected timeline..."
-                        className="w-full resize-none rounded-[14px] border border-[#e1ddec] bg-white py-3.5 pl-11 pr-3 text-[12px] font-semibold leading-6 text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)] sm:rounded-[15px] sm:py-4 sm:pl-12 sm:pr-4 sm:text-[13px]"
+                        className="w-full resize-none rounded-[14px] border border-[#e1ddec] bg-white py-3.5 pl-11 pr-3 text-[12px] font-semibold leading-6 text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)] sm:rounded-[15px] sm:py-4 sm:pl-12 sm:pr-4 sm:text-[14px]"
                       />
                     </div>
                   </label>
 
                   <button
                     type="submit"
-                    className="group flex min-h-[52px] w-full cursor-pointer items-center justify-center gap-3 rounded-[14px] bg-gradient-to-r from-[#4b22ff] via-[#7138ff] to-[#ff315d] px-5 text-[12px] font-bold text-white shadow-[0_15px_32px_rgba(75,34,255,0.25)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_42px_rgba(255,49,93,0.25)] sm:h-14 sm:rounded-[15px] sm:px-6 sm:text-[13px]"
+                    className="group flex min-h-[52px] w-full cursor-pointer items-center justify-center gap-3 rounded-[14px] bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff2f7d] px-5 text-[13px] font-bold text-white shadow-[0_15px_32px_rgba(75,34,255,0.25)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_42px_rgba(255,49,93,0.25)] sm:h-14 sm:rounded-[15px] sm:px-6 sm:text-[14px]"
                   >
                     Send Project Enquiry
 
@@ -677,7 +677,7 @@ export default function ContactPage() {
                     />
                   </button>
 
-                  <div className="flex flex-col items-start gap-2 pt-1 text-[10px] font-bold text-[#4a5671]/55 min-[430px]:flex-row min-[430px]:flex-wrap min-[430px]:items-center min-[430px]:justify-center min-[430px]:gap-x-6">
+                  <div className="flex flex-col items-start gap-2 pt-1 text-[12px] font-bold text-[#27314f]/75 min-[430px]:flex-row min-[430px]:flex-wrap min-[430px]:items-center min-[430px]:justify-center min-[430px]:gap-x-6">
                     <span className="flex items-center gap-1.5">
                       <CheckCircle2 size={14} className="text-[#4b22ff]" />
                       Free Consultation
@@ -701,7 +701,7 @@ export default function ContactPage() {
                 <div className="relative">
                   <div className="absolute inset-[-25px] rounded-full bg-[#4b22ff]/10 blur-2xl" />
 
-                  <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-[#4b22ff] to-[#ff315d] text-white shadow-[0_22px_50px_rgba(75,34,255,0.30)]">
+                  <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-[#4b22ff] to-[#ff2f7d] text-white shadow-[0_22px_50px_rgba(75,34,255,0.30)]">
                     <Check size={45} strokeWidth={2.5} />
                   </div>
                 </div>
@@ -719,7 +719,7 @@ export default function ContactPage() {
                   Thank You!
                 </h2>
 
-                <p className="mt-4 max-w-[480px] text-[14px] font-medium leading-7 text-[#34405f]/65">
+                <p className="mt-4 max-w-[500px] text-[16px] font-medium leading-7 text-[#27314f]/86">
                   Your project enquiry has been received. Our team will review
                   the details and contact you within one business day.
                 </p>
@@ -727,7 +727,7 @@ export default function ContactPage() {
                 <button
                   type="button"
                   onClick={() => setSubmitted(false)}
-                  className="mt-8 inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-[13px] bg-[#081232] px-7 text-[12px] font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#4b22ff]"
+                  className="mt-8 inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-[13px] bg-[#081232] px-7 text-[13px] font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#4b22ff]"
                 >
                   Send Another Message
                   <ArrowRight size={17} />
@@ -742,12 +742,12 @@ export default function ContactPage() {
       <section className="bg-[#fbfaff] px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-20">
         <div className="mx-auto max-w-[1320px]">
           <div className="mx-auto max-w-[720px] text-center">
-            <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#ff315d]">
+            <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#ff2f7d]">
               <TypewriterOnce
                 text="How Can We Help?"
                 speed={90}
                 delay={120}
-                cursorClassName="bg-[#ff315d]"
+                cursorClassName="bg-[#ff2f7d]"
               />
             </p>
 
@@ -772,7 +772,7 @@ export default function ContactPage() {
                   "Share your idea and let us help you plan the right digital solution.",
                 action: "Start a Project",
                 href: "#contact-form",
-                gradient: "from-[#4b22ff] to-[#7a5cff]",
+                gradient: "from-[#4b22ff] to-[#7b5cff]",
               },
               {
                 icon: Headphones,
@@ -790,7 +790,7 @@ export default function ContactPage() {
                   "Explore development partnerships, outsourcing and collaboration opportunities.",
                 action: "Partner With Us",
                 href: "mailto:info@mitoms.com?subject=Business Partnership",
-                gradient: "from-[#ff315d] to-[#8b3dff]",
+                gradient: "from-[#ff2f7d] to-[#743cff]",
               },
             ].map((item) => {
               const Icon = item.icon;
@@ -801,7 +801,7 @@ export default function ContactPage() {
                   href={item.href}
                   className="group relative overflow-hidden rounded-[21px] border border-[#e4dff2] bg-white p-5 shadow-[0_12px_34px_rgba(35,25,88,0.06)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(75,34,255,0.12)] sm:rounded-[24px] sm:p-7"
                 >
-                  <div className="pointer-events-none absolute -right-14 -top-16 h-44 w-44 rounded-full bg-[#4b22ff]/5 blur-3xl transition-all duration-500 group-hover:bg-[#ff315d]/8" />
+                  <div className="pointer-events-none absolute -right-14 -top-16 h-44 w-44 rounded-full bg-[#4b22ff]/5 blur-3xl transition-all duration-500 group-hover:bg-[#ff2f7d]/8" />
 
                   <div
                     className={`relative flex h-14 w-14 items-center justify-center rounded-[18px] bg-gradient-to-br ${item.gradient} text-white shadow-[0_12px_25px_rgba(75,34,255,0.20)]`}
@@ -813,11 +813,11 @@ export default function ContactPage() {
                     {item.title}
                   </h3>
 
-                  <p className="relative mt-3 text-[13px] font-medium leading-7 text-[#34405f]/62">
+                  <p className="relative mt-3 text-[15px] font-medium leading-7 text-[#27314f]/86">
                     {item.description}
                   </p>
 
-                  <span className="relative mt-6 inline-flex items-center gap-2 text-[12px] font-bold text-[#4b22ff]">
+                  <span className="relative mt-6 inline-flex items-center gap-2 text-[14px] font-bold text-[#4b22ff]">
                     {item.action}
 
                     <ArrowRight
@@ -836,7 +836,7 @@ export default function ContactPage() {
       <section className="px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-24">
         <div className="mx-auto grid max-w-[1180px] gap-12 lg:grid-cols-[0.72fr_1.28fr]">
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#4b22ff]">
+            <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#4b22ff]">
               <TypewriterOnce
                 text="Common Questions"
                 speed={90}
@@ -852,19 +852,19 @@ export default function ContactPage() {
                 display="block"
                 speed={115}
                 delay={220}
-                className="text-[#ff315d]"
-                cursorClassName="bg-[#ff315d]"
+                className="text-[#ff2f7d]"
+                cursorClassName="bg-[#ff2f7d]"
               />
             </h2>
 
-            <p className="mt-5 max-w-[400px] text-[13px] font-medium leading-7 text-[#34405f]/65">
+            <p className="mt-5 max-w-[420px] text-[15px] font-medium leading-7 text-[#27314f]/86">
               Here are answers to some common questions about project enquiries
               and working with MITOMS.
             </p>
 
             <a
               href="mailto:info@mitoms.com"
-              className="group mt-7 inline-flex h-12 items-center justify-center gap-3 rounded-[13px] border border-[#dcd6ef] bg-white px-6 text-[12px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(22,17,62,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#4b22ff] hover:text-[#4b22ff]"
+              className="group mt-7 inline-flex h-12 items-center justify-center gap-3 rounded-[13px] border border-[#dcd6ef] bg-white px-6 text-[13px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(22,17,62,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#4b22ff] hover:text-[#4b22ff]"
             >
               Ask Another Question
               <ArrowRight
@@ -886,7 +886,7 @@ export default function ContactPage() {
                       {String(index + 1).padStart(2, "0")}
                     </span>
 
-                    <h3 className="min-w-0 text-[13px] font-bold leading-5 text-[#081232] sm:text-[15px]">
+                    <h3 className="min-w-0 text-[14px] font-bold leading-6 text-[#081232] sm:text-[16px]">
                       {item.question}
                     </h3>
                   </div>
@@ -897,7 +897,7 @@ export default function ContactPage() {
                   />
                 </summary>
 
-                <p className="ml-0 mt-4 border-t border-[#ebe7f4] pt-4 text-[13px] font-medium leading-7 text-[#34405f]/65 sm:ml-[52px]">
+                <p className="ml-0 mt-4 border-t border-[#ebe7f4] pt-4 text-[15px] font-medium leading-7 text-[#27314f]/86 sm:ml-[52px]">
                   {item.answer}
                 </p>
               </details>
@@ -908,21 +908,21 @@ export default function ContactPage() {
 
       {/* FINAL CTA */}
       <section className="px-4 pb-8 sm:px-6 lg:px-10">
-        <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[22px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff315d_125%)] px-5 py-10 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:rounded-[26px] sm:px-8 sm:py-12 lg:px-14">
-          <div className="pointer-events-none absolute -left-20 -top-28 h-72 w-72 rounded-full bg-[#1685ff]/20 blur-[90px]" />
+        <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[22px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff2f7d_125%)] px-5 py-10 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:rounded-[26px] sm:px-8 sm:py-12 lg:px-14">
+          <div className="pointer-events-none absolute -left-20 -top-28 h-72 w-72 rounded-full bg-[#00b8ff]/20 blur-[90px]" />
 
-          <div className="pointer-events-none absolute -bottom-28 right-[-40px] h-80 w-80 rounded-full bg-[#ff315d]/35 blur-[95px]" />
+          <div className="pointer-events-none absolute -bottom-28 right-[-40px] h-80 w-80 rounded-full bg-[#ff2f7d]/35 blur-[95px]" />
 
           <div className="pointer-events-none absolute inset-0 opacity-[0.10] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:22px_22px]" />
 
           <div className="relative z-10 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-[#ff84b8]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.24em] text-[#ff7ca8]">
                 <TypewriterOnce
                   text="Ready to Get Started?"
                   speed={90}
                   delay={120}
-                  cursorClassName="bg-[#ff84b8]"
+                  cursorClassName="bg-[#ff7ca8]"
                 />
               </p>
 
@@ -930,7 +930,7 @@ export default function ContactPage() {
                 Let&apos;s Turn Your Idea Into a Powerful Digital Solution
               </h2>
 
-              <p className="mt-3 max-w-[620px] text-[13px] font-medium leading-7 text-white/65">
+              <p className="mt-3 max-w-[650px] text-[15px] font-medium leading-7 text-white/84">
                 Start a conversation with our team and receive a practical plan
                 for your project.
               </p>
@@ -938,13 +938,13 @@ export default function ContactPage() {
 
             <a
               href="mailto:info@mitoms.com?subject=Project Enquiry"
-              className="group inline-flex min-h-[50px] w-full shrink-0 items-center justify-center gap-3 rounded-[14px] bg-white px-7 py-4 text-[12px] font-bold text-[#17163b] shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 sm:w-auto"
+              className="group inline-flex min-h-[50px] w-full shrink-0 items-center justify-center gap-3 rounded-[14px] bg-white px-7 py-4 text-[13px] font-bold text-[#17163b] shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 sm:w-auto"
             >
               Contact Our Team
 
               <ArrowRight
                 size={18}
-                className="text-[#ff315d] transition-transform duration-300 group-hover:translate-x-1"
+                className="text-[#ff2f7d] transition-transform duration-300 group-hover:translate-x-1"
               />
             </a>
           </div>

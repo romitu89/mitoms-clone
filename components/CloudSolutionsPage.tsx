@@ -43,35 +43,35 @@ const cloudCapabilities = [
     title: "Cloud Infrastructure",
     description:
       "Reliable and scalable cloud environments designed around business requirements.",
-    gradient: "from-[#00aef0] to-[#4b22ff]",
+    gradient: "from-[#00b8ff] to-[#4b22ff]",
   },
   {
     icon: Code2,
     title: "Cloud-Native Development",
     description:
       "Modern applications built specifically to benefit from cloud technologies.",
-    gradient: "from-[#8b3dff] to-[#ff315d]",
+    gradient: "from-[#743cff] to-[#ff2f7d]",
   },
   {
     icon: ShieldCheck,
     title: "Cloud Security",
     description:
       "Security-focused architecture, access management and data-protection practices.",
-    gradient: "from-[#ff315d] to-[#ff72a3]",
+    gradient: "from-[#ff2f7d] to-[#ff7ca8]",
   },
   {
     icon: Gauge,
     title: "Performance Optimization",
     description:
       "Improve application speed, reliability and infrastructure utilization.",
-    gradient: "from-[#4b22ff] to-[#00aef0]",
+    gradient: "from-[#4b22ff] to-[#00b8ff]",
   },
   {
     icon: Activity,
     title: "Monitoring and Support",
     description:
       "Continuous monitoring, issue detection, maintenance and technical support.",
-    gradient: "from-[#ff315d] to-[#8b3dff]",
+    gradient: "from-[#ff2f7d] to-[#743cff]",
   },
 ];
 
@@ -393,7 +393,7 @@ function TechnologyCard({
   return (
     <div className="rounded-[19px] border border-white/10 bg-white/[0.055] p-5 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.08] sm:rounded-[22px] sm:p-6">
       <div className="flex items-center gap-3">
-        <div className="flex h-12 w-12 items-center justify-center rounded-[15px] bg-gradient-to-br from-[#4b22ff] to-[#ff315d] text-white shadow-[0_12px_25px_rgba(75,34,255,0.24)]">
+        <div className="flex h-12 w-12 items-center justify-center rounded-[15px] bg-gradient-to-br from-[#4b22ff] to-[#ff2f7d] text-white shadow-[0_12px_25px_rgba(75,34,255,0.24)]">
           <Icon size={22} />
         </div>
 
@@ -404,7 +404,7 @@ function TechnologyCard({
         {items.map((item) => (
           <span
             key={item}
-            className="rounded-full border border-white/10 bg-white/[0.07] px-3 py-2 text-[11px] font-semibold text-white/68"
+            className="rounded-full border border-white/10 bg-white/[0.07] px-3 py-2 text-[12px] font-semibold text-white/82"
           >
             {item}
           </span>
@@ -423,14 +423,14 @@ export default function CloudSolutionsPage() {
 
   return (
     <>
-      <main className="overflow-hidden bg-white text-[#07112f] antialiased">
+      <main className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
         {/* HERO SECTION */}
-        <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-14 pt-12 sm:px-6 sm:pb-18 sm:pt-16 lg:px-10 lg:pb-24 lg:pt-20">
+        <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-14 pt-10 sm:px-6 sm:pb-18 sm:pt-12 lg:px-10 lg:pb-24 lg:pt-11">
           <div className="pointer-events-none absolute -left-32 top-[-80px] h-[430px] w-[430px] rounded-full bg-[#4b22ff]/10 blur-[125px]" />
 
-          <div className="pointer-events-none absolute -right-32 top-[-80px] h-[430px] w-[430px] rounded-full bg-[#ff315d]/10 blur-[125px]" />
+          <div className="pointer-events-none absolute -right-32 top-[-80px] h-[430px] w-[430px] rounded-full bg-[#ff2f7d]/10 blur-[125px]" />
 
-          <div className="pointer-events-none absolute bottom-[-220px] left-1/2 h-[420px] w-[900px] -translate-x-1/2 rounded-full bg-[#673aff]/6 blur-[110px]" />
+          <div className="pointer-events-none absolute bottom-[-220px] left-1/2 h-[420px] w-[900px] -translate-x-1/2 rounded-full bg-[#743cff]/6 blur-[110px]" />
 
           <div className="pointer-events-none absolute inset-0 opacity-[0.27] [background-image:radial-gradient(circle_at_1px_1px,rgba(75,34,255,0.13)_1px,transparent_1px)] [background-size:26px_26px]" />
 
@@ -445,7 +445,7 @@ export default function CloudSolutionsPage() {
                   speed={90}
                   delay={100}
                   nowrap
-                  className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#4b22ff]"
+                  className="text-[12px] font-bold uppercase tracking-[0.22em] text-[#4b22ff]"
                   cursorClassName="bg-[#4b22ff]"
                 />
               </div>
@@ -459,13 +459,13 @@ export default function CloudSolutionsPage() {
                     speed={140}
                     delay={300}
                     nowrap
-                    className="bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff315d] bg-clip-text text-transparent"
-                    cursorClassName="bg-[#ff315d]"
+                    className="bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff2f7d] bg-clip-text text-transparent"
+                    cursorClassName="bg-[#ff2f7d]"
                   />
                 </span>
               </h1>
 
-              <p className="mt-5 max-w-[610px] text-[14px] font-medium leading-7 text-[#34405f]/72 sm:mt-7 sm:text-[16px] sm:leading-8">
+              <p className="mt-5 max-w-[610px] text-[16px] font-medium leading-7 text-[#27314f]/90 sm:mt-7 sm:text-[17px] sm:leading-[1.8]">
                 We help businesses migrate, modernize and manage applications
                 using secure, scalable and reliable cloud infrastructure.
               </p>
@@ -474,7 +474,7 @@ export default function CloudSolutionsPage() {
                 <button
                   type="button"
                   onClick={openConsultation}
-                  className="group inline-flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-3 rounded-[12px] bg-gradient-to-r from-[#4b22ff] to-[#ff315d] px-6 text-[13px] font-bold text-white shadow-[0_14px_30px_rgba(75,34,255,0.24)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_38px_rgba(255,49,93,0.24)] sm:w-auto sm:px-7"
+                  className="group inline-flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-3 rounded-[12px] bg-gradient-to-r from-[#4525ff] to-[#ff315f] px-6 text-[14px] font-bold text-white shadow-[0_14px_30px_rgba(75,34,255,0.24)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_38px_rgba(255,49,93,0.24)] sm:w-auto sm:px-7"
                 >
                   Plan Your Cloud Strategy
 
@@ -486,7 +486,7 @@ export default function CloudSolutionsPage() {
 
                 <Link
                   href="/contact"
-                  className="group inline-flex min-h-[50px] w-full items-center justify-center gap-3 rounded-[12px] border border-[#ddd8ee] bg-white px-6 text-[13px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(22,17,62,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#4b22ff] hover:text-[#4b22ff] sm:w-auto sm:px-7"
+                  className="group inline-flex min-h-[50px] w-full items-center justify-center gap-3 rounded-[12px] border border-[#ddd8ee] bg-white px-6 text-[14px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(22,17,62,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#4b22ff] hover:text-[#4b22ff] sm:w-auto sm:px-7"
                 >
                   Talk to Our Team
 
@@ -527,7 +527,7 @@ export default function CloudSolutionsPage() {
                         <Icon size={17} />
                       </div>
 
-                      <span className="min-w-0 text-[10px] font-bold leading-4 text-[#24304f] sm:text-[11px]">
+                      <span className="min-w-0 text-[12px] font-bold leading-5 text-[#24304f] sm:text-[12px]">
                         {item.title}
                       </span>
                     </div>
@@ -572,7 +572,7 @@ export default function CloudSolutionsPage() {
 
               <div className="absolute right-[0%] top-[18%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#ff315d] to-[#ff72a3] text-white">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#ff2f7d] to-[#ff7ca8] text-white">
                     <ShieldCheck size={21} />
                   </div>
 
@@ -590,7 +590,7 @@ export default function CloudSolutionsPage() {
 
               <div className="absolute bottom-[8%] left-[3%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#00aef0] to-[#4b22ff] text-white">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#00b8ff] to-[#4b22ff] text-white">
                     <Database size={21} />
                   </div>
 
@@ -608,7 +608,7 @@ export default function CloudSolutionsPage() {
 
               <div className="absolute bottom-[2%] right-[1%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#8b3dff] to-[#ff315d] text-white">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#743cff] to-[#ff2f7d] text-white">
                     <Activity size={21} />
                   </div>
 
@@ -633,7 +633,7 @@ export default function CloudSolutionsPage() {
 
           <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 sm:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#4b22ff]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#4b22ff]">
                 <TypewriterText
                   text="Your Cloud Technology Partner"
                   speed={82}
@@ -655,8 +655,8 @@ export default function CloudSolutionsPage() {
                     speed={105}
                     delay={220}
                     nowrap
-                    className="text-[#ff315d]"
-                    cursorClassName="bg-[#ff315d]"
+                    className="text-[#ff2f7d]"
+                    cursorClassName="bg-[#ff2f7d]"
                   />
                 </span>
 
@@ -666,8 +666,8 @@ export default function CloudSolutionsPage() {
                     speed={105}
                     delay={950}
                     nowrap
-                    className="text-[#ff315d]"
-                    cursorClassName="bg-[#ff315d]"
+                    className="text-[#ff2f7d]"
+                    cursorClassName="bg-[#ff2f7d]"
                   />
                 </span>
 
@@ -681,19 +681,19 @@ export default function CloudSolutionsPage() {
                     text="Modern Digital Businesses"
                     speed={105}
                     delay={220}
-                    className="text-[#ff315d]"
-                    cursorClassName="bg-[#ff315d]"
+                    className="text-[#ff2f7d]"
+                    cursorClassName="bg-[#ff2f7d]"
                   />
                 </span>
               </h2>
 
-              <p className="mt-6 max-w-[610px] text-[14px] font-medium leading-8 text-[#34405f]/68">
+              <p className="mt-6 max-w-[610px] text-[16px] font-medium leading-8 text-[#27314f]/88">
                 Cloud infrastructure provides businesses with the flexibility
                 to launch faster, scale efficiently and improve application
                 availability.
               </p>
 
-              <p className="mt-5 max-w-[610px] text-[14px] font-medium leading-8 text-[#34405f]/68">
+              <p className="mt-5 max-w-[610px] text-[16px] font-medium leading-8 text-[#27314f]/88">
                 We help you choose the right cloud approach, migrate existing
                 systems and create infrastructure that supports security,
                 performance and long-term growth.
@@ -702,7 +702,7 @@ export default function CloudSolutionsPage() {
               <button
                 type="button"
                 onClick={openConsultation}
-                className="group mt-7 inline-flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-3 rounded-[13px] bg-[#081232] px-6 text-[12px] font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#4b22ff] sm:mt-8 sm:w-auto sm:px-7"
+                className="group mt-7 inline-flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-3 rounded-[13px] bg-[#081232] px-6 text-[13px] font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#4b22ff] sm:mt-8 sm:w-auto sm:px-7"
               >
                 Discuss Your Cloud Requirements
 
@@ -732,7 +732,7 @@ export default function CloudSolutionsPage() {
                       {item.title}
                     </h3>
 
-                    <p className="mt-2 text-[12px] font-medium leading-6 text-[#34405f]/62">
+                    <p className="mt-2 text-[14px] font-medium leading-6 text-[#27314f]/84">
                       {item.description}
                     </p>
                   </div>
@@ -746,17 +746,17 @@ export default function CloudSolutionsPage() {
         <section className="bg-[#fbfaff] px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-24">
           <div className="mx-auto max-w-[1320px]">
             <div className="mx-auto max-w-[790px] text-center">
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#ff315d]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#ff2f7d]">
                 <TypewriterText
                   text="Cloud Services"
                   speed={90}
                   delay={100}
                   nowrap
-                  cursorClassName="bg-[#ff315d]"
+                  cursorClassName="bg-[#ff2f7d]"
                 />
               </p>
 
-              <h2 className="mt-4 text-[34px] font-bold tracking-[-0.04em] text-[#081232] sm:text-[44px]">
+              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
                 Complete Cloud Solutions for{" "}
                 <TypewriterText
                   text="Every Stage"
@@ -768,7 +768,7 @@ export default function CloudSolutionsPage() {
                 />
               </h2>
 
-              <p className="mx-auto mt-5 max-w-[690px] text-[14px] font-medium leading-7 text-[#34405f]/65">
+              <p className="mx-auto mt-5 max-w-[690px] text-[16px] font-medium leading-7 text-[#27314f]/86">
                 From initial planning to migration, modernization and ongoing
                 support, we help businesses manage the complete cloud journey.
               </p>
@@ -783,10 +783,10 @@ export default function CloudSolutionsPage() {
                     key={item.number}
                     className="group relative overflow-hidden rounded-[21px] border border-[#e4dff1] bg-white p-5 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(75,34,255,0.12)] sm:rounded-[24px] sm:p-7"
                   >
-                    <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#4b22ff]/5 blur-3xl transition-colors duration-500 group-hover:bg-[#ff315d]/8" />
+                    <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#4b22ff]/5 blur-3xl transition-colors duration-500 group-hover:bg-[#ff2f7d]/8" />
 
                     <div className="relative flex items-start justify-between">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-[18px] bg-gradient-to-br from-[#4b22ff] to-[#ff315d] text-white shadow-[0_12px_26px_rgba(75,34,255,0.20)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-[18px] bg-gradient-to-br from-[#4b22ff] to-[#ff2f7d] text-white shadow-[0_12px_26px_rgba(75,34,255,0.20)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105">
                         <Icon size={25} />
                       </div>
 
@@ -799,7 +799,7 @@ export default function CloudSolutionsPage() {
                       {item.title}
                     </h3>
 
-                    <p className="relative mt-3 text-[13px] font-medium leading-7 text-[#34405f]/62">
+                    <p className="relative mt-3 text-[15px] font-medium leading-7 text-[#27314f]/86">
                       {item.description}
                     </p>
 
@@ -826,7 +826,7 @@ export default function CloudSolutionsPage() {
         <section className="px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-24">
           <div className="mx-auto grid max-w-[1320px] items-center gap-10 sm:gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#4b22ff]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#4b22ff]">
                 <TypewriterText
                   text="Cloud Capabilities"
                   speed={88}
@@ -848,8 +848,8 @@ export default function CloudSolutionsPage() {
                     speed={105}
                     delay={220}
                     nowrap
-                    className="text-[#ff315d]"
-                    cursorClassName="bg-[#ff315d]"
+                    className="text-[#ff2f7d]"
+                    cursorClassName="bg-[#ff2f7d]"
                   />
                 </span>
 
@@ -859,8 +859,8 @@ export default function CloudSolutionsPage() {
                     speed={105}
                     delay={760}
                     nowrap
-                    className="text-[#ff315d]"
-                    cursorClassName="bg-[#ff315d]"
+                    className="text-[#ff2f7d]"
+                    cursorClassName="bg-[#ff2f7d]"
                   />
                 </span>
 
@@ -875,13 +875,13 @@ export default function CloudSolutionsPage() {
                     speed={105}
                     delay={220}
                     nowrap
-                    className="text-[#ff315d]"
-                    cursorClassName="bg-[#ff315d]"
+                    className="text-[#ff2f7d]"
+                    cursorClassName="bg-[#ff2f7d]"
                   />
                 </span>
               </h2>
 
-              <p className="mt-6 max-w-[600px] text-[14px] font-medium leading-8 text-[#34405f]/67">
+              <p className="mt-6 max-w-[600px] text-[16px] font-medium leading-8 text-[#27314f]/88">
                 We design cloud environments around reliability, security,
                 automation and operational visibility, helping your technology
                 remain ready for changing business requirements.
@@ -890,7 +890,7 @@ export default function CloudSolutionsPage() {
               <button
                 type="button"
                 onClick={openConsultation}
-                className="group mt-7 inline-flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-3 rounded-[13px] bg-gradient-to-r from-[#4b22ff] to-[#ff315d] px-6 text-[12px] font-bold text-white shadow-[0_14px_30px_rgba(75,34,255,0.22)] transition-all duration-300 hover:-translate-y-1 sm:mt-8 sm:w-auto sm:px-7"
+                className="group mt-7 inline-flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-3 rounded-[13px] bg-gradient-to-r from-[#4525ff] to-[#ff315f] px-6 text-[13px] font-bold text-white shadow-[0_14px_30px_rgba(75,34,255,0.22)] transition-all duration-300 hover:-translate-y-1 sm:mt-8 sm:w-auto sm:px-7"
               >
                 Improve Your Infrastructure
 
@@ -915,7 +915,7 @@ export default function CloudSolutionsPage() {
                     </div>
 
                     <div>
-                      <span className="text-[10px] font-bold text-[#ff315d]">
+                      <span className="text-[14px] font-extrabold leading-none tracking-[0.02em] text-[#ff2f7d]">
                         {String(index + 1).padStart(2, "0")}
                       </span>
 
@@ -938,12 +938,12 @@ export default function CloudSolutionsPage() {
             <div className="pointer-events-none absolute inset-0 opacity-[0.10] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:24px_24px]" />
 
             <div className="relative z-10 mx-auto max-w-[800px] text-center">
-              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#d96bff]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.28em] text-[#d75cff]">
                 <TypewriterText
                   text="Cloud Technology Stack"
                   speed={85}
                   delay={100}
-                  cursorClassName="bg-[#d96bff]"
+                  cursorClassName="bg-[#d75cff]"
                 />
               </p>
 
@@ -990,7 +990,7 @@ export default function CloudSolutionsPage() {
                 </span>
               </h2>
 
-              <p className="mx-auto mt-5 max-w-[690px] text-[14px] font-medium leading-7 text-white/62">
+              <p className="mx-auto mt-5 max-w-[690px] text-[16px] font-medium leading-7 text-white/82">
                 We choose cloud services and infrastructure tools according to
                 your application, security, performance and operational needs.
               </p>
@@ -1008,7 +1008,7 @@ export default function CloudSolutionsPage() {
         <section className="px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="mx-auto max-w-[1320px]">
             <div className="mx-auto max-w-[790px] text-center">
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#4b22ff]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#4b22ff]">
                 <TypewriterText
                   text="Our Cloud Process"
                   speed={88}
@@ -1017,19 +1017,19 @@ export default function CloudSolutionsPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[34px] font-bold tracking-[-0.04em] text-[#081232] sm:text-[44px]">
+              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
                 From Infrastructure Assessment to{" "}
                 <TypewriterText
                   text="Cloud Optimization"
                   speed={110}
                   delay={220}
                   nowrap
-                  className="text-[#ff315d]"
-                  cursorClassName="bg-[#ff315d]"
+                  className="text-[#ff2f7d]"
+                  cursorClassName="bg-[#ff2f7d]"
                 />
               </h2>
 
-              <p className="mx-auto mt-5 max-w-[680px] text-[14px] font-medium leading-7 text-[#34405f]/65">
+              <p className="mx-auto mt-5 max-w-[680px] text-[16px] font-medium leading-7 text-[#27314f]/86">
                 Our structured approach helps reduce migration risk and keeps
                 every technical decision aligned with business requirements.
               </p>
@@ -1045,7 +1045,7 @@ export default function CloudSolutionsPage() {
                     className="group relative rounded-[23px] border border-[#e4dff0] bg-white p-6 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_22px_48px_rgba(75,34,255,0.11)]"
                   >
                     <div className="flex items-center justify-between">
-                      <div className="flex h-[66px] w-[66px] items-center justify-center rounded-full bg-gradient-to-br from-[#4b22ff] to-[#ff315d] text-white shadow-[0_14px_30px_rgba(75,34,255,0.22)] transition-transform duration-300 group-hover:rotate-6 group-hover:scale-105">
+                      <div className="flex h-[66px] w-[66px] items-center justify-center rounded-full bg-gradient-to-br from-[#4b22ff] to-[#ff2f7d] text-white shadow-[0_14px_30px_rgba(75,34,255,0.22)] transition-transform duration-300 group-hover:rotate-6 group-hover:scale-105">
                         <Icon size={27} />
                       </div>
 
@@ -1058,7 +1058,7 @@ export default function CloudSolutionsPage() {
                       {item.title}
                     </h3>
 
-                    <p className="mt-3 text-[13px] font-medium leading-7 text-[#34405f]/62">
+                    <p className="mt-3 text-[15px] font-medium leading-7 text-[#27314f]/86">
                       {item.description}
                     </p>
                   </div>
@@ -1070,21 +1070,21 @@ export default function CloudSolutionsPage() {
 
         {/* WHY MITOMS */}
         <section className="relative bg-[#fbfaff] px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-24">
-          <div className="pointer-events-none absolute right-[-140px] top-1/4 h-96 w-96 rounded-full bg-[#ff315d]/5 blur-[120px]" />
+          <div className="pointer-events-none absolute right-[-140px] top-1/4 h-96 w-96 rounded-full bg-[#ff2f7d]/5 blur-[120px]" />
 
           <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 sm:gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#ff315d]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#ff2f7d]">
                 <TypewriterText
                   text="Why Choose MITOMS"
                   speed={90}
                   delay={100}
                   nowrap
-                  cursorClassName="bg-[#ff315d]"
+                  cursorClassName="bg-[#ff2f7d]"
                 />
               </p>
 
-              <h2 className="mt-4 max-w-[590px] text-[34px] font-bold leading-[1.16] tracking-[-0.04em] text-[#081232] sm:text-[44px]">
+              <h2 className="mt-4 max-w-[590px] text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
                 Cloud Solutions Designed for{" "}
                 <TypewriterText
                   text="Long-Term Reliability"
@@ -1095,7 +1095,7 @@ export default function CloudSolutionsPage() {
                 />
               </h2>
 
-              <p className="mt-6 max-w-[600px] text-[14px] font-medium leading-8 text-[#34405f]/67">
+              <p className="mt-6 max-w-[600px] text-[16px] font-medium leading-8 text-[#27314f]/88">
                 Our approach connects infrastructure decisions with application
                 performance, security, operational efficiency and future
                 business growth.
@@ -1128,10 +1128,10 @@ export default function CloudSolutionsPage() {
                   <div className="flex items-start gap-2">
                     <Check
                       size={17}
-                      className="mt-0.5 shrink-0 text-[#ff315d]"
+                      className="mt-0.5 shrink-0 text-[#ff2f7d]"
                     />
 
-                    <p className="text-[12px] font-bold leading-6 text-[#24304f]/82">
+                    <p className="text-[14px] font-bold leading-6 text-[#24304f]/90">
                       {benefit}
                     </p>
                   </div>
@@ -1145,7 +1145,7 @@ export default function CloudSolutionsPage() {
         <section className="px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="mx-auto grid max-w-[1180px] gap-9 sm:gap-12 lg:grid-cols-[0.72fr_1.28fr]">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#4b22ff]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#4b22ff]">
                 <TypewriterText
                   text="Frequently Asked Questions"
                   speed={80}
@@ -1154,7 +1154,7 @@ export default function CloudSolutionsPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[34px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[42px]">
+              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
                 Questions About
                 <TypewriterText
                   text="Cloud Solutions"
@@ -1162,12 +1162,12 @@ export default function CloudSolutionsPage() {
                   speed={110}
                   delay={220}
                   nowrap
-                  className="text-[#ff315d]"
-                  cursorClassName="bg-[#ff315d]"
+                  className="text-[#ff2f7d]"
+                  cursorClassName="bg-[#ff2f7d]"
                 />
               </h2>
 
-              <p className="mt-5 max-w-[410px] text-[13px] font-medium leading-7 text-[#34405f]/65">
+              <p className="mt-5 max-w-[410px] text-[15px] font-medium leading-7 text-[#27314f]/86">
                 Common questions businesses ask before moving applications and
                 infrastructure to the cloud.
               </p>
@@ -1198,7 +1198,7 @@ export default function CloudSolutionsPage() {
                         {String(index + 1).padStart(2, "0")}
                       </span>
 
-                      <h3 className="min-w-0 text-[13px] font-bold leading-5 text-[#081232] sm:text-[15px]">
+                      <h3 className="min-w-0 text-[14px] font-bold leading-6 text-[#081232] sm:text-[16px]">
                         {item.question}
                       </h3>
                     </div>
@@ -1209,7 +1209,7 @@ export default function CloudSolutionsPage() {
                     />
                   </summary>
 
-                  <p className="mt-4 border-t border-[#ebe7f4] pt-4 text-[13px] font-medium leading-7 text-[#34405f]/65 sm:ml-[52px]">
+                  <p className="mt-4 border-t border-[#ebe7f4] pt-4 text-[15px] font-medium leading-7 text-[#27314f]/86 sm:ml-[52px]">
                     {item.answer}
                   </p>
                 </details>
@@ -1220,21 +1220,21 @@ export default function CloudSolutionsPage() {
 
         {/* FINAL CTA */}
         <section className="px-4 pb-8 sm:px-6 lg:px-10">
-          <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[22px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff315d_125%)] px-5 py-10 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:rounded-[26px] sm:px-8 sm:py-12 lg:px-14">
+          <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[22px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff2f7d_125%)] px-5 py-10 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:rounded-[26px] sm:px-8 sm:py-12 lg:px-14">
             <div className="pointer-events-none absolute -left-20 -top-28 h-72 w-72 rounded-full bg-[#1685ff]/20 blur-[90px]" />
 
-            <div className="pointer-events-none absolute -bottom-28 right-[-40px] h-80 w-80 rounded-full bg-[#ff315d]/35 blur-[95px]" />
+            <div className="pointer-events-none absolute -bottom-28 right-[-40px] h-80 w-80 rounded-full bg-[#ff2f7d]/35 blur-[95px]" />
 
             <div className="pointer-events-none absolute inset-0 opacity-[0.10] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:22px_22px]" />
 
             <div className="relative z-10 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-[#ff84b8]">
+                <p className="text-[12px] font-bold uppercase tracking-[0.24em] text-[#ff7ca8]">
                   <TypewriterText
                     text="Move to the Cloud"
                     speed={88}
                     delay={100}
-                    cursorClassName="bg-[#ff84b8]"
+                    cursorClassName="bg-[#ff7ca8]"
                   />
                 </p>
 
@@ -1242,7 +1242,7 @@ export default function CloudSolutionsPage() {
                   Ready to Build a More Scalable and Reliable Infrastructure?
                 </h2>
 
-                <p className="mt-3 max-w-[660px] text-[13px] font-medium leading-7 text-white/65">
+                <p className="mt-3 max-w-[660px] text-[15px] font-medium leading-7 text-white/84">
                   Share your cloud requirements with our team and receive a
                   practical migration, modernization or infrastructure plan.
                 </p>
@@ -1251,13 +1251,13 @@ export default function CloudSolutionsPage() {
               <button
                 type="button"
                 onClick={openConsultation}
-                className="group inline-flex min-h-[50px] w-full shrink-0 cursor-pointer items-center justify-center gap-3 rounded-[14px] bg-white px-7 py-4 text-[12px] font-bold text-[#17163b] shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 sm:w-auto"
+                className="group inline-flex min-h-[50px] w-full shrink-0 cursor-pointer items-center justify-center gap-3 rounded-[14px] bg-white px-7 py-4 text-[13px] font-bold text-[#17163b] shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 sm:w-auto"
               >
                 Start Your Cloud Project
 
                 <ArrowRight
                   size={18}
-                  className="text-[#ff315d] transition-transform duration-300 group-hover:translate-x-1"
+                  className="text-[#ff2f7d] transition-transform duration-300 group-hover:translate-x-1"
                 />
               </button>
             </div>

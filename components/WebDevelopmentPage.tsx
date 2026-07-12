@@ -49,35 +49,35 @@ const capabilities = [
     title: "High Performance",
     description:
       "Optimized code, images and architecture for better speed and user experience.",
-    gradient: "from-[#00aef0] to-[#4b22ff]",
+    gradient: "from-[#00b8ff] to-[#4b22ff]",
   },
   {
     icon: ShieldCheck,
     title: "Secure Architecture",
     description:
       "Reliable development practices focused on security, privacy and stability.",
-    gradient: "from-[#ff315d] to-[#8b3dff]",
+    gradient: "from-[#ff2f7d] to-[#743cff]",
   },
   {
     icon: Search,
     title: "SEO-Friendly Structure",
     description:
       "Clean, accessible and search-engine-friendly website architecture.",
-    gradient: "from-[#8b3dff] to-[#ff315d]",
+    gradient: "from-[#743cff] to-[#ff2f7d]",
   },
   {
     icon: Blocks,
     title: "Scalable Solutions",
     description:
       "Flexible architecture that can grow with your users, services and business.",
-    gradient: "from-[#4b22ff] to-[#00aef0]",
+    gradient: "from-[#4b22ff] to-[#00b8ff]",
   },
   {
     icon: Wrench,
     title: "Maintenance and Support",
     description:
       "Continuous monitoring, updates, improvements and technical assistance.",
-    gradient: "from-[#ff315d] to-[#ff72a3]",
+    gradient: "from-[#ff2f7d] to-[#ff7ca8]",
   },
 ];
 
@@ -377,7 +377,7 @@ function TechnologyGroup({
   return (
     <div className="rounded-[19px] border border-white/10 bg-white/[0.055] p-5 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.08] sm:rounded-[22px] sm:p-6">
       <div className="flex items-center gap-3">
-        <div className="flex h-12 w-12 items-center justify-center rounded-[15px] bg-gradient-to-br from-[#4b22ff] to-[#ff315d] text-white shadow-[0_12px_25px_rgba(75,34,255,0.24)]">
+        <div className="flex h-12 w-12 items-center justify-center rounded-[15px] bg-gradient-to-br from-[#4b22ff] to-[#ff2f7d] text-white shadow-[0_12px_25px_rgba(75,34,255,0.24)]">
           <Icon size={22} />
         </div>
 
@@ -388,7 +388,7 @@ function TechnologyGroup({
         {technologies.map((technology) => (
           <span
             key={technology}
-            className="rounded-full border border-white/10 bg-white/[0.07] px-3 py-2 text-[11px] font-semibold text-white/68"
+            className="rounded-full border border-white/10 bg-white/[0.07] px-3 py-2 text-[12px] font-semibold text-white/82"
           >
             {technology}
           </span>
@@ -403,14 +403,14 @@ export default function WebDevelopmentPage() {
 
   return (
     <>
-      <main className="overflow-hidden bg-white text-[#07112f] antialiased">
+      <main className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
         {/* HERO */}
-        <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-14 pt-12 sm:px-6 sm:pb-18 sm:pt-16 lg:px-10 lg:pb-24 lg:pt-20">
+        <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-14 pt-10 sm:px-6 sm:pb-18 sm:pt-12 lg:px-10 lg:pb-24 lg:pt-11">
           <div className="pointer-events-none absolute -left-32 top-[-80px] h-[430px] w-[430px] rounded-full bg-[#4b22ff]/10 blur-[125px]" />
 
-          <div className="pointer-events-none absolute -right-32 top-[-80px] h-[430px] w-[430px] rounded-full bg-[#ff315d]/10 blur-[125px]" />
+          <div className="pointer-events-none absolute -right-32 top-[-80px] h-[430px] w-[430px] rounded-full bg-[#ff2f7d]/10 blur-[125px]" />
 
-          <div className="pointer-events-none absolute bottom-[-220px] left-1/2 h-[420px] w-[900px] -translate-x-1/2 rounded-full bg-[#673aff]/6 blur-[110px]" />
+          <div className="pointer-events-none absolute bottom-[-220px] left-1/2 h-[420px] w-[900px] -translate-x-1/2 rounded-full bg-[#743cff]/6 blur-[110px]" />
 
           <div className="pointer-events-none absolute inset-0 opacity-[0.27] [background-image:radial-gradient(circle_at_1px_1px,rgba(75,34,255,0.13)_1px,transparent_1px)] [background-size:26px_26px]" />
 
@@ -424,7 +424,7 @@ export default function WebDevelopmentPage() {
                   text="Web Development Services"
                   speed={85}
                   delay={100}
-                  className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#4b22ff]"
+                  className="text-[12px] font-bold uppercase tracking-[0.22em] text-[#4b22ff]"
                   cursorClassName="bg-[#4b22ff]"
                 />
               </div>
@@ -438,13 +438,13 @@ export default function WebDevelopmentPage() {
                     speed={125}
                     delay={300}
                     nowrap
-                    className="overflow-visible pb-[0.06em] pr-[0.08em] tracking-[-0.015em] bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff315d] bg-clip-text text-transparent"
-                    cursorClassName="bg-[#ff315d]"
+                    className="overflow-visible pb-[0.06em] pr-[0.08em] tracking-[-0.015em] bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff2f7d] bg-clip-text text-transparent"
+                    cursorClassName="bg-[#ff2f7d]"
                   />
                 </span>
               </h1>
 
-              <p className="mt-5 max-w-[600px] text-[14px] font-medium leading-7 text-[#34405f]/72 sm:mt-7 sm:text-[16px] sm:leading-8">
+              <p className="mt-5 max-w-[600px] text-[16px] font-medium leading-7 text-[#27314f]/90 sm:mt-7 sm:text-[17px] sm:leading-[1.8]">
                 We design and develop fast, responsive and scalable websites
                 that communicate your brand, support your operations and create
                 better digital experiences for your customers.
@@ -454,7 +454,7 @@ export default function WebDevelopmentPage() {
                 <button
                   type="button"
                   onClick={() => setShowConsultation(true)}
-                  className="group inline-flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-3 rounded-[12px] bg-gradient-to-r from-[#4b22ff] to-[#ff315d] px-6 text-[13px] font-bold text-white shadow-[0_14px_30px_rgba(75,34,255,0.24)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_38px_rgba(255,49,93,0.24)] sm:w-auto sm:px-7"
+                  className="group inline-flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-3 rounded-[12px] bg-gradient-to-r from-[#4525ff] to-[#ff315f] px-6 text-[14px] font-bold text-white shadow-[0_14px_30px_rgba(75,34,255,0.24)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_38px_rgba(255,49,93,0.24)] sm:w-auto sm:px-7"
                 >
                   Start Your Web Project
 
@@ -466,7 +466,7 @@ export default function WebDevelopmentPage() {
 
                 <Link
                   href="/portfolio"
-                  className="group inline-flex min-h-[50px] w-full items-center justify-center gap-3 rounded-[12px] border border-[#ddd8ee] bg-white px-6 text-[13px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(22,17,62,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#4b22ff] hover:text-[#4b22ff] sm:w-auto sm:px-7"
+                  className="group inline-flex min-h-[50px] w-full items-center justify-center gap-3 rounded-[12px] border border-[#ddd8ee] bg-white px-6 text-[14px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(22,17,62,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#4b22ff] hover:text-[#4b22ff] sm:w-auto sm:px-7"
                 >
                   View Our Work
 
@@ -507,7 +507,7 @@ export default function WebDevelopmentPage() {
                         <Icon size={17} />
                       </div>
 
-                      <span className="text-[11px] font-bold text-[#24304f]">
+                      <span className="text-[12px] font-bold text-[#24304f]">
                         {item.title}
                       </span>
                     </div>
@@ -552,7 +552,7 @@ export default function WebDevelopmentPage() {
 
               <div className="absolute right-[0%] top-[18%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#ff315d] to-[#ff72a3] text-white">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#ff2f7d] to-[#ff7ca8] text-white">
                     <MousePointerClick size={21} />
                   </div>
 
@@ -570,7 +570,7 @@ export default function WebDevelopmentPage() {
 
               <div className="absolute bottom-[8%] left-[4%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#00aef0] to-[#4b22ff] text-white">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#00b8ff] to-[#4b22ff] text-white">
                     <Smartphone size={21} />
                   </div>
 
@@ -588,7 +588,7 @@ export default function WebDevelopmentPage() {
 
               <div className="absolute bottom-[2%] right-[2%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#8b3dff] to-[#ff315d] text-white">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#743cff] to-[#ff2f7d] text-white">
                     <BarChart3 size={21} />
                   </div>
 
@@ -613,7 +613,7 @@ export default function WebDevelopmentPage() {
 
           <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 sm:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#4b22ff]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#4b22ff]">
                 <TypewriterText
                   text="Web Development Partner"
                   speed={85}
@@ -622,26 +622,26 @@ export default function WebDevelopmentPage() {
                 />
               </p>
 
-              <h2 className="mt-4 max-w-[580px] text-[34px] font-bold leading-[1.16] tracking-[-0.04em] text-[#081232] sm:text-[44px]">
+              <h2 className="mt-4 max-w-[580px] text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
                 More Than a Website.
                 <TypewriterText
                   text="A Digital Growth Platform."
                   display="block"
                   speed={105}
                   delay={220}
-                  className="text-[#ff315d]"
-                  cursorClassName="bg-[#ff315d]"
+                  className="text-[#ff2f7d]"
+                  cursorClassName="bg-[#ff2f7d]"
                 />
               </h2>
 
-              <p className="mt-6 max-w-[600px] text-[14px] font-medium leading-8 text-[#34405f]/68">
+              <p className="mt-6 max-w-[600px] text-[16px] font-medium leading-8 text-[#27314f]/88">
                 Your website is often the first interaction a customer has with
                 your business. We combine design, development and strategy to
                 create websites that look professional, load quickly and make it
                 easier for visitors to take action.
               </p>
 
-              <p className="mt-5 max-w-[600px] text-[14px] font-medium leading-8 text-[#34405f]/68">
+              <p className="mt-5 max-w-[600px] text-[16px] font-medium leading-8 text-[#27314f]/88">
                 From corporate websites to complex web platforms, every project
                 is planned around your audience, business processes and future
                 growth.
@@ -650,7 +650,7 @@ export default function WebDevelopmentPage() {
               <button
                 type="button"
                 onClick={() => setShowConsultation(true)}
-                className="group mt-7 inline-flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-3 rounded-[13px] bg-[#081232] px-6 text-[12px] font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#4b22ff] sm:mt-8 sm:w-auto sm:px-7"
+                className="group mt-7 inline-flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-3 rounded-[13px] bg-[#081232] px-6 text-[13px] font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#4b22ff] sm:mt-8 sm:w-auto sm:px-7"
               >
                 Discuss Your Requirements
 
@@ -680,7 +680,7 @@ export default function WebDevelopmentPage() {
                       {item.title}
                     </h3>
 
-                    <p className="mt-2 text-[12px] font-medium leading-6 text-[#34405f]/62">
+                    <p className="mt-2 text-[14px] font-medium leading-6 text-[#27314f]/84">
                       {item.description}
                     </p>
                   </div>
@@ -694,17 +694,17 @@ export default function WebDevelopmentPage() {
         <section className="bg-[#fbfaff] px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-24">
           <div className="mx-auto max-w-[1320px]">
             <div className="mx-auto max-w-[780px] text-center">
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#ff315d]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#ff2f7d]">
                 <TypewriterText
                   text="What We Build"
                   speed={90}
                   delay={100}
                   nowrap
-                  cursorClassName="bg-[#ff315d]"
+                  cursorClassName="bg-[#ff2f7d]"
                 />
               </p>
 
-              <h2 className="mt-4 text-[34px] font-bold tracking-[-0.04em] text-[#081232] sm:text-[44px]">
+              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
                 Web Solutions Designed Around{" "}
                 <TypewriterText
                   text="Your Business"
@@ -716,7 +716,7 @@ export default function WebDevelopmentPage() {
                 />
               </h2>
 
-              <p className="mx-auto mt-5 max-w-[670px] text-[14px] font-medium leading-7 text-[#34405f]/65">
+              <p className="mx-auto mt-5 max-w-[670px] text-[16px] font-medium leading-7 text-[#27314f]/86">
                 We develop websites and web platforms for different business
                 models, audiences and operational requirements.
               </p>
@@ -731,10 +731,10 @@ export default function WebDevelopmentPage() {
                     key={item.number}
                     className="group relative overflow-hidden rounded-[21px] border border-[#e4dff1] bg-white p-5 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(75,34,255,0.12)] sm:rounded-[24px] sm:p-7"
                   >
-                    <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#4b22ff]/5 blur-3xl transition-colors duration-500 group-hover:bg-[#ff315d]/8" />
+                    <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#4b22ff]/5 blur-3xl transition-colors duration-500 group-hover:bg-[#ff2f7d]/8" />
 
                     <div className="relative flex items-start justify-between">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-[18px] bg-gradient-to-br from-[#4b22ff] to-[#ff315d] text-white shadow-[0_12px_26px_rgba(75,34,255,0.20)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-[18px] bg-gradient-to-br from-[#4b22ff] to-[#ff2f7d] text-white shadow-[0_12px_26px_rgba(75,34,255,0.20)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105">
                         <Icon size={25} />
                       </div>
 
@@ -747,7 +747,7 @@ export default function WebDevelopmentPage() {
                       {item.title}
                     </h3>
 
-                    <p className="relative mt-3 text-[13px] font-medium leading-7 text-[#34405f]/62">
+                    <p className="relative mt-3 text-[15px] font-medium leading-7 text-[#27314f]/86">
                       {item.description}
                     </p>
 
@@ -778,29 +778,49 @@ export default function WebDevelopmentPage() {
             <div className="pointer-events-none absolute inset-0 opacity-[0.10] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:24px_24px]" />
 
             <div className="relative z-10 mx-auto max-w-[780px] text-center">
-              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#d96bff]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.28em] text-[#d75cff]">
                 <TypewriterText
                   text="Technology Stack"
                   speed={90}
                   delay={100}
                   nowrap
-                  cursorClassName="bg-[#d96bff]"
+                  cursorClassName="bg-[#d75cff]"
                 />
               </p>
 
-              <h2 className="mt-4 text-[34px] font-bold tracking-[-0.04em] sm:text-[44px]">
-                Modern Technologies for
-                <br />
-                <TypewriterText
-                  text="Reliable Web Development"
-                  speed={105}
-                  delay={220}
-                  className="text-[#ff43a1]"
-                  cursorClassName="bg-[#ff43a1]"
-                />
+              <h2 className="mt-4 overflow-visible font-bold tracking-[-0.035em]">
+                {/* Mobile: balanced two-line heading */}
+                <span className="block whitespace-nowrap text-[25px] leading-[1.16] min-[390px]:text-[27px] sm:hidden">
+                  Modern Technologies for
+                </span>
+
+                <span className="mt-1 flex justify-center overflow-visible pb-[0.1em] text-[25px] leading-[1.16] min-[390px]:text-[27px] sm:hidden">
+                  <TypewriterText
+                    text="Reliable Web Development"
+                    speed={105}
+                    delay={220}
+                    nowrap
+                    className="overflow-visible pb-[0.06em] pr-[0.08em] tracking-[-0.015em] text-[#ff2f7d]"
+                    cursorClassName="bg-[#ff2f7d]"
+                  />
+                </span>
+
+                {/* Tablet and desktop */}
+                <span className="hidden text-[38px] leading-[1.16] sm:block lg:text-[42px]">
+                  Modern Technologies for
+                  <br />
+                  <TypewriterText
+                    text="Reliable Web Development"
+                    speed={105}
+                    delay={220}
+                    nowrap
+                    className="overflow-visible pb-[0.05em] pr-[0.08em] text-[#ff2f7d]"
+                    cursorClassName="bg-[#ff2f7d]"
+                  />
+                </span>
               </h2>
 
-              <p className="mx-auto mt-5 max-w-[670px] text-[14px] font-medium leading-7 text-white/62">
+              <p className="mx-auto mt-5 max-w-[670px] text-[16px] font-medium leading-7 text-white/82">
                 We choose technologies according to the product requirements,
                 business goals, performance needs and expected scale.
               </p>
@@ -838,7 +858,7 @@ export default function WebDevelopmentPage() {
         <section className="px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-24">
           <div className="mx-auto max-w-[1320px]">
             <div className="mx-auto max-w-[760px] text-center">
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#4b22ff]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#4b22ff]">
                 <TypewriterText
                   text="Our Process"
                   speed={90}
@@ -848,19 +868,19 @@ export default function WebDevelopmentPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[34px] font-bold tracking-[-0.04em] text-[#081232] sm:text-[44px]">
+              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
                 From Initial Idea to{" "}
                 <TypewriterText
                   text="Successful Launch"
                   speed={110}
                   delay={220}
                   nowrap
-                  className="text-[#ff315d]"
-                  cursorClassName="bg-[#ff315d]"
+                  className="text-[#ff2f7d]"
+                  cursorClassName="bg-[#ff2f7d]"
                 />
               </h2>
 
-              <p className="mx-auto mt-5 max-w-[660px] text-[14px] font-medium leading-7 text-[#34405f]/65">
+              <p className="mx-auto mt-5 max-w-[660px] text-[16px] font-medium leading-7 text-[#27314f]/86">
                 A structured and transparent development process keeps your
                 project aligned with its goals at every stage.
               </p>
@@ -876,7 +896,7 @@ export default function WebDevelopmentPage() {
                     className="group relative rounded-[23px] border border-[#e4dff0] bg-white p-6 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_22px_48px_rgba(75,34,255,0.11)]"
                   >
                     <div className="flex items-center justify-between">
-                      <div className="flex h-[66px] w-[66px] items-center justify-center rounded-full bg-gradient-to-br from-[#4b22ff] to-[#ff315d] text-white shadow-[0_14px_30px_rgba(75,34,255,0.22)] transition-transform duration-300 group-hover:rotate-6 group-hover:scale-105">
+                      <div className="flex h-[66px] w-[66px] items-center justify-center rounded-full bg-gradient-to-br from-[#4b22ff] to-[#ff2f7d] text-white shadow-[0_14px_30px_rgba(75,34,255,0.22)] transition-transform duration-300 group-hover:rotate-6 group-hover:scale-105">
                         <Icon size={27} />
                       </div>
 
@@ -889,7 +909,7 @@ export default function WebDevelopmentPage() {
                       {item.title}
                     </h3>
 
-                    <p className="mt-3 text-[13px] font-medium leading-7 text-[#34405f]/62">
+                    <p className="mt-3 text-[15px] font-medium leading-7 text-[#27314f]/86">
                       {item.description}
                     </p>
                   </div>
@@ -901,21 +921,21 @@ export default function WebDevelopmentPage() {
 
         {/* BENEFITS */}
         <section className="relative bg-[#fbfaff] px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-24">
-          <div className="pointer-events-none absolute right-[-140px] top-1/4 h-96 w-96 rounded-full bg-[#ff315d]/5 blur-[120px]" />
+          <div className="pointer-events-none absolute right-[-140px] top-1/4 h-96 w-96 rounded-full bg-[#ff2f7d]/5 blur-[120px]" />
 
           <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 sm:gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#ff315d]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#ff2f7d]">
                 <TypewriterText
                   text="Why MITOMS"
                   speed={90}
                   delay={100}
                   nowrap
-                  cursorClassName="bg-[#ff315d]"
+                  cursorClassName="bg-[#ff2f7d]"
                 />
               </p>
 
-              <h2 className="mt-4 max-w-[570px] text-[34px] font-bold leading-[1.16] tracking-[-0.04em] text-[#081232] sm:text-[44px]">
+              <h2 className="mt-4 max-w-[570px] text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
                 Web Development Focused on{" "}
                 <TypewriterText
                   text="Business Results"
@@ -927,7 +947,7 @@ export default function WebDevelopmentPage() {
                 />
               </h2>
 
-              <p className="mt-6 max-w-[590px] text-[14px] font-medium leading-8 text-[#34405f]/67">
+              <p className="mt-6 max-w-[590px] text-[16px] font-medium leading-8 text-[#27314f]/88">
                 We do not approach web development as only a coding exercise.
                 Every decision is connected to user experience, performance,
                 maintainability and the goals of your business.
@@ -936,7 +956,7 @@ export default function WebDevelopmentPage() {
               <button
                 type="button"
                 onClick={() => setShowConsultation(true)}
-                className="group mt-7 inline-flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-3 rounded-[13px] bg-gradient-to-r from-[#4b22ff] to-[#ff315d] px-6 text-[12px] font-bold text-white shadow-[0_14px_30px_rgba(75,34,255,0.22)] transition-all duration-300 hover:-translate-y-1 sm:mt-8 sm:w-auto sm:px-7"
+                className="group mt-7 inline-flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-3 rounded-[13px] bg-gradient-to-r from-[#4525ff] to-[#ff315f] px-6 text-[13px] font-bold text-white shadow-[0_14px_30px_rgba(75,34,255,0.22)] transition-all duration-300 hover:-translate-y-1 sm:mt-8 sm:w-auto sm:px-7"
               >
                 Get Free Consultation
 
@@ -960,10 +980,10 @@ export default function WebDevelopmentPage() {
                   <div className="flex items-start gap-2">
                     <Check
                       size={17}
-                      className="mt-0.5 shrink-0 text-[#ff315d]"
+                      className="mt-0.5 shrink-0 text-[#ff2f7d]"
                     />
 
-                    <p className="text-[12px] font-bold leading-6 text-[#24304f]/82">
+                    <p className="text-[14px] font-bold leading-6 text-[#24304f]/90">
                       {benefit}
                     </p>
                   </div>
@@ -977,7 +997,7 @@ export default function WebDevelopmentPage() {
         <section className="px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="mx-auto grid max-w-[1180px] gap-9 sm:gap-12 lg:grid-cols-[0.72fr_1.28fr]">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#4b22ff]">
+              <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#4b22ff]">
                 <TypewriterText
                   text="Frequently Asked Questions"
                   speed={80}
@@ -986,7 +1006,7 @@ export default function WebDevelopmentPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[34px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[42px]">
+              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
                 Questions About
                 <TypewriterText
                   text="Web Development"
@@ -994,12 +1014,12 @@ export default function WebDevelopmentPage() {
                   speed={110}
                   delay={220}
                   nowrap
-                  className="text-[#ff315d]"
-                  cursorClassName="bg-[#ff315d]"
+                  className="text-[#ff2f7d]"
+                  cursorClassName="bg-[#ff2f7d]"
                 />
               </h2>
 
-              <p className="mt-5 max-w-[400px] text-[13px] font-medium leading-7 text-[#34405f]/65">
+              <p className="mt-5 max-w-[400px] text-[15px] font-medium leading-7 text-[#27314f]/86">
                 Some common questions businesses ask before beginning a website
                 or web application project.
               </p>
@@ -1030,7 +1050,7 @@ export default function WebDevelopmentPage() {
                         {String(index + 1).padStart(2, "0")}
                       </span>
 
-                      <h3 className="min-w-0 text-[13px] font-bold leading-5 text-[#081232] sm:text-[15px]">
+                      <h3 className="min-w-0 text-[14px] font-bold leading-6 text-[#081232] sm:text-[16px]">
                         {item.question}
                       </h3>
                     </div>
@@ -1041,7 +1061,7 @@ export default function WebDevelopmentPage() {
                     />
                   </summary>
 
-                  <p className="mt-4 border-t border-[#ebe7f4] pt-4 text-[13px] font-medium leading-7 text-[#34405f]/65 sm:ml-[52px]">
+                  <p className="mt-4 border-t border-[#ebe7f4] pt-4 text-[15px] font-medium leading-7 text-[#27314f]/86 sm:ml-[52px]">
                     {item.answer}
                   </p>
                 </details>
@@ -1052,21 +1072,21 @@ export default function WebDevelopmentPage() {
 
         {/* FINAL CTA */}
         <section className="px-4 pb-8 sm:px-6 lg:px-10">
-          <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[22px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff315d_125%)] px-5 py-10 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:rounded-[26px] sm:px-8 sm:py-12 lg:px-14">
+          <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[22px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff2f7d_125%)] px-5 py-10 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:rounded-[26px] sm:px-8 sm:py-12 lg:px-14">
             <div className="pointer-events-none absolute -left-20 -top-28 h-72 w-72 rounded-full bg-[#1685ff]/20 blur-[90px]" />
 
-            <div className="pointer-events-none absolute -bottom-28 right-[-40px] h-80 w-80 rounded-full bg-[#ff315d]/35 blur-[95px]" />
+            <div className="pointer-events-none absolute -bottom-28 right-[-40px] h-80 w-80 rounded-full bg-[#ff2f7d]/35 blur-[95px]" />
 
             <div className="pointer-events-none absolute inset-0 opacity-[0.10] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:22px_22px]" />
 
             <div className="relative z-10 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-[#ff84b8]">
+                <p className="text-[12px] font-bold uppercase tracking-[0.24em] text-[#ff7ca8]">
                   <TypewriterText
                     text="Build Your Next Website"
                     speed={85}
                     delay={100}
-                    cursorClassName="bg-[#ff84b8]"
+                    cursorClassName="bg-[#ff7ca8]"
                   />
                 </p>
 
@@ -1074,7 +1094,7 @@ export default function WebDevelopmentPage() {
                   Ready to Create a Website That Supports Your Business Growth?
                 </h2>
 
-                <p className="mt-3 max-w-[640px] text-[13px] font-medium leading-7 text-white/65">
+                <p className="mt-3 max-w-[640px] text-[15px] font-medium leading-7 text-white/84">
                   Share your requirements with our team and receive a practical
                   development plan for your website or web application.
                 </p>
@@ -1083,13 +1103,13 @@ export default function WebDevelopmentPage() {
               <button
                 type="button"
                 onClick={() => setShowConsultation(true)}
-                className="group inline-flex min-h-[50px] w-full shrink-0 cursor-pointer items-center justify-center gap-3 rounded-[14px] bg-white px-7 py-4 text-[12px] font-bold text-[#17163b] shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 sm:w-auto"
+                className="group inline-flex min-h-[50px] w-full shrink-0 cursor-pointer items-center justify-center gap-3 rounded-[14px] bg-white px-7 py-4 text-[13px] font-bold text-[#17163b] shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 sm:w-auto"
               >
                 Start Your Project
 
                 <ArrowRight
                   size={18}
-                  className="text-[#ff315d] transition-transform duration-300 group-hover:translate-x-1"
+                  className="text-[#ff2f7d] transition-transform duration-300 group-hover:translate-x-1"
                 />
               </button>
             </div>
