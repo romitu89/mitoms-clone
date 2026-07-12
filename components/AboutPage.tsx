@@ -415,15 +415,15 @@ export default function AboutPage() {
                 />
               </div>
 
-              <h1 className="mt-6 max-w-[730px] text-[36px] font-bold leading-[1.09] tracking-[-0.05em] text-[#081232] sm:mt-7 sm:text-[52px] lg:text-[66px]">
+              <h1 className="mt-6 max-w-[760px] overflow-visible text-[36px] font-bold leading-[1.09] tracking-[-0.05em] text-[#081232] sm:mt-7 sm:text-[52px] lg:text-[66px]">
                 Building Technology
-                <span className="mt-2 block">
+                <span className="mt-2 block overflow-visible pr-[0.18em]">
                   With{" "}
                   <TypewriterText
                     text="Purpose and Impact"
                     speed={115}
                     delay={260}
-                    className="bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff315d] bg-clip-text text-transparent"
+                    className="overflow-visible pb-[0.06em] pr-[0.14em] tracking-[-0.012em] bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff315d] bg-clip-text text-transparent"
                     cursorClassName="bg-[#ff315d]"
                   />
                 </span>
@@ -900,7 +900,7 @@ export default function AboutPage() {
 
             <div className="pointer-events-none absolute inset-0 opacity-[0.10] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:24px_24px]" />
 
-            <div className="relative z-10 grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+            <div className="relative z-10 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 xl:grid-cols-[1fr_1fr]">
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#d96bff]">
                   <TypewriterText
@@ -912,16 +912,51 @@ export default function AboutPage() {
                   />
                 </p>
 
-                <h2 className="mt-4 max-w-[580px] text-[31px] font-bold leading-[1.16] tracking-[-0.04em] sm:text-[43px] lg:text-[46px]">
-                  A Delivery Approach Built for
-                  <TypewriterText
-                    text="Clarity and Confidence"
-                    display="block"
-                    speed={110}
-                    delay={220}
-                    className="text-[#ff43a1]"
-                    cursorClassName="bg-[#ff43a1]"
-                  />
+                <h2 className="mt-4 max-w-[720px] overflow-visible font-bold tracking-[-0.04em]">
+                  {/* Mobile: balanced three-line layout */}
+                  <span className="block text-[28px] leading-[1.16] min-[390px]:text-[30px] sm:hidden">
+                    A Delivery Approach
+                  </span>
+
+                  <span className="mt-1 flex items-baseline overflow-visible text-[28px] leading-[1.16] min-[390px]:text-[30px] sm:hidden">
+                    Built for{" "}
+                    <TypewriterText
+                      text="Clarity and"
+                      speed={110}
+                      delay={220}
+                      nowrap
+                      className="ml-2 pb-[0.04em] pr-[0.06em] text-[#ff43a1]"
+                      cursorClassName="bg-[#ff43a1]"
+                    />
+                  </span>
+
+                  <span className="mt-1 flex overflow-visible pb-[0.1em] text-[28px] leading-[1.16] min-[390px]:text-[30px] sm:hidden">
+                    <TypewriterText
+                      text="Confidence"
+                      speed={110}
+                      delay={1050}
+                      nowrap
+                      className="pb-[0.06em] pr-[0.08em] text-[#ff43a1]"
+                      cursorClassName="bg-[#ff43a1]"
+                    />
+                  </span>
+
+                  {/* Tablet and laptop */}
+                  <span className="hidden text-[38px] leading-[1.14] sm:block lg:text-[37px] xl:text-[40px]">
+                    A Delivery Approach
+                  </span>
+
+                  <span className="mt-2 hidden items-baseline whitespace-nowrap text-[38px] leading-[1.14] sm:flex lg:text-[37px] xl:text-[40px]">
+                    Built for{" "}
+                    <TypewriterText
+                      text="Clarity and Confidence"
+                      speed={110}
+                      delay={220}
+                      nowrap
+                      className="ml-2 overflow-visible pb-[0.06em] pr-[0.08em] tracking-[-0.015em] text-[#ff43a1]"
+                      cursorClassName="bg-[#ff43a1]"
+                    />
+                  </span>
                 </h2>
 
                 <p className="mt-6 max-w-[550px] text-[14px] font-medium leading-7 text-white/60">

@@ -253,15 +253,15 @@ export default function ContactPage() {
               />
             </div>
 
-            <h1 className="mt-6 text-[36px] font-bold leading-[1.09] tracking-[-0.045em] text-[#081232] sm:text-[50px] lg:text-[64px]">
+            <h1 className="mt-6 overflow-visible text-[36px] font-bold leading-[1.09] tracking-[-0.045em] text-[#081232] sm:text-[50px] lg:text-[64px]">
               Have an Idea?
-              <span className="mt-2 block">
+              <span className="mt-2 block overflow-visible px-[0.08em] pb-[0.1em]">
                 Let&apos;s Build Something{" "}
                 <TypewriterOnce
                   text="Remarkable"
                   speed={120}
                   delay={320}
-                  className="bg-gradient-to-r from-[#4b22ff] via-[#7439ff] to-[#ff315d] bg-clip-text text-transparent"
+                  className="overflow-visible pb-[0.06em] pr-[0.16em] tracking-[-0.012em] bg-gradient-to-r from-[#4b22ff] via-[#7439ff] to-[#ff315d] bg-clip-text text-transparent"
                   cursorClassName="bg-[#ff315d]"
                 />
               </span>
