@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  useEffect,
-  useRef,
-  useState,
-  type LucideIcon,
-} from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -29,6 +24,7 @@ import {
   Users,
   Workflow,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import ConsultationModal from "./ConsultationModal";
 
 type Stat = {
@@ -423,7 +419,7 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <div className="absolute left-[-1%] top-[8%] z-30 hidden rounded-[18px] border border-[#e3def1] bg-white px-4 py-3 shadow-[0_18px_42px_rgba(35,27,84,0.11)] sm:block">
+              <div className="absolute left-[0%] top-[6%] z-30 hidden rounded-[18px] border border-[#e3def1] bg-white px-4 py-3 shadow-[0_18px_42px_rgba(35,27,84,0.11)] sm:block">
                 <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#ff315d]">
                   Our Focus
                 </p>
