@@ -7,10 +7,10 @@ export default function Footer() {
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#030817_0%,#061127_48%,#030817_100%)]" />
 
       {/* Top neon light */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#22b8ff] via-[#6b46ff] to-[#ff2f7d] shadow-[0_0_14px_#22b8ff,0_0_28px_#6b46ff,0_0_46px_#ff2f7d] motion-safe:animate-[pulse_4s_ease-in-out_infinite]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#00b8ff] via-[#743cff] to-[#ff2f7d] shadow-[0_0_14px_#00b8ff,0_0_28px_#743cff,0_0_46px_#ff2f7d] motion-safe:animate-[pulse_4s_ease-in-out_infinite]" />
 
       {/* Top blue glow */}
-      <div className="pointer-events-none absolute left-[-180px] top-[-170px] h-[300px] w-[300px] rounded-full bg-[#087cff]/10 blur-[110px] motion-safe:animate-[pulse_6s_ease-in-out_infinite] sm:left-[-120px] sm:top-[-140px] sm:h-[340px] sm:w-[340px] sm:blur-[120px]" />
+      <div className="pointer-events-none absolute left-[-180px] top-[-170px] h-[300px] w-[300px] rounded-full bg-[#00b8ff]/10 blur-[110px] motion-safe:animate-[pulse_6s_ease-in-out_infinite] sm:left-[-120px] sm:top-[-140px] sm:h-[340px] sm:w-[340px] sm:blur-[120px]" />
 
       {/* Top pink glow */}
       <div className="pointer-events-none absolute right-[-170px] top-[-160px] h-[290px] w-[290px] rounded-full bg-[#ff2f7d]/12 blur-[110px] motion-safe:animate-[pulse_7s_ease-in-out_infinite] motion-safe:[animation-delay:1.2s] sm:right-[-100px] sm:top-[-130px] sm:h-[320px] sm:w-[320px] sm:blur-[120px]" />
@@ -19,7 +19,7 @@ export default function Footer() {
       <div className="pointer-events-none absolute -bottom-44 left-1/2 h-[320px] w-[620px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(38,118,255,0.16)_0%,rgba(44,71,194,0.07)_38%,transparent_72%)] blur-[80px] motion-safe:animate-[pulse_8s_ease-in-out_infinite] sm:-bottom-48 sm:h-[430px] sm:w-[950px] sm:blur-[95px]" />
 
       {/* Bottom left glow */}
-      <div className="pointer-events-none absolute bottom-[-120px] left-[-90px] h-[280px] w-[280px] rounded-full bg-[#1f9cff]/10 blur-[105px]" />
+      <div className="pointer-events-none absolute bottom-[-120px] left-[-90px] h-[280px] w-[280px] rounded-full bg-[#00b8ff]/10 blur-[105px]" />
 
       {/* Bottom right pink glow */}
       <div className="pointer-events-none absolute bottom-[-130px] right-[-80px] h-[300px] w-[300px] rounded-full bg-[#ff2f7d]/12 blur-[110px]" />
@@ -47,7 +47,7 @@ export default function Footer() {
       <div className="pointer-events-none absolute bottom-[42px] left-[12%] h-1.5 w-1.5 motion-safe:animate-pulse rounded-full bg-white shadow-[0_0_8px_#fff,0_0_18px_#5aa7ff]" />
       <div className="pointer-events-none absolute bottom-[86px] left-[29%] h-1 w-1 motion-safe:animate-[pulse_2.8s_ease-in-out_infinite] rounded-full bg-[#7fb7ff] shadow-[0_0_7px_#7fb7ff,0_0_16px_#4d67ff]" />
       <div className="pointer-events-none absolute bottom-[58px] left-[47%] h-1.5 w-1.5 motion-safe:animate-pulse rounded-full bg-white shadow-[0_0_8px_#fff,0_0_18px_#9a6bff]" />
-      <div className="pointer-events-none absolute bottom-[94px] left-[66%] h-1 w-1 motion-safe:animate-[pulse_3.4s_ease-in-out_infinite] rounded-full bg-[#ff72c5] shadow-[0_0_7px_#ff72c5,0_0_16px_#ff2f9b]" />
+      <div className="pointer-events-none absolute bottom-[94px] left-[66%] h-1 w-1 motion-safe:animate-[pulse_3.4s_ease-in-out_infinite] rounded-full bg-[#ff72c5] shadow-[0_0_7px_#ff72c5,0_0_16px_#ff2f7d]" />
       <div className="pointer-events-none absolute bottom-[48px] left-[84%] h-1.5 w-1.5 motion-safe:animate-pulse rounded-full bg-white shadow-[0_0_8px_#fff,0_0_18px_#5a8fff]" />
 
       {/* Star sparkle crosses */}
@@ -88,9 +88,9 @@ export default function Footer() {
             y2="0"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#1FA8FF" stopOpacity="0.2" />
+            <stop stopColor="#00B8FF" stopOpacity="0.2" />
             <stop offset="0.28" stopColor="#6B4BFF" stopOpacity="0.65" />
-            <stop offset="0.62" stopColor="#FF2F9B" stopOpacity="0.7" />
+            <stop offset="0.62" stopColor="#FF2F7D" stopOpacity="0.7" />
             <stop offset="1" stopColor="#FF2F7D" stopOpacity="0.35" />
           </linearGradient>
 
@@ -112,7 +112,7 @@ export default function Footer() {
             <stop stopColor="#FFFFFF" />
             <stop offset="0.25" stopColor="#7CC8FF" />
             <stop offset="0.65" stopColor="#6B4BFF" />
-            <stop offset="1" stopColor="#FF2F9B" stopOpacity="0" />
+            <stop offset="1" stopColor="#FF2F7D" stopOpacity="0" />
           </radialGradient>
         </defs>
 
@@ -135,7 +135,7 @@ export default function Footer() {
 
         <path
           d="M960 252C1015 185 1055 150 1115 208C1170 260 1215 195 1260 154"
-          stroke="#FF2F9B"
+          stroke="#FF2F7D"
           strokeWidth="1.6"
           strokeOpacity="0.5"
           strokeLinecap="round"
@@ -156,7 +156,7 @@ export default function Footer() {
       >
         <path
           d="M8 74C54 42 101 36 182 7"
-          stroke="#FF2F9B"
+          stroke="#FF2F7D"
           strokeWidth="2"
           strokeLinecap="round"
         />
@@ -174,20 +174,20 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 min-w-0 lg:col-span-1">
             <Link href="/" className="group inline-flex items-center gap-3">
-              <div className="bg-gradient-to-br from-[#22b8ff] via-[#6b46ff] to-[#ff2f7d] bg-clip-text text-[42px] font-extrabold leading-none text-transparent transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-105 sm:text-5xl">
+              <div className="bg-gradient-to-br from-[#00b8ff] via-[#743cff] to-[#ff2f7d] bg-clip-text text-[42px] font-extrabold leading-none text-transparent transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-105 sm:text-5xl">
                 M
               </div>
 
               <div>
                 <h2 className="text-xl font-extrabold tracking-[-0.02em] sm:text-2xl">MITOMS</h2>
 
-                <p className="mt-0.5 text-[10px] font-semibold text-white/65 sm:text-xs sm:text-white/70">
+                <p className="mt-0.5 text-[12px] font-semibold text-white/78 sm:text-[13px] sm:text-white/82">
                   Technologies Pvt. Ltd.
                 </p>
               </div>
             </Link>
 
-            <p className="mt-5 max-w-md text-[13px] leading-7 text-white/62 sm:mt-6 sm:text-sm sm:text-white/65">
+            <p className="mt-5 max-w-md text-[15px] font-medium leading-7 text-white/82 sm:mt-6 sm:text-[16px] sm:text-white/84">
               We build modern digital products, websites, apps and growth
               solutions for ambitious businesses.
             </p>
@@ -197,13 +197,13 @@ export default function Footer() {
           <div className="min-w-0 border-t border-white/10 pt-7 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 xl:pl-10">
             <h3 className="mb-4 text-[16px] font-bold text-white sm:mb-5 sm:text-lg">Company</h3>
 
-            <ul className="space-y-3 text-[13px] text-white/62 sm:text-sm sm:text-white/65">
+            <ul className="space-y-3 text-[14px] text-white/78 sm:text-[15px] sm:text-white/82">
               <li>
                 <Link
                   href="/about"
-                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
-                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#6b46ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#6b46ff]" />
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
                   About Us
                 </Link>
               </li>
@@ -211,19 +211,19 @@ export default function Footer() {
               <li>
                 <Link
                   href="/portfolio"
-                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
-                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#6b46ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#6b46ff]" />
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
                   Portfolio
                 </Link>
               </li>
 
               <li>
                 <Link
-                  href="/services/web-development"
-                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
+                  href="/services"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
-                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#6b46ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#6b46ff]" />
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
                   Services
                 </Link>
               </li>
@@ -231,9 +231,9 @@ export default function Footer() {
               <li>
                 <Link
                   href="/contact"
-                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
-                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#6b46ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#6b46ff]" />
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
                   Contact Us
                 </Link>
               </li>
@@ -244,13 +244,13 @@ export default function Footer() {
           <div className="min-w-0 border-t border-white/10 pt-7 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 xl:pl-10">
             <h3 className="mb-4 text-[16px] font-bold text-white sm:mb-5 sm:text-lg">Services</h3>
 
-            <ul className="space-y-3 text-[13px] text-white/62 sm:text-sm sm:text-white/65">
+            <ul className="space-y-3 text-[14px] text-white/78 sm:text-[15px] sm:text-white/82">
               <li>
                 <Link
                   href="/services/web-development"
-                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
-                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#6b46ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#6b46ff]" />
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
                   Website Development
                 </Link>
               </li>
@@ -258,9 +258,9 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services/mobile-app-development"
-                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
-                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#6b46ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#6b46ff]" />
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
                   Mobile App Development
                 </Link>
               </li>
@@ -268,9 +268,9 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services/ui-ux-design"
-                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
-                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#6b46ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#6b46ff]" />
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
                   UI/UX Design
                 </Link>
               </li>
@@ -278,9 +278,9 @@ export default function Footer() {
               <li>
                 <Link
                   href="/services/cloud-solutions"
-                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
-                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#6b46ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#6b46ff]" />
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
                   Cloud Solutions
                 </Link>
               </li>
@@ -291,13 +291,13 @@ export default function Footer() {
           <div className="col-span-2 min-w-0 border-t border-white/10 pt-7 lg:col-span-1 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 xl:pl-10">
             <h3 className="mb-4 text-[16px] font-bold text-white sm:mb-5 sm:text-lg">Contact</h3>
 
-            <ul className="grid gap-3 text-[13px] text-white/62 min-[430px]:grid-cols-3 min-[430px]:items-center sm:text-sm sm:text-white/65 lg:grid-cols-1">
+            <ul className="grid gap-3 text-[14px] text-white/78 min-[430px]:grid-cols-3 min-[430px]:items-center sm:text-[15px] sm:text-white/82 lg:grid-cols-1">
               <li className="min-w-0">India</li>
 
               <li>
                 <a
                   href="mailto:info@mitoms.com"
-                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
                   <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#ff2f7d] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#ff2f7d]" />
                   <span className="break-words">info@mitoms.com</span>
@@ -307,9 +307,9 @@ export default function Footer() {
               <li>
                 <a
                   href="tel:+910000000000"
-                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
-                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#22b8ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#22b8ff]" />
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#00b8ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#00b8ff]" />
                   +91 00000 00000
                 </a>
               </li>
@@ -317,20 +317,20 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-center gap-4 border-t border-white/10 pt-6 text-center text-[12px] leading-6 text-white/50 sm:mt-12 sm:text-sm md:flex-row md:justify-between md:text-left">
+        <div className="mt-10 flex flex-col items-center gap-4 border-t border-white/10 pt-6 text-center text-[13px] leading-6 text-white/68 sm:mt-12 sm:text-[14px] md:flex-row md:justify-between md:text-left">
           <p>© 2026 MITOMS Technologies Pvt. Ltd. All rights reserved.</p>
 
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:justify-end">
             <Link
               href="/privacy-policy"
-              className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
+              className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
             >
               Privacy Policy
             </Link>
 
             <Link
               href="/terms"
-              className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b46ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
+              className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
             >
               Terms
             </Link>

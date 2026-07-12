@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
   AlertTriangle,
@@ -61,21 +61,21 @@ const summaryCards: SummaryCard[] = [
     title: "How We Use It",
     description:
       "To respond to enquiries, deliver services, improve our website and protect our systems.",
-    gradient: "from-[#FF315D] to-[#FF74A0]",
+    gradient: "from-[#FF2F7D] to-[#FF7CA8]",
   },
   {
     icon: ShieldCheck,
     title: "How We Protect It",
     description:
       "We use reasonable organisational and technical safeguards appropriate to the information.",
-    gradient: "from-[#00AEEF] to-[#4B22FF]",
+    gradient: "from-[#00B8FF] to-[#4B22FF]",
   },
   {
     icon: UserCheck,
     title: "Your Choices",
     description:
       "You may request access, correction, deletion or other available privacy choices.",
-    gradient: "from-[#8B3DFF] to-[#FF3B9D]",
+    gradient: "from-[#743CFF] to-[#FF2F7D]",
   },
 ];
 
@@ -247,6 +247,122 @@ const sections: PolicySection[] = [
   },
 ];
 
+
+function TypewriterText({
+  text,
+  speed = 95,
+  delay = 120,
+  display = "inline",
+  nowrap = false,
+  className = "",
+  cursorClassName = "bg-current",
+}: {
+  text: string;
+  speed?: number;
+  delay?: number;
+  display?: "inline" | "block";
+  nowrap?: boolean;
+  className?: string;
+  cursorClassName?: string;
+}) {
+  const elementRef = useRef<HTMLSpanElement>(null);
+  const [hasStarted, setHasStarted] = useState(false);
+  const [visibleCharacters, setVisibleCharacters] = useState(0);
+
+  useEffect(() => {
+    const element = elementRef.current;
+
+    if (!element || hasStarted) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        setHasStarted(true);
+        observer.disconnect();
+      },
+      {
+        threshold: 0.18,
+        rootMargin: "0px 0px -5% 0px",
+      },
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [hasStarted]);
+
+  useEffect(() => {
+    if (!hasStarted || visibleCharacters >= text.length) {
+      return;
+    }
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    const timeoutId = window.setTimeout(
+      () => {
+        setVisibleCharacters((current) => {
+          if (reducedMotion) {
+            return text.length;
+          }
+
+          return Math.min(current + 1, text.length);
+        });
+      },
+      visibleCharacters === 0 ? delay : speed,
+    );
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [delay, hasStarted, speed, text, visibleCharacters]);
+
+  const isTyping = hasStarted && visibleCharacters < text.length;
+  const layoutClassName =
+    display === "block"
+      ? "grid w-fit max-w-full"
+      : "inline-grid max-w-full";
+  const whitespaceClassName = nowrap
+    ? "whitespace-nowrap"
+    : "whitespace-normal";
+
+  return (
+    <span
+      ref={elementRef}
+      aria-label={text}
+      className={`${layoutClassName} ${whitespaceClassName}`}
+    >
+      <span
+        aria-hidden="true"
+        className={`invisible col-start-1 row-start-1 ${whitespaceClassName} ${className}`}
+      >
+        {text}
+      </span>
+
+      <span
+        aria-hidden="true"
+        className={`col-start-1 row-start-1 ${whitespaceClassName} ${className}`}
+      >
+        {text.slice(0, visibleCharacters)}
+
+        {isTyping && (
+          <span
+            className={`ml-1 inline-block h-[0.88em] w-[2px] animate-pulse align-[-0.06em] ${cursorClassName}`}
+          />
+        )}
+      </span>
+    </span>
+  );
+}
+
 function PrivacySummaryCard({
   icon: Icon,
   title,
@@ -265,7 +381,7 @@ function PrivacySummaryCard({
         {title}
       </h2>
 
-      <p className="mt-3 text-[12px] font-medium leading-6 text-[#34405f]/64">
+      <p className="mt-3 text-[15px] font-medium leading-7 text-[#27314f]/86">
         {description}
       </p>
     </article>
@@ -277,44 +393,56 @@ export default function PrivacyPolicyPage() {
 
   return (
     <>
-      <main className="overflow-hidden bg-white text-[#07112f] antialiased">
+      <main className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
         {/* HERO */}
-        <section className="relative overflow-hidden bg-[#fbfaff] px-5 pb-20 pt-16 sm:px-8 lg:px-10 lg:pb-24 lg:pt-20">
-          <div className="pointer-events-none absolute -left-40 -top-32 h-[500px] w-[500px] rounded-full bg-[#4b22ff]/10 blur-[135px]" />
-          <div className="pointer-events-none absolute -right-40 top-[-100px] h-[500px] w-[500px] rounded-full bg-[#ff315d]/10 blur-[135px]" />
+        <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-20 pt-10 sm:px-6 sm:pt-12 lg:px-10 lg:pb-24 lg:pt-11">
+          <div className="pointer-events-none absolute -left-40 -top-32 h-[500px] w-[500px] rounded-full bg-[#4b22ff]/10 blur-[135px] motion-safe:animate-[pulse_6s_ease-in-out_infinite]" />
+          <div className="pointer-events-none absolute -right-40 top-[-100px] h-[500px] w-[500px] rounded-full bg-[#ff2f7d]/10 blur-[135px] motion-safe:animate-[pulse_7s_ease-in-out_infinite] motion-safe:[animation-delay:1s]" />
           <div className="pointer-events-none absolute inset-0 opacity-[0.27] [background-image:radial-gradient(circle_at_1px_1px,rgba(75,34,255,0.13)_1px,transparent_1px)] [background-size:27px_27px]" />
 
           <div className="relative mx-auto grid max-w-[1320px] items-center gap-12 lg:grid-cols-[0.94fr_1.06fr]">
             <div className="relative z-20">
               <div className="inline-flex items-center gap-2 rounded-full border border-[#ddd6ff] bg-white/80 px-4 py-2 shadow-[0_8px_24px_rgba(75,34,255,0.06)] backdrop-blur">
                 <ShieldCheck size={15} className="text-[#4b22ff]" />
-                <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#4b22ff]">
-                  Privacy Policy
-                </span>
+                <TypewriterText
+                  text="Privacy Policy"
+                  speed={82}
+                  delay={100}
+                  nowrap
+                  className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#4b22ff]"
+                  cursorClassName="bg-[#4b22ff]"
+                />
               </div>
 
-              <h1 className="mt-7 max-w-[730px] text-[43px] font-bold leading-[1.08] tracking-[-0.055em] text-[#081232] sm:text-[56px] lg:text-[66px]">
+              <h1 className="mt-7 max-w-[730px] overflow-visible text-[43px] font-bold leading-[1.08] tracking-[-0.055em] text-[#081232] sm:text-[56px] lg:text-[66px]">
                 Your Privacy,
-                <span className="mt-2 block pb-[0.14em] leading-[1.08] bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff315d] bg-clip-text text-transparent">
-                  Explained Clearly
+                <span className="mt-2 flex overflow-visible pb-[0.22em] leading-[1.14]">
+                  <TypewriterText
+                    text="Explained Clearly"
+                    speed={110}
+                    delay={260}
+                    nowrap
+                    className="overflow-visible pb-[0.14em] pr-[0.12em] bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff2f7d] bg-clip-text text-transparent"
+                    cursorClassName="bg-[#ff2f7d]"
+                  />
                 </span>
               </h1>
 
-              <p className="mt-7 max-w-[640px] text-[15px] font-medium leading-8 text-[#34405f]/72 sm:text-[16px]">
+              <p className="mt-7 max-w-[640px] text-[16px] font-medium leading-8 text-[#27314f]/90 sm:text-[17px]">
                 This policy explains what {policyDetails.companyName} may
                 collect, why we use it, when it may be shared and the choices
                 available to you.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
-                <span className="inline-flex items-center gap-2 rounded-full border border-[#e3def1] bg-white px-4 py-3 text-[11px] font-bold text-[#34405f]/70 shadow-[0_8px_22px_rgba(22,17,62,0.05)]">
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#e3def1] bg-white px-4 py-3 text-[12px] font-bold text-[#27314f]/82 shadow-[0_8px_22px_rgba(22,17,62,0.05)]">
                   <FileText size={15} className="text-[#4b22ff]" />
                   Last updated: {policyDetails.lastUpdated}
                 </span>
 
                 <Link
                   href="/contact"
-                  className="group inline-flex items-center gap-2 rounded-full border border-[#e3def1] bg-white px-4 py-3 text-[11px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(22,17,62,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#4b22ff] hover:text-[#4b22ff]"
+                  className="group inline-flex items-center gap-2 rounded-full border border-[#e3def1] bg-white px-4 py-3 text-[12px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(22,17,62,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#4b22ff] hover:text-[#4b22ff]"
                 >
                   Privacy question
                   <ArrowRight
@@ -332,19 +460,24 @@ export default function PrivacyPolicyPage() {
 
               <div className="absolute left-1/2 top-1/2 z-20 w-[88%] max-w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-[30px] border border-white/70 bg-white p-4 shadow-[0_35px_80px_rgba(38,25,104,0.20)]">
                 <div className="relative min-h-[360px] overflow-hidden rounded-[24px] bg-[linear-gradient(145deg,#061330_0%,#1d1059_52%,#8a1c78_115%)] p-8 text-white">
-                  <div className="pointer-events-none absolute -left-20 -top-24 h-72 w-72 rounded-full bg-[#1685ff]/25 blur-[90px]" />
-                  <div className="pointer-events-none absolute -bottom-28 -right-20 h-80 w-80 rounded-full bg-[#ff315d]/35 blur-[95px]" />
+                  <div className="pointer-events-none absolute -left-20 -top-24 h-72 w-72 rounded-full bg-[#00b8ff]/25 blur-[90px]" />
+                  <div className="pointer-events-none absolute -bottom-28 -right-20 h-80 w-80 rounded-full bg-[#ff2f7d]/35 blur-[95px]" />
                   <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:22px_22px]" />
 
                   <div className="relative z-10 flex min-h-[296px] flex-col justify-between">
                     <div>
-                      <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-[#ff84b8]">
-                        Privacy by Design
+                      <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-[#ff7ca8]">
+                        <TypewriterText
+                          text="Privacy by Design"
+                          speed={82}
+                          delay={120}
+                          cursorClassName="bg-[#ff7ca8]"
+                        />
                       </p>
 
                       <h2 className="mt-4 max-w-[410px] text-[31px] font-bold leading-[1.15] tracking-[-0.04em] sm:text-[38px]">
                         Clear Information.
-                        <span className="block text-[#ff7eb8]">
+                        <span className="block text-[#ff7ca8]">
                           Responsible Handling.
                         </span>
                       </h2>
@@ -363,7 +496,7 @@ export default function PrivacyPolicyPage() {
                             key={item.label}
                             className="rounded-[15px] border border-white/10 bg-white/[0.08] p-3 text-center backdrop-blur"
                           >
-                            <Icon size={18} className="mx-auto text-[#ff84b8]" />
+                            <Icon size={18} className="mx-auto text-[#ff7ca8]" />
                             <p className="mt-2 text-[10px] font-bold text-white/75">
                               {item.label}
                             </p>
@@ -376,7 +509,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div className="absolute left-[0%] top-[6%] z-30 hidden rounded-[18px] border border-[#e3def1] bg-white px-4 py-3 shadow-[0_18px_42px_rgba(35,27,84,0.11)] sm:block">
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#ff315d]">
+                <p className="bg-gradient-to-r from-[#4b22ff] to-[#ff2f7d] bg-clip-text text-[11px] font-bold uppercase tracking-[0.16em] text-transparent">
                   Our Commitment
                 </p>
                 <p className="mt-1 text-[13px] font-bold text-[#081232]">
@@ -385,7 +518,7 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div className="absolute bottom-[6%] right-[0%] z-30 hidden rounded-[18px] border border-[#e3def1] bg-white px-4 py-3 shadow-[0_18px_42px_rgba(35,27,84,0.11)] sm:block">
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#4b22ff]">
+                <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#4b22ff]">
                   Your Choice
                 </p>
                 <p className="mt-1 text-[13px] font-bold text-[#081232]">
@@ -400,12 +533,27 @@ export default function PrivacyPolicyPage() {
         <section className="px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="mx-auto max-w-[1320px]">
             <div className="mx-auto max-w-[780px] text-center">
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#ff315d]">
-                Privacy at a Glance
+              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#ff2f7d]">
+                <TypewriterText
+                  text="Privacy at a Glance"
+                  speed={84}
+                  delay={100}
+                  cursorClassName="bg-[#ff2f7d]"
+                />
               </p>
-              <h2 className="mt-4 text-[34px] font-bold tracking-[-0.04em] text-[#081232] sm:text-[44px]">
-                The Important Points, {" "}
-                <span className="text-[#4b22ff]">Without the Complexity</span>
+
+              <h2 className="mt-4 overflow-visible text-[34px] font-bold tracking-[-0.04em] text-[#081232] sm:text-[44px]">
+                <span className="block">The Important Points,</span>
+
+                <span className="mt-1 flex justify-center overflow-visible pb-[0.1em]">
+                  <TypewriterText
+                    text="Without the Complexity"
+                    speed={105}
+                    delay={220}
+                    className="overflow-visible pb-[0.06em] pr-[0.08em] bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff2f7d] bg-clip-text text-transparent"
+                    cursorClassName="bg-[#ff2f7d]"
+                  />
+                </span>
               </h2>
             </div>
 
@@ -427,7 +575,7 @@ export default function PrivacyPolicyPage() {
                     <FileText size={21} />
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#ff315d]">
+                    <p className="bg-gradient-to-r from-[#4b22ff] to-[#ff2f7d] bg-clip-text text-[11px] font-bold uppercase tracking-[0.16em] text-transparent">
                       On This Page
                     </p>
                     <h2 className="mt-1 text-[16px] font-bold text-[#081232]">
@@ -441,9 +589,9 @@ export default function PrivacyPolicyPage() {
                     <Link
                       key={section.id}
                       href={`#${section.id}`}
-                      className="group flex items-center gap-3 rounded-[12px] px-3 py-2.5 text-[11px] font-semibold text-[#34405f]/68 transition-all duration-300 hover:bg-[#f3efff] hover:text-[#4b22ff]"
+                      className="group flex items-center gap-3 rounded-[12px] px-3 py-2.5 text-[13px] font-semibold text-[#27314f]/82 transition-all duration-300 hover:bg-[#f3efff] hover:text-[#4b22ff]"
                     >
-                      <span className="w-6 shrink-0 text-[9px] font-black text-[#c0b8dc] transition-colors group-hover:text-[#ff315d]">
+                      <span className="w-6 shrink-0 text-[9px] font-black text-[#c0b8dc] transition-colors group-hover:text-[#ff2f7d]">
                         {section.number}
                       </span>
                       <span>{section.title}</span>
@@ -456,14 +604,14 @@ export default function PrivacyPolicyPage() {
             <div className="space-y-5">
               <div className="rounded-[24px] border border-[#eadff0] bg-[linear-gradient(105deg,#fff8fb,#f7f4ff)] p-6 shadow-[0_12px_32px_rgba(75,34,255,0.05)] sm:p-7">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-[#fff0f5] text-[#ff315d]">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-[#fff0f5] text-[#ff2f7d]">
                     <AlertTriangle size={21} />
                   </div>
                   <div>
                     <h2 className="text-[16px] font-bold text-[#081232]">
                       Please review this policy before publishing
                     </h2>
-                    <p className="mt-2 text-[12px] font-medium leading-6 text-[#34405f]/68">
+                    <p className="mt-2 text-[14px] font-medium leading-7 text-[#27314f]/86">
                       This page is a general website template. Update it so it
                       accurately describes the tools, forms, cookies, hosting
                       providers, analytics services and data practices actually
@@ -484,11 +632,11 @@ export default function PrivacyPolicyPage() {
                   >
                     <div className="flex items-start justify-between gap-5">
                       <div className="flex items-start gap-4">
-                        <div className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-[17px] bg-gradient-to-br from-[#4b22ff] to-[#ff315d] text-white shadow-[0_12px_26px_rgba(75,34,255,0.20)]">
+                        <div className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-[17px] bg-gradient-to-br from-[#4b22ff] to-[#ff2f7d] text-white shadow-[0_12px_26px_rgba(75,34,255,0.20)]">
                           <Icon size={23} />
                         </div>
                         <div>
-                          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#ff315d]">
+                          <p className="bg-gradient-to-r from-[#4b22ff] to-[#ff2f7d] bg-clip-text text-[11px] font-bold uppercase tracking-[0.16em] text-transparent">
                             Section {section.number}
                           </p>
                           <h2 className="mt-2 text-[23px] font-bold tracking-[-0.03em] text-[#081232] sm:text-[27px]">
@@ -506,7 +654,7 @@ export default function PrivacyPolicyPage() {
                       {section.paragraphs.map((paragraph) => (
                         <p
                           key={paragraph}
-                          className="text-[13px] font-medium leading-7 text-[#34405f]/68"
+                          className="text-[15px] font-medium leading-7 text-[#27314f]/88"
                         >
                           {paragraph}
                         </p>
@@ -524,7 +672,7 @@ export default function PrivacyPolicyPage() {
                               size={17}
                               className="mt-0.5 shrink-0 text-[#4b22ff]"
                             />
-                            <p className="text-[11px] font-semibold leading-5 text-[#34405f]/72">
+                            <p className="text-[13px] font-semibold leading-6 text-[#27314f]/86">
                               {bullet}
                             </p>
                           </div>
@@ -534,8 +682,8 @@ export default function PrivacyPolicyPage() {
 
                     {section.note && (
                       <div className="mt-6 rounded-[15px] border border-[#eadff0] bg-[#fff9fb] px-4 py-4">
-                        <p className="text-[11px] font-semibold leading-6 text-[#6b4160]">
-                          <strong className="text-[#ff315d]">Important:</strong>{" "}
+                        <p className="text-[13px] font-semibold leading-6 text-[#6b4160]">
+                          <strong className="text-[#ff2f7d]">Important:</strong>{" "}
                           {section.note}
                         </p>
                       </div>
@@ -548,7 +696,7 @@ export default function PrivacyPolicyPage() {
                           className="group flex items-center justify-between rounded-[17px] border border-[#e3deef] bg-[#fbfaff] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#4b22ff]"
                         >
                           <div>
-                            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#ff315d]">
+                            <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#ff2f7d]">
                               Email
                             </p>
                             <p className="mt-2 break-all text-[13px] font-bold text-[#081232] group-hover:text-[#4b22ff]">
@@ -563,7 +711,7 @@ export default function PrivacyPolicyPage() {
                           className="group flex items-center justify-between rounded-[17px] border border-[#e3deef] bg-[#fbfaff] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#4b22ff]"
                         >
                           <div>
-                            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#ff315d]">
+                            <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#ff2f7d]">
                               Contact Page
                             </p>
                             <p className="mt-2 text-[13px] font-bold text-[#081232] group-hover:text-[#4b22ff]">
@@ -586,20 +734,36 @@ export default function PrivacyPolicyPage() {
 
         {/* FINAL CTA */}
         <section className="px-5 py-8 sm:px-8 lg:px-10">
-          <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[28px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff315d_125%)] px-7 py-12 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:px-10 lg:px-14">
-            <div className="pointer-events-none absolute -left-20 -top-28 h-72 w-72 rounded-full bg-[#1685ff]/20 blur-[90px]" />
-            <div className="pointer-events-none absolute -bottom-28 right-[-40px] h-80 w-80 rounded-full bg-[#ff315d]/35 blur-[95px]" />
+          <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[28px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff2f7d_125%)] px-7 py-12 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:px-10 lg:px-14">
+            <div className="pointer-events-none absolute -left-20 -top-28 h-72 w-72 rounded-full bg-[#00b8ff]/20 blur-[90px]" />
+            <div className="pointer-events-none absolute -bottom-28 right-[-40px] h-80 w-80 rounded-full bg-[#ff2f7d]/35 blur-[95px]" />
             <div className="pointer-events-none absolute inset-0 opacity-[0.10] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:22px_22px]" />
 
             <div className="relative z-10 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-[#ff84b8]">
-                  Need More Information?
+                <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-[#ff7ca8]">
+                  <TypewriterText
+                    text="Need More Information?"
+                    speed={82}
+                    delay={100}
+                    cursorClassName="bg-[#ff7ca8]"
+                  />
                 </p>
-                <h2 className="mt-3 max-w-[730px] text-[31px] font-bold tracking-[-0.035em] sm:text-[40px]">
-                  Have a Question About Privacy or How We Handle Information?
+
+                <h2 className="mt-3 max-w-[730px] overflow-visible text-[31px] font-bold tracking-[-0.035em] sm:text-[40px]">
+                  <span className="block">Have a Question About Privacy</span>
+
+                  <span className="mt-1 block overflow-visible pb-[0.08em]">
+                    <TypewriterText
+                      text="or How We Handle Information?"
+                      speed={98}
+                      delay={220}
+                      className="overflow-visible pb-[0.04em] pr-[0.08em] text-[#ff7ca8]"
+                      cursorClassName="bg-[#ff7ca8]"
+                    />
+                  </span>
                 </h2>
-                <p className="mt-3 max-w-[670px] text-[13px] font-medium leading-7 text-white/65">
+                <p className="mt-3 max-w-[670px] text-[15px] font-medium leading-7 text-white/84">
                   Send us your question and our team will respond through the
                   most appropriate contact channel.
                 </p>
@@ -608,19 +772,19 @@ export default function PrivacyPolicyPage() {
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/contact"
-                  className="group inline-flex shrink-0 items-center justify-center gap-3 rounded-[14px] bg-white px-7 py-4 text-[12px] font-bold text-[#17163b] shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1"
+                  className="group inline-flex shrink-0 items-center justify-center gap-3 rounded-[14px] bg-white px-7 py-4 text-[13px] font-bold text-[#17163b] shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1"
                 >
                   Contact Us
                   <ArrowRight
                     size={18}
-                    className="text-[#ff315d] transition-transform duration-300 group-hover:translate-x-1"
+                    className="text-[#ff2f7d] transition-transform duration-300 group-hover:translate-x-1"
                   />
                 </Link>
 
                 <button
                   type="button"
                   onClick={() => setShowConsultation(true)}
-                  className="group inline-flex shrink-0 cursor-pointer items-center justify-center gap-3 rounded-[14px] border border-white/20 bg-white/[0.06] px-7 py-4 text-[12px] font-bold text-white backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.12]"
+                  className="group inline-flex shrink-0 cursor-pointer items-center justify-center gap-3 rounded-[14px] border border-white/20 bg-white/[0.06] px-7 py-4 text-[13px] font-bold text-white backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.12]"
                 >
                   Talk to Our Team
                   <ArrowRight

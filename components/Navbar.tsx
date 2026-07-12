@@ -31,28 +31,28 @@ const services = [
     description: "Modern iOS and Android applications.",
     href: "/services/mobile-app-development",
     icon: Smartphone,
-    iconBg: "from-[#FF315D] to-[#FF74A0]",
+    iconBg: "from-[#FF2F7D] to-[#FF7CA8]",
   },
   {
     title: "UI/UX Design",
     description: "Clean and user-focused digital experiences.",
     href: "/services/ui-ux-design",
     icon: PenTool,
-    iconBg: "from-[#8B3DFF] to-[#FF3B9D]",
+    iconBg: "from-[#743CFF] to-[#FF2F7D]",
   },
   {
     title: "Cloud Solutions",
     description: "Secure and scalable cloud infrastructure.",
     href: "/services/cloud-solutions",
     icon: Cloud,
-    iconBg: "from-[#00AEEF] to-[#4B22FF]",
+    iconBg: "from-[#00B8FF] to-[#4B22FF]",
   },
   {
     title: "AI & Digital Transformation",
     description: "Automation and intelligent business solutions.",
     href: "/services/ai-digital-transformation",
     icon: Brain,
-    iconBg: "from-[#FF315D] to-[#6D32FF]",
+    iconBg: "from-[#FF2F7D] to-[#743CFF]",
   },
   {
     title: "IT Consulting",
@@ -158,7 +158,7 @@ export default function Navbar() {
               Home
 
               <span
-                className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D] transition-all duration-300 ${
+                className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D] transition-all duration-300 ${
                   isActive("/") ? "w-full" : "w-0 group-hover:w-full"
                 }`}
               />
@@ -193,7 +193,7 @@ export default function Navbar() {
                 />
 
                 <span
-                  className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D] transition-all duration-300 ${
+                  className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D] transition-all duration-300 ${
                     desktopServicesOpen || servicesActive
                       ? "w-full"
                       : "w-0 group-hover/services-link:w-full"
@@ -212,7 +212,7 @@ export default function Navbar() {
                 }`}
               >
                 <div className="relative overflow-hidden rounded-[26px] border border-[#e7e2f5] bg-white p-5 shadow-[0_28px_80px_rgba(20,15,60,0.18)]">
-                  <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#FF315D]/10 blur-3xl" />
+                  <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#FF2F7D]/10 blur-3xl" />
 
                   <div className="pointer-events-none absolute -bottom-24 -left-20 h-56 w-56 rounded-full bg-[#4B22FF]/10 blur-3xl" />
 
@@ -254,7 +254,7 @@ export default function Navbar() {
                               {service.title}
                             </h3>
 
-                            <p className="mt-1 text-[11px] font-medium leading-5 text-[#52607A]/65">
+                            <p className="mt-1 text-[12px] font-medium leading-5 text-[#27314F]/82">
                               {service.description}
                             </p>
                           </div>
@@ -269,7 +269,7 @@ export default function Navbar() {
                         Need help choosing the right service?
                       </p>
 
-                      <p className="mt-1 text-[11px] font-medium text-white/65">
+                      <p className="mt-1 text-[12px] font-medium leading-5 text-white/82">
                         Talk to our team and get a practical
                         recommendation.
                       </p>
@@ -278,7 +278,7 @@ export default function Navbar() {
                     <button
                       type="button"
                       onClick={openConsultation}
-                      className="flex cursor-pointer items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-[11px] font-bold text-[#17163B] transition-all duration-300 hover:-translate-y-0.5"
+                      className="flex cursor-pointer items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-[12px] font-bold text-[#17163B] transition-all duration-300 hover:-translate-y-0.5"
                     >
                       Talk to an Expert
                       <ArrowRight size={15} />
@@ -303,7 +303,7 @@ export default function Navbar() {
               Portfolio
 
               <span
-                className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D] transition-all duration-300 ${
+                className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D] transition-all duration-300 ${
                   isActive("/portfolio")
                     ? "w-full"
                     : "w-0 group-hover:w-full"
@@ -324,7 +324,7 @@ export default function Navbar() {
               About Us
 
               <span
-                className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D] transition-all duration-300 ${
+                className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D] transition-all duration-300 ${
                   isActive("/about")
                     ? "w-full"
                     : "w-0 group-hover:w-full"
@@ -347,7 +347,7 @@ export default function Navbar() {
               Contact Us
 
               <span
-                className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D] transition-all duration-300 ${
+                className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D] transition-all duration-300 ${
                   isActive("/contact")
                     ? "w-full"
                     : "w-0 group-hover:w-full"
@@ -360,7 +360,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={openConsultation}
-            className="hidden shrink-0 cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-r from-[#4B22FF] to-[#FF315D] px-5 py-3 text-[13px] font-semibold text-white shadow-[0_12px_28px_rgba(75,34,255,0.24)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(255,49,93,0.25)] xl:flex 2xl:px-7 2xl:text-sm"
+            className="hidden shrink-0 cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D] px-5 py-3 text-[14px] font-semibold text-white shadow-[0_12px_28px_rgba(75,34,255,0.24)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(255,49,93,0.25)] xl:flex 2xl:px-7 2xl:text-sm"
           >
             Get Free Consultation
             <ArrowRight size={18} />
@@ -401,7 +401,7 @@ export default function Navbar() {
                   <span>Home</span>
 
                   {isActive("/") && (
-                    <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D]" />
+                    <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D]" />
                   )}
                 </div>
               </Link>
@@ -424,7 +424,7 @@ export default function Navbar() {
                     <span>Services</span>
 
                     {servicesActive && (
-                      <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D]" />
+                      <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D]" />
                     )}
                   </div>
 
@@ -473,13 +473,13 @@ export default function Navbar() {
                               {service.title}
                             </p>
 
-                            <p className="mt-0.5 break-words text-[10px] font-medium leading-4 text-[#52607A]/60">
+                            <p className="mt-0.5 break-words text-[11px] font-medium leading-5 text-[#27314F]/80">
                               {service.description}
                             </p>
                           </div>
 
                           {serviceIsActive && (
-                            <span className="h-2 w-2 shrink-0 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D]" />
+                            <span className="h-2 w-2 shrink-0 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D]" />
                           )}
                         </Link>
                       );
@@ -518,7 +518,7 @@ export default function Navbar() {
                   <span>Portfolio</span>
 
                   {isActive("/portfolio") && (
-                    <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D]" />
+                    <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D]" />
                   )}
                 </div>
               </Link>
@@ -540,7 +540,7 @@ export default function Navbar() {
                   <span>About Us</span>
 
                   {isActive("/about") && (
-                    <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D]" />
+                    <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D]" />
                   )}
                 </div>
               </Link>
@@ -562,7 +562,7 @@ export default function Navbar() {
                   <span>Contact Us</span>
 
                   {isActive("/contact") && (
-                    <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF315D]" />
+                    <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D]" />
                   )}
                 </div>
               </Link>
@@ -571,7 +571,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={openConsultation}
-                className="mt-5 flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#4B22FF] to-[#FF315D] px-5 py-3.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(75,34,255,0.20)]"
+                className="mt-5 flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D] px-5 py-3.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(75,34,255,0.20)]"
               >
                 Get Free Consultation
                 <ArrowRight size={18} />

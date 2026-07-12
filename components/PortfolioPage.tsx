@@ -405,12 +405,12 @@ function DetailItem({
           <Icon size={14} />
         </span>
 
-        <p className="text-[9px] font-bold uppercase tracking-[0.16em] text-[#081232]">
+        <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#081232]">
           {label}
         </p>
       </div>
 
-      <p className="mt-2 text-[11px] font-semibold leading-5 text-[#27314f]/72">
+      <p className="mt-2 text-[13px] font-semibold leading-6 text-[#27314f]/86">
         {value}
       </p>
     </div>
@@ -448,13 +448,13 @@ function ProjectSection({
           <div className={reverse ? "xl:order-2" : ""}>
             <div className="flex flex-wrap items-center gap-3">
               <span
-                className={`inline-flex items-center gap-2 rounded-full bg-gradient-to-r ${project.accent} px-4 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-white shadow-[0_10px_24px_rgba(75,34,255,0.20)]`}
+                className={`inline-flex items-center gap-2 rounded-full bg-gradient-to-r ${project.accent} px-4 py-2 text-[11px] font-bold uppercase tracking-[0.15em] text-white shadow-[0_10px_24px_rgba(75,34,255,0.20)]`}
               >
                 <Icon size={14} />
                 {project.badge}
               </span>
 
-              <span className="rounded-full border border-[#ded8ec] bg-white px-4 py-2 text-[10px] font-bold text-[#34405f]/62">
+              <span className="rounded-full border border-[#ded8ec] bg-white px-4 py-2 text-[11px] font-bold text-[#27314f]/78">
                 Project {project.number}
               </span>
             </div>
@@ -464,12 +464,12 @@ function ProjectSection({
             </h2>
 
             <p
-              className={`mt-3 max-w-[640px] bg-gradient-to-r ${project.accent} bg-clip-text text-[12px] font-bold leading-6 text-transparent sm:text-[13px]`}
+              className={`mt-3 max-w-[640px] bg-gradient-to-r ${project.accent} bg-clip-text text-[13px] font-bold leading-6 text-transparent sm:text-[14px]`}
             >
               {project.category}
             </p>
 
-            <p className="mt-5 max-w-[680px] text-[12px] font-medium leading-6 text-[#34405f]/72 sm:mt-6 sm:text-[13px] sm:leading-7">
+            <p className="mt-5 max-w-[700px] text-[15px] font-medium leading-7 text-[#27314f]/88 sm:mt-6 sm:text-[16px] sm:leading-8">
               {project.description}
             </p>
 
@@ -505,7 +505,7 @@ function ProjectSection({
                 href={project.link}
                 target="_blank"
                 rel="noreferrer"
-                className={`group inline-flex w-full items-center justify-center gap-3 rounded-[12px] bg-gradient-to-r ${project.accent} px-5 py-3.5 text-[11px] font-bold text-white shadow-[0_12px_30px_rgba(75,34,255,0.22)] transition-all duration-300 hover:-translate-y-1 sm:w-auto sm:px-6`}
+                className={`group inline-flex w-full items-center justify-center gap-3 rounded-[12px] bg-gradient-to-r ${project.accent} px-5 py-3.5 text-[13px] font-bold text-white shadow-[0_12px_30px_rgba(75,34,255,0.22)] transition-all duration-300 hover:-translate-y-1 sm:w-auto sm:px-6`}
               >
                 {project.linkLabel}
                 <ExternalLink
@@ -516,7 +516,7 @@ function ProjectSection({
 
               <Link
                 href="/contact"
-                className="group inline-flex w-full items-center justify-center gap-3 rounded-[12px] border border-[#ded8ec] bg-white px-5 py-3.5 text-center text-[11px] font-bold text-[#081232] transition-all duration-300 hover:-translate-y-1 hover:border-[#4B22FF] hover:text-[#4B22FF] sm:w-auto sm:px-6"
+                className="group inline-flex w-full items-center justify-center gap-3 rounded-[12px] border border-[#ded8ec] bg-white px-5 py-3.5 text-center text-[13px] font-bold text-[#081232] transition-all duration-300 hover:-translate-y-1 hover:border-[#4B22FF] hover:text-[#4B22FF] sm:w-auto sm:px-6"
               >
                 Start a Similar Project
                 <ArrowRight
@@ -544,10 +544,10 @@ function ProjectSection({
 
             <div>
               <p
-                className={`text-[9px] font-bold uppercase tracking-[0.18em] ${
+                className={`text-[11px] font-bold uppercase tracking-[0.16em] ${
                   project.number === "01"
                     ? "text-[#CDAE3D]"
-                    : "text-[#FF315D]"
+                    : "text-[#FF2F7D]"
                 }`}
               >
                 <TypewriterText
@@ -582,7 +582,7 @@ function ProjectSection({
                 >
                   <CheckCircle2 size={13} />
                 </span>
-                <p className="text-[11px] font-semibold leading-5 text-[#34405f]/72">
+                <p className="text-[13px] font-semibold leading-6 text-[#27314f]/86">
                   {feature}
                 </p>
               </div>
@@ -601,7 +601,7 @@ function ProjectSection({
             className={`pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full blur-[85px] ${
               project.number === "01"
                 ? "bg-[#793DDC]/24"
-                : "bg-[#FF315D]/18"
+                : "bg-[#FF2F7D]/18"
             }`}
           />
           <div
@@ -621,7 +621,7 @@ function ProjectSection({
 
             <div>
               <p
-                className={`text-[9px] font-bold uppercase tracking-[0.18em] ${
+                className={`text-[11px] font-bold uppercase tracking-[0.16em] ${
                   project.number === "01"
                     ? "text-[#F4E178]"
                     : "text-[#FF7CA8]"
@@ -644,12 +644,12 @@ function ProjectSection({
             </div>
           </div>
 
-          <p className="relative z-10 mt-6 text-[12px] font-medium leading-7 text-white/68">
+          <p className="relative z-10 mt-6 text-[15px] font-medium leading-7 text-white/84">
             {project.impact}
           </p>
 
           <div className="relative z-10 mt-7">
-            <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-white/42">
+            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-white/68">
               Technologies and Capabilities
             </p>
 
@@ -657,7 +657,7 @@ function ProjectSection({
               {project.technologies.map((technology) => (
                 <span
                   key={technology}
-                  className={`rounded-full px-3 py-2 text-[9px] font-bold ${
+                  className={`rounded-full px-3 py-2 text-[11px] font-bold ${
                     project.number === "01"
                       ? "border border-[#A782E8]/28 bg-[#793DDC]/10 text-[#F7EAA0]"
                       : "border border-white/12 bg-white/[0.06] text-white/72"
@@ -679,11 +679,11 @@ export default function PortfolioPage() {
 
   return (
     <>
-      <main className="overflow-hidden bg-white text-[#07112f] antialiased">
+      <main className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
         {/* HERO */}
-        <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-14 pt-12 sm:px-6 sm:pb-18 sm:pt-16 lg:px-10 lg:pb-24 lg:pt-20">
+        <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-14 pt-10 sm:px-6 sm:pb-18 sm:pt-12 lg:px-10 lg:pb-24 lg:pt-11">
           <div className="pointer-events-none absolute -left-40 -top-36 h-[520px] w-[520px] rounded-full bg-[#4B22FF]/12 blur-[140px]" />
-          <div className="pointer-events-none absolute -right-40 top-[-110px] h-[520px] w-[520px] rounded-full bg-[#FF315D]/12 blur-[140px]" />
+          <div className="pointer-events-none absolute -right-40 top-[-110px] h-[520px] w-[520px] rounded-full bg-[#FF2F7D]/12 blur-[140px]" />
           <div className="pointer-events-none absolute inset-0 opacity-[0.25] [background-image:radial-gradient(circle_at_1px_1px,rgba(75,34,255,0.12)_1px,transparent_1px)] [background-size:27px_27px]" />
 
           <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 sm:gap-12 xl:grid-cols-[0.88fr_1.12fr] xl:gap-14">
@@ -730,7 +730,7 @@ export default function PortfolioPage() {
                 </span>
               </h1>
 
-              <p className="mt-7 max-w-[650px] text-[15px] font-medium leading-8 text-[#34405f]/72 sm:text-[16px]">
+              <p className="mt-7 max-w-[670px] text-[16px] font-medium leading-8 text-[#27314f]/90 sm:text-[17px]">
                 Explore real projects delivered across culture, healthcare and
                 specialised professional services - each shaped around its
                 audience, business goals and user journey.
@@ -740,7 +740,7 @@ export default function PortfolioPage() {
                 <button
                   type="button"
                   onClick={() => setShowConsultation(true)}
-                  className="group inline-flex w-full cursor-pointer items-center justify-center gap-3 rounded-[13px] bg-gradient-to-r from-[#4B22FF] to-[#FF315D] px-6 py-4 text-[12px] font-bold text-white shadow-[0_14px_34px_rgba(75,34,255,0.25)] transition-all duration-300 hover:-translate-y-1 sm:w-auto sm:px-7"
+                  className="group inline-flex w-full cursor-pointer items-center justify-center gap-3 rounded-[13px] bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D] px-6 py-4 text-[13px] font-bold text-white shadow-[0_14px_34px_rgba(75,34,255,0.25)] transition-all duration-300 hover:-translate-y-1 sm:w-auto sm:px-7"
                 >
                   Discuss Your Project
                   <ArrowRight
@@ -751,7 +751,7 @@ export default function PortfolioPage() {
 
                 <a
                   href="#featured-projects"
-                  className="group inline-flex w-full items-center justify-center gap-3 rounded-[13px] border border-[#ded8ec] bg-white px-6 py-4 text-[12px] font-bold text-[#081232] transition-all duration-300 hover:-translate-y-1 hover:border-[#4B22FF] hover:text-[#4B22FF] sm:w-auto sm:px-7"
+                  className="group inline-flex w-full items-center justify-center gap-3 rounded-[13px] border border-[#ded8ec] bg-white px-6 py-4 text-[13px] font-bold text-[#081232] transition-all duration-300 hover:-translate-y-1 hover:border-[#4B22FF] hover:text-[#4B22FF] sm:w-auto sm:px-7"
                 >
                   View Case Studies
                   <ArrowUpRight
@@ -771,7 +771,7 @@ export default function PortfolioPage() {
                   {
                     value: "03",
                     label: "Industry Verticals",
-                    color: "text-[#FF315D]",
+                    color: "text-[#FF2F7D]",
                   },
                   {
                     value: "100%",
@@ -794,7 +794,7 @@ export default function PortfolioPage() {
                     >
                       {item.value}
                     </p>
-                    <p className="mt-2 text-[9px] font-semibold leading-4 text-[#34405f]/58">
+                    <p className="mt-2 text-[11px] font-semibold leading-5 text-[#27314f]/78">
                       {item.label}
                     </p>
                   </div>
@@ -863,7 +863,7 @@ export default function PortfolioPage() {
                   />
                 </span>
               </h2>
-              <p className="mt-5 text-[13px] font-medium leading-7 text-[#34405f]/65">
+              <p className="mt-5 text-[16px] font-medium leading-7 text-[#27314f]/86">
                 The projects combine strategy, design and development to make
                 information clearer, interactions easier and digital presence
                 more valuable.
@@ -887,7 +887,7 @@ export default function PortfolioPage() {
                     <h3 className="mt-5 text-[18px] font-bold text-[#081232]">
                       {capability.title}
                     </h3>
-                    <p className="mt-3 text-[12px] font-medium leading-6 text-[#34405f]/64">
+                    <p className="mt-3 text-[15px] font-medium leading-7 text-[#27314f]/86">
                       {capability.text}
                     </p>
                   </article>
@@ -931,7 +931,7 @@ export default function PortfolioPage() {
                 </h2>
               </div>
 
-              <p className="max-w-[470px] text-[13px] font-medium leading-7 text-[#34405f]/65 xl:text-right">
+              <p className="max-w-[490px] text-[15px] font-medium leading-7 text-[#27314f]/86 xl:text-right">
                 Each project below includes its audience, purpose, core
                 features, technology coverage and the value created through the
                 final digital experience.
@@ -949,12 +949,12 @@ export default function PortfolioPage() {
                     <div className="hidden h-px flex-1 bg-gradient-to-r from-transparent via-[#d8d0ea] to-[#d8d0ea] sm:block" />
 
                     <div className="flex w-full items-center justify-center gap-2 rounded-full border border-[#ded8ec] bg-white px-3 py-2.5 shadow-[0_8px_24px_rgba(35,25,88,0.06)] sm:w-auto sm:shrink-0 sm:gap-3 sm:px-5">
-                      <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#ff315d]">
+                      <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#ff2f7d]">
                         Case Study
                       </span>
 
                       <span
-                        className={`inline-flex h-7 min-w-7 items-center justify-center rounded-full bg-gradient-to-r ${project.accent} px-2 text-[10px] font-black text-white`}
+                        className={`inline-flex h-7 min-w-7 items-center justify-center rounded-full bg-gradient-to-r ${project.accent} px-2 text-[11px] font-black text-white`}
                       >
                         {project.number}
                       </span>
@@ -1001,7 +1001,7 @@ export default function PortfolioPage() {
         <section className="px-4 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-24">
           <div className="mx-auto grid max-w-[1320px] gap-8 rounded-[24px] border border-[#e2ddec] bg-white p-5 shadow-[0_22px_70px_rgba(30,20,80,0.07)] sm:rounded-[30px] sm:p-8 lg:p-10 xl:grid-cols-[0.9fr_1.1fr] xl:items-center xl:p-12">
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-[linear-gradient(90deg,#f1edff,#fff0f5)] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#FF315D]">
+              <span className="inline-flex items-center gap-2 rounded-full bg-[linear-gradient(90deg,#f1edff,#fff0f5)] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#FF2F7D]">
                 <Network size={14} className="text-[#FF2F7D]" />
 
                 <TypewriterText
@@ -1011,23 +1011,41 @@ export default function PortfolioPage() {
                   cursorClassName="bg-[#FF2F7D]"
                 />
               </span>
-              <h2 className="mt-5 font-bold tracking-[-0.04em] text-[#081232]">
-                <span className="block text-[30px] leading-[1.14] sm:text-[38px] lg:text-[40px]">
-                  Strategy, Design and Development
+              <h2 className="mt-5 overflow-visible font-bold tracking-[-0.035em] text-[#081232]">
+                {/* Mobile: two balanced lines kept inside the card */}
+                <span className="block whitespace-nowrap text-[20px] leading-[1.16] tracking-[-0.035em] min-[390px]:text-[22px] min-[430px]:text-[23px] sm:hidden">
+                  Strategy, Design and
                 </span>
 
-                <span className="mt-1 flex overflow-visible pb-[0.1em] text-[30px] leading-[1.14] sm:text-[38px] lg:text-[40px]">
+                <span className="mt-1 flex items-baseline whitespace-nowrap text-[20px] leading-[1.16] tracking-[-0.035em] min-[390px]:text-[22px] min-[430px]:text-[23px] sm:hidden">
+                  Development{" "}
                   <TypewriterText
                     text="Working Together"
                     speed={105}
                     delay={220}
                     nowrap
-                    className="pb-[0.06em] bg-gradient-to-r from-[#4B22FF] via-[#7B3CFF] to-[#FF2F7D] bg-clip-text text-transparent"
+                    className="ml-2 overflow-visible pb-[0.05em] pr-[0.06em] tracking-[-0.02em] bg-gradient-to-r from-[#4B22FF] via-[#7B3CFF] to-[#FF2F7D] bg-clip-text text-transparent"
+                    cursorClassName="bg-[#FF2F7D]"
+                  />
+                </span>
+
+                {/* Tablet and laptop */}
+                <span className="hidden whitespace-nowrap text-[36px] leading-[1.16] sm:block lg:text-[38px] xl:text-[34px] 2xl:text-[36px]">
+                  Strategy, Design and Development
+                </span>
+
+                <span className="mt-1 hidden overflow-visible pb-[0.1em] text-[36px] leading-[1.16] sm:flex lg:text-[38px] xl:text-[34px] 2xl:text-[36px]">
+                  <TypewriterText
+                    text="Working Together"
+                    speed={105}
+                    delay={220}
+                    nowrap
+                    className="overflow-visible pb-[0.06em] pr-[0.08em] tracking-[-0.015em] bg-gradient-to-r from-[#4B22FF] via-[#7B3CFF] to-[#FF2F7D] bg-clip-text text-transparent"
                     cursorClassName="bg-[#FF2F7D]"
                   />
                 </span>
               </h2>
-              <p className="mt-5 max-w-[590px] text-[13px] font-medium leading-7 text-[#34405f]/68">
+              <p className="mt-5 max-w-[610px] text-[16px] font-medium leading-8 text-[#27314f]/88">
                 From early product planning to responsive implementation, the
                 work is connected through one practical delivery approach. This
                 keeps the experience aligned with the organisation, its users
@@ -1077,7 +1095,7 @@ export default function PortfolioPage() {
                     <h3 className="mt-4 text-[14px] font-bold text-[#081232]">
                       {item.title}
                     </h3>
-                    <p className="mt-2 text-[11px] font-medium leading-5 text-[#34405f]/62">
+                    <p className="mt-2 text-[13px] font-medium leading-6 text-[#27314f]/84">
                       {item.text}
                     </p>
                   </div>
@@ -1089,9 +1107,9 @@ export default function PortfolioPage() {
 
         {/* CTA */}
         <section className="px-4 pb-6 sm:px-6 sm:pb-8 lg:px-10">
-          <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[24px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff315d_125%)] px-5 py-10 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:rounded-[28px] sm:px-8 sm:py-12 lg:px-14">
-            <div className="pointer-events-none absolute -left-20 -top-28 h-72 w-72 rounded-full bg-[#1685ff]/20 blur-[90px]" />
-            <div className="pointer-events-none absolute -bottom-28 right-[-40px] h-80 w-80 rounded-full bg-[#ff315d]/35 blur-[95px]" />
+          <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[24px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff2f7d_125%)] px-5 py-10 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:rounded-[28px] sm:px-8 sm:py-12 lg:px-14">
+            <div className="pointer-events-none absolute -left-20 -top-28 h-72 w-72 rounded-full bg-[#00B8FF]/20 blur-[90px]" />
+            <div className="pointer-events-none absolute -bottom-28 right-[-40px] h-80 w-80 rounded-full bg-[#ff2f7d]/35 blur-[95px]" />
             <div className="pointer-events-none absolute inset-0 opacity-[0.10] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:22px_22px]" />
 
             <div className="relative z-10 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
@@ -1104,23 +1122,45 @@ export default function PortfolioPage() {
                     cursorClassName="bg-[#FF7CA8]"
                   />
                 </p>
-                <h2 className="mt-3 max-w-[790px] font-bold tracking-[-0.035em]">
-                  <span className="block text-[30px] leading-[1.16] sm:text-[38px] lg:text-[40px]">
+                <h2 className="mt-3 max-w-[790px] overflow-visible font-bold tracking-[-0.035em]">
+                  {/* Mobile */}
+                  <span className="block whitespace-nowrap text-[25px] leading-[1.16] min-[390px]:text-[27px] sm:hidden">
+                    Let&apos;s Build a Digital
+                  </span>
+
+                  <span className="mt-1 block whitespace-nowrap text-[25px] leading-[1.16] min-[390px]:text-[27px] sm:hidden">
+                    Experience That Supports
+                  </span>
+
+                  <span className="mt-1 flex items-baseline whitespace-nowrap text-[25px] leading-[1.16] min-[390px]:text-[27px] sm:hidden">
+                    Your{" "}
+                    <TypewriterText
+                      text="Next Stage of Growth"
+                      speed={100}
+                      delay={260}
+                      nowrap
+                      className="ml-2 overflow-visible pb-[0.05em] pr-[0.08em] tracking-[-0.015em] text-[#FF7CA8]"
+                      cursorClassName="bg-[#FF7CA8]"
+                    />
+                  </span>
+
+                  {/* Tablet and desktop */}
+                  <span className="hidden text-[38px] leading-[1.16] sm:block lg:text-[40px]">
                     Let&apos;s Build a Digital Experience
                   </span>
 
-                  <span className="mt-1 block text-[30px] leading-[1.16] sm:text-[38px] lg:text-[40px]">
+                  <span className="mt-1 hidden text-[38px] leading-[1.16] sm:block lg:text-[40px]">
                     That Supports Your{" "}
                     <TypewriterText
                       text="Next Stage of Growth"
                       speed={100}
                       delay={260}
-                      className="text-[#FF7CA8]"
+                      className="overflow-visible pb-[0.04em] pr-[0.08em] text-[#FF7CA8]"
                       cursorClassName="bg-[#FF7CA8]"
                     />
                   </span>
                 </h2>
-                <p className="mt-3 max-w-[690px] text-[13px] font-medium leading-7 text-white/65">
+                <p className="mt-3 max-w-[710px] text-[15px] font-medium leading-7 text-white/84">
                   Share your idea, current challenge or business requirement and
                   start a practical conversation with our team.
                 </p>
@@ -1130,18 +1170,18 @@ export default function PortfolioPage() {
                 <button
                   type="button"
                   onClick={() => setShowConsultation(true)}
-                  className="group inline-flex w-full cursor-pointer items-center justify-center gap-3 rounded-[14px] bg-white px-6 py-4 text-[12px] font-bold text-[#17163b] shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 sm:w-auto sm:shrink-0 sm:px-7"
+                  className="group inline-flex w-full cursor-pointer items-center justify-center gap-3 rounded-[14px] bg-white px-6 py-4 text-[13px] font-bold text-[#17163b] shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 sm:w-auto sm:shrink-0 sm:px-7"
                 >
                   Get Free Consultation
                   <ArrowRight
                     size={18}
-                    className="text-[#ff315d] transition-transform duration-300 group-hover:translate-x-1"
+                    className="text-[#ff2f7d] transition-transform duration-300 group-hover:translate-x-1"
                   />
                 </button>
 
                 <Link
                   href="/contact"
-                  className="group inline-flex w-full items-center justify-center gap-3 rounded-[14px] border border-white/20 bg-white/[0.06] px-6 py-4 text-[12px] font-bold text-white backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.12] sm:w-auto sm:shrink-0 sm:px-7"
+                  className="group inline-flex w-full items-center justify-center gap-3 rounded-[14px] border border-white/20 bg-white/[0.06] px-6 py-4 text-[13px] font-bold text-white backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.12] sm:w-auto sm:shrink-0 sm:px-7"
                 >
                   Contact Us
                   <ArrowUpRight
