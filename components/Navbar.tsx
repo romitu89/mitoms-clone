@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent as ReactMouseEvent } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -137,6 +137,36 @@ export default function Navbar() {
     setMobileServicesOpen(false);
   };
 
+  const handleNavigationClick = (
+    event: ReactMouseEvent<HTMLAnchorElement>,
+    href: string,
+    options?: {
+      closeMobileMenu?: boolean;
+      closeDesktopServices?: boolean;
+    },
+  ) => {
+    if (options?.closeMobileMenu) {
+      closeMobileMenu();
+    }
+
+    if (options?.closeDesktopServices) {
+      setDesktopServicesOpen(false);
+    }
+
+    if (pathname !== href) {
+      return;
+    }
+
+    event.preventDefault();
+
+    window.requestAnimationFrame(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+  };
+
   return (
     <>
       <header
@@ -150,7 +180,11 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            onClick={closeMobileMenu}
+            onClick={(event) =>
+              handleNavigationClick(event, "/", {
+                closeMobileMenu: true,
+              })
+            }
             aria-label="MITOMS home"
           >
             <Image
@@ -170,6 +204,7 @@ export default function Navbar() {
             <Link
               href="/"
               aria-current={isActive("/") ? "page" : undefined}
+              onClick={(event) => handleNavigationClick(event, "/")}
               className={`group relative text-[15px] font-semibold transition-colors duration-300 ${
                 isActive("/")
                   ? "text-[#4B22FF]"
@@ -197,7 +232,11 @@ export default function Navbar() {
                 aria-expanded={desktopServicesOpen}
                 onMouseEnter={() => setDesktopServicesOpen(true)}
                 onFocus={() => setDesktopServicesOpen(true)}
-                onClick={() => setDesktopServicesOpen(false)}
+                onClick={(event) =>
+                  handleNavigationClick(event, "/services", {
+                    closeDesktopServices: true,
+                  })
+                }
                 className={`group/services-link relative flex items-center gap-1.5 text-[15px] font-semibold transition-colors duration-300 ${
                   desktopServicesOpen || servicesActive
                     ? "text-[#4B22FF]"
@@ -249,8 +288,10 @@ export default function Navbar() {
                           aria-current={
                             serviceIsActive ? "page" : undefined
                           }
-                          onClick={() =>
-                            setDesktopServicesOpen(false)
+                          onClick={(event) =>
+                            handleNavigationClick(event, service.href, {
+                              closeDesktopServices: true,
+                            })
                           }
                           className={`group/service flex items-start gap-4 rounded-[18px] border p-4 transition-all duration-300 ${
                             serviceIsActive
@@ -315,6 +356,9 @@ export default function Navbar() {
               aria-current={
                 isActive("/portfolio") ? "page" : undefined
               }
+              onClick={(event) =>
+                handleNavigationClick(event, "/portfolio")
+              }
               className={`group relative text-[15px] font-semibold transition-colors duration-300 ${
                 isActive("/portfolio")
                   ? "text-[#4B22FF]"
@@ -336,6 +380,7 @@ export default function Navbar() {
             <Link
               href="/about"
               aria-current={isActive("/about") ? "page" : undefined}
+              onClick={(event) => handleNavigationClick(event, "/about")}
               className={`group relative text-[15px] font-semibold transition-colors duration-300 ${
                 isActive("/about")
                   ? "text-[#4B22FF]"
@@ -358,6 +403,9 @@ export default function Navbar() {
               href="/contact"
               aria-current={
                 isActive("/contact") ? "page" : undefined
+              }
+              onClick={(event) =>
+                handleNavigationClick(event, "/contact")
               }
               className={`group relative text-[15px] font-semibold transition-colors duration-300 ${
                 isActive("/contact")
@@ -411,7 +459,11 @@ export default function Navbar() {
               <Link
                 href="/"
                 aria-current={isActive("/") ? "page" : undefined}
-                onClick={closeMobileMenu}
+                onClick={(event) =>
+                  handleNavigationClick(event, "/", {
+                    closeMobileMenu: true,
+                  })
+                }
                 className={`border-b border-[#ece8f5] py-4 text-[15px] font-semibold transition-colors ${
                   isActive("/")
                     ? "text-[#4B22FF]"
@@ -470,7 +522,11 @@ export default function Navbar() {
                           aria-current={
                             serviceIsActive ? "page" : undefined
                           }
-                          onClick={closeMobileMenu}
+                          onClick={(event) =>
+                            handleNavigationClick(event, service.href, {
+                              closeMobileMenu: true,
+                            })
+                          }
                           className={`flex items-center gap-3 rounded-[14px] border px-3 py-3 transition-all duration-300 ${
                             serviceIsActive
                               ? "border-[#cec4ff] bg-[#f3efff] shadow-[0_8px_20px_rgba(75,34,255,0.08)]"
@@ -508,7 +564,11 @@ export default function Navbar() {
 
                     <Link
                       href="/services"
-                      onClick={closeMobileMenu}
+                      onClick={(event) =>
+                        handleNavigationClick(event, "/services", {
+                          closeMobileMenu: true,
+                        })
+                      }
                       className={`flex items-center justify-center gap-2 rounded-[12px] border py-3 text-[12px] font-bold transition-colors ${
                         pathname === "/services"
                           ? "border-[#4B22FF] bg-[#f3efff] text-[#4B22FF]"
@@ -528,7 +588,11 @@ export default function Navbar() {
                 aria-current={
                   isActive("/portfolio") ? "page" : undefined
                 }
-                onClick={closeMobileMenu}
+                onClick={(event) =>
+                  handleNavigationClick(event, "/portfolio", {
+                    closeMobileMenu: true,
+                  })
+                }
                 className={`border-b border-[#ece8f5] py-4 text-[15px] font-semibold transition-colors ${
                   isActive("/portfolio")
                     ? "text-[#4B22FF]"
@@ -550,7 +614,11 @@ export default function Navbar() {
                 aria-current={
                   isActive("/about") ? "page" : undefined
                 }
-                onClick={closeMobileMenu}
+                onClick={(event) =>
+                  handleNavigationClick(event, "/about", {
+                    closeMobileMenu: true,
+                  })
+                }
                 className={`border-b border-[#ece8f5] py-4 text-[15px] font-semibold transition-colors ${
                   isActive("/about")
                     ? "text-[#4B22FF]"
@@ -572,7 +640,11 @@ export default function Navbar() {
                 aria-current={
                   isActive("/contact") ? "page" : undefined
                 }
-                onClick={closeMobileMenu}
+                onClick={(event) =>
+                  handleNavigationClick(event, "/contact", {
+                    closeMobileMenu: true,
+                  })
+                }
                 className={`border-b border-[#ece8f5] py-4 text-[15px] font-semibold transition-colors ${
                   isActive("/contact")
                     ? "text-[#4B22FF]"
