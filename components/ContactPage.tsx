@@ -33,6 +33,191 @@ const services = [
   "Other",
 ];
 
+const clientNamePattern = /^[\p{L}\p{M} .'-]+$/u;
+
+
+function sanitizeNameInput(value: string): string {
+  return value
+    .normalize("NFKC")
+    .replace(/[^\p{L}\p{M} .'-]/gu, "")
+    .replace(/\s{2,}/g, " ")
+    .slice(0, 70);
+}
+
+function sanitizePhoneInput(value: string): string {
+  const allowedCharacters = value.replace(/[^+()\s\d-]/g, "");
+  const singleLeadingPlus = allowedCharacters.replace(/(?!^)\+/g, "");
+
+  return singleLeadingPlus.replace(/\s{2,}/g, " ").slice(0, 22);
+}
+
+function sanitizeEmailInput(value: string): string {
+  return value.replace(/\s/g, "").slice(0, 180);
+}
+
+function sanitizeCompanyInput(value: string): string {
+  return value
+    .normalize("NFKC")
+    .replace(/[^\p{L}\p{M}\p{N} &.,'()\/-]/gu, "")
+    .replace(/\s{2,}/g, " ")
+    .slice(0, 100);
+}
+
+type FormFieldName =
+  | "name"
+  | "phone"
+  | "email"
+  | "company"
+  | "service"
+  | "message";
+
+type FormFieldErrors = Partial<Record<FormFieldName, string>>;
+
+function getNameFieldError(value: string): string {
+  const name = value.normalize("NFKC").trim();
+
+  if (!name) {
+    return "Full name is required.";
+  }
+
+  if (
+    name.length < 2 ||
+    name.length > 70 ||
+    !clientNamePattern.test(name) ||
+    (name.match(/\p{L}/gu) ?? []).length < 2
+  ) {
+    return "Use letters only. Numbers and special symbols are not allowed.";
+  }
+
+  if (/^(test|testing|asdf|qwerty|unknown|anonymous|admin|user|name)$/i.test(name)) {
+    return "Please enter your real full name.";
+  }
+
+  return "";
+}
+
+function getPhoneFieldError(value: string): string {
+  const phone = value.trim();
+  const phoneDigits = phone.replace(/\D/g, "");
+
+  if (!phone) {
+    return "Phone number is required.";
+  }
+
+  if (!/^[+()\s\d-]+$/.test(phone)) {
+    return "Use digits only. Letters are not allowed in the phone number.";
+  }
+
+  if (
+    phoneDigits.length < 8 ||
+    phoneDigits.length > 15 ||
+    /^(\d)\1+$/.test(phoneDigits)
+  ) {
+    return "Enter a valid phone number containing 8 to 15 digits.";
+  }
+
+  return "";
+}
+
+function getEmailFieldError(value: string): string {
+  const email = value.trim().toLowerCase();
+
+  if (!email) {
+    return "Email address is required.";
+  }
+
+  if (
+    email.length < 6 ||
+    email.length > 180 ||
+    !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) ||
+    email.includes("..")
+  ) {
+    return "Enter a valid email address, for example name@company.com.";
+  }
+
+  return "";
+}
+
+function getCompanyFieldError(value: string): string {
+  const company = value.normalize("NFKC").trim();
+
+  if (!company) {
+    return "";
+  }
+
+  if (
+    company.length < 2 ||
+    company.length > 100 ||
+    !/^[\p{L}\p{M}\p{N} &.,'()\/-]+$/u.test(company)
+  ) {
+    return "Enter a valid company name using normal letters, numbers and punctuation.";
+  }
+
+  return "";
+}
+
+function getServiceFieldError(value: string): string {
+  if (!value || !services.includes(value)) {
+    return "Please select a service.";
+  }
+
+  return "";
+}
+
+function getMessageFieldError(value: string): string {
+  const message = value.normalize("NFKC").trim();
+  const words = message.match(/[\p{L}\p{N}][\p{L}\p{M}\p{N}'-]*/gu) ?? [];
+  const uniqueWords = new Set(
+    words.map((word) => word.toLowerCase()).filter((word) => word.length >= 3),
+  );
+
+  if (!message) {
+    return "Project details are required.";
+  }
+
+  if (
+    message.length < 30 ||
+    message.length > 3000 ||
+    words.length < 6 ||
+    uniqueWords.size < 4 ||
+    (message.match(/\p{L}/gu) ?? []).length < 20 ||
+    /(.)\1{8,}/u.test(message)
+  ) {
+    return "Describe your project in at least 6 meaningful words and 30 characters.";
+  }
+
+  return "";
+}
+
+function getFieldValidationErrors(values: {
+  name: string;
+  phone: string;
+  email: string;
+  company?: string;
+  service: string;
+  message: string;
+}): FormFieldErrors {
+  const errors: FormFieldErrors = {};
+
+  const nameError = getNameFieldError(values.name);
+  const phoneError = getPhoneFieldError(values.phone);
+  const emailError = getEmailFieldError(values.email);
+  const companyError = getCompanyFieldError(values.company ?? "");
+  const serviceError = getServiceFieldError(values.service);
+  const messageError = getMessageFieldError(values.message);
+
+  if (nameError) errors.name = nameError;
+  if (phoneError) errors.phone = phoneError;
+  if (emailError) errors.email = emailError;
+  if (companyError) errors.company = companyError;
+  if (serviceError) errors.service = serviceError;
+  if (messageError) errors.message = messageError;
+
+  return errors;
+}
+
+
+
 const budgets = [
   "Not decided yet",
   "Below ₹50,000",
@@ -218,6 +403,79 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<FormFieldErrors>({});
+  const formRef = useRef<HTMLFormElement>(null);
+  const formStartedAtRef = useRef<number>(0);
+
+  const updateFieldError = (field: FormFieldName, error: string) => {
+    setFieldErrors((current) => {
+      if (current[field] === error) {
+        return current;
+      }
+
+      const next = { ...current };
+
+      if (error) {
+        next[field] = error;
+      } else {
+        delete next[field];
+      }
+
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    const clearContactForm = () => {
+      const form = formRef.current;
+
+      if (!form) {
+        return;
+      }
+
+      form.reset();
+
+      Array.from(form.elements).forEach((element) => {
+        if (element instanceof HTMLInputElement) {
+          if (
+            element.type !== "hidden" &&
+            element.type !== "submit" &&
+            element.type !== "button"
+          ) {
+            element.value = "";
+          }
+
+          return;
+        }
+
+        if (element instanceof HTMLTextAreaElement) {
+          element.value = "";
+          return;
+        }
+
+        if (element instanceof HTMLSelectElement) {
+          element.selectedIndex = 0;
+        }
+      });
+
+      setSubmitted(false);
+      setIsSubmitting(false);
+      setSubmitError("");
+      setFieldErrors({});
+      formStartedAtRef.current = new Date().getTime();
+    };
+
+    const frameId = window.requestAnimationFrame(clearContactForm);
+    const delayedResetId = window.setTimeout(clearContactForm, 80);
+
+    window.addEventListener("pageshow", clearContactForm);
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      window.clearTimeout(delayedResetId);
+      window.removeEventListener("pageshow", clearContactForm);
+    };
+  }, []);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -229,41 +487,38 @@ export default function ContactPage() {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
-    const name = String(formData.get("name") ?? "").trim();
-    const phone = String(formData.get("phone") ?? "").trim();
-    const email = String(formData.get("email") ?? "").trim();
-    const company = String(formData.get("company") ?? "").trim();
-    const service = String(formData.get("service") ?? "").trim();
-    const budget = String(formData.get("budget") ?? "").trim();
-    const projectDetails = String(formData.get("message") ?? "").trim();
-    const website = String(formData.get("website") ?? "").trim();
-
-    const message = [
-      "Source: Contact Page Project Enquiry",
-      company ? `Company: ${company}` : "",
-      budget ? `Estimated Budget: ${budget}` : "",
-      "",
-      projectDetails,
-    ]
-      .filter((line, index, lines) => {
-        if (line !== "") {
-          return true;
-        }
-
-        return index > 0 && index < lines.length - 1;
-      })
-      .join("\n")
-      .trim();
-
     const payload = {
-      name,
-      phone,
-      email,
-      service,
-      message,
-      website,
+      name: String(formData.get("name") ?? "").trim(),
+      phone: String(formData.get("phone") ?? "").trim(),
+      email: String(formData.get("email") ?? "").trim(),
+      company: String(formData.get("company") ?? "").trim(),
+      service: String(formData.get("service") ?? "").trim(),
+      budget: String(formData.get("budget") ?? "").trim(),
+      message: String(formData.get("message") ?? "").trim(),
+      website: String(formData.get("website") ?? "").trim(),
+      source: "contact-page",
+      startedAt: formStartedAtRef.current,
     };
 
+    const validationErrors = getFieldValidationErrors(payload);
+    const firstInvalidField = ["name", "email", "phone", "company", "service", "message"].find(
+      (field) => validationErrors[field as FormFieldName],
+    ) as FormFieldName | undefined;
+
+    if (firstInvalidField) {
+      setFieldErrors(validationErrors);
+      setSubmitError("Please correct the highlighted fields before submitting.");
+
+      const invalidElement = form.elements.namedItem(firstInvalidField);
+
+      if (invalidElement instanceof HTMLElement) {
+        invalidElement.focus();
+      }
+
+      return;
+    }
+
+    setFieldErrors({});
     setIsSubmitting(true);
     setSubmitError("");
 
@@ -288,6 +543,8 @@ export default function ContactPage() {
       }
 
       form.reset();
+      setFieldErrors({});
+      formStartedAtRef.current = new Date().getTime();
       setSubmitted(true);
     } catch (error) {
       setSubmitError(
@@ -552,7 +809,13 @@ export default function ContactPage() {
                   possible. Our team will review your enquiry and contact you.
                 </p>
 
-                <form onSubmit={handleSubmit} className="mt-7 space-y-4 sm:mt-8">
+                <form
+                  ref={formRef}
+                  onSubmit={handleSubmit}
+                  noValidate
+                  autoComplete="off"
+                  className="mt-7 space-y-4 sm:mt-8"
+                >
                   <input
                     type="text"
                     name="website"
@@ -572,18 +835,67 @@ export default function ContactPage() {
                       <div className="relative">
                         <User
                           size={18}
-                          className="absolute left-4 top-1/2 -translate-y-1/2 text-[#786f98] transition-colors group-focus-within:text-[#4b22ff]"
+                          className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors ${
+                            fieldErrors.name
+                              ? "text-[#d11a4d]"
+                              : "text-[#786f98] group-focus-within:text-[#4b22ff]"
+                          }`}
                         />
 
                         <input
                           required
                           type="text"
                           name="name"
+                          minLength={2}
+                          maxLength={70}
                           autoComplete="name"
+                          inputMode="text"
+                          aria-invalid={Boolean(fieldErrors.name)}
+                          aria-describedby={fieldErrors.name ? "contact-name-error" : undefined}
+                          onInput={(event) => {
+                            const rawValue = event.currentTarget.value;
+                            const sanitizedValue = sanitizeNameInput(rawValue);
+                            event.currentTarget.value = sanitizedValue;
+
+                            if (rawValue !== sanitizedValue) {
+                              updateFieldError(
+                                "name",
+                                "Use letters only. Numbers and special symbols are not allowed.",
+                              );
+                              return;
+                            }
+
+                            updateFieldError(
+                              "name",
+                              sanitizedValue.trim().length >= 2
+                                ? getNameFieldError(sanitizedValue)
+                                : "",
+                            );
+                          }}
+                          onBlur={(event) =>
+                            updateFieldError(
+                              "name",
+                              getNameFieldError(event.currentTarget.value),
+                            )
+                          }
                           placeholder="Enter your name"
-                          className="h-[52px] w-full rounded-[14px] border border-[#e1ddec] bg-white pl-11 pr-3 text-[13px] font-semibold text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)] sm:h-14 sm:rounded-[15px] sm:pl-12 sm:pr-4 sm:text-[14px]"
+                          className={`h-[52px] w-full rounded-[14px] border bg-white pl-11 pr-3 text-[13px] font-semibold text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 sm:h-14 sm:rounded-[15px] sm:pl-12 sm:pr-4 sm:text-[14px] ${
+                            fieldErrors.name
+                              ? "border-[#e11d48] bg-[#fff7f9] shadow-[0_0_0_3px_rgba(225,29,72,0.08)] focus:border-[#e11d48]"
+                              : "border-[#e1ddec] focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
+                          }`}
                         />
                       </div>
+                      {fieldErrors.name && (
+                        <p
+                          id="contact-name-error"
+                          role="alert"
+                          className="mt-1.5 flex items-start gap-1.5 text-[12px] font-bold leading-5 text-[#d11a4d]"
+                        >
+                          <span aria-hidden="true">•</span>
+                          {fieldErrors.name}
+                        </p>
+                      )}
                     </label>
 
                     <label className="group block">
@@ -594,18 +906,63 @@ export default function ContactPage() {
                       <div className="relative">
                         <Mail
                           size={18}
-                          className="absolute left-4 top-1/2 -translate-y-1/2 text-[#786f98] transition-colors group-focus-within:text-[#4b22ff]"
+                          className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors ${
+                            fieldErrors.email
+                              ? "text-[#d11a4d]"
+                              : "text-[#786f98] group-focus-within:text-[#4b22ff]"
+                          }`}
                         />
 
                         <input
                           required
                           type="email"
                           name="email"
+                          maxLength={180}
                           autoComplete="email"
+                          inputMode="email"
+                          aria-invalid={Boolean(fieldErrors.email)}
+                          aria-describedby={fieldErrors.email ? "contact-email-error" : undefined}
+                          onInput={(event) => {
+                            const rawValue = event.currentTarget.value;
+                            const sanitizedValue = sanitizeEmailInput(rawValue);
+                            event.currentTarget.value = sanitizedValue;
+
+                            if (rawValue !== sanitizedValue) {
+                              updateFieldError("email", "Spaces are not allowed in an email address.");
+                              return;
+                            }
+
+                            updateFieldError(
+                              "email",
+                              sanitizedValue.includes("@")
+                                ? getEmailFieldError(sanitizedValue)
+                                : "",
+                            );
+                          }}
+                          onBlur={(event) =>
+                            updateFieldError(
+                              "email",
+                              getEmailFieldError(event.currentTarget.value),
+                            )
+                          }
                           placeholder="name@company.com"
-                          className="h-14 w-full rounded-[15px] border border-[#e1ddec] bg-white pl-12 pr-4 text-[13px] font-semibold text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
+                          className={`h-14 w-full rounded-[15px] border bg-white pl-12 pr-4 text-[13px] font-semibold text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 ${
+                            fieldErrors.email
+                              ? "border-[#e11d48] bg-[#fff7f9] shadow-[0_0_0_3px_rgba(225,29,72,0.08)] focus:border-[#e11d48]"
+                              : "border-[#e1ddec] focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
+                          }`}
                         />
                       </div>
+                      {fieldErrors.email && (
+                        <p
+                          id="contact-email-error"
+                          role="alert"
+                          className="mt-1.5 flex items-start gap-1.5 text-[12px] font-bold leading-5 text-[#d11a4d]"
+                        >
+                          <span aria-hidden="true">•</span>
+                          {fieldErrors.email}
+                        </p>
+                      )}
                     </label>
                   </div>
 
@@ -619,18 +976,66 @@ export default function ContactPage() {
                       <div className="relative">
                         <Phone
                           size={18}
-                          className="absolute left-4 top-1/2 -translate-y-1/2 text-[#786f98] transition-colors group-focus-within:text-[#4b22ff]"
+                          className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors ${
+                            fieldErrors.phone
+                              ? "text-[#d11a4d]"
+                              : "text-[#786f98] group-focus-within:text-[#4b22ff]"
+                          }`}
                         />
 
                         <input
                           required
                           type="tel"
                           name="phone"
+                          minLength={8}
+                          maxLength={22}
+                          inputMode="tel"
                           autoComplete="tel"
+                          aria-invalid={Boolean(fieldErrors.phone)}
+                          aria-describedby={fieldErrors.phone ? "contact-phone-error" : undefined}
+                          onInput={(event) => {
+                            const rawValue = event.currentTarget.value;
+                            const sanitizedValue = sanitizePhoneInput(rawValue);
+                            event.currentTarget.value = sanitizedValue;
+
+                            if (rawValue !== sanitizedValue) {
+                              updateFieldError(
+                                "phone",
+                                "Use digits only. Letters are not allowed in the phone number.",
+                              );
+                              return;
+                            }
+
+                            const digitCount = sanitizedValue.replace(/\D/g, "").length;
+                            updateFieldError(
+                              "phone",
+                              digitCount >= 8 ? getPhoneFieldError(sanitizedValue) : "",
+                            );
+                          }}
+                          onBlur={(event) =>
+                            updateFieldError(
+                              "phone",
+                              getPhoneFieldError(event.currentTarget.value),
+                            )
+                          }
                           placeholder="Enter your phone number"
-                          className="h-14 w-full rounded-[15px] border border-[#e1ddec] bg-white pl-12 pr-4 text-[13px] font-semibold text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
+                          className={`h-14 w-full rounded-[15px] border bg-white pl-12 pr-4 text-[13px] font-semibold text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 ${
+                            fieldErrors.phone
+                              ? "border-[#e11d48] bg-[#fff7f9] shadow-[0_0_0_3px_rgba(225,29,72,0.08)] focus:border-[#e11d48]"
+                              : "border-[#e1ddec] focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
+                          }`}
                         />
                       </div>
+                      {fieldErrors.phone && (
+                        <p
+                          id="contact-phone-error"
+                          role="alert"
+                          className="mt-1.5 flex items-start gap-1.5 text-[12px] font-bold leading-5 text-[#d11a4d]"
+                        >
+                          <span aria-hidden="true">•</span>
+                          {fieldErrors.phone}
+                        </p>
+                      )}
                     </label>
 
                     <label className="group block">
@@ -641,17 +1046,65 @@ export default function ContactPage() {
                       <div className="relative">
                         <Building2
                           size={18}
-                          className="absolute left-4 top-1/2 -translate-y-1/2 text-[#786f98] transition-colors group-focus-within:text-[#4b22ff]"
+                          className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors ${
+                            fieldErrors.company
+                              ? "text-[#d11a4d]"
+                              : "text-[#786f98] group-focus-within:text-[#4b22ff]"
+                          }`}
                         />
 
                         <input
                           type="text"
                           name="company"
+                          minLength={2}
+                          maxLength={100}
                           autoComplete="organization"
+                          aria-invalid={Boolean(fieldErrors.company)}
+                          aria-describedby={fieldErrors.company ? "contact-company-error" : undefined}
+                          onInput={(event) => {
+                            const rawValue = event.currentTarget.value;
+                            const sanitizedValue = sanitizeCompanyInput(rawValue);
+                            event.currentTarget.value = sanitizedValue;
+
+                            if (rawValue !== sanitizedValue) {
+                              updateFieldError(
+                                "company",
+                                "Use normal letters, numbers and business-name punctuation only.",
+                              );
+                              return;
+                            }
+
+                            updateFieldError(
+                              "company",
+                              sanitizedValue.trim().length >= 2
+                                ? getCompanyFieldError(sanitizedValue)
+                                : "",
+                            );
+                          }}
+                          onBlur={(event) =>
+                            updateFieldError(
+                              "company",
+                              getCompanyFieldError(event.currentTarget.value),
+                            )
+                          }
                           placeholder="Your company"
-                          className="h-14 w-full rounded-[15px] border border-[#e1ddec] bg-white pl-12 pr-4 text-[13px] font-semibold text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
+                          className={`h-14 w-full rounded-[15px] border bg-white pl-12 pr-4 text-[13px] font-semibold text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 ${
+                            fieldErrors.company
+                              ? "border-[#e11d48] bg-[#fff7f9] shadow-[0_0_0_3px_rgba(225,29,72,0.08)] focus:border-[#e11d48]"
+                              : "border-[#e1ddec] focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
+                          }`}
                         />
                       </div>
+                      {fieldErrors.company && (
+                        <p
+                          id="contact-company-error"
+                          role="alert"
+                          className="mt-1.5 flex items-start gap-1.5 text-[12px] font-bold leading-5 text-[#d11a4d]"
+                        >
+                          <span aria-hidden="true">•</span>
+                          {fieldErrors.company}
+                        </p>
+                      )}
                     </label>
                   </div>
 
@@ -666,14 +1119,34 @@ export default function ContactPage() {
                       <div className="relative">
                         <BriefcaseBusiness
                           size={18}
-                          className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#786f98]"
+                          className={`pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 ${
+                            fieldErrors.service ? "text-[#d11a4d]" : "text-[#786f98]"
+                          }`}
                         />
 
                         <select
                           required
                           name="service"
                           defaultValue=""
-                          className="h-[52px] w-full appearance-none rounded-[14px] border border-[#e1ddec] bg-white pl-11 pr-10 text-[13px] font-semibold text-[#34405f] outline-none transition-all focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)] sm:h-14 sm:rounded-[15px] sm:pl-12 sm:pr-11 sm:text-[14px]"
+                          aria-invalid={Boolean(fieldErrors.service)}
+                          aria-describedby={fieldErrors.service ? "contact-service-error" : undefined}
+                          onChange={(event) =>
+                            updateFieldError(
+                              "service",
+                              getServiceFieldError(event.currentTarget.value),
+                            )
+                          }
+                          onBlur={(event) =>
+                            updateFieldError(
+                              "service",
+                              getServiceFieldError(event.currentTarget.value),
+                            )
+                          }
+                          className={`h-[52px] w-full appearance-none rounded-[14px] border bg-white pl-11 pr-10 text-[13px] font-semibold text-[#34405f] outline-none transition-all sm:h-14 sm:rounded-[15px] sm:pl-12 sm:pr-11 sm:text-[14px] ${
+                            fieldErrors.service
+                              ? "border-[#e11d48] bg-[#fff7f9] shadow-[0_0_0_3px_rgba(225,29,72,0.08)] focus:border-[#e11d48]"
+                              : "border-[#e1ddec] focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
+                          }`}
                         >
                           <option value="" disabled>
                             Select service
@@ -688,9 +1161,21 @@ export default function ContactPage() {
 
                         <ChevronDown
                           size={17}
-                          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#786f98]"
+                          className={`pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 ${
+                            fieldErrors.service ? "text-[#d11a4d]" : "text-[#786f98]"
+                          }`}
                         />
                       </div>
+                      {fieldErrors.service && (
+                        <p
+                          id="contact-service-error"
+                          role="alert"
+                          className="mt-1.5 flex items-start gap-1.5 text-[12px] font-bold leading-5 text-[#d11a4d]"
+                        >
+                          <span aria-hidden="true">•</span>
+                          {fieldErrors.service}
+                        </p>
+                      )}
                     </label>
 
                     <label className="block">
@@ -737,17 +1222,54 @@ export default function ContactPage() {
                     <div className="relative">
                       <MessageSquareText
                         size={18}
-                        className="absolute left-4 top-5 text-[#786f98] transition-colors group-focus-within:text-[#4b22ff]"
+                        className={`absolute left-4 top-5 transition-colors ${
+                          fieldErrors.message
+                            ? "text-[#d11a4d]"
+                            : "text-[#786f98] group-focus-within:text-[#4b22ff]"
+                        }`}
                       />
 
                       <textarea
                         required
                         name="message"
+                        minLength={30}
+                        maxLength={3000}
                         rows={6}
+                        aria-invalid={Boolean(fieldErrors.message)}
+                        aria-describedby={fieldErrors.message ? "contact-message-error" : undefined}
+                        onInput={(event) => {
+                          const value = event.currentTarget.value;
+                          updateFieldError(
+                            "message",
+                            value.trim().length >= 30
+                              ? getMessageFieldError(value)
+                              : "",
+                          );
+                        }}
+                        onBlur={(event) =>
+                          updateFieldError(
+                            "message",
+                            getMessageFieldError(event.currentTarget.value),
+                          )
+                        }
                         placeholder="Tell us about your project, goals, required features and expected timeline..."
-                        className="w-full resize-none rounded-[14px] border border-[#e1ddec] bg-white py-3.5 pl-11 pr-3 text-[12px] font-semibold leading-6 text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)] sm:rounded-[15px] sm:py-4 sm:pl-12 sm:pr-4 sm:text-[14px]"
+                        className={`w-full resize-none rounded-[14px] border bg-white py-3.5 pl-11 pr-3 text-[12px] font-semibold leading-6 text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 sm:rounded-[15px] sm:py-4 sm:pl-12 sm:pr-4 sm:text-[14px] ${
+                          fieldErrors.message
+                            ? "border-[#e11d48] bg-[#fff7f9] shadow-[0_0_0_3px_rgba(225,29,72,0.08)] focus:border-[#e11d48]"
+                            : "border-[#e1ddec] focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
+                        }`}
                       />
                     </div>
+                    {fieldErrors.message && (
+                      <p
+                        id="contact-message-error"
+                        role="alert"
+                        className="mt-1.5 flex items-start gap-1.5 text-[12px] font-bold leading-5 text-[#d11a4d]"
+                      >
+                        <span aria-hidden="true">•</span>
+                        {fieldErrors.message}
+                      </p>
+                    )}
                   </label>
 
                   <button
@@ -826,8 +1348,10 @@ export default function ContactPage() {
                 <button
                   type="button"
                   onClick={() => {
+                    formStartedAtRef.current = new Date().getTime();
                     setSubmitted(false);
                     setSubmitError("");
+                    setFieldErrors({});
                   }}
                   className="mt-8 inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-[13px] bg-[#081232] px-7 text-[13px] font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#4b22ff]"
                 >

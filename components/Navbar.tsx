@@ -63,8 +63,16 @@ const services = [
   },
 ];
 
+const normalizePath = (value: string) => {
+  const pathWithoutQueryOrHash = value.split(/[?#]/, 1)[0];
+  const pathWithoutTrailingSlash = pathWithoutQueryOrHash.replace(/\/+$/, "");
+
+  return pathWithoutTrailingSlash || "/";
+};
+
 export default function Navbar() {
   const pathname = usePathname();
+  const currentPath = normalizePath(pathname);
 
   const [isOpen, setIsOpen] = useState(false);
   const [showConsultation, setShowConsultation] = useState(false);
@@ -73,11 +81,16 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const isActive = (href: string) => {
-    if (href === "/") {
-      return pathname === "/";
+    const normalizedHref = normalizePath(href);
+
+    if (normalizedHref === "/") {
+      return currentPath === "/";
     }
 
-    return pathname === href || pathname.startsWith(`${href}/`);
+    return (
+      currentPath === normalizedHref ||
+      currentPath.startsWith(`${normalizedHref}/`)
+    );
   };
 
   const servicesActive = isActive("/services");
@@ -153,16 +166,18 @@ export default function Navbar() {
       setDesktopServicesOpen(false);
     }
 
-    if (pathname !== href) {
+    if (currentPath !== normalizePath(href)) {
       return;
     }
 
     event.preventDefault();
 
     window.requestAnimationFrame(() => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
+      window.requestAnimationFrame(() => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
       });
     });
   };

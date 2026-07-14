@@ -29,6 +29,184 @@ const services = [
   "Digital Marketing",
 ];
 
+const clientNamePattern = /^[\p{L}\p{M} .'-]+$/u;
+
+
+function sanitizeNameInput(value: string): string {
+  return value
+    .normalize("NFKC")
+    .replace(/[^\p{L}\p{M} .'-]/gu, "")
+    .replace(/\s{2,}/g, " ")
+    .slice(0, 70);
+}
+
+function sanitizePhoneInput(value: string): string {
+  const allowedCharacters = value.replace(/[^+()\s\d-]/g, "");
+  const singleLeadingPlus = allowedCharacters.replace(/(?!^)\+/g, "");
+
+  return singleLeadingPlus.replace(/\s{2,}/g, " ").slice(0, 22);
+}
+
+function sanitizeEmailInput(value: string): string {
+  return value.replace(/\s/g, "").slice(0, 180);
+}
+
+
+type FormFieldName =
+  | "name"
+  | "phone"
+  | "email"
+  | "company"
+  | "service"
+  | "message";
+
+type FormFieldErrors = Partial<Record<FormFieldName, string>>;
+
+function getNameFieldError(value: string): string {
+  const name = value.normalize("NFKC").trim();
+
+  if (!name) {
+    return "Full name is required.";
+  }
+
+  if (
+    name.length < 2 ||
+    name.length > 70 ||
+    !clientNamePattern.test(name) ||
+    (name.match(/\p{L}/gu) ?? []).length < 2
+  ) {
+    return "Use letters only. Numbers and special symbols are not allowed.";
+  }
+
+  if (/^(test|testing|asdf|qwerty|unknown|anonymous|admin|user|name)$/i.test(name)) {
+    return "Please enter your real full name.";
+  }
+
+  return "";
+}
+
+function getPhoneFieldError(value: string): string {
+  const phone = value.trim();
+  const phoneDigits = phone.replace(/\D/g, "");
+
+  if (!phone) {
+    return "Phone number is required.";
+  }
+
+  if (!/^[+()\s\d-]+$/.test(phone)) {
+    return "Use digits only. Letters are not allowed in the phone number.";
+  }
+
+  if (
+    phoneDigits.length < 8 ||
+    phoneDigits.length > 15 ||
+    /^(\d)\1+$/.test(phoneDigits)
+  ) {
+    return "Enter a valid phone number containing 8 to 15 digits.";
+  }
+
+  return "";
+}
+
+function getEmailFieldError(value: string): string {
+  const email = value.trim().toLowerCase();
+
+  if (!email) {
+    return "Email address is required.";
+  }
+
+  if (
+    email.length < 6 ||
+    email.length > 180 ||
+    !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) ||
+    email.includes("..")
+  ) {
+    return "Enter a valid email address, for example name@company.com.";
+  }
+
+  return "";
+}
+
+function getCompanyFieldError(value: string): string {
+  const company = value.normalize("NFKC").trim();
+
+  if (!company) {
+    return "";
+  }
+
+  if (
+    company.length < 2 ||
+    company.length > 100 ||
+    !/^[\p{L}\p{M}\p{N} &.,'()\/-]+$/u.test(company)
+  ) {
+    return "Enter a valid company name using normal letters, numbers and punctuation.";
+  }
+
+  return "";
+}
+
+function getServiceFieldError(value: string): string {
+  if (!value || !services.includes(value)) {
+    return "Please select a service.";
+  }
+
+  return "";
+}
+
+function getMessageFieldError(value: string): string {
+  const message = value.normalize("NFKC").trim();
+  const words = message.match(/[\p{L}\p{N}][\p{L}\p{M}\p{N}'-]*/gu) ?? [];
+  const uniqueWords = new Set(
+    words.map((word) => word.toLowerCase()).filter((word) => word.length >= 3),
+  );
+
+  if (!message) {
+    return "Project details are required.";
+  }
+
+  if (
+    message.length < 30 ||
+    message.length > 3000 ||
+    words.length < 6 ||
+    uniqueWords.size < 4 ||
+    (message.match(/\p{L}/gu) ?? []).length < 20 ||
+    /(.)\1{8,}/u.test(message)
+  ) {
+    return "Describe your project in at least 6 meaningful words and 30 characters.";
+  }
+
+  return "";
+}
+
+function getFieldValidationErrors(values: {
+  name: string;
+  phone: string;
+  email: string;
+  company?: string;
+  service: string;
+  message: string;
+}): FormFieldErrors {
+  const errors: FormFieldErrors = {};
+
+  const nameError = getNameFieldError(values.name);
+  const phoneError = getPhoneFieldError(values.phone);
+  const emailError = getEmailFieldError(values.email);
+  const companyError = getCompanyFieldError(values.company ?? "");
+  const serviceError = getServiceFieldError(values.service);
+  const messageError = getMessageFieldError(values.message);
+
+  if (nameError) errors.name = nameError;
+  if (phoneError) errors.phone = phoneError;
+  if (emailError) errors.email = emailError;
+  if (companyError) errors.company = companyError;
+  if (serviceError) errors.service = serviceError;
+  if (messageError) errors.message = messageError;
+
+  return errors;
+}
+
+
+
 export default function ConsultationModal({
   isOpen,
   onClose,
@@ -36,9 +214,30 @@ export default function ConsultationModal({
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<FormFieldErrors>({});
   const [shouldRender, setShouldRender] = useState(isOpen);
   const [isVisible, setIsVisible] = useState(false);
   const closeTimerRef = useRef<number | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const formStartedAtRef = useRef<number>(0);
+
+  const updateFieldError = (field: FormFieldName, error: string) => {
+    setFieldErrors((current) => {
+      if (current[field] === error) {
+        return current;
+      }
+
+      const next = { ...current };
+
+      if (error) {
+        next[field] = error;
+      } else {
+        delete next[field];
+      }
+
+      return next;
+    });
+  };
 
   const requestClose = useCallback(() => {
     if (closeTimerRef.current !== null) {
@@ -55,28 +254,46 @@ export default function ConsultationModal({
   }, [onClose]);
 
   useEffect(() => {
+    let mountFrameId: number | null = null;
+    let visibilityFrameId: number | null = null;
+    let unmountTimerId: number | null = null;
+
     if (isOpen) {
       if (closeTimerRef.current !== null) {
         window.clearTimeout(closeTimerRef.current);
         closeTimerRef.current = null;
       }
 
-      setShouldRender(true);
+      mountFrameId = window.requestAnimationFrame(() => {
+        setShouldRender(true);
 
-      const frameId = window.requestAnimationFrame(() => {
-        setIsVisible(true);
+        visibilityFrameId = window.requestAnimationFrame(() => {
+          setIsVisible(true);
+        });
       });
+    } else {
+      mountFrameId = window.requestAnimationFrame(() => {
+        setIsVisible(false);
 
-      return () => window.cancelAnimationFrame(frameId);
+        unmountTimerId = window.setTimeout(() => {
+          setShouldRender(false);
+        }, 220);
+      });
     }
 
-    setIsVisible(false);
+    return () => {
+      if (mountFrameId !== null) {
+        window.cancelAnimationFrame(mountFrameId);
+      }
 
-    const timerId = window.setTimeout(() => {
-      setShouldRender(false);
-    }, 220);
+      if (visibilityFrameId !== null) {
+        window.cancelAnimationFrame(visibilityFrameId);
+      }
 
-    return () => window.clearTimeout(timerId);
+      if (unmountTimerId !== null) {
+        window.clearTimeout(unmountTimerId);
+      }
+    };
   }, [isOpen]);
 
   useEffect(() => {
@@ -105,10 +322,31 @@ export default function ConsultationModal({
 
   useEffect(() => {
     if (!isOpen) {
+      return;
+    }
+
+    formStartedAtRef.current = new Date().getTime();
+
+    const frameId = window.requestAnimationFrame(() => {
+      formRef.current?.reset();
+      setSubmitted(false);
+      setIsSubmitting(false);
+      setSubmitError("");
+      setFieldErrors({});
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) {
       const timer = window.setTimeout(() => {
         setSubmitted(false);
         setIsSubmitting(false);
         setSubmitError("");
+        setFieldErrors({});
       }, 250);
 
       return () => window.clearTimeout(timer);
@@ -134,8 +372,29 @@ export default function ConsultationModal({
       service: String(formData.get("service") ?? "").trim(),
       message: String(formData.get("message") ?? "").trim(),
       website: String(formData.get("website") ?? "").trim(),
+      source: "consultation-modal",
+      startedAt: formStartedAtRef.current,
     };
 
+    const validationErrors = getFieldValidationErrors(payload);
+    const firstInvalidField = ["name", "phone", "email", "service", "message"].find(
+      (field) => validationErrors[field as FormFieldName],
+    ) as FormFieldName | undefined;
+
+    if (firstInvalidField) {
+      setFieldErrors(validationErrors);
+      setSubmitError("Please correct the highlighted fields before submitting.");
+
+      const invalidElement = form.elements.namedItem(firstInvalidField);
+
+      if (invalidElement instanceof HTMLElement) {
+        invalidElement.focus();
+      }
+
+      return;
+    }
+
+    setFieldErrors({});
     setIsSubmitting(true);
     setSubmitError("");
 
@@ -160,6 +419,8 @@ export default function ConsultationModal({
       }
 
       form.reset();
+      setFieldErrors({});
+      formStartedAtRef.current = new Date().getTime();
       setSubmitted(true);
     } catch (error) {
       setSubmitError(
@@ -324,7 +585,13 @@ export default function ConsultationModal({
                   one business day.
                 </p>
 
-                <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+                <form
+                  ref={formRef}
+                  onSubmit={handleSubmit}
+                  noValidate
+                  autoComplete="off"
+                  className="mt-8 space-y-4"
+                >
                   <div
                     className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden"
                     aria-hidden="true"
@@ -340,83 +607,307 @@ export default function ConsultationModal({
                     </label>
                   </div>
                   <div className="grid gap-4 sm:grid-cols-2">
-                    <label className="group relative block">
-                      <User
-                        size={18}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-[#776d96] transition group-focus-within:text-[#4b22ff]"
-                      />
-                      <input
-                        required
-                        type="text"
-                        name="name"
-                        placeholder="Your name"
-                        className="h-14 w-full rounded-[16px] border border-[#e2def1] bg-white pl-12 pr-4 text-sm font-semibold text-[#081232] outline-none transition placeholder:text-[#71809f]/55 focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
-                      />
+                    <label className="group block">
+                      <div className="relative">
+                        <User
+                          size={18}
+                          className={`absolute left-4 top-1/2 -translate-y-1/2 transition ${
+                            fieldErrors.name
+                              ? "text-[#d11a4d]"
+                              : "text-[#776d96] group-focus-within:text-[#4b22ff]"
+                          }`}
+                        />
+                        <input
+                          required
+                          type="text"
+                          name="name"
+                          minLength={2}
+                          maxLength={70}
+                          autoComplete="name"
+                          inputMode="text"
+                          aria-invalid={Boolean(fieldErrors.name)}
+                          aria-describedby={fieldErrors.name ? "consultation-name-error" : undefined}
+                          onInput={(event) => {
+                            const rawValue = event.currentTarget.value;
+                            const sanitizedValue = sanitizeNameInput(rawValue);
+                            event.currentTarget.value = sanitizedValue;
+
+                            if (rawValue !== sanitizedValue) {
+                              updateFieldError(
+                                "name",
+                                "Use letters only. Numbers and special symbols are not allowed.",
+                              );
+                              return;
+                            }
+
+                            updateFieldError(
+                              "name",
+                              sanitizedValue.trim().length >= 2
+                                ? getNameFieldError(sanitizedValue)
+                                : "",
+                            );
+                          }}
+                          onBlur={(event) =>
+                            updateFieldError(
+                              "name",
+                              getNameFieldError(event.currentTarget.value),
+                            )
+                          }
+                          placeholder="Your name"
+                          className={`h-14 w-full rounded-[16px] border bg-white pl-12 pr-4 text-sm font-semibold text-[#081232] outline-none transition placeholder:text-[#71809f]/55 ${
+                            fieldErrors.name
+                              ? "border-[#e11d48] bg-[#fff7f9] shadow-[0_0_0_3px_rgba(225,29,72,0.08)] focus:border-[#e11d48]"
+                              : "border-[#e2def1] focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
+                          }`}
+                        />
+                      </div>
+                      {fieldErrors.name && (
+                        <p
+                          id="consultation-name-error"
+                          role="alert"
+                          className="mt-1.5 flex items-start gap-1.5 text-[11px] font-bold leading-5 text-[#d11a4d]"
+                        >
+                          <span aria-hidden="true">•</span>
+                          {fieldErrors.name}
+                        </p>
+                      )}
                     </label>
 
-                    <label className="group relative block">
-                      <Phone
-                        size={18}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-[#776d96] transition group-focus-within:text-[#4b22ff]"
-                      />
-                      <input
-                        required
-                        type="tel"
-                        name="phone"
-                        placeholder="Phone number"
-                        className="h-14 w-full rounded-[16px] border border-[#e2def1] bg-white pl-12 pr-4 text-sm font-semibold text-[#081232] outline-none transition placeholder:text-[#71809f]/55 focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
-                      />
+                    <label className="group block">
+                      <div className="relative">
+                        <Phone
+                          size={18}
+                          className={`absolute left-4 top-1/2 -translate-y-1/2 transition ${
+                            fieldErrors.phone
+                              ? "text-[#d11a4d]"
+                              : "text-[#776d96] group-focus-within:text-[#4b22ff]"
+                          }`}
+                        />
+                        <input
+                          required
+                          type="tel"
+                          name="phone"
+                          minLength={8}
+                          maxLength={22}
+                          inputMode="tel"
+                          autoComplete="tel"
+                          aria-invalid={Boolean(fieldErrors.phone)}
+                          aria-describedby={fieldErrors.phone ? "consultation-phone-error" : undefined}
+                          onInput={(event) => {
+                            const rawValue = event.currentTarget.value;
+                            const sanitizedValue = sanitizePhoneInput(rawValue);
+                            event.currentTarget.value = sanitizedValue;
+
+                            if (rawValue !== sanitizedValue) {
+                              updateFieldError(
+                                "phone",
+                                "Use digits only. Letters are not allowed in the phone number.",
+                              );
+                              return;
+                            }
+
+                            const digitCount = sanitizedValue.replace(/\D/g, "").length;
+                            updateFieldError(
+                              "phone",
+                              digitCount >= 8 ? getPhoneFieldError(sanitizedValue) : "",
+                            );
+                          }}
+                          onBlur={(event) =>
+                            updateFieldError(
+                              "phone",
+                              getPhoneFieldError(event.currentTarget.value),
+                            )
+                          }
+                          placeholder="Phone number"
+                          className={`h-14 w-full rounded-[16px] border bg-white pl-12 pr-4 text-sm font-semibold text-[#081232] outline-none transition placeholder:text-[#71809f]/55 ${
+                            fieldErrors.phone
+                              ? "border-[#e11d48] bg-[#fff7f9] shadow-[0_0_0_3px_rgba(225,29,72,0.08)] focus:border-[#e11d48]"
+                              : "border-[#e2def1] focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
+                          }`}
+                        />
+                      </div>
+                      {fieldErrors.phone && (
+                        <p
+                          id="consultation-phone-error"
+                          role="alert"
+                          className="mt-1.5 flex items-start gap-1.5 text-[11px] font-bold leading-5 text-[#d11a4d]"
+                        >
+                          <span aria-hidden="true">•</span>
+                          {fieldErrors.phone}
+                        </p>
+                      )}
                     </label>
                   </div>
 
-                  <label className="group relative block">
-                    <Mail
-                      size={18}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 text-[#776d96] transition group-focus-within:text-[#4b22ff]"
-                    />
-                    <input
-                      required
-                      type="email"
-                      name="email"
-                      placeholder="Business email"
-                      className="h-14 w-full rounded-[16px] border border-[#e2def1] bg-white pl-12 pr-4 text-sm font-semibold text-[#081232] outline-none transition placeholder:text-[#71809f]/55 focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
-                    />
+                  <label className="group block">
+                    <div className="relative">
+                      <Mail
+                        size={18}
+                        className={`absolute left-4 top-1/2 -translate-y-1/2 transition ${
+                          fieldErrors.email
+                            ? "text-[#d11a4d]"
+                            : "text-[#776d96] group-focus-within:text-[#4b22ff]"
+                        }`}
+                      />
+                      <input
+                        required
+                        type="email"
+                        name="email"
+                        maxLength={180}
+                        autoComplete="email"
+                        inputMode="email"
+                        aria-invalid={Boolean(fieldErrors.email)}
+                        aria-describedby={fieldErrors.email ? "consultation-email-error" : undefined}
+                        onInput={(event) => {
+                          const rawValue = event.currentTarget.value;
+                          const sanitizedValue = sanitizeEmailInput(rawValue);
+                          event.currentTarget.value = sanitizedValue;
+
+                          if (rawValue !== sanitizedValue) {
+                            updateFieldError("email", "Spaces are not allowed in an email address.");
+                            return;
+                          }
+
+                          updateFieldError(
+                            "email",
+                            sanitizedValue.includes("@")
+                              ? getEmailFieldError(sanitizedValue)
+                              : "",
+                          );
+                        }}
+                        onBlur={(event) =>
+                          updateFieldError(
+                            "email",
+                            getEmailFieldError(event.currentTarget.value),
+                          )
+                        }
+                        placeholder="Business email"
+                        className={`h-14 w-full rounded-[16px] border bg-white pl-12 pr-4 text-sm font-semibold text-[#081232] outline-none transition placeholder:text-[#71809f]/55 ${
+                          fieldErrors.email
+                            ? "border-[#e11d48] bg-[#fff7f9] shadow-[0_0_0_3px_rgba(225,29,72,0.08)] focus:border-[#e11d48]"
+                            : "border-[#e2def1] focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
+                        }`}
+                      />
+                    </div>
+                    {fieldErrors.email && (
+                      <p
+                        id="consultation-email-error"
+                        role="alert"
+                        className="mt-1.5 flex items-start gap-1.5 text-[11px] font-bold leading-5 text-[#d11a4d]"
+                      >
+                        <span aria-hidden="true">•</span>
+                        {fieldErrors.email}
+                      </p>
+                    )}
                   </label>
 
-                  <label className="group relative block">
-                    <select
-                      required
-                      name="service"
-                      defaultValue=""
-                      className="h-14 w-full cursor-pointer appearance-none rounded-[16px] border border-[#e2def1] bg-white px-4 pr-12 text-sm font-semibold text-[#34405f] outline-none transition group-hover:border-[#cfc6ed] focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
-                    >
-                      <option value="" disabled>
-                        Select a service
-                      </option>
-                      {services.map((service) => (
-                        <option key={service} value={service}>
-                          {service}
+                  <label className="group block">
+                    <div className="relative">
+                      <select
+                        required
+                        name="service"
+                        defaultValue=""
+                        aria-invalid={Boolean(fieldErrors.service)}
+                        aria-describedby={fieldErrors.service ? "consultation-service-error" : undefined}
+                        onChange={(event) =>
+                          updateFieldError(
+                            "service",
+                            getServiceFieldError(event.currentTarget.value),
+                          )
+                        }
+                        onBlur={(event) =>
+                          updateFieldError(
+                            "service",
+                            getServiceFieldError(event.currentTarget.value),
+                          )
+                        }
+                        className={`h-14 w-full cursor-pointer appearance-none rounded-[16px] border bg-white px-4 pr-12 text-sm font-semibold text-[#34405f] outline-none transition ${
+                          fieldErrors.service
+                            ? "border-[#e11d48] bg-[#fff7f9] shadow-[0_0_0_3px_rgba(225,29,72,0.08)] focus:border-[#e11d48]"
+                            : "border-[#e2def1] group-hover:border-[#cfc6ed] focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
+                        }`}
+                      >
+                        <option value="" disabled>
+                          Select a service
                         </option>
-                      ))}
-                    </select>
+                        {services.map((service) => (
+                          <option key={service} value={service}>
+                            {service}
+                          </option>
+                        ))}
+                      </select>
 
-                    <span className="pointer-events-none absolute right-4 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-[#f3efff] text-[#4b22ff] transition duration-300 group-hover:bg-[#e9e2ff] group-focus-within:rotate-180">
-                      <ChevronDown size={18} strokeWidth={2.4} />
-                    </span>
+                      <span className={`pointer-events-none absolute right-4 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full transition duration-300 group-focus-within:rotate-180 ${
+                        fieldErrors.service
+                          ? "bg-[#ffe4ec] text-[#d11a4d]"
+                          : "bg-[#f3efff] text-[#4b22ff] group-hover:bg-[#e9e2ff]"
+                      }`}>
+                        <ChevronDown size={18} strokeWidth={2.4} />
+                      </span>
+                    </div>
+                    {fieldErrors.service && (
+                      <p
+                        id="consultation-service-error"
+                        role="alert"
+                        className="mt-1.5 flex items-start gap-1.5 text-[11px] font-bold leading-5 text-[#d11a4d]"
+                      >
+                        <span aria-hidden="true">•</span>
+                        {fieldErrors.service}
+                      </p>
+                    )}
                   </label>
 
-                  <label className="group relative block">
-                    <MessageSquareText
-                      size={18}
-                      className="absolute left-4 top-5 text-[#776d96] transition group-focus-within:text-[#4b22ff]"
-                    />
-                    <textarea
-                      required
-                      name="message"
-                      rows={5}
-                      placeholder="Tell us briefly about your project, goals and timeline..."
-                      className="w-full resize-none rounded-[16px] border border-[#e2def1] bg-white py-4 pl-12 pr-4 text-sm font-semibold leading-6 text-[#081232] outline-none transition placeholder:text-[#71809f]/55 focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
-                    />
+                  <label className="group block">
+                    <div className="relative">
+                      <MessageSquareText
+                        size={18}
+                        className={`absolute left-4 top-5 transition ${
+                          fieldErrors.message
+                            ? "text-[#d11a4d]"
+                            : "text-[#776d96] group-focus-within:text-[#4b22ff]"
+                        }`}
+                      />
+                      <textarea
+                        required
+                        name="message"
+                        minLength={30}
+                        maxLength={3000}
+                        rows={5}
+                        aria-invalid={Boolean(fieldErrors.message)}
+                        aria-describedby={fieldErrors.message ? "consultation-message-error" : undefined}
+                        onInput={(event) => {
+                          const value = event.currentTarget.value;
+                          updateFieldError(
+                            "message",
+                            value.trim().length >= 30
+                              ? getMessageFieldError(value)
+                              : "",
+                          );
+                        }}
+                        onBlur={(event) =>
+                          updateFieldError(
+                            "message",
+                            getMessageFieldError(event.currentTarget.value),
+                          )
+                        }
+                        placeholder="Tell us briefly about your project, goals and timeline..."
+                        className={`w-full resize-none rounded-[16px] border bg-white py-4 pl-12 pr-4 text-sm font-semibold leading-6 text-[#081232] outline-none transition placeholder:text-[#71809f]/55 ${
+                          fieldErrors.message
+                            ? "border-[#e11d48] bg-[#fff7f9] shadow-[0_0_0_3px_rgba(225,29,72,0.08)] focus:border-[#e11d48]"
+                            : "border-[#e2def1] focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
+                        }`}
+                      />
+                    </div>
+                    {fieldErrors.message && (
+                      <p
+                        id="consultation-message-error"
+                        role="alert"
+                        className="mt-1.5 flex items-start gap-1.5 text-[11px] font-bold leading-5 text-[#d11a4d]"
+                      >
+                        <span aria-hidden="true">•</span>
+                        {fieldErrors.message}
+                      </p>
+                    )}
                   </label>
 
                   {submitError && (
