@@ -900,7 +900,7 @@ export default function AboutPage() {
 
             <div className="pointer-events-none absolute inset-0 opacity-[0.10] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:24px_24px]" />
 
-            <div className="relative z-10 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 xl:grid-cols-[1fr_1fr]">
+            <div className="relative z-10 grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
               <div>
                 <p className="text-[12px] font-bold uppercase tracking-[0.3em] text-[#d75cff]">
                   <TypewriterText
@@ -979,23 +979,23 @@ export default function AboutPage() {
                 </button>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-[repeat(2,minmax(0,1fr))]">
                 {reasons.map((reason, index) => (
                   <div
                     key={reason}
-                    className="flex items-center gap-4 rounded-[19px] border border-white/10 bg-white/[0.055] p-5 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.085]"
+                    className="flex min-w-0 overflow-hidden items-center gap-3 rounded-[19px] border border-white/10 bg-white/[0.055] p-4 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.085] xl:gap-4 xl:p-5"
                   >
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[13px] bg-gradient-to-br from-[#4b22ff] to-[#ff2f7d] text-[11px] font-bold text-white">
                       {String(index + 1).padStart(2, "0")}
                     </div>
 
-                    <div className="flex items-start gap-2">
+                    <div className="flex min-w-0 flex-1 items-start gap-2">
                       <CheckCircle2
                         size={17}
                         className="mt-0.5 shrink-0 text-[#ff2f7d]"
                       />
 
-                      <p className="text-[14px] font-bold leading-6 text-white/88">
+                      <p className="min-w-0 flex-1 whitespace-normal break-words [overflow-wrap:anywhere] text-[13px] font-bold leading-6 text-white/88 xl:text-[14px]">
                         {reason}
                       </p>
                     </div>

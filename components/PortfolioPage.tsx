@@ -686,8 +686,8 @@ export default function PortfolioPage() {
           <div className="pointer-events-none absolute -right-40 top-[-110px] h-[520px] w-[520px] rounded-full bg-[#FF2F7D]/12 blur-[140px]" />
           <div className="pointer-events-none absolute inset-0 opacity-[0.25] [background-image:radial-gradient(circle_at_1px_1px,rgba(75,34,255,0.12)_1px,transparent_1px)] [background-size:27px_27px]" />
 
-          <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 sm:gap-12 xl:grid-cols-[0.88fr_1.12fr] xl:gap-14">
-            <div className="relative z-20">
+          <div className="relative mx-auto grid w-full max-w-[1320px] min-w-0 items-center gap-10 sm:gap-12 xl:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] xl:gap-14">
+            <div className="relative z-20 min-w-0">
               <div className="inline-flex items-center gap-2 rounded-full border border-[#ddd6ff] bg-white/80 px-4 py-2 shadow-[0_8px_24px_rgba(75,34,255,0.06)] backdrop-blur">
                 <Sparkles size={15} className="text-[#FF2F7D]" />
                 <TypewriterText
@@ -761,7 +761,7 @@ export default function PortfolioPage() {
                 </a>
               </div>
 
-              <div className="mt-9 grid max-w-[680px] grid-cols-2 gap-3 sm:mt-10 sm:grid-cols-4">
+              <div className="mt-9 grid w-full max-w-[680px] auto-rows-fr grid-cols-2 gap-3 sm:mt-10 sm:grid-cols-[repeat(4,minmax(0,1fr))] xl:gap-2 2xl:gap-3">
                 {[
                   {
                     value: "03",
@@ -787,14 +787,14 @@ export default function PortfolioPage() {
                 ].map((item) => (
                   <div
                     key={item.label}
-                    className="min-w-0 rounded-[17px] border border-[#e5e0f1] bg-white/75 px-2.5 py-4 sm:px-3.5 shadow-[0_10px_28px_rgba(35,25,88,0.05)] backdrop-blur sm:px-4"
+                    className="flex h-full min-w-0 flex-col justify-center overflow-hidden rounded-[17px] border border-[#e5e0f1] bg-white/75 px-2.5 py-4 shadow-[0_10px_28px_rgba(35,25,88,0.05)] backdrop-blur sm:px-3 xl:px-2.5 2xl:px-4"
                   >
                     <p
-                      className={`whitespace-nowrap overflow-visible pb-[0.12em] text-[16px] font-bold leading-[1.08] sm:text-[18px] xl:text-[16px] 2xl:text-[18px] ${item.color}`}
+                      className={`max-w-full whitespace-nowrap pb-[0.12em] text-[16px] font-bold leading-[1.08] tracking-[-0.02em] sm:text-[18px] xl:text-[16px] 2xl:text-[18px] ${item.value === "Web + App" ? "xl:text-[15px] xl:tracking-[-0.045em] 2xl:text-[18px]" : ""} ${item.color}`}
                     >
                       {item.value}
                     </p>
-                    <p className="mt-2 text-[11px] font-semibold leading-5 text-[#27314f]/78">
+                    <p className="mt-2 min-w-0 whitespace-normal break-words text-[11px] font-semibold leading-5 text-[#27314f]/78">
                       {item.label}
                     </p>
                   </div>

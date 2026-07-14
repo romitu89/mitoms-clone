@@ -764,17 +764,17 @@ export default function Home() {
                 return (
                   <div
                     key={item.label}
-                    className="flex min-h-[88px] min-w-0 items-center gap-2.5 rounded-[16px] border border-[#e9e6f5] bg-white/75 px-3 py-3.5 shadow-[0_8px_24px_rgba(34,24,88,0.05)] backdrop-blur sm:min-h-[92px] sm:gap-3 sm:rounded-[18px] sm:px-4 sm:py-4"
+                    className="stat-card flex min-h-[88px] min-w-0 items-center gap-2.5 rounded-[16px] border border-[#e9e6f5] bg-white/75 px-3 py-3.5 shadow-[0_8px_24px_rgba(34,24,88,0.05)] backdrop-blur sm:min-h-[92px] sm:gap-3 sm:rounded-[18px] sm:px-4 sm:py-4"
                   >
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] bg-[#f1edff] text-[#542cff]">
-                      <Icon className="h-5 w-5 stroke-[2]" />
+                    <div className="stat-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] bg-[#f1edff] text-[#542cff]">
+                      <Icon className="stat-icon-svg h-5 w-5 stroke-[2]" />
                     </div>
 
-                    <div className="min-w-0">
-                      <h3 className="text-[22px] font-bold leading-none tracking-[-0.02em] text-[#3f24ff]">
+                    <div className="stat-copy min-w-0 flex-1">
+                      <h3 className="stat-number text-[22px] font-bold leading-none tracking-[-0.02em] text-[#3f24ff]">
                         <AnimatedCounter target={item.target} suffix={item.suffix} />
                       </h3>
-                      <p className="mt-2 text-[12px] font-medium leading-[1.45] text-[#27314f]/82">
+                      <p className="stat-label mt-2 text-[12px] font-medium leading-[1.45] text-[#27314f]/82">
                         {item.label}
                       </p>
                     </div>
@@ -1086,15 +1086,15 @@ export default function Home() {
           </div>
 
           {/* RIGHT ORBIT DIAGRAM */}
-          <div className="relative min-h-[430px] md:min-h-[510px]">
+          <div className="impact-orbit relative min-h-[430px] md:min-h-[510px]">
             {/* Dotted orbit */}
-            <div className="absolute left-1/2 top-[42%] h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[2px] border-dashed border-[#d4c9ff] md:top-1/2 md:h-[405px] md:w-[405px]" />
+            <div className="impact-orbit-ring absolute left-1/2 top-[42%] h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[2px] border-dashed border-[#d4c9ff]" />
 
             {/* Soft background glow */}
-            <div className="pointer-events-none absolute left-1/2 top-[42%] h-[325px] w-[325px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(91,41,255,0.08),transparent_68%)] md:top-1/2 md:h-[455px] md:w-[455px]" />
+            <div className="impact-orbit-glow pointer-events-none absolute left-1/2 top-[42%] h-[325px] w-[325px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(91,41,255,0.08),transparent_68%)]" />
 
             {/* Center gradient circle */}
-            <div className="absolute left-1/2 top-[42%] z-20 flex h-[150px] w-[150px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border border-[#8b46dd]/70 bg-[linear-gradient(180deg,#0b1026_0%,#161236_38%,#25114d_68%,#8b23b8_100%)] text-center text-[16px] font-bold leading-[1.65] text-white shadow-[0_0_0_6px_rgba(157,70,255,0.05),0_18px_40px_rgba(42,18,94,0.22),0_0_18px_rgba(190,70,255,0.18)] md:top-1/2 md:h-[184px] md:w-[184px] md:text-[20px] md:leading-[1.75]">
+            <div className="impact-orbit-center absolute left-1/2 top-[42%] z-20 flex h-[150px] w-[150px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border border-[#8b46dd]/70 bg-[linear-gradient(180deg,#0b1026_0%,#161236_38%,#25114d_68%,#8b23b8_100%)] text-center text-[16px] font-bold leading-[1.65] text-white shadow-[0_0_0_6px_rgba(157,70,255,0.05),0_18px_40px_rgba(42,18,94,0.22),0_0_18px_rgba(190,70,255,0.18)]">
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(132,76,255,0.38),transparent_34%)]" />
               <div className="pointer-events-none absolute bottom-[-6px] left-1/2 h-[92px] w-[150px] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,58,221,0.52)_0%,rgba(181,41,206,0.34)_45%,transparent_80%)] blur-xl" />
               <span className="relative z-10">
@@ -1107,7 +1107,7 @@ export default function Home() {
             </div>
 
             {/* Mobile orbit details */}
-            <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 gap-3 md:hidden">
+            <div className="impact-orbit-mobile absolute inset-x-0 bottom-0 grid grid-cols-2 gap-3">
               {[
                 {
                   icon: Search,
@@ -1155,7 +1155,7 @@ export default function Home() {
             </div>
 
             {/* Research text */}
-            <div className="absolute left-[0%] top-[8%] hidden w-[220px] text-right md:block">
+            <div className="impact-orbit-desktop impact-orbit-label absolute left-0 top-[8%] hidden text-right">
               <h3 className="text-[14px] font-semibold text-[#10183a]">
                 Research &amp; Insights
               </h3>
@@ -1167,12 +1167,12 @@ export default function Home() {
             </div>
 
             {/* Research icon */}
-            <div className="absolute left-[31.2%] top-[21.1%] z-30 hidden h-[70px] w-[70px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#ebe2ff] bg-[#f4efff] text-[#6b4dff] shadow-[0_3px_10px_rgba(91,50,255,0.06)] md:flex">
+            <div className="impact-orbit-desktop impact-orbit-icon absolute left-[31.2%] top-[21.1%] z-30 hidden h-[70px] w-[70px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#ebe2ff] bg-[#f4efff] text-[#6b4dff] shadow-[0_3px_10px_rgba(91,50,255,0.06)]">
               <Search className="h-8 w-8 stroke-[2.2]" />
             </div>
 
             {/* Design text */}
-            <div className="absolute right-[0%] top-[8%] hidden w-[220px] md:block">
+            <div className="impact-orbit-desktop impact-orbit-label absolute right-0 top-[8%] hidden">
               <h3 className="text-[14px] font-semibold text-[#10183a]">
                 Design &amp; Prototype
               </h3>
@@ -1186,12 +1186,12 @@ export default function Home() {
             </div>
 
             {/* Design icon */}
-            <div className="absolute left-[68.8%] top-[21.1%] z-30 hidden h-[70px] w-[70px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#ebe2ff] bg-[#f4efff] text-[#6b4dff] shadow-[0_3px_10px_rgba(91,50,255,0.06)] md:flex">
+            <div className="impact-orbit-desktop impact-orbit-icon absolute left-[68.8%] top-[21.1%] z-30 hidden h-[70px] w-[70px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#ebe2ff] bg-[#f4efff] text-[#6b4dff] shadow-[0_3px_10px_rgba(91,50,255,0.06)]">
               <Rocket className="h-8 w-8 stroke-[2.2]" />
             </div>
 
             {/* ===== Build & Implement - यहाँ पर टेक्स्ट ठीक किया ===== */}
-            <div className="absolute bottom-[7%] left-[0%] hidden w-[225px] text-right md:block">
+            <div className="impact-orbit-desktop impact-orbit-label absolute bottom-[7%] left-0 hidden text-right">
               <h3 className="text-[14px] font-semibold text-[#10183a]">
                 Build &amp; Implement
               </h3>
@@ -1203,12 +1203,12 @@ export default function Home() {
             </div>
 
             {/* Build icon */}
-            <div className="absolute bottom-[21.1%] left-[31.2%] z-30 hidden h-[70px] w-[70px] -translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border border-[#ebe2ff] bg-[#f4efff] text-[#6b4dff] shadow-[0_3px_10px_rgba(91,50,255,0.06)] md:flex">
+            <div className="impact-orbit-desktop impact-orbit-icon absolute bottom-[21.1%] left-[31.2%] z-30 hidden h-[70px] w-[70px] -translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border border-[#ebe2ff] bg-[#f4efff] text-[#6b4dff] shadow-[0_3px_10px_rgba(91,50,255,0.06)]">
               <Code2 className="h-8 w-8 stroke-[2.2]" />
             </div>
 
             {/* Measure text */}
-            <div className="absolute bottom-[7%] right-[0%] hidden w-[225px] md:block">
+            <div className="impact-orbit-desktop impact-orbit-label absolute bottom-[7%] right-0 hidden">
               <h3 className="text-[14px] font-semibold text-[#10183a]">
                 Measure &amp; Optimize
               </h3>
@@ -1222,7 +1222,7 @@ export default function Home() {
             </div>
 
             {/* Measure icon */}
-            <div className="absolute bottom-[21.1%] left-[68.8%] z-30 hidden h-[70px] w-[70px] -translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border border-[#ebe2ff] bg-[#f4efff] text-[#6b4dff] shadow-[0_3px_10px_rgba(91,50,255,0.06)] md:flex">
+            <div className="impact-orbit-desktop impact-orbit-icon absolute bottom-[21.1%] left-[68.8%] z-30 hidden h-[70px] w-[70px] -translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border border-[#ebe2ff] bg-[#f4efff] text-[#6b4dff] shadow-[0_3px_10px_rgba(91,50,255,0.06)]">
               <BarChart3 className="h-8 w-8 stroke-[2.2]" />
             </div>
           </div>
@@ -1340,6 +1340,105 @@ export default function Home() {
       />
 
       <style>{`
+        .impact-orbit {
+          container-type: inline-size;
+          container-name: impactOrbit;
+        }
+
+        .impact-orbit-mobile {
+          display: grid;
+        }
+
+        .impact-orbit-desktop {
+          display: none;
+        }
+
+        @container impactOrbit (min-width: 760px) {
+          .impact-orbit-mobile {
+            display: none;
+          }
+
+          .impact-orbit-desktop.impact-orbit-label {
+            display: block;
+            width: 185px;
+          }
+
+          .impact-orbit-desktop.impact-orbit-icon {
+            display: flex;
+          }
+
+          .impact-orbit-ring {
+            top: 50%;
+            width: 405px;
+            height: 405px;
+          }
+
+          .impact-orbit-glow {
+            top: 50%;
+            width: 455px;
+            height: 455px;
+          }
+
+          .impact-orbit-center {
+            top: 50%;
+            width: 184px;
+            height: 184px;
+            font-size: 20px;
+            line-height: 1.75;
+          }
+        }
+
+        @container impactOrbit (min-width: 900px) {
+          .impact-orbit-desktop.impact-orbit-label {
+            width: 220px;
+          }
+        }
+
+        .stat-card {
+          container-type: inline-size;
+        }
+
+        .stat-label {
+          overflow-wrap: normal;
+          word-break: normal;
+        }
+
+        @container (max-width: 140px) {
+          .stat-card {
+            gap: 0.55rem;
+            padding-left: 0.7rem;
+            padding-right: 0.7rem;
+          }
+        }
+
+        @container (max-width: 112px) {
+          .stat-card {
+            gap: 0.45rem;
+            padding-left: 0.55rem;
+            padding-right: 0.55rem;
+          }
+
+          .stat-icon {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 0.7rem;
+          }
+
+          .stat-icon-svg {
+            width: 1rem;
+            height: 1rem;
+          }
+
+          .stat-number {
+            font-size: 1.1rem;
+          }
+
+          .stat-label {
+            font-size: 0.67rem;
+            line-height: 1.35;
+          }
+        }
+
         .hero-orb {
           transform-origin: 50% 0%;
           backface-visibility: hidden;

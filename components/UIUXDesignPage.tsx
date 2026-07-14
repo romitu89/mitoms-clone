@@ -369,7 +369,7 @@ function TypewriterText({
       : "inline-grid max-w-full";
 
   const whitespaceClassName = nowrap
-    ? "whitespace-nowrap"
+    ? "whitespace-normal sm:whitespace-nowrap"
     : "whitespace-normal";
 
   return (
@@ -443,7 +443,7 @@ export default function UIUXDesignPage() {
 
   return (
     <>
-      <main className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
+      <main className="w-full overflow-x-clip bg-white font-sans text-[#07112f] antialiased">
         {/* HERO SECTION */}
         <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-14 pt-10 sm:px-6 sm:pb-18 sm:pt-12 lg:px-10 lg:pb-24 lg:pt-11">
           <div className="pointer-events-none absolute -left-32 top-[-80px] h-[430px] w-[430px] rounded-full bg-[#4b22ff]/10 blur-[125px]" />
@@ -454,9 +454,9 @@ export default function UIUXDesignPage() {
 
           <div className="pointer-events-none absolute inset-0 opacity-[0.27] [background-image:radial-gradient(circle_at_1px_1px,rgba(75,34,255,0.13)_1px,transparent_1px)] [background-size:26px_26px]" />
 
-          <div className="relative mx-auto grid max-w-[1320px] items-center gap-9 sm:gap-12 lg:grid-cols-[0.92fr_1.08fr]">
+          <div className="relative mx-auto grid w-full max-w-[1320px] min-w-0 items-center gap-9 sm:gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
             {/* LEFT CONTENT */}
-            <div className="relative z-20">
+            <div className="relative z-20 min-w-0">
               <div className="inline-flex items-center gap-2 rounded-full border border-[#ddd6ff] bg-white/80 px-4 py-2 shadow-[0_8px_24px_rgba(75,34,255,0.06)] backdrop-blur">
                 <PenTool size={15} className="text-[#4b22ff]" />
 
@@ -517,7 +517,7 @@ export default function UIUXDesignPage() {
                 </Link>
               </div>
 
-              <div className="mt-8 grid w-full max-w-[620px] grid-cols-2 gap-3 sm:mt-10 xl:grid-cols-4">
+              <div className="mt-8 grid w-full max-w-[620px] auto-rows-fr grid-cols-2 gap-3 sm:mt-10 xl:grid-cols-[repeat(4,minmax(0,1fr))] xl:gap-2 2xl:gap-3">
                 {[
                   {
                     icon: Users,
@@ -541,13 +541,13 @@ export default function UIUXDesignPage() {
                   return (
                     <div
                       key={item.title}
-                      className="flex min-w-0 items-center gap-2.5 rounded-[15px] border border-[#e7e2f5] bg-white/85 px-3 py-3.5 shadow-[0_10px_28px_rgba(34,24,88,0.05)] backdrop-blur sm:gap-3 sm:rounded-[16px] sm:px-4 sm:py-4 xl:px-3"
+                      className="flex h-full w-full min-w-0 overflow-hidden rounded-[15px] border border-[#e7e2f5] bg-white/85 px-3 py-3.5 shadow-[0_10px_28px_rgba(34,24,88,0.05)] backdrop-blur sm:rounded-[16px] sm:px-4 sm:py-4 xl:items-center xl:gap-1.5 xl:px-2 xl:py-3 2xl:gap-2.5 2xl:px-3 2xl:py-4"
                     >
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[12px] bg-[#f0ecff] text-[#4b22ff]">
-                        <Icon size={17} />
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[12px] bg-[#f0ecff] text-[#4b22ff] xl:h-7 xl:w-7 xl:rounded-[10px] 2xl:h-9 2xl:w-9 2xl:rounded-[12px]">
+                        <Icon size={17} className="xl:h-[14px] xl:w-[14px] 2xl:h-[17px] 2xl:w-[17px]" />
                       </div>
 
-                      <span className="min-w-0 text-[12px] font-bold leading-5 text-[#24304f] sm:text-[12px]">
+                      <span className="min-w-0 flex-1 whitespace-normal [overflow-wrap:anywhere] text-[12px] font-bold leading-5 text-[#24304f] xl:text-[10px] xl:leading-[1.25] 2xl:text-[12px] 2xl:leading-5">
                         {item.title}
                       </span>
                     </div>
@@ -557,7 +557,7 @@ export default function UIUXDesignPage() {
             </div>
 
             {/* RIGHT VISUAL */}
-            <div className="relative min-h-[390px] sm:min-h-[470px] lg:min-h-[540px]">
+            <div className="relative min-h-[390px] min-w-0 sm:min-h-[470px] lg:min-h-[540px]">
               <div className="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[#cfc5ff] sm:h-[400px] sm:w-[400px] lg:h-[460px] lg:w-[460px]" />
 
               <div className="pointer-events-none absolute left-1/2 top-1/2 h-[250px] w-[250px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(75,34,255,0.14),transparent_67%)] sm:h-[330px] sm:w-[330px] lg:h-[390px] lg:w-[390px]" />
@@ -569,7 +569,7 @@ export default function UIUXDesignPage() {
                 height={650}
                 priority
                 unoptimized
-                className="absolute left-1/2 top-1/2 z-20 w-[92%] max-w-[580px] -translate-x-1/2 -translate-y-1/2 object-contain drop-shadow-[0_30px_45px_rgba(32,23,92,0.18)] sm:w-[84%]"
+                className="absolute left-1/2 top-1/2 z-20 h-auto w-[92%] max-w-full -translate-x-1/2 -translate-y-1/2 object-contain drop-shadow-[0_30px_45px_rgba(32,23,92,0.18)] sm:w-[84%] xl:max-w-[580px]"
               />
 
               <div className="absolute left-[0%] top-[8%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
@@ -651,7 +651,7 @@ export default function UIUXDesignPage() {
         <section className="relative px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-24">
           <div className="pointer-events-none absolute -left-24 top-1/4 h-80 w-80 rounded-full bg-[#4b22ff]/5 blur-[110px]" />
 
-          <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 sm:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
+          <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 sm:gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
             <div>
               <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#4b22ff]">
                 <TypewriterText
@@ -700,14 +700,14 @@ export default function UIUXDesignPage() {
               </button>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid min-w-0 gap-4 sm:grid-cols-2">
               {capabilities.map((item) => {
                 const Icon = item.icon;
 
                 return (
                   <div
                     key={item.title}
-                    className="group rounded-[21px] border border-[#e4dff0] bg-white p-5 shadow-[0_10px_30px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#cec4ff] hover:shadow-[0_18px_40px_rgba(75,34,255,0.09)]"
+                    className="group min-w-0 rounded-[21px] border border-[#e4dff0] bg-white p-5 shadow-[0_10px_30px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#cec4ff] hover:shadow-[0_18px_40px_rgba(75,34,255,0.09)]"
                   >
                     <div
                       className={`flex h-12 w-12 items-center justify-center rounded-[15px] bg-gradient-to-br ${item.gradient} text-white shadow-[0_10px_24px_rgba(75,34,255,0.18)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105`}
@@ -761,14 +761,14 @@ export default function UIUXDesignPage() {
               </p>
             </div>
 
-            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-12 grid min-w-0 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {designSolutions.map((item) => {
                 const Icon = item.icon;
 
                 return (
                   <div
                     key={item.number}
-                    className="group relative overflow-hidden rounded-[21px] border border-[#e4dff1] bg-white p-5 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(75,34,255,0.12)] sm:rounded-[24px] sm:p-7"
+                    className="group relative min-w-0 overflow-hidden rounded-[21px] border border-[#e4dff1] bg-white p-5 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(75,34,255,0.12)] sm:rounded-[24px] sm:p-7"
                   >
                     <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#4b22ff]/5 blur-3xl transition-colors duration-500 group-hover:bg-[#ff2f7d]/8" />
 
@@ -811,7 +811,7 @@ export default function UIUXDesignPage() {
 
         {/* DESIGN PRINCIPLES */}
         <section className="px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-24">
-          <div className="mx-auto grid max-w-[1320px] items-center gap-10 sm:gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
+          <div className="mx-auto grid max-w-[1320px] items-center gap-10 sm:gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-14">
             <div>
               <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#4b22ff]">
                 <TypewriterText
@@ -854,14 +854,14 @@ export default function UIUXDesignPage() {
               </button>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid min-w-0 gap-4 sm:grid-cols-2">
               {principles.map((principle, index) => {
                 const Icon = principle.icon;
 
                 return (
                   <div
                     key={principle.title}
-                    className="group rounded-[22px] border border-[#e3deef] bg-white p-6 shadow-[0_10px_30px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#cec4ff] hover:shadow-[0_18px_40px_rgba(75,34,255,0.09)]"
+                    className="group min-w-0 rounded-[22px] border border-[#e3deef] bg-white p-6 shadow-[0_10px_30px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#cec4ff] hover:shadow-[0_18px_40px_rgba(75,34,255,0.09)]"
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex h-12 w-12 items-center justify-center rounded-[15px] bg-[#f0ecff] text-[#4b22ff] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105">
@@ -957,7 +957,7 @@ export default function UIUXDesignPage() {
               </p>
             </div>
 
-            <div className="relative z-10 mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            <div className="relative z-10 mt-12 grid min-w-0 gap-5 md:grid-cols-2 lg:grid-cols-4">
               {designDeliverables.map((item) => (
                 <DeliverableCard key={item.title} {...item} />
               ))}
@@ -995,14 +995,14 @@ export default function UIUXDesignPage() {
               </p>
             </div>
 
-            <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-14 grid min-w-0 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {designProcess.map((item) => {
                 const Icon = item.icon;
 
                 return (
                   <div
                     key={item.number}
-                    className="group relative rounded-[23px] border border-[#e4dff0] bg-white p-6 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_22px_48px_rgba(75,34,255,0.11)]"
+                    className="group relative min-w-0 rounded-[23px] border border-[#e4dff0] bg-white p-6 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_22px_48px_rgba(75,34,255,0.11)]"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex h-[66px] w-[66px] items-center justify-center rounded-full bg-gradient-to-br from-[#4b22ff] to-[#ff2f7d] text-white shadow-[0_14px_30px_rgba(75,34,255,0.22)] transition-transform duration-300 group-hover:rotate-6 group-hover:scale-105">
@@ -1032,7 +1032,7 @@ export default function UIUXDesignPage() {
         <section className="relative bg-[#fbfaff] px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-24">
           <div className="pointer-events-none absolute right-[-140px] top-1/4 h-96 w-96 rounded-full bg-[#ff2f7d]/5 blur-[120px]" />
 
-          <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 sm:gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
+          <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 sm:gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-14">
             <div>
               <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#ff2f7d]">
                 <TypewriterText
@@ -1075,11 +1075,11 @@ export default function UIUXDesignPage() {
               </button>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid min-w-0 gap-4 sm:grid-cols-2">
               {benefits.map((benefit, index) => (
                 <div
                   key={benefit}
-                  className="group flex min-h-[96px] items-center gap-4 rounded-[19px] border border-[#e3deef] bg-white p-5 shadow-[0_10px_30px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#cec4ff] hover:shadow-[0_18px_40px_rgba(75,34,255,0.09)]"
+                  className="group flex min-h-[96px] min-w-0 items-center gap-4 rounded-[19px] border border-[#e3deef] bg-white p-5 shadow-[0_10px_30px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#cec4ff] hover:shadow-[0_18px_40px_rgba(75,34,255,0.09)]"
                 >
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[13px] bg-[#f0ecff] text-[11px] font-bold text-[#4b22ff]">
                     {String(index + 1).padStart(2, "0")}
@@ -1103,7 +1103,7 @@ export default function UIUXDesignPage() {
 
         {/* FAQ */}
         <section className="px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
-          <div className="mx-auto grid max-w-[1180px] gap-9 sm:gap-12 lg:grid-cols-[0.72fr_1.28fr]">
+          <div className="mx-auto grid max-w-[1180px] gap-9 sm:gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)]">
             <div>
               <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#4b22ff]">
                 <TypewriterText
@@ -1150,7 +1150,7 @@ export default function UIUXDesignPage() {
               {faqs.map((item, index) => (
                 <details
                   key={item.question}
-                  className="group rounded-[18px] border border-[#e4dff1] bg-white p-4 shadow-[0_10px_30px_rgba(34,24,85,0.05)] open:border-[#cfc5ff] open:shadow-[0_16px_38px_rgba(75,34,255,0.08)] sm:rounded-[20px] sm:p-5"
+                  className="group min-w-0 rounded-[18px] border border-[#e4dff1] bg-white p-4 shadow-[0_10px_30px_rgba(34,24,85,0.05)] open:border-[#cfc5ff] open:shadow-[0_16px_38px_rgba(75,34,255,0.08)] sm:rounded-[20px] sm:p-5"
                 >
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-3 sm:gap-5">
                     <div className="flex min-w-0 items-center gap-3 sm:gap-4">
