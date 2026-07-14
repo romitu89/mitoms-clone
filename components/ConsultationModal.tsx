@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import {
   ArrowRight,
   Check,
@@ -33,6 +33,8 @@ export default function ConsultationModal({
   onClose,
 }: ConsultationModalProps) {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   useEffect(() => {
     if (!isOpen) return;
@@ -52,16 +54,71 @@ export default function ConsultationModal({
 
   useEffect(() => {
     if (!isOpen) {
-      const timer = window.setTimeout(() => setSubmitted(false), 250);
+      const timer = window.setTimeout(() => {
+        setSubmitted(false);
+        setIsSubmitting(false);
+        setSubmitError("");
+      }, 250);
+
       return () => window.clearTimeout(timer);
     }
   }, [isOpen]);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSubmitted(true);
+
+    if (isSubmitting) {
+      return;
+    }
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const payload = {
+      name: String(formData.get("name") ?? "").trim(),
+      phone: String(formData.get("phone") ?? "").trim(),
+      email: String(formData.get("email") ?? "").trim(),
+      service: String(formData.get("service") ?? "").trim(),
+      message: String(formData.get("message") ?? "").trim(),
+      website: String(formData.get("website") ?? "").trim(),
+    };
+
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const response = await fetch("/api/consultation", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = (await response.json().catch(() => null)) as
+        | { success?: boolean; message?: string }
+        | null;
+
+      if (!response.ok || !result?.success) {
+        throw new Error(
+          result?.message ||
+            "We could not send your request. Please try again.",
+        );
+      }
+
+      form.reset();
+      setSubmitted(true);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "We could not send your request. Please try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -165,6 +222,20 @@ export default function ConsultationModal({
                 </p>
 
                 <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+                  <div
+                    className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden"
+                    aria-hidden="true"
+                  >
+                    <label>
+                      Website
+                      <input
+                        type="text"
+                        name="website"
+                        tabIndex={-1}
+                        autoComplete="off"
+                      />
+                    </label>
+                  </div>
                   <div className="grid gap-4 sm:grid-cols-2">
                     <label className="group relative block">
                       <User
@@ -241,15 +312,30 @@ export default function ConsultationModal({
                     />
                   </label>
 
+                  {submitError && (
+                    <div
+                      role="alert"
+                      className="rounded-[14px] border border-[#ff2f7d]/25 bg-[#fff2f6] px-4 py-3 text-[13px] font-semibold leading-6 text-[#a51d49]"
+                    >
+                      {submitError}
+                    </div>
+                  )}
+
                   <button
                     type="submit"
-                    className="group flex h-14 w-full items-center justify-center gap-3 rounded-[16px] bg-gradient-to-r from-[#4b22ff] via-[#7038ff] to-[#ff315d] text-sm font-black text-white shadow-[0_14px_30px_rgba(75,34,255,0.25)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_38px_rgba(255,49,93,0.24)]"
+                    disabled={isSubmitting}
+                    className="group flex h-14 w-full items-center justify-center gap-3 rounded-[16px] bg-gradient-to-r from-[#4b22ff] via-[#7038ff] to-[#ff315d] text-sm font-black text-white shadow-[0_14px_30px_rgba(75,34,255,0.25)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_38px_rgba(255,49,93,0.24)] disabled:cursor-not-allowed disabled:opacity-65 disabled:hover:translate-y-0"
                   >
-                    Schedule Free Consultation
-                    <ArrowRight
-                      size={18}
-                      className="transition-transform duration-300 group-hover:translate-x-1"
-                    />
+                    {isSubmitting
+                      ? "Sending Your Request..."
+                      : "Schedule Free Consultation"}
+
+                    {!isSubmitting && (
+                      <ArrowRight
+                        size={18}
+                        className="transition-transform duration-300 group-hover:translate-x-1"
+                      />
+                    )}
                   </button>
                 </form>
 
@@ -283,8 +369,9 @@ export default function ConsultationModal({
                 </h3>
 
                 <p className="mt-4 max-w-[420px] text-sm font-semibold leading-7 text-[#34405f]/65">
-                  Your consultation request has been submitted. Our team will
-                  contact you within 24 hours.
+                  Your consultation request has been submitted. A confirmation
+                  email has been sent to you, and our team will contact you within
+                  one business day.
                 </p>
 
                 <button
