@@ -517,7 +517,7 @@ export default function UIUXDesignPage() {
                 </Link>
               </div>
 
-              <div className="mt-8 grid max-w-[620px] grid-cols-2 gap-3 sm:mt-10 sm:grid-cols-4">
+              <div className="mt-8 grid w-full max-w-[620px] grid-cols-2 gap-3 sm:mt-10 xl:grid-cols-4">
                 {[
                   {
                     icon: Users,
@@ -541,7 +541,7 @@ export default function UIUXDesignPage() {
                   return (
                     <div
                       key={item.title}
-                      className="flex min-w-0 items-center gap-2.5 rounded-[15px] border border-[#e7e2f5] bg-white/85 px-3 py-3.5 shadow-[0_10px_28px_rgba(34,24,88,0.05)] backdrop-blur sm:gap-3 sm:rounded-[16px] sm:px-4 sm:py-4"
+                      className="flex min-w-0 items-center gap-2.5 rounded-[15px] border border-[#e7e2f5] bg-white/85 px-3 py-3.5 shadow-[0_10px_28px_rgba(34,24,88,0.05)] backdrop-blur sm:gap-3 sm:rounded-[16px] sm:px-4 sm:py-4 xl:px-3"
                     >
                       <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[12px] bg-[#f0ecff] text-[#4b22ff]">
                         <Icon size={17} />
