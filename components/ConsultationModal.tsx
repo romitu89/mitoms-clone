@@ -5,6 +5,7 @@ import {
   ArrowRight,
   Check,
   CheckCircle2,
+  ChevronDown,
   Mail,
   MessageSquareText,
   Phone,
@@ -122,23 +123,65 @@ export default function ConsultationModal({
   };
 
   return (
-    <div
-      className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-[#04081d]/75 px-4 py-8 backdrop-blur-md"
-      onMouseDown={(event) => {
-        if (event.target === event.currentTarget) onClose();
-      }}
-    >
-      <div className="relative w-full max-w-[980px] overflow-hidden rounded-[30px] border border-white/20 bg-white shadow-[0_35px_100px_rgba(4,8,29,0.45)]">
+    <div className="fixed inset-0 z-[100] overflow-y-auto overscroll-contain bg-black">
+      {/* Premium ambient scene behind the modal */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 overflow-hidden bg-black"
+      >
+        <div className="consultation-space-field consultation-space-field-one" />
+        <div className="consultation-space-field consultation-space-field-two" />
+        <div className="consultation-space-field consultation-space-field-three" />
+
+        <div className="consultation-nebula consultation-nebula-one" />
+        <div className="consultation-nebula consultation-nebula-two" />
+
+        <div className="consultation-planet" aria-hidden="true">
+          <span className="consultation-planet-ring" />
+        </div>
+
+        <div className="consultation-orbit consultation-orbit-one">
+          <span />
+          <span />
+          <span />
+        </div>
+
+        <div className="consultation-orbit consultation-orbit-two">
+          <span />
+          <span />
+          <span />
+        </div>
+
+        <div className="consultation-comet consultation-comet-one" />
+        <div className="consultation-comet consultation-comet-two" />
+        <div className="consultation-comet consultation-comet-three" />
+        <div className="consultation-comet consultation-comet-four" />
+
+        <div className="consultation-stars">
+          {Array.from({ length: 36 }).map((_, index) => (
+            <span key={index} />
+          ))}
+        </div>
+      </div>
+
+      <div
+        className="relative flex min-h-full items-start justify-center px-3 py-3 sm:px-4 sm:py-5 lg:py-6 xl:py-8"
+        onMouseDown={(event) => {
+          if (event.target === event.currentTarget) onClose();
+        }}
+      >
+        <div className="consultation-premium-shell relative my-auto w-full max-w-[980px] rounded-[25px] p-px sm:rounded-[31px]">
+          <div className="consultation-modal-card relative w-full overflow-hidden rounded-[24px] border border-white/20 bg-white shadow-[0_35px_100px_rgba(4,8,29,0.45)] sm:rounded-[30px]">
         <button
           type="button"
           onClick={onClose}
           aria-label="Close consultation form"
-          className="absolute right-5 top-5 z-30 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-[#07112f]/75 text-white backdrop-blur transition hover:rotate-90 hover:bg-[#ff2f7d]"
+          className="absolute right-5 top-5 z-30 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-[#07112f]/75 text-white backdrop-blur transition hover:rotate-90 hover:bg-[#ff2f7d]"
         >
           <X size={20} />
         </button>
 
-        <div className="grid lg:grid-cols-[0.92fr_1.08fr]">
+        <div className="grid min-w-0 lg:grid-cols-[0.92fr_1.08fr]">
           {/* LEFT VISUAL */}
           <div className="relative hidden min-h-[650px] overflow-hidden bg-[linear-gradient(145deg,#07153c_0%,#251061_48%,#ff2f7d_135%)] p-10 text-white lg:flex lg:flex-col">
             <div className="pointer-events-none absolute -left-20 top-14 h-64 w-64 rounded-full bg-[#167dff]/25 blur-[90px]" />
@@ -202,7 +245,7 @@ export default function ConsultationModal({
           </div>
 
           {/* RIGHT FORM */}
-          <div className="relative min-h-[650px] bg-[#fbfaff] p-6 sm:p-9 lg:p-11">
+          <div className="relative min-h-[650px] min-w-0 bg-[#fbfaff] p-6 sm:p-9 lg:p-11">
             <div className="pointer-events-none absolute right-[-80px] top-[-90px] h-64 w-64 rounded-full bg-[#4b22ff]/10 blur-[90px]" />
             <div className="pointer-events-none absolute bottom-[-110px] left-[-70px] h-64 w-64 rounded-full bg-[#ff2f7d]/10 blur-[90px]" />
 
@@ -280,12 +323,12 @@ export default function ConsultationModal({
                     />
                   </label>
 
-                  <label className="block">
+                  <label className="group relative block">
                     <select
                       required
                       name="service"
                       defaultValue=""
-                      className="h-14 w-full appearance-none rounded-[16px] border border-[#e2def1] bg-white px-4 text-sm font-semibold text-[#34405f] outline-none transition focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
+                      className="h-14 w-full cursor-pointer appearance-none rounded-[16px] border border-[#e2def1] bg-white px-4 pr-12 text-sm font-semibold text-[#34405f] outline-none transition group-hover:border-[#cfc6ed] focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
                     >
                       <option value="" disabled>
                         Select a service
@@ -296,6 +339,10 @@ export default function ConsultationModal({
                         </option>
                       ))}
                     </select>
+
+                    <span className="pointer-events-none absolute right-4 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-[#f3efff] text-[#4b22ff] transition duration-300 group-hover:bg-[#e9e2ff] group-focus-within:rotate-180">
+                      <ChevronDown size={18} strokeWidth={2.4} />
+                    </span>
                   </label>
 
                   <label className="group relative block">
@@ -324,7 +371,7 @@ export default function ConsultationModal({
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="group flex h-14 w-full items-center justify-center gap-3 rounded-[16px] bg-gradient-to-r from-[#4b22ff] via-[#7038ff] to-[#ff315d] text-sm font-black text-white shadow-[0_14px_30px_rgba(75,34,255,0.25)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_38px_rgba(255,49,93,0.24)] disabled:cursor-not-allowed disabled:opacity-65 disabled:hover:translate-y-0"
+                    className="group flex h-14 w-full cursor-pointer items-center justify-center gap-3 rounded-[16px] bg-gradient-to-r from-[#4b22ff] via-[#7038ff] to-[#ff315d] text-sm font-black text-white shadow-[0_14px_30px_rgba(75,34,255,0.25)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_38px_rgba(255,49,93,0.24)] disabled:cursor-not-allowed disabled:opacity-65 disabled:hover:translate-y-0"
                   >
                     {isSubmitting
                       ? "Sending Your Request..."
@@ -377,14 +424,608 @@ export default function ConsultationModal({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="mt-8 inline-flex h-12 items-center justify-center rounded-[14px] bg-[#081232] px-7 text-sm font-black text-white transition hover:-translate-y-1 hover:bg-[#4b22ff]"
+                  className="mt-8 inline-flex h-12 cursor-pointer items-center justify-center rounded-[14px] bg-[#081232] px-7 text-sm font-black text-white transition hover:-translate-y-1 hover:bg-[#4b22ff]"
                 >
                   Back to Website
                 </button>
               </div>
             )}
           </div>
+          </div>
         </div>
+      </div>
+
+      <style>{`
+        .consultation-premium-shell {
+          isolation: isolate;
+          background:
+            linear-gradient(#ffffff, #ffffff) padding-box,
+            conic-gradient(
+              from var(--consultation-angle),
+              rgba(75, 34, 255, 0.25),
+              rgba(0, 184, 255, 0.95),
+              rgba(255, 255, 255, 0.95),
+              rgba(255, 47, 125, 0.95),
+              rgba(255, 179, 71, 0.85),
+              rgba(75, 34, 255, 0.25)
+            ) border-box;
+          box-shadow:
+            0 0 0 1px rgba(255, 255, 255, 0.08),
+            0 0 34px rgba(75, 34, 255, 0.24),
+            0 0 70px rgba(255, 47, 125, 0.12);
+          transform-origin: center center;
+          animation:
+            consultationShellEnter 920ms cubic-bezier(0.16, 1, 0.3, 1) both,
+            consultationBorderRotate 8s linear 920ms infinite;
+        }
+
+        .consultation-premium-shell::before {
+          content: "";
+          position: absolute;
+          inset: -14px;
+          z-index: -1;
+          border-radius: inherit;
+          background: conic-gradient(
+            from var(--consultation-angle),
+            transparent 0deg,
+            rgba(0, 184, 255, 0.28) 62deg,
+            transparent 112deg,
+            rgba(255, 47, 125, 0.3) 188deg,
+            transparent 242deg,
+            rgba(124, 92, 255, 0.3) 310deg,
+            transparent 360deg
+          );
+          filter: blur(22px);
+          opacity: 0.82;
+          animation: consultationBorderRotate 8s linear infinite;
+        }
+
+        .consultation-modal-card::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: 25;
+          pointer-events: none;
+          transform: translateX(-145%) skewX(-17deg);
+          background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.02) 34%,
+            rgba(255, 255, 255, 0.24) 50%,
+            rgba(255, 255, 255, 0.04) 66%,
+            transparent 100%
+          );
+          animation: consultationGlassSweep 7s ease-in-out 1.1s infinite;
+        }
+
+        .consultation-space-field {
+          position: absolute;
+          inset: -12%;
+          background-repeat: repeat;
+          will-change: transform;
+        }
+
+        .consultation-space-field-one {
+          opacity: 0.82;
+          background-image:
+            radial-gradient(circle, rgba(255, 255, 255, 0.96) 0 1px, transparent 1.4px),
+            radial-gradient(circle, rgba(160, 205, 255, 0.76) 0 1px, transparent 1.5px);
+          background-position:
+            0 0,
+            46px 78px;
+          background-size:
+            112px 112px,
+            156px 156px;
+          animation: consultationStarDriftOne 90s linear infinite;
+        }
+
+        .consultation-space-field-two {
+          opacity: 0.48;
+          background-image:
+            radial-gradient(circle, rgba(255, 255, 255, 0.8) 0 1px, transparent 1.3px),
+            radial-gradient(circle, rgba(178, 138, 255, 0.72) 0 1px, transparent 1.6px);
+          background-position:
+            24px 14px,
+            90px 54px;
+          background-size:
+            78px 78px,
+            132px 132px;
+          animation: consultationStarDriftTwo 120s linear infinite;
+        }
+
+        .consultation-space-field-three {
+          opacity: 0.3;
+          background-image:
+            radial-gradient(circle, rgba(255, 255, 255, 0.7) 0 0.8px, transparent 1.2px);
+          background-size: 48px 48px;
+          animation: consultationStarDriftThree 150s linear infinite;
+        }
+
+        .consultation-nebula {
+          position: absolute;
+          border-radius: 999px;
+          filter: blur(95px);
+          mix-blend-mode: screen;
+          opacity: 0.22;
+          will-change: transform;
+        }
+
+        .consultation-nebula-one {
+          left: -8vw;
+          top: 12vh;
+          width: min(360px, 34vw);
+          height: min(360px, 34vw);
+          background: radial-gradient(
+            circle,
+            rgba(75, 34, 255, 0.72) 0%,
+            rgba(75, 34, 255, 0.18) 44%,
+            transparent 72%
+          );
+          animation: consultationNebulaOne 24s ease-in-out infinite alternate;
+        }
+
+        .consultation-nebula-two {
+          right: -7vw;
+          bottom: 8vh;
+          width: min(400px, 38vw);
+          height: min(400px, 38vw);
+          background: radial-gradient(
+            circle,
+            rgba(0, 184, 255, 0.58) 0%,
+            rgba(255, 47, 125, 0.12) 48%,
+            transparent 74%
+          );
+          animation: consultationNebulaTwo 28s ease-in-out infinite alternate;
+        }
+
+        .consultation-planet {
+          position: absolute;
+          left: -74px;
+          bottom: -88px;
+          width: 210px;
+          height: 210px;
+          border-radius: 50%;
+          opacity: 0.66;
+          background:
+            radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.3), transparent 18%),
+            radial-gradient(circle at 42% 38%, #2f1c78 0%, #130a3f 44%, #050313 78%);
+          box-shadow:
+            inset -32px -28px 45px rgba(0, 0, 0, 0.72),
+            0 0 42px rgba(75, 34, 255, 0.24);
+          animation: consultationPlanetFloat 18s ease-in-out infinite alternate;
+        }
+
+        .consultation-planet-ring {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: 300px;
+          height: 72px;
+          transform: translate(-50%, -50%) rotate(-17deg);
+          border: 2px solid rgba(151, 118, 255, 0.38);
+          border-radius: 50%;
+          box-shadow:
+            0 0 18px rgba(75, 34, 255, 0.18),
+            inset 0 0 12px rgba(0, 184, 255, 0.1);
+        }
+
+        .consultation-orbit {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          border-radius: 50%;
+          transform-style: preserve-3d;
+          will-change: transform;
+        }
+
+        .consultation-orbit-one {
+          width: min(1160px, 96vw);
+          height: min(760px, 80vh);
+          animation: consultationOrbitOne 18s linear infinite;
+        }
+
+        .consultation-orbit-two {
+          width: min(1260px, 104vw);
+          height: min(860px, 90vh);
+          border-color: rgba(124, 92, 255, 0.1);
+          animation: consultationOrbitTwo 24s linear infinite reverse;
+        }
+
+        .consultation-orbit span {
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          border-radius: 999px;
+          background: #ffffff;
+          box-shadow:
+            0 0 10px #ffffff,
+            0 0 24px rgba(0, 184, 255, 0.95),
+            0 0 42px rgba(75, 34, 255, 0.75);
+        }
+
+        .consultation-orbit span:nth-child(1) {
+          left: 8%;
+          top: 20%;
+        }
+
+        .consultation-orbit span:nth-child(2) {
+          right: 12%;
+          top: 28%;
+          box-shadow:
+            0 0 10px #ffffff,
+            0 0 24px rgba(255, 47, 125, 0.95),
+            0 0 42px rgba(255, 47, 125, 0.65);
+        }
+
+        .consultation-orbit span:nth-child(3) {
+          left: 52%;
+          bottom: -4px;
+          box-shadow:
+            0 0 10px #ffffff,
+            0 0 24px rgba(255, 179, 71, 0.95),
+            0 0 42px rgba(255, 179, 71, 0.65);
+        }
+
+        .consultation-comet {
+          position: absolute;
+          width: 220px;
+          height: 1.5px;
+          border-radius: 999px;
+          opacity: 0;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.96)
+          );
+          filter: drop-shadow(0 0 8px rgba(0, 184, 255, 0.9));
+          transform: rotate(-28deg);
+        }
+
+        .consultation-comet::after {
+          content: "";
+          position: absolute;
+          right: -2px;
+          top: 50%;
+          width: 7px;
+          height: 7px;
+          transform: translateY(-50%);
+          border-radius: 999px;
+          background: #ffffff;
+          box-shadow:
+            0 0 9px #ffffff,
+            0 0 22px rgba(0, 184, 255, 0.95);
+        }
+
+        .consultation-comet-one {
+          left: -180px;
+          top: 14%;
+          animation: consultationCometOne 18s linear 1.5s infinite;
+        }
+
+        .consultation-comet-two {
+          right: -190px;
+          top: 26%;
+          transform: rotate(208deg);
+          filter: drop-shadow(0 0 8px rgba(255, 47, 125, 0.9));
+          animation: consultationCometTwo 22s linear 6s infinite;
+        }
+
+        .consultation-comet-three {
+          left: -170px;
+          bottom: 19%;
+          filter: drop-shadow(0 0 8px rgba(124, 92, 255, 0.9));
+          animation: consultationCometThree 20s linear 10s infinite;
+        }
+
+        .consultation-comet-four {
+          right: -200px;
+          bottom: 11%;
+          transform: rotate(204deg);
+          filter: drop-shadow(0 0 8px rgba(255, 179, 71, 0.88));
+          animation: consultationCometFour 24s linear 14s infinite;
+        }
+
+        .consultation-stars span {
+          position: absolute;
+          width: 3px;
+          height: 3px;
+          border-radius: 999px;
+          background: rgba(255, 255, 255, 0.98);
+          box-shadow: 0 0 10px rgba(255, 255, 255, 0.95), 0 0 20px rgba(124, 92, 255, 0.35);
+          animation: consultationStarTwinkle 3.6s ease-in-out infinite;
+        }
+
+        .consultation-stars span:nth-child(1) { left: 7%; top: 14%; animation-delay: 0.1s; }
+        .consultation-stars span:nth-child(2) { left: 13%; top: 72%; animation-delay: 1.2s; }
+        .consultation-stars span:nth-child(3) { left: 19%; top: 31%; animation-delay: 2s; }
+        .consultation-stars span:nth-child(4) { left: 27%; top: 87%; animation-delay: 0.7s; }
+        .consultation-stars span:nth-child(5) { left: 32%; top: 11%; animation-delay: 1.8s; }
+        .consultation-stars span:nth-child(6) { left: 39%; top: 64%; animation-delay: 2.7s; }
+        .consultation-stars span:nth-child(7) { left: 45%; top: 22%; animation-delay: 0.4s; }
+        .consultation-stars span:nth-child(8) { left: 51%; top: 82%; animation-delay: 1.5s; }
+        .consultation-stars span:nth-child(9) { left: 57%; top: 8%; animation-delay: 2.4s; }
+        .consultation-stars span:nth-child(10) { left: 63%; top: 58%; animation-delay: 0.9s; }
+        .consultation-stars span:nth-child(11) { left: 69%; top: 18%; animation-delay: 2.2s; }
+        .consultation-stars span:nth-child(12) { left: 74%; top: 89%; animation-delay: 1.1s; }
+        .consultation-stars span:nth-child(13) { left: 80%; top: 37%; animation-delay: 2.9s; }
+        .consultation-stars span:nth-child(14) { left: 86%; top: 68%; animation-delay: 0.2s; }
+        .consultation-stars span:nth-child(15) { left: 92%; top: 17%; animation-delay: 1.6s; }
+        .consultation-stars span:nth-child(16) { left: 95%; top: 82%; animation-delay: 2.5s; }
+        .consultation-stars span:nth-child(17) { left: 4%; top: 47%; animation-delay: 1.3s; }
+        .consultation-stars span:nth-child(18) { left: 89%; top: 49%; animation-delay: 2.1s; }
+        .consultation-stars span:nth-child(19) { left: 10%; top: 26%; animation-delay: 3.1s; }
+        .consultation-stars span:nth-child(20) { left: 16%; top: 91%; animation-delay: 0.5s; }
+        .consultation-stars span:nth-child(21) { left: 23%; top: 53%; animation-delay: 2.8s; }
+        .consultation-stars span:nth-child(22) { left: 30%; top: 76%; animation-delay: 1.4s; }
+        .consultation-stars span:nth-child(23) { left: 36%; top: 35%; animation-delay: 3.3s; }
+        .consultation-stars span:nth-child(24) { left: 42%; top: 94%; animation-delay: 0.8s; }
+        .consultation-stars span:nth-child(25) { left: 49%; top: 43%; animation-delay: 2.6s; }
+        .consultation-stars span:nth-child(26) { left: 55%; top: 69%; animation-delay: 1.7s; }
+        .consultation-stars span:nth-child(27) { left: 61%; top: 27%; animation-delay: 3s; }
+        .consultation-stars span:nth-child(28) { left: 67%; top: 78%; animation-delay: 0.3s; }
+        .consultation-stars span:nth-child(29) { left: 72%; top: 47%; animation-delay: 2.3s; }
+        .consultation-stars span:nth-child(30) { left: 78%; top: 8%; animation-delay: 1s; }
+        .consultation-stars span:nth-child(31) { left: 83%; top: 93%; animation-delay: 3.4s; }
+        .consultation-stars span:nth-child(32) { left: 88%; top: 29%; animation-delay: 1.9s; }
+        .consultation-stars span:nth-child(33) { left: 93%; top: 61%; animation-delay: 0.6s; }
+        .consultation-stars span:nth-child(34) { left: 2%; top: 84%; animation-delay: 2.5s; }
+        .consultation-stars span:nth-child(35) { left: 52%; top: 15%; animation-delay: 3.2s; }
+        .consultation-stars span:nth-child(36) { left: 97%; top: 39%; animation-delay: 1.3s; }
+
+        @property --consultation-angle {
+          syntax: "<angle>";
+          inherits: false;
+          initial-value: 0deg;
+        }
+
+        @keyframes consultationBorderRotate {
+          to {
+            --consultation-angle: 360deg;
+          }
+        }
+
+        @keyframes consultationShellEnter {
+          0% {
+            opacity: 0;
+            transform: translateY(18px) scale(0.16);
+            filter: blur(14px);
+          }
+          42% {
+            opacity: 1;
+            filter: blur(1px);
+          }
+          76% {
+            opacity: 1;
+            transform: translateY(-4px) scale(1.035);
+            filter: blur(0);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+          }
+        }
+
+        @keyframes consultationGlassSweep {
+          0%,
+          58% {
+            transform: translateX(-145%) skewX(-17deg);
+          }
+          76%,
+          100% {
+            transform: translateX(145%) skewX(-17deg);
+          }
+        }
+
+        @keyframes consultationStarDriftOne {
+          from {
+            transform: translate3d(0, 0, 0) scale(1);
+          }
+          to {
+            transform: translate3d(-70px, 48px, 0) scale(1.02);
+          }
+        }
+
+        @keyframes consultationStarDriftTwo {
+          from {
+            transform: translate3d(0, 0, 0) scale(1.02);
+          }
+          to {
+            transform: translate3d(52px, -44px, 0) scale(1);
+          }
+        }
+
+        @keyframes consultationStarDriftThree {
+          from {
+            transform: translate3d(0, 0, 0);
+          }
+          to {
+            transform: translate3d(-38px, -54px, 0);
+          }
+        }
+
+        @keyframes consultationNebulaOne {
+          from {
+            transform: translate3d(-2vw, -2vh, 0) scale(0.92);
+          }
+          to {
+            transform: translate3d(5vw, 4vh, 0) scale(1.08);
+          }
+        }
+
+        @keyframes consultationNebulaTwo {
+          from {
+            transform: translate3d(3vw, 2vh, 0) scale(0.94);
+          }
+          to {
+            transform: translate3d(-5vw, -4vh, 0) scale(1.1);
+          }
+        }
+
+        @keyframes consultationPlanetFloat {
+          from {
+            transform: translate3d(-8px, 6px, 0) rotate(-2deg);
+          }
+          to {
+            transform: translate3d(10px, -8px, 0) rotate(2deg);
+          }
+        }
+
+        @keyframes consultationOrbitOne {
+          from {
+            transform: translate(-50%, -50%) rotate(-7deg);
+          }
+          to {
+            transform: translate(-50%, -50%) rotate(353deg);
+          }
+        }
+
+        @keyframes consultationOrbitTwo {
+          from {
+            transform: translate(-50%, -50%) rotate(13deg);
+          }
+          to {
+            transform: translate(-50%, -50%) rotate(373deg);
+          }
+        }
+
+        @keyframes consultationCometOne {
+          0%,
+          54% {
+            opacity: 0;
+            transform: translate3d(0, 0, 0) rotate(-28deg);
+          }
+          58% {
+            opacity: 0.9;
+          }
+          93% {
+            opacity: 0.9;
+          }
+          100% {
+            opacity: 0;
+            transform: translate3d(78vw, 38vh, 0) rotate(-28deg);
+          }
+        }
+
+        @keyframes consultationCometTwo {
+          0%,
+          57% {
+            opacity: 0;
+            transform: translate3d(0, 0, 0) rotate(208deg);
+          }
+          61% {
+            opacity: 0.82;
+          }
+          94% {
+            opacity: 0.82;
+          }
+          100% {
+            opacity: 0;
+            transform: translate3d(-82vw, 35vh, 0) rotate(208deg);
+          }
+        }
+
+        @keyframes consultationCometThree {
+          0%,
+          60% {
+            opacity: 0;
+            transform: translate3d(0, 0, 0) rotate(-28deg);
+          }
+          64% {
+            opacity: 0.84;
+          }
+          94% {
+            opacity: 0.84;
+          }
+          100% {
+            opacity: 0;
+            transform: translate3d(82vw, -34vh, 0) rotate(-28deg);
+          }
+        }
+
+        @keyframes consultationCometFour {
+          0%,
+          62% {
+            opacity: 0;
+            transform: translate3d(0, 0, 0) rotate(204deg);
+          }
+          66% {
+            opacity: 0.78;
+          }
+          95% {
+            opacity: 0.78;
+          }
+          100% {
+            opacity: 0;
+            transform: translate3d(-78vw, -32vh, 0) rotate(204deg);
+          }
+        }
+
+        @keyframes consultationStarTwinkle {
+          0%,
+          100% {
+            opacity: 0.28;
+            transform: scale(0.7);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.5);
+          }
+        }
+
+        @media (max-width: 767px) {
+          .consultation-orbit,
+          .consultation-comet {
+            display: none;
+          }
+
+          .consultation-stars span:nth-child(n + 19) {
+            display: none;
+          }
+
+          .consultation-nebula {
+            opacity: 0.13;
+            filter: blur(72px);
+          }
+
+          .consultation-planet {
+            left: -92px;
+            bottom: -105px;
+            transform: scale(0.78);
+          }
+
+          .consultation-premium-shell {
+            box-shadow:
+              0 0 0 1px rgba(255, 255, 255, 0.08),
+              0 0 30px rgba(75, 34, 255, 0.22),
+              0 0 48px rgba(255, 47, 125, 0.1);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .consultation-premium-shell,
+          .consultation-premium-shell::before,
+          .consultation-modal-card::after,
+          .consultation-space-field,
+          .consultation-nebula,
+          .consultation-planet,
+          .consultation-orbit,
+          .consultation-comet,
+          .consultation-stars span {
+            animation: none !important;
+          }
+
+          .consultation-premium-shell {
+            opacity: 1;
+            transform: none;
+          }
+
+          .consultation-comet {
+            display: none;
+          }
+        }
+      `}</style>
       </div>
     </div>
   );
