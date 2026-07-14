@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 import {
   ArrowRight,
   Check,
@@ -36,12 +36,62 @@ export default function ConsultationModal({
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [shouldRender, setShouldRender] = useState(isOpen);
+  const [isVisible, setIsVisible] = useState(false);
+  const closeTimerRef = useRef<number | null>(null);
+
+  const requestClose = useCallback(() => {
+    if (closeTimerRef.current !== null) {
+      return;
+    }
+
+    setIsVisible(false);
+
+    closeTimerRef.current = window.setTimeout(() => {
+      closeTimerRef.current = null;
+      setShouldRender(false);
+      onClose();
+    }, 220);
+  }, [onClose]);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (isOpen) {
+      if (closeTimerRef.current !== null) {
+        window.clearTimeout(closeTimerRef.current);
+        closeTimerRef.current = null;
+      }
+
+      setShouldRender(true);
+
+      const frameId = window.requestAnimationFrame(() => {
+        setIsVisible(true);
+      });
+
+      return () => window.cancelAnimationFrame(frameId);
+    }
+
+    setIsVisible(false);
+
+    const timerId = window.setTimeout(() => {
+      setShouldRender(false);
+    }, 220);
+
+    return () => window.clearTimeout(timerId);
+  }, [isOpen]);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimerRef.current !== null) {
+        window.clearTimeout(closeTimerRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!shouldRender) return;
 
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") requestClose();
     };
 
     document.addEventListener("keydown", handleEscape);
@@ -51,7 +101,7 @@ export default function ConsultationModal({
       document.removeEventListener("keydown", handleEscape);
       document.body.style.overflow = "";
     };
-  }, [isOpen, onClose]);
+  }, [requestClose, shouldRender]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -65,7 +115,7 @@ export default function ConsultationModal({
     }
   }, [isOpen]);
 
-  if (!isOpen) return null;
+  if (!shouldRender) return null;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -123,7 +173,11 @@ export default function ConsultationModal({
   };
 
   return (
-    <div className="fixed inset-0 z-[100] overflow-y-auto overscroll-contain bg-black">
+    <div
+      className={`fixed inset-0 z-[100] overflow-y-auto overscroll-contain bg-black transition-opacity duration-200 ease-out ${
+        isVisible ? "opacity-100" : "pointer-events-none opacity-0"
+      }`}
+    >
       {/* Premium ambient scene behind the modal */}
       <div
         aria-hidden="true"
@@ -158,7 +212,7 @@ export default function ConsultationModal({
         <div className="consultation-comet consultation-comet-four" />
 
         <div className="consultation-stars">
-          {Array.from({ length: 36 }).map((_, index) => (
+          {Array.from({ length: 24 }).map((_, index) => (
             <span key={index} />
           ))}
         </div>
@@ -167,14 +221,20 @@ export default function ConsultationModal({
       <div
         className="relative flex min-h-full items-start justify-center px-3 py-3 sm:px-4 sm:py-5 lg:py-6 xl:py-8"
         onMouseDown={(event) => {
-          if (event.target === event.currentTarget) onClose();
+          if (event.target === event.currentTarget) requestClose();
         }}
       >
-        <div className="consultation-premium-shell relative my-auto w-full max-w-[980px] rounded-[25px] p-px sm:rounded-[31px]">
+        <div
+          className={`consultation-premium-shell relative my-auto w-full max-w-[980px] rounded-[25px] p-px transition-[transform,opacity] duration-[380ms] ease-[cubic-bezier(0.16,1,0.3,1)] sm:rounded-[31px] ${
+            isVisible
+              ? "translate-y-0 scale-100 opacity-100"
+              : "translate-y-2 scale-[0.72] opacity-0"
+          }`}
+        >
           <div className="consultation-modal-card relative w-full overflow-hidden rounded-[24px] border border-white/20 bg-white shadow-[0_35px_100px_rgba(4,8,29,0.45)] sm:rounded-[30px]">
         <button
           type="button"
-          onClick={onClose}
+          onClick={requestClose}
           aria-label="Close consultation form"
           className="absolute right-5 top-5 z-30 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-[#07112f]/75 text-white backdrop-blur transition hover:rotate-90 hover:bg-[#ff2f7d]"
         >
@@ -423,7 +483,7 @@ export default function ConsultationModal({
 
                 <button
                   type="button"
-                  onClick={onClose}
+                  onClick={requestClose}
                   className="mt-8 inline-flex h-12 cursor-pointer items-center justify-center rounded-[14px] bg-[#081232] px-7 text-sm font-black text-white transition hover:-translate-y-1 hover:bg-[#4b22ff]"
                 >
                   Back to Website
@@ -454,9 +514,9 @@ export default function ConsultationModal({
             0 0 34px rgba(75, 34, 255, 0.24),
             0 0 70px rgba(255, 47, 125, 0.12);
           transform-origin: center center;
-          animation:
-            consultationShellEnter 920ms cubic-bezier(0.16, 1, 0.3, 1) both,
-            consultationBorderRotate 8s linear 920ms infinite;
+          backface-visibility: hidden;
+          will-change: transform, opacity;
+          animation: consultationBorderRotate 16s linear infinite;
         }
 
         .consultation-premium-shell::before {
@@ -495,7 +555,7 @@ export default function ConsultationModal({
             rgba(255, 255, 255, 0.04) 66%,
             transparent 100%
           );
-          animation: consultationGlassSweep 7s ease-in-out 1.1s infinite;
+          animation: consultationGlassSweep 2.8s ease-in-out 900ms 1 both;
         }
 
         .consultation-space-field {
@@ -534,6 +594,7 @@ export default function ConsultationModal({
         }
 
         .consultation-space-field-three {
+          display: none;
           opacity: 0.3;
           background-image:
             radial-gradient(circle, rgba(255, 255, 255, 0.7) 0 0.8px, transparent 1.2px);
@@ -544,7 +605,7 @@ export default function ConsultationModal({
         .consultation-nebula {
           position: absolute;
           border-radius: 999px;
-          filter: blur(95px);
+          filter: blur(62px);
           mix-blend-mode: screen;
           opacity: 0.22;
           will-change: transform;
@@ -561,7 +622,7 @@ export default function ConsultationModal({
             rgba(75, 34, 255, 0.18) 44%,
             transparent 72%
           );
-          animation: consultationNebulaOne 24s ease-in-out infinite alternate;
+          transform: translateZ(0);
         }
 
         .consultation-nebula-two {
@@ -575,7 +636,7 @@ export default function ConsultationModal({
             rgba(255, 47, 125, 0.12) 48%,
             transparent 74%
           );
-          animation: consultationNebulaTwo 28s ease-in-out infinite alternate;
+          transform: translateZ(0);
         }
 
         .consultation-planet {
@@ -732,8 +793,8 @@ export default function ConsultationModal({
           height: 3px;
           border-radius: 999px;
           background: rgba(255, 255, 255, 0.98);
-          box-shadow: 0 0 10px rgba(255, 255, 255, 0.95), 0 0 20px rgba(124, 92, 255, 0.35);
-          animation: consultationStarTwinkle 3.6s ease-in-out infinite;
+          box-shadow: 0 0 8px rgba(255, 255, 255, 0.85);
+          animation: consultationStarTwinkle 5.5s ease-in-out infinite;
         }
 
         .consultation-stars span:nth-child(1) { left: 7%; top: 14%; animation-delay: 0.1s; }
@@ -786,24 +847,13 @@ export default function ConsultationModal({
         }
 
         @keyframes consultationShellEnter {
-          0% {
+          from {
             opacity: 0;
-            transform: translateY(18px) scale(0.16);
-            filter: blur(14px);
+            transform: translateY(8px) scale(0.72);
           }
-          42% {
-            opacity: 1;
-            filter: blur(1px);
-          }
-          76% {
-            opacity: 1;
-            transform: translateY(-4px) scale(1.035);
-            filter: blur(0);
-          }
-          100% {
+          to {
             opacity: 1;
             transform: translateY(0) scale(1);
-            filter: blur(0);
           }
         }
 
@@ -1019,6 +1069,7 @@ export default function ConsultationModal({
           .consultation-premium-shell {
             opacity: 1;
             transform: none;
+            transition: none !important;
           }
 
           .consultation-comet {
