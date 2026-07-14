@@ -70,6 +70,7 @@ export default function Navbar() {
   const [showConsultation, setShowConsultation] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [desktopServicesOpen, setDesktopServicesOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -80,6 +81,19 @@ export default function Navbar() {
   };
 
   const servicesActive = isActive("/services");
+
+  useEffect(() => {
+    const updateHeaderState = () => {
+      setIsScrolled(window.scrollY > 24);
+    };
+
+    updateHeaderState();
+    window.addEventListener("scroll", updateHeaderState, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", updateHeaderState);
+    };
+  }, []);
 
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
@@ -125,7 +139,13 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-[#ebe8f5]/70 bg-white/95 shadow-[0_8px_30px_rgba(21,17,65,0.04)] backdrop-blur-md">
+      <header
+        className={`sticky top-0 z-50 border-b backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-500 ${
+          isScrolled
+            ? "border-[#cfc4e8] bg-[linear-gradient(90deg,rgba(235,229,250,0.98),rgba(248,232,242,0.98))] shadow-[0_14px_38px_rgba(48,30,104,0.14)]"
+            : "border-[#ebe8f5]/70 bg-white/95 shadow-[0_8px_30px_rgba(21,17,65,0.04)]"
+        }`}
+      >
         <div className="mx-auto flex h-20 max-w-[1320px] items-center justify-between gap-4 px-4 sm:h-[88px] sm:px-6 xl:h-24 xl:px-10">
           {/* Logo */}
           <Link
@@ -134,10 +154,11 @@ export default function Navbar() {
             aria-label="MITOMS home"
           >
             <Image
-              src="/images/home/logo.png"
-              alt="MITOMS"
-              width={360}
-              height={100}
+              src="/images/home/mitoms-logo.png"
+              alt="MITOMS Technologies Pvt Ltd"
+              width={2048}
+              height={705}
+              sizes="(min-width: 1280px) 233px, (min-width: 640px) 192px, 169px"
               priority
               className="h-[58px] w-auto max-w-[210px] object-contain sm:h-[66px] sm:max-w-[245px] xl:h-[80px] xl:max-w-none"
             />

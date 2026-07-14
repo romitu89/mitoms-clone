@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -169,32 +170,43 @@ export default function Footer() {
         />
       </svg>
 
-      <div className="relative z-10 mx-auto max-w-[1320px] px-4 py-12 sm:px-6 sm:py-14 lg:px-10 lg:py-16">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-9 sm:gap-x-10 sm:gap-y-10 lg:grid-cols-[1.25fr_0.78fr_1fr_0.9fr] lg:gap-8 xl:gap-10">
+      <div className="relative z-10 mx-auto max-w-[1320px] px-4 pb-8 pt-10 sm:px-6 sm:py-14 lg:px-10 lg:py-16">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-7 sm:gap-x-10 sm:gap-y-10 lg:grid-cols-[1.25fr_0.78fr_1fr_0.9fr] lg:gap-8 xl:gap-10">
           {/* Brand */}
           <div className="col-span-2 min-w-0 lg:col-span-1">
-            <Link href="/" className="group inline-flex items-center gap-3">
-              <div className="bg-gradient-to-br from-[#00b8ff] via-[#743cff] to-[#ff2f7d] bg-clip-text text-[42px] font-extrabold leading-none text-transparent transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-105 sm:text-5xl">
-                M
-              </div>
+            <Link
+              href="/"
+              aria-label="MITOMS home"
+              className="group inline-flex max-w-full items-center gap-3 transition-transform duration-300 hover:-translate-y-1"
+            >
+              <Image
+                src="/images/home/mitoms-footer-icon.png"
+                alt=""
+                width={256}
+                height={256}
+                sizes="(min-width: 640px) 92px, 78px"
+                className="h-auto w-[78px] shrink-0 object-contain drop-shadow-[0_10px_24px_rgba(94,55,255,0.28)] transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-105 sm:w-[92px]"
+              />
 
-              <div>
-                <h2 className="text-xl font-extrabold tracking-[-0.02em] sm:text-2xl">MITOMS</h2>
+              <div className="min-w-0">
+                <p className="text-[35px] font-black leading-none tracking-[-0.045em] text-white sm:text-[40px]">
+                  mitoms
+                </p>
 
-                <p className="mt-0.5 text-[12px] font-semibold text-white/78 sm:text-[13px] sm:text-white/82">
-                  Technologies Pvt. Ltd.
+                <p className="mt-1.5 whitespace-nowrap pl-[2px] text-[8.5px] font-bold uppercase tracking-[0.16em] text-white/68 sm:text-[9.5px]">
+                  Technologies Pvt Ltd
                 </p>
               </div>
             </Link>
 
-            <p className="mt-5 max-w-md text-[15px] font-medium leading-7 text-white/82 sm:mt-6 sm:text-[16px] sm:text-white/84">
+            <p className="mt-4 max-w-md text-[14px] font-medium leading-6 text-white/82 sm:mt-6 sm:text-[16px] sm:leading-7 sm:text-white/84">
               We build modern digital products, websites, apps and growth
               solutions for ambitious businesses.
             </p>
           </div>
 
           {/* Company */}
-          <div className="min-w-0 border-t border-white/10 pt-7 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 xl:pl-10">
+          <div className="min-w-0 border-t border-white/10 pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 xl:pl-10">
             <h3 className="mb-4 text-[16px] font-bold text-white sm:mb-5 sm:text-lg">Company</h3>
 
             <ul className="space-y-3 text-[14px] text-white/78 sm:text-[15px] sm:text-white/82">
@@ -241,7 +253,7 @@ export default function Footer() {
           </div>
 
           {/* Services */}
-          <div className="min-w-0 border-t border-white/10 pt-7 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 xl:pl-10">
+          <div className="min-w-0 border-t border-white/10 pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 xl:pl-10">
             <h3 className="mb-4 text-[16px] font-bold text-white sm:mb-5 sm:text-lg">Services</h3>
 
             <ul className="space-y-3 text-[14px] text-white/78 sm:text-[15px] sm:text-white/82">
@@ -288,39 +300,41 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="col-span-2 min-w-0 border-t border-white/10 pt-7 lg:col-span-1 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 xl:pl-10">
+          <div className="col-span-2 min-w-0 border-t border-white/10 pt-6 lg:col-span-1 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 xl:pl-10">
             <h3 className="mb-4 text-[16px] font-bold text-white sm:mb-5 sm:text-lg">Contact</h3>
 
-            <ul className="grid gap-3 text-[14px] text-white/78 min-[430px]:grid-cols-3 min-[430px]:items-center sm:text-[15px] sm:text-white/82 lg:grid-cols-1">
+            <ul className="flex flex-wrap items-center gap-x-5 gap-y-3 text-[14px] text-white/78 sm:text-[15px] sm:text-white/82 lg:flex-col lg:items-start">
               <li className="min-w-0">India</li>
 
               <li>
                 <a
-                  href="mailto:info@mitoms.com"
+                  href="mailto:sales@mitoms.com"
                   className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
                   <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#ff2f7d] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#ff2f7d]" />
-                  <span className="break-words">info@mitoms.com</span>
+                  <span className="break-words">sales@mitoms.com</span>
                 </a>
               </li>
 
               <li>
                 <a
-                  href="tel:+910000000000"
+                  href="tel:+919990794979"
                   className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
                   <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#00b8ff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#00b8ff]" />
-                  +91 00000 00000
+                  +91 99907 94979
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-center gap-4 border-t border-white/10 pt-6 text-center text-[13px] leading-6 text-white/68 sm:mt-12 sm:text-[14px] md:flex-row md:justify-between md:text-left">
-          <p>© 2026 MITOMS Technologies Pvt. Ltd. All rights reserved.</p>
+        <div className="mt-8 flex flex-col items-center gap-2.5 border-t border-white/10 pb-3 pt-5 text-center text-[12px] leading-5 text-white/68 sm:mt-12 sm:gap-4 sm:pb-0 sm:pt-6 sm:text-[14px] sm:leading-6 md:flex-row md:justify-between md:text-left">
+          <p className="max-w-[330px] sm:max-w-none">
+            © 2026 MITOMS Technologies Pvt. Ltd. All rights reserved.
+          </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:justify-end">
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 md:justify-end">
             <Link
               href="/privacy-policy"
               className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"

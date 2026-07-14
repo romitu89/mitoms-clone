@@ -47,8 +47,8 @@ const contactCards = [
     icon: Mail,
     title: "Email Us",
     description: "Share your requirements with our team.",
-    value: "info@mitoms.com",
-    href: "mailto:info@mitoms.com",
+    value: "sales@mitoms.com",
+    href: "mailto:sales@mitoms.com",
     iconBg: "from-[#4b22ff] to-[#7b5cff]",
   },
   {
@@ -216,13 +216,88 @@ const frequentlyAskedQuestions = [
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Frontend success state only.
-    // Later this can be connected to an API, email service or database.
-    setSubmitted(true);
+    if (isSubmitting) {
+      return;
+    }
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const name = String(formData.get("name") ?? "").trim();
+    const phone = String(formData.get("phone") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const company = String(formData.get("company") ?? "").trim();
+    const service = String(formData.get("service") ?? "").trim();
+    const budget = String(formData.get("budget") ?? "").trim();
+    const projectDetails = String(formData.get("message") ?? "").trim();
+    const website = String(formData.get("website") ?? "").trim();
+
+    const message = [
+      "Source: Contact Page Project Enquiry",
+      company ? `Company: ${company}` : "",
+      budget ? `Estimated Budget: ${budget}` : "",
+      "",
+      projectDetails,
+    ]
+      .filter((line, index, lines) => {
+        if (line !== "") {
+          return true;
+        }
+
+        return index > 0 && index < lines.length - 1;
+      })
+      .join("\n")
+      .trim();
+
+    const payload = {
+      name,
+      phone,
+      email,
+      service,
+      message,
+      website,
+    };
+
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const response = await fetch("/api/consultation", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = (await response.json().catch(() => null)) as
+        | { success?: boolean; message?: string }
+        | null;
+
+      if (!response.ok || !result?.success) {
+        throw new Error(
+          result?.message ||
+            "We could not send your enquiry. Please try again.",
+        );
+      }
+
+      form.reset();
+      setSubmitted(true);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "We could not send your enquiry. Please try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -437,11 +512,11 @@ export default function ContactPage() {
                 </p>
 
                 <a
-                  href="mailto:info@mitoms.com"
+                  href="mailto:sales@mitoms.com"
                   className="group mt-3 inline-flex max-w-full items-center gap-3 break-all text-[15px] font-bold text-white transition-colors hover:text-[#ff7ca8] sm:text-[17px]"
                 >
                   <Mail size={19} />
-                  info@mitoms.com
+                  sales@mitoms.com
                   <ArrowRight
                     size={17}
                     className="transition-transform duration-300 group-hover:translate-x-1"
@@ -478,6 +553,15 @@ export default function ContactPage() {
                 </p>
 
                 <form onSubmit={handleSubmit} className="mt-7 space-y-4 sm:mt-8">
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="hidden"
+                  />
+
                   {/* Name and email */}
                   <div className="grid gap-4 sm:grid-cols-2">
                     <label className="group block">
@@ -529,7 +613,7 @@ export default function ContactPage() {
                   <div className="grid gap-4 sm:grid-cols-2">
                     <label className="group block">
                       <span className="mb-2 block text-[13px] font-bold text-[#202b48]">
-                        Phone Number
+                        Phone Number <span className="text-[#ff2f7d]">*</span>
                       </span>
 
                       <div className="relative">
@@ -539,10 +623,11 @@ export default function ContactPage() {
                         />
 
                         <input
+                          required
                           type="tel"
                           name="phone"
                           autoComplete="tel"
-                          placeholder="+91 00000 00000"
+                          placeholder="Enter your phone number"
                           className="h-14 w-full rounded-[15px] border border-[#e1ddec] bg-white pl-12 pr-4 text-[13px] font-semibold text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
                         />
                       </div>
@@ -667,15 +752,29 @@ export default function ContactPage() {
 
                   <button
                     type="submit"
-                    className="group flex min-h-[52px] w-full cursor-pointer items-center justify-center gap-3 rounded-[14px] bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff2f7d] px-5 text-[13px] font-bold text-white shadow-[0_15px_32px_rgba(75,34,255,0.25)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_42px_rgba(255,49,93,0.25)] sm:h-14 sm:rounded-[15px] sm:px-6 sm:text-[14px]"
+                    disabled={isSubmitting}
+                    className="group flex min-h-[52px] w-full cursor-pointer items-center justify-center gap-3 rounded-[14px] bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff2f7d] px-5 text-[13px] font-bold text-white shadow-[0_15px_32px_rgba(75,34,255,0.25)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_42px_rgba(255,49,93,0.25)] disabled:cursor-not-allowed disabled:opacity-65 disabled:hover:translate-y-0 sm:h-14 sm:rounded-[15px] sm:px-6 sm:text-[14px]"
                   >
-                    Send Project Enquiry
+                    {isSubmitting ? "Sending Enquiry..." : "Send Project Enquiry"}
 
                     <Send
                       size={18}
-                      className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5"
+                      className={`transition-transform duration-300 ${
+                        isSubmitting
+                          ? "animate-pulse"
+                          : "group-hover:translate-x-1 group-hover:-translate-y-0.5"
+                      }`}
                     />
                   </button>
+
+                  {submitError && (
+                    <p
+                      role="alert"
+                      className="rounded-[12px] border border-[#ff2f7d]/20 bg-[#fff2f7] px-4 py-3 text-center text-[13px] font-semibold leading-5 text-[#b71855]"
+                    >
+                      {submitError}
+                    </p>
+                  )}
 
                   <div className="flex flex-col items-start gap-2 pt-1 text-[12px] font-bold text-[#27314f]/75 min-[430px]:flex-row min-[430px]:flex-wrap min-[430px]:items-center min-[430px]:justify-center min-[430px]:gap-x-6">
                     <span className="flex items-center gap-1.5">
@@ -726,7 +825,10 @@ export default function ContactPage() {
 
                 <button
                   type="button"
-                  onClick={() => setSubmitted(false)}
+                  onClick={() => {
+                    setSubmitted(false);
+                    setSubmitError("");
+                  }}
                   className="mt-8 inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-[13px] bg-[#081232] px-7 text-[13px] font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#4b22ff]"
                 >
                   Send Another Message
@@ -780,7 +882,7 @@ export default function ContactPage() {
                 description:
                   "Need assistance with an existing product, website or application?",
                 action: "Contact Support",
-                href: "mailto:info@mitoms.com?subject=Technical Support",
+                href: "mailto:sales@mitoms.com?subject=Technical Support",
                 gradient: "from-[#00aeef] to-[#4b22ff]",
               },
               {
@@ -789,7 +891,7 @@ export default function ContactPage() {
                 description:
                   "Explore development partnerships, outsourcing and collaboration opportunities.",
                 action: "Partner With Us",
-                href: "mailto:info@mitoms.com?subject=Business Partnership",
+                href: "mailto:sales@mitoms.com?subject=Business Partnership",
                 gradient: "from-[#ff2f7d] to-[#743cff]",
               },
             ].map((item) => {
@@ -863,7 +965,7 @@ export default function ContactPage() {
             </p>
 
             <a
-              href="mailto:info@mitoms.com"
+              href="mailto:sales@mitoms.com"
               className="group mt-7 inline-flex h-12 items-center justify-center gap-3 rounded-[13px] border border-[#dcd6ef] bg-white px-6 text-[13px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(22,17,62,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#4b22ff] hover:text-[#4b22ff]"
             >
               Ask Another Question
@@ -937,7 +1039,7 @@ export default function ContactPage() {
             </div>
 
             <a
-              href="mailto:info@mitoms.com?subject=Project Enquiry"
+              href="mailto:sales@mitoms.com?subject=Project Enquiry"
               className="group inline-flex min-h-[50px] w-full shrink-0 items-center justify-center gap-3 rounded-[14px] bg-white px-7 py-4 text-[13px] font-bold text-[#17163b] shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 sm:w-auto"
             >
               Contact Our Team

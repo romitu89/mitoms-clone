@@ -8,6 +8,7 @@ import {
 } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import ConsultationModal from "./ConsultationModal";
 import {
   Star,
@@ -659,11 +660,26 @@ function ProcessStep({
 }
 
 export default function Home() {
+  const router = useRouter();
   const [showConsultation, setShowConsultation] = useState(false);
 
   const openConsultation = () => {
     setShowConsultation(true);
   };
+
+  const prefetchPortfolio = () => {
+    router.prefetch("/portfolio");
+  };
+
+  useEffect(() => {
+    const prefetchTimer = window.setTimeout(() => {
+      router.prefetch("/portfolio");
+    }, 250);
+
+    return () => {
+      window.clearTimeout(prefetchTimer);
+    };
+  }, [router]);
 
   return (
     <main className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
@@ -786,7 +802,7 @@ export default function Home() {
               width={70}
               height={70}
               unoptimized
-              className="absolute left-[5%] top-[24%] z-30 w-[34px] sm:left-[8%] sm:top-[26%] sm:w-[48px]"
+              className="hero-orb hero-orb-one pointer-events-none absolute left-[5%] top-[24%] z-30 w-[34px] select-none mix-blend-multiply drop-shadow-[0_10px_18px_rgba(255,47,125,0.28)] sm:left-[8%] sm:top-[26%] sm:w-[48px]"
             />
 
             <Image
@@ -795,7 +811,7 @@ export default function Home() {
               width={55}
               height={55}
               unoptimized
-              className="absolute left-[20%] top-[39%] z-30 w-[24px] sm:left-[23%] sm:w-[34px]"
+              className="hero-orb hero-orb-two pointer-events-none absolute left-[20%] top-[39%] z-30 w-[24px] select-none mix-blend-multiply drop-shadow-[0_8px_16px_rgba(0,184,255,0.26)] sm:left-[23%] sm:w-[34px]"
             />
 
             <Image
@@ -804,7 +820,7 @@ export default function Home() {
               width={65}
               height={65}
               unoptimized
-              className="absolute right-[4%] top-[37%] z-30 w-[30px] sm:right-[6%] sm:top-[39%] sm:w-[45px]"
+              className="hero-orb hero-orb-three pointer-events-none absolute right-[4%] top-[37%] z-30 w-[30px] select-none mix-blend-multiply drop-shadow-[0_10px_18px_rgba(0,184,255,0.28)] sm:right-[6%] sm:top-[39%] sm:w-[45px]"
             />
 
             <Image
@@ -813,7 +829,7 @@ export default function Home() {
               width={65}
               height={65}
               unoptimized
-              className="absolute right-[10%] top-[58%] z-30 w-[28px] sm:right-[13%] sm:top-[56%] sm:w-[42px]"
+              className="hero-orb hero-orb-four pointer-events-none absolute right-[10%] top-[58%] z-30 w-[28px] select-none mix-blend-multiply drop-shadow-[0_10px_18px_rgba(255,47,125,0.28)] sm:right-[13%] sm:top-[56%] sm:w-[42px]"
             />
 
             {heroCards.map((card) => (
@@ -1256,8 +1272,9 @@ export default function Home() {
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 lg:justify-end">
               <button
                 type="button"
+                onPointerDown={openConsultation}
                 onClick={openConsultation}
-                className="inline-flex h-[48px] w-full cursor-pointer items-center justify-center rounded-[8px] bg-white px-5 text-[13px] font-bold tracking-[0.01em] text-[#17163b] shadow-[0_10px_25px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(0,0,0,0.24)] sm:w-auto sm:min-w-[200px]"
+                className="inline-flex h-[48px] w-full cursor-pointer touch-manipulation items-center justify-center rounded-[8px] bg-white px-5 text-[13px] font-bold tracking-[0.01em] text-[#17163b] shadow-[0_10px_25px_rgba(0,0,0,0.18)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(0,0,0,0.24)] sm:w-auto sm:min-w-[200px]"
               >
                 Get Free Consultation
                 <span className="ml-4 text-[18px] text-[#ff2f7d]">→</span>
@@ -1265,7 +1282,11 @@ export default function Home() {
 
               <Link
                 href="/portfolio"
-                className="inline-flex h-[48px] w-full items-center justify-center rounded-[8px] border border-white/30 bg-white/[0.03] px-5 text-[13px] font-semibold text-white backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:bg-white/10 sm:w-auto sm:min-w-[158px]"
+                prefetch
+                onPointerEnter={prefetchPortfolio}
+                onFocus={prefetchPortfolio}
+                onTouchStart={prefetchPortfolio}
+                className="inline-flex h-[48px] w-full touch-manipulation items-center justify-center rounded-[8px] border border-white/30 bg-white/[0.03] px-5 text-[13px] font-semibold text-white backdrop-blur transition-all duration-200 hover:-translate-y-1 hover:bg-white/10 sm:w-auto sm:min-w-[158px]"
               >
                 View Our Work
                 <span className="ml-4 text-[17px]">→</span>
@@ -1317,6 +1338,102 @@ export default function Home() {
         isOpen={showConsultation}
         onClose={() => setShowConsultation(false)}
       />
+
+      <style>{`
+        .hero-orb {
+          transform-origin: 50% 0%;
+          backface-visibility: hidden;
+          will-change: transform;
+          filter: saturate(1.08) contrast(1.04);
+        }
+
+        .hero-orb-one {
+          animation: heroOrbHangLeft 5.8s ease-in-out infinite;
+        }
+
+        .hero-orb-two {
+          animation: heroOrbOrbitSmall 7.2s ease-in-out infinite;
+        }
+
+        .hero-orb-three {
+          animation: heroOrbHangRight 6.4s ease-in-out infinite;
+        }
+
+        .hero-orb-four {
+          animation: heroOrbOrbitWide 8.6s ease-in-out infinite reverse;
+        }
+
+        @keyframes heroOrbHangLeft {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0) rotate(-4deg);
+          }
+          50% {
+            transform: translate3d(8px, 13px, 0) rotate(5deg);
+          }
+        }
+
+        @keyframes heroOrbOrbitSmall {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+          }
+          25% {
+            transform: translate3d(12px, -9px, 0) rotate(8deg) scale(1.04);
+          }
+          50% {
+            transform: translate3d(4px, 10px, 0) rotate(0deg) scale(0.97);
+          }
+          75% {
+            transform: translate3d(-10px, 3px, 0) rotate(-8deg) scale(1.02);
+          }
+        }
+
+        @keyframes heroOrbHangRight {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0) rotate(5deg);
+          }
+          50% {
+            transform: translate3d(-9px, 14px, 0) rotate(-5deg);
+          }
+        }
+
+        @keyframes heroOrbOrbitWide {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0) rotate(0deg);
+          }
+          25% {
+            transform: translate3d(14px, -10px, 0) rotate(7deg);
+          }
+          50% {
+            transform: translate3d(5px, 12px, 0) rotate(0deg);
+          }
+          75% {
+            transform: translate3d(-13px, 2px, 0) rotate(-7deg);
+          }
+        }
+
+        @media (max-width: 639px) {
+          .hero-orb-one,
+          .hero-orb-three {
+            animation-duration: 7s;
+          }
+
+          .hero-orb-two,
+          .hero-orb-four {
+            animation-duration: 9s;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .hero-orb {
+            animation: none !important;
+            transform: none !important;
+          }
+        }
+      `}</style>
     </main>
   );
 }
