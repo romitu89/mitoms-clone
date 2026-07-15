@@ -1,6 +1,11 @@
 "use client";
 
-import { useEffect, useState, type MouseEvent as ReactMouseEvent } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type MouseEvent as ReactMouseEvent,
+} from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -72,6 +77,7 @@ const normalizePath = (value: string) => {
 
 export default function Navbar() {
   const pathname = usePathname();
+  const headerRef = useRef<HTMLElement>(null);
   const currentPath = normalizePath(pathname);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -125,6 +131,37 @@ export default function Navbar() {
       window.removeEventListener("keydown", handleEscape);
     };
   }, []);
+
+  useEffect(() => {
+    if (!isOpen && !desktopServicesOpen) {
+      return;
+    }
+
+    const handleOutsidePointerDown = (event: PointerEvent) => {
+      const header = headerRef.current;
+      const target = event.target;
+
+      if (!(target instanceof Node) || header?.contains(target)) {
+        return;
+      }
+
+      setIsOpen(false);
+      setMobileServicesOpen(false);
+      setDesktopServicesOpen(false);
+    };
+
+    document.addEventListener("pointerdown", handleOutsidePointerDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handleOutsidePointerDown);
+    };
+  }, [desktopServicesOpen, isOpen]);
+
+  useEffect(() => {
+    setIsOpen(false);
+    setMobileServicesOpen(false);
+    setDesktopServicesOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -185,6 +222,7 @@ export default function Navbar() {
   return (
     <>
       <header
+        ref={headerRef}
         className={`sticky top-0 z-50 border-b backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-500 ${
           isScrolled
             ? "border-[#cfc4e8] bg-[linear-gradient(90deg,rgba(235,229,250,0.98),rgba(248,232,242,0.98))] shadow-[0_14px_38px_rgba(48,30,104,0.14)]"
@@ -502,38 +540,60 @@ export default function Navbar() {
                 </div>
               </Link>
 
-              {/* Mobile Services Dropdown */}
+              {/* Mobile Services: text opens the Services page, arrow opens submenu */}
               <div className="border-b border-[#ece8f5]">
-                <button
-                  type="button"
-                  onClick={() =>
-                    setMobileServicesOpen((current) => !current)
-                  }
-                  aria-expanded={mobileServicesOpen}
-                  className={`flex w-full cursor-pointer items-center justify-between py-4 text-left text-[15px] font-semibold transition-colors ${
+                <div
+                  className={`flex w-full items-center justify-between text-[15px] font-semibold transition-colors ${
                     servicesActive
                       ? "text-[#4B22FF]"
                       : "text-[#07112F]"
                   }`}
                 >
-                  <div className="flex items-center gap-3">
+                  <Link
+                    prefetch={false}
+                    href="/services/"
+                    aria-current={
+                      currentPath === "/services" ? "page" : undefined
+                    }
+                    onClick={(event) =>
+                      handleNavigationClick(event, "/services/", {
+                        closeMobileMenu: true,
+                      })
+                    }
+                    className="flex min-w-0 flex-1 items-center gap-3 py-4 pr-3"
+                  >
                     <span>Services</span>
 
                     {servicesActive && (
-                      <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D]" />
+                      <span className="h-2 w-2 shrink-0 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D]" />
                     )}
-                  </div>
+                  </Link>
 
-                  <ChevronDown
-                    size={18}
-                    className={`transition-transform duration-300 ${
-                      mobileServicesOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setMobileServicesOpen((current) => !current)
+                    }
+                    aria-label={
+                      mobileServicesOpen
+                        ? "Close services submenu"
+                        : "Open services submenu"
+                    }
+                    aria-expanded={mobileServicesOpen}
+                    aria-controls="mobile-services-submenu"
+                    className="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-lg transition-colors hover:bg-[#f3efff] hover:text-[#4B22FF]"
+                  >
+                    <ChevronDown
+                      size={18}
+                      className={`transition-transform duration-300 ${
+                        mobileServicesOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                </div>
 
                 {mobileServicesOpen && (
-                  <div className="space-y-2 pb-4">
+                  <div id="mobile-services-submenu" className="space-y-2 pb-4">
                     {services.map((service) => {
                       const Icon = service.icon;
                       const serviceIsActive = isActive(service.href);
