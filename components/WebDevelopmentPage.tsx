@@ -401,7 +401,7 @@ export default function WebDevelopmentPage() {
 
   return (
     <>
-      <main className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
+      <main className="w-full overflow-x-clip bg-white font-sans text-[#07112f] antialiased">
         {/* HERO */}
         <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-14 pt-10 sm:px-6 sm:pb-18 sm:pt-12 lg:px-10 lg:pb-24 lg:pt-11">
           <div className="pointer-events-none absolute -left-32 top-[-80px] h-[430px] w-[430px] rounded-full bg-[#4b22ff]/10 blur-[125px]" />
@@ -412,9 +412,9 @@ export default function WebDevelopmentPage() {
 
           <div className="pointer-events-none absolute inset-0 opacity-[0.27] [background-image:radial-gradient(circle_at_1px_1px,rgba(75,34,255,0.13)_1px,transparent_1px)] [background-size:26px_26px]" />
 
-          <div className="relative mx-auto grid max-w-[1320px] items-center gap-9 sm:gap-12 lg:grid-cols-[0.92fr_1.08fr]">
+          <div className="relative mx-auto grid w-full max-w-[1320px] min-w-0 items-center gap-9 sm:gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
             {/* Hero content */}
-            <div className="relative z-20">
+            <div className="relative z-20 min-w-0">
               <div className="inline-flex items-center gap-2 rounded-full border border-[#ddd6ff] bg-white/80 px-4 py-2 shadow-[0_8px_24px_rgba(75,34,255,0.06)] backdrop-blur">
                 <Code2 size={15} className="text-[#4b22ff]" />
 
@@ -475,7 +475,7 @@ export default function WebDevelopmentPage() {
                 </Link>
               </div>
 
-              <div className="mt-8 grid max-w-[620px] grid-cols-2 gap-3 sm:mt-10 sm:grid-cols-4">
+              <div className="mt-8 grid w-full max-w-[620px] auto-rows-fr grid-cols-2 gap-3 sm:mt-10 xl:grid-cols-[repeat(4,minmax(0,1fr))] xl:gap-2 2xl:gap-3">
                 {[
                   {
                     icon: MonitorSmartphone,
@@ -499,13 +499,13 @@ export default function WebDevelopmentPage() {
                   return (
                     <div
                       key={item.title}
-                      className="flex min-w-0 items-center gap-2.5 rounded-[15px] border border-[#e7e2f5] bg-white/85 px-3 py-3.5 shadow-[0_10px_28px_rgba(34,24,88,0.05)] backdrop-blur sm:gap-3 sm:rounded-[16px] sm:px-4 sm:py-4"
+                      className="flex h-full w-full min-w-0 overflow-hidden rounded-[15px] border border-[#e7e2f5] bg-white/85 px-3 py-3.5 shadow-[0_10px_28px_rgba(34,24,88,0.05)] backdrop-blur sm:rounded-[16px] sm:px-4 sm:py-4 xl:items-center xl:gap-1.5 xl:px-2 xl:py-3 2xl:gap-2.5 2xl:px-3 2xl:py-4"
                     >
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[12px] bg-[#f0ecff] text-[#4b22ff]">
-                        <Icon size={17} />
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[12px] bg-[#f0ecff] text-[#4b22ff] xl:h-7 xl:w-7 xl:rounded-[10px] 2xl:h-9 2xl:w-9 2xl:rounded-[12px]">
+                        <Icon size={17} className="xl:h-[14px] xl:w-[14px] 2xl:h-[17px] 2xl:w-[17px]" />
                       </div>
 
-                      <span className="text-[12px] font-bold text-[#24304f]">
+                      <span className="min-w-0 flex-1 whitespace-normal [overflow-wrap:anywhere] text-[12px] font-bold leading-5 text-[#24304f] xl:text-[10px] xl:leading-[1.25] 2xl:text-[12px] 2xl:leading-5">
                         {item.title}
                       </span>
                     </div>
@@ -515,7 +515,7 @@ export default function WebDevelopmentPage() {
             </div>
 
             {/* Hero visual */}
-            <div className="relative min-h-[380px] sm:min-h-[470px] lg:min-h-[530px]">
+            <div className="relative min-h-[380px] min-w-0 sm:min-h-[470px] lg:min-h-[530px]">
               <div className="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[#cfc5ff] sm:h-[400px] sm:w-[400px] lg:h-[460px] lg:w-[460px]" />
 
               <div className="pointer-events-none absolute left-1/2 top-1/2 h-[250px] w-[250px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(75,34,255,0.13),transparent_67%)] sm:h-[330px] sm:w-[330px] lg:h-[380px] lg:w-[380px]" />
@@ -527,7 +527,7 @@ export default function WebDevelopmentPage() {
                 height={600}
                 priority
                 unoptimized
-                className="absolute left-1/2 top-1/2 z-20 w-full max-w-[620px] -translate-x-1/2 -translate-y-1/2 object-contain drop-shadow-[0_30px_45px_rgba(32,23,92,0.18)] sm:w-[92%] lg:w-[88%]"
+                className="absolute left-1/2 top-1/2 z-20 h-auto w-full max-w-full -translate-x-1/2 -translate-y-1/2 object-contain drop-shadow-[0_30px_45px_rgba(32,23,92,0.18)] sm:w-[92%] lg:w-[88%] xl:max-w-[620px]"
               />
 
               <div className="absolute left-[1%] top-[9%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
