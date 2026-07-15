@@ -1,62 +1,81 @@
 MITOMS - HOSTINGER SHARED HOSTING DEPLOYMENT
 ============================================
 
-This project uses:
-- Next.js only to create a static frontend build on your computer.
-- PHP for the consultation/contact form backend on Hostinger.
-- No Node.js process is required on the Hostinger server.
+ARCHITECTURE
+------------
+- Next.js creates a static production website on your computer.
+- PHP handles the consultation/contact form on Hostinger.
+- No Node.js process is required on Hostinger shared hosting.
 
-REQUIREMENTS ON YOUR COMPUTER
------------------------------
+LOCAL REQUIREMENTS
+------------------
 1. Node.js 20.9 or newer.
 2. npm, included with Node.js.
 
 WINDOWS BUILD
 -------------
-1. Extract the source ZIP.
-2. Double-click build-hostinger.bat.
-3. Wait for the build to complete.
-4. The script creates MITOMS-PublicHTML-Build.zip.
+1. Extract MITOMS-SEO-Optimized-Source.zip.
+2. Optionally copy .env.example to .env.local and add Search Console/GA4 values.
+3. Review public/api/consultation.php email settings.
+4. Double-click build-hostinger.bat.
+5. Wait for lint, TypeScript and production build checks to finish.
+6. The script creates MITOMS-PublicHTML-Build.zip.
 
-You can also run these commands in PowerShell:
+MANUAL BUILD
+------------
+Run from the project directory:
 
-  npm install
-  npm run build
+  npm ci
+  npm run build:hostinger
 
 The generated website will be in the out folder.
 
 HOSTINGER UPLOAD
 ----------------
 1. Open Hostinger hPanel.
-2. Open Websites > Manage > File Manager.
+2. Go to Websites > Manage > File Manager.
 3. Open public_html.
-4. Back up and remove the old website files.
-5. Upload MITOMS-PublicHTML-Build.zip.
-6. Extract it directly inside public_html.
+4. Download a backup of the current website.
+5. Remove or move the previous website files.
+6. Upload MITOMS-PublicHTML-Build.zip.
+7. Extract it directly inside public_html.
+8. Confirm hidden files are visible and .htaccess exists at the root.
 
-The final structure must contain:
+The final structure must include:
 
   public_html/index.html
   public_html/.htaccess
   public_html/_next/
   public_html/api/consultation.php
+  public_html/robots.txt
+  public_html/sitemap.xml
 
-Do not leave the files inside an additional folder.
+Do not leave the website inside an additional folder.
 
 EMAIL CONFIGURATION
 -------------------
-Open public/api/consultation.php before building and check:
+Before building, check these values in public/api/consultation.php:
 
   CONSULTATION_TO_EMAIL
   FROM_EMAIL
   FROM_NAME
 
-The default recipient and sender are sales@mitoms.com.
-Create this mailbox in Hostinger before testing the form.
+The default sender and recipient are sales@mitoms.com. Create and verify that mailbox in Hostinger before testing the form.
+
+POST-UPLOAD TESTS
+-----------------
+1. Open https://mitoms.com and several service pages.
+2. Confirm http:// and www URLs redirect to https://mitoms.com.
+3. Open https://mitoms.com/robots.txt.
+4. Open https://mitoms.com/sitemap.xml.
+5. Test an invalid URL and confirm the custom 404 page appears.
+6. Submit the contact form and confirm email delivery.
+7. Test mobile and desktop pages in PageSpeed Insights.
+8. Add the domain to Google Search Console and submit sitemap.xml.
 
 IMPORTANT
 ---------
 - Never upload the source-code ZIP directly into public_html.
-- Upload the generated MITOMS-PublicHTML-Build.zip instead.
-- The PHP endpoint is copied into out/api/consultation.php during npm run build.
-- Local Next.js development does not execute PHP. Test email delivery after uploading to Hostinger, or run a separate local PHP server for backend testing.
+- Upload MITOMS-PublicHTML-Build.zip instead.
+- The PHP endpoint is copied to out/api/consultation.php during the build.
+- Local Next.js development does not execute PHP. Test actual email delivery after deployment or with a separate local PHP server.

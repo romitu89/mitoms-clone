@@ -494,7 +494,7 @@ export default function TermsAndConditionsPage() {
                 </span>
 
                 <Link
-                  href="/contact"
+                  href="/contact/"
                   className="group inline-flex items-center gap-2 rounded-full border border-[#e3def1] bg-white px-4 py-3 text-[12px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(22,17,62,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#4b22ff] hover:text-[#4b22ff]"
                 >
                   Ask a question
@@ -790,7 +790,7 @@ export default function TermsAndConditionsPage() {
                         </a>
 
                         <Link
-                          href="/contact"
+                          href="/contact/"
                           className="group flex items-center justify-between rounded-[17px] border border-[#e3deef] bg-[#fbfaff] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#4b22ff]"
                         >
                           <div>
@@ -859,7 +859,7 @@ export default function TermsAndConditionsPage() {
 
               <div className="flex flex-wrap gap-3">
                 <Link
-                  href="/contact"
+                  href="/contact/"
                   className="group inline-flex shrink-0 items-center justify-center gap-3 rounded-[14px] bg-white px-7 py-4 text-[13px] font-bold text-[#17163b] shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1"
                 >
                   Contact Us

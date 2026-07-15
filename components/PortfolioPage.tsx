@@ -68,7 +68,7 @@ const projects: Project[] = [
       "The platform creates a central digital ecosystem for artist discovery, cultural learning, community participation and professional opportunities. It helps artists improve visibility while making it easier for learners and organisers to discover talent, book sessions and participate in India's creative community.",
     link: "https://artmilap.com/",
     linkLabel: "Visit Artmilap",
-    image: `${imagePath}artmilap.png`,
+    image: `${imagePath}artmilap.webp`,
     imageAlt: "Artmilap culture and artist networking platform homepage",
     imageMode: "desktop",
     icon: Palette,
@@ -108,7 +108,7 @@ const projects: Project[] = [
       "The website gives Elevate Care a clear and professional digital presence, improves access to service information, supports customer enquiries and helps build trust through quality-care information, testimonials and recruitment content.",
     link: "https://elevatecare.mitoms.com/",
     linkLabel: "Visit Elevate Care",
-    image: `${imagePath}elevate-care.png`,
+    image: `${imagePath}elevate-care.webp`,
     imageAlt: "Elevate Care healthcare services mobile website",
     imageMode: "mobile",
     icon: HeartPulse,
@@ -148,7 +148,7 @@ const projects: Project[] = [
       "The website strengthens the laboratory's credibility, presents its dental-restoration expertise clearly and gives dentists and prospective business clients a convenient way to understand the organisation and submit enquiries.",
     link: "https://sohardental.com/",
     linkLabel: "Visit Sohar Dental",
-    image: `${imagePath}sohar-dental.png`,
+    image: `${imagePath}sohar-dental.webp`,
     imageAlt: "Sohar Dental Laboratory mobile corporate website",
     imageMode: "mobile",
     icon: Stethoscope,
@@ -515,7 +515,7 @@ function ProjectSection({
               </a>
 
               <Link
-                href="/contact"
+                href="/contact/"
                 className="group inline-flex w-full items-center justify-center gap-3 rounded-[12px] border border-[#ded8ec] bg-white px-5 py-3.5 text-center text-[13px] font-bold text-[#081232] transition-all duration-300 hover:-translate-y-1 hover:border-[#4B22FF] hover:text-[#4B22FF] sm:w-auto sm:px-6"
               >
                 Start a Similar Project
@@ -1180,7 +1180,7 @@ export default function PortfolioPage() {
                 </button>
 
                 <Link
-                  href="/contact"
+                  href="/contact/"
                   className="group inline-flex w-full items-center justify-center gap-3 rounded-[14px] border border-white/20 bg-white/[0.06] px-6 py-4 text-[13px] font-bold text-white backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.12] sm:w-auto sm:shrink-0 sm:px-7"
                 >
                   Contact Us

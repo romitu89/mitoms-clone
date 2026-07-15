@@ -22,42 +22,42 @@ const services = [
   {
     title: "Web Development",
     description: "Fast, scalable and conversion-focused websites.",
-    href: "/services/web-development",
+    href: "/services/web-development/",
     icon: Code2,
     iconBg: "from-[#4B22FF] to-[#7B5CFF]",
   },
   {
     title: "Mobile App Development",
     description: "Modern iOS and Android applications.",
-    href: "/services/mobile-app-development",
+    href: "/services/mobile-app-development/",
     icon: Smartphone,
     iconBg: "from-[#FF2F7D] to-[#FF7CA8]",
   },
   {
     title: "UI/UX Design",
     description: "Clean and user-focused digital experiences.",
-    href: "/services/ui-ux-design",
+    href: "/services/ui-ux-design/",
     icon: PenTool,
     iconBg: "from-[#743CFF] to-[#FF2F7D]",
   },
   {
     title: "Cloud Solutions",
     description: "Secure and scalable cloud infrastructure.",
-    href: "/services/cloud-solutions",
+    href: "/services/cloud-solutions/",
     icon: Cloud,
     iconBg: "from-[#00B8FF] to-[#4B22FF]",
   },
   {
     title: "AI & Digital Transformation",
     description: "Automation and intelligent business solutions.",
-    href: "/services/ai-digital-transformation",
+    href: "/services/ai-digital-transformation/",
     icon: Brain,
     iconBg: "from-[#FF2F7D] to-[#743CFF]",
   },
   {
     title: "IT Consulting",
     description: "Technology strategy for sustainable growth.",
-    href: "/services/it-consulting",
+    href: "/services/it-consulting/",
     icon: Server,
     iconBg: "from-[#172554] to-[#4B22FF]",
   },
@@ -93,7 +93,7 @@ export default function Navbar() {
     );
   };
 
-  const servicesActive = isActive("/services");
+  const servicesActive = isActive("/services/");
 
   useEffect(() => {
     const updateHeaderState = () => {
@@ -194,6 +194,7 @@ export default function Navbar() {
         <div className="mx-auto flex h-20 max-w-[1320px] items-center justify-between gap-4 px-4 sm:h-[88px] sm:px-6 xl:h-24 xl:px-10">
           {/* Logo */}
           <Link
+            prefetch={false}
             href="/"
             onClick={(event) =>
               handleNavigationClick(event, "/", {
@@ -203,7 +204,7 @@ export default function Navbar() {
             aria-label="MITOMS home"
           >
             <Image
-              src="/images/home/mitoms-logo.png"
+              src="/images/home/mitoms-logo.webp"
               alt="MITOMS Technologies Pvt Ltd"
               width={2048}
               height={705}
@@ -217,6 +218,7 @@ export default function Navbar() {
           <nav className="hidden items-center gap-6 xl:flex 2xl:gap-9">
             {/* Home */}
             <Link
+              prefetch={false}
               href="/"
               aria-current={isActive("/") ? "page" : undefined}
               onClick={(event) => handleNavigationClick(event, "/")}
@@ -241,14 +243,15 @@ export default function Navbar() {
               onMouseLeave={() => setDesktopServicesOpen(false)}
             >
               <Link
-                href="/services"
+                prefetch={false}
+                href="/services/"
                 aria-current={servicesActive ? "page" : undefined}
                 aria-haspopup="menu"
                 aria-expanded={desktopServicesOpen}
                 onMouseEnter={() => setDesktopServicesOpen(true)}
                 onFocus={() => setDesktopServicesOpen(true)}
                 onClick={(event) =>
-                  handleNavigationClick(event, "/services", {
+                  handleNavigationClick(event, "/services/", {
                     closeDesktopServices: true,
                   })
                 }
@@ -298,6 +301,7 @@ export default function Navbar() {
 
                       return (
                         <Link
+                          prefetch={false}
                           key={service.title}
                           href={service.href}
                           aria-current={
@@ -367,15 +371,16 @@ export default function Navbar() {
 
             {/* Portfolio */}
             <Link
-              href="/portfolio"
+              prefetch={false}
+              href="/portfolio/"
               aria-current={
-                isActive("/portfolio") ? "page" : undefined
+                isActive("/portfolio/") ? "page" : undefined
               }
               onClick={(event) =>
-                handleNavigationClick(event, "/portfolio")
+                handleNavigationClick(event, "/portfolio/")
               }
               className={`group relative text-[15px] font-semibold transition-colors duration-300 ${
-                isActive("/portfolio")
+                isActive("/portfolio/")
                   ? "text-[#4B22FF]"
                   : "text-[#07112F] hover:text-[#4B22FF]"
               }`}
@@ -384,7 +389,7 @@ export default function Navbar() {
 
               <span
                 className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D] transition-all duration-300 ${
-                  isActive("/portfolio")
+                  isActive("/portfolio/")
                     ? "w-full"
                     : "w-0 group-hover:w-full"
                 }`}
@@ -393,11 +398,12 @@ export default function Navbar() {
 
             {/* About */}
             <Link
-              href="/about"
-              aria-current={isActive("/about") ? "page" : undefined}
-              onClick={(event) => handleNavigationClick(event, "/about")}
+              prefetch={false}
+              href="/about/"
+              aria-current={isActive("/about/") ? "page" : undefined}
+              onClick={(event) => handleNavigationClick(event, "/about/")}
               className={`group relative text-[15px] font-semibold transition-colors duration-300 ${
-                isActive("/about")
+                isActive("/about/")
                   ? "text-[#4B22FF]"
                   : "text-[#07112F] hover:text-[#4B22FF]"
               }`}
@@ -406,7 +412,7 @@ export default function Navbar() {
 
               <span
                 className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D] transition-all duration-300 ${
-                  isActive("/about")
+                  isActive("/about/")
                     ? "w-full"
                     : "w-0 group-hover:w-full"
                 }`}
@@ -415,15 +421,16 @@ export default function Navbar() {
 
             {/* Contact */}
             <Link
-              href="/contact"
+              prefetch={false}
+              href="/contact/"
               aria-current={
-                isActive("/contact") ? "page" : undefined
+                isActive("/contact/") ? "page" : undefined
               }
               onClick={(event) =>
-                handleNavigationClick(event, "/contact")
+                handleNavigationClick(event, "/contact/")
               }
               className={`group relative text-[15px] font-semibold transition-colors duration-300 ${
-                isActive("/contact")
+                isActive("/contact/")
                   ? "text-[#4B22FF]"
                   : "text-[#07112F] hover:text-[#4B22FF]"
               }`}
@@ -432,7 +439,7 @@ export default function Navbar() {
 
               <span
                 className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D] transition-all duration-300 ${
-                  isActive("/contact")
+                  isActive("/contact/")
                     ? "w-full"
                     : "w-0 group-hover:w-full"
                 }`}
@@ -472,6 +479,7 @@ export default function Navbar() {
             <div className="flex flex-col px-4 py-4 sm:px-6 sm:py-5">
               {/* Mobile Home */}
               <Link
+                prefetch={false}
                 href="/"
                 aria-current={isActive("/") ? "page" : undefined}
                 onClick={(event) =>
@@ -532,6 +540,7 @@ export default function Navbar() {
 
                       return (
                         <Link
+                          prefetch={false}
                           key={service.title}
                           href={service.href}
                           aria-current={
@@ -578,14 +587,15 @@ export default function Navbar() {
                     })}
 
                     <Link
-                      href="/services"
+                      prefetch={false}
+                      href="/services/"
                       onClick={(event) =>
-                        handleNavigationClick(event, "/services", {
+                        handleNavigationClick(event, "/services/", {
                           closeMobileMenu: true,
                         })
                       }
                       className={`flex items-center justify-center gap-2 rounded-[12px] border py-3 text-[12px] font-bold transition-colors ${
-                        pathname === "/services"
+                        currentPath === "/services"
                           ? "border-[#4B22FF] bg-[#f3efff] text-[#4B22FF]"
                           : "border-[#ded8f4] text-[#4B22FF]"
                       }`}
@@ -599,17 +609,18 @@ export default function Navbar() {
 
               {/* Mobile Portfolio */}
               <Link
-                href="/portfolio"
+                prefetch={false}
+                href="/portfolio/"
                 aria-current={
-                  isActive("/portfolio") ? "page" : undefined
+                  isActive("/portfolio/") ? "page" : undefined
                 }
                 onClick={(event) =>
-                  handleNavigationClick(event, "/portfolio", {
+                  handleNavigationClick(event, "/portfolio/", {
                     closeMobileMenu: true,
                   })
                 }
                 className={`border-b border-[#ece8f5] py-4 text-[15px] font-semibold transition-colors ${
-                  isActive("/portfolio")
+                  isActive("/portfolio/")
                     ? "text-[#4B22FF]"
                     : "text-[#07112F]"
                 }`}
@@ -617,7 +628,7 @@ export default function Navbar() {
                 <div className="flex items-center justify-between">
                   <span>Portfolio</span>
 
-                  {isActive("/portfolio") && (
+                  {isActive("/portfolio/") && (
                     <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D]" />
                   )}
                 </div>
@@ -625,17 +636,18 @@ export default function Navbar() {
 
               {/* Mobile About */}
               <Link
-                href="/about"
+                prefetch={false}
+                href="/about/"
                 aria-current={
-                  isActive("/about") ? "page" : undefined
+                  isActive("/about/") ? "page" : undefined
                 }
                 onClick={(event) =>
-                  handleNavigationClick(event, "/about", {
+                  handleNavigationClick(event, "/about/", {
                     closeMobileMenu: true,
                   })
                 }
                 className={`border-b border-[#ece8f5] py-4 text-[15px] font-semibold transition-colors ${
-                  isActive("/about")
+                  isActive("/about/")
                     ? "text-[#4B22FF]"
                     : "text-[#07112F]"
                 }`}
@@ -643,7 +655,7 @@ export default function Navbar() {
                 <div className="flex items-center justify-between">
                   <span>About Us</span>
 
-                  {isActive("/about") && (
+                  {isActive("/about/") && (
                     <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D]" />
                   )}
                 </div>
@@ -651,17 +663,18 @@ export default function Navbar() {
 
               {/* Mobile Contact */}
               <Link
-                href="/contact"
+                prefetch={false}
+                href="/contact/"
                 aria-current={
-                  isActive("/contact") ? "page" : undefined
+                  isActive("/contact/") ? "page" : undefined
                 }
                 onClick={(event) =>
-                  handleNavigationClick(event, "/contact", {
+                  handleNavigationClick(event, "/contact/", {
                     closeMobileMenu: true,
                   })
                 }
                 className={`border-b border-[#ece8f5] py-4 text-[15px] font-semibold transition-colors ${
-                  isActive("/contact")
+                  isActive("/contact/")
                     ? "text-[#4B22FF]"
                     : "text-[#07112F]"
                 }`}
@@ -669,7 +682,7 @@ export default function Navbar() {
                 <div className="flex items-center justify-between">
                   <span>Contact Us</span>
 
-                  {isActive("/contact") && (
+                  {isActive("/contact/") && (
                     <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D]" />
                   )}
                 </div>

@@ -23,10 +23,10 @@ if (Test-Path $zipPath) {
 }
 
 Write-Host "Installing project dependencies..." -ForegroundColor Cyan
-Invoke-NpmCommand -Arguments @("ci") -FailureMessage "Dependency installation failed"
+Invoke-NpmCommand -Arguments @("ci", "--no-audit", "--no-fund") -FailureMessage "Dependency installation failed"
 
 Write-Host "Creating a clean static Next.js build..." -ForegroundColor Cyan
-Invoke-NpmCommand -Arguments @("run", "build") -FailureMessage "Next.js build failed"
+Invoke-NpmCommand -Arguments @("run", "build:hostinger") -FailureMessage "Next.js build failed"
 
 $outPath = Join-Path $PSScriptRoot "out"
 if (-not (Test-Path $outPath)) {

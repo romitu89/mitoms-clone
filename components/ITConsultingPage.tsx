@@ -510,7 +510,7 @@ export default function ITConsultingPage() {
                 </button>
 
                 <Link
-                  href="/contact"
+                  href="/contact/"
                   className="group inline-flex min-h-[50px] w-full items-center justify-center gap-3 rounded-[12px] border border-[#ddd8ee] bg-white px-6 text-[14px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(22,17,62,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#4b22ff] hover:text-[#4b22ff] sm:w-auto sm:px-7"
                 >
                   Talk to Our Team
@@ -568,7 +568,7 @@ export default function ITConsultingPage() {
               <div className="pointer-events-none absolute left-1/2 top-1/2 h-[250px] w-[250px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(75,34,255,0.15),transparent_67%)] sm:h-[330px] sm:w-[330px] lg:h-[390px] lg:w-[390px]" />
 
               <Image
-                src="/images/home/machine.png"
+                src="/images/home/machine.webp"
                 alt="IT consulting services"
                 width={720}
                 height={650}

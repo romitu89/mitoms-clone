@@ -8,7 +8,6 @@ import {
 } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import ConsultationModal from "./ConsultationModal";
 import {
   Star,
@@ -105,48 +104,48 @@ const services = [
     icon: Code2, 
     no: "01", 
     title: "Web Development",
-    href: "/services/web-development",
-    image: "laptop.png",
+    href: "/services/web-development/",
+    image: "laptop.webp",
     description: "High-performance websites that are secure, scalable and built to convert."
   },
   { 
     icon: Smartphone, 
     no: "02", 
     title: "Mobile App Development",
-    href: "/services/mobile-app-development",
-    image: "mobile.png",
+    href: "/services/mobile-app-development/",
+    image: "mobile.webp",
     description: "Engaging mobile apps for iOS & Android that deliver real value."
   },
   { 
     icon: PenTool, 
     no: "03", 
     title: "UI/UX Design",
-    href: "/services/ui-ux-design",
-    image: "knowledge.png",
+    href: "/services/ui-ux-design/",
+    image: "knowledge.webp",
     description: "Creative, user-centric designs that turn ideas into delightful experiences."
   },
   { 
     icon: Cloud, 
     no: "04", 
     title: "Cloud Solutions",
-    href: "/services/cloud-solutions",
-    image: "cloud.png",
+    href: "/services/cloud-solutions/",
+    image: "cloud.webp",
     description: "Scalable, secure and cost-effective cloud solutions for modern businesses."
   },
   { 
     icon: Brain, 
     no: "05", 
     title: "AI & Digital Transformation",
-    href: "/services/ai-digital-transformation",
-    image: "ai.png",
+    href: "/services/ai-digital-transformation/",
+    image: "ai.webp",
     description: "Reimagine your business with technology that makes you future-ready."
   },
   { 
     icon: Server, 
     no: "06", 
     title: "IT Consulting",
-    href: "/services/it-consulting",
-    image: "machine.png",
+    href: "/services/it-consulting/",
+    image: "machine.webp",
     description: "Strategic consulting to solve complex challenges and unlock growth."
   },
 ];
@@ -155,7 +154,7 @@ const heroCards = [
   {
     icon: Code2,
     title: "Web Development",
-    href: "/services/web-development",
+    href: "/services/web-development/",
     text: "Modern scalable websites",
     pos: "left-[16%] top-[4%]",
     iconBg: "from-[#4b22ff] to-[#7b5cff]",
@@ -163,7 +162,7 @@ const heroCards = [
   {
     icon: Smartphone,
     title: "Mobile Apps",
-    href: "/services/mobile-app-development",
+    href: "/services/mobile-app-development/",
     text: "iOS & Android solutions",
     pos: "right-[0%] top-[21%]",
     iconBg: "from-[#ff2f7d] to-[#ff7ca8]",
@@ -171,7 +170,7 @@ const heroCards = [
   {
     icon: Cloud,
     title: "Cloud Solutions",
-    href: "/services/cloud-solutions",
+    href: "/services/cloud-solutions/",
     text: "Secure cloud architecture",
     pos: "left-[6%] bottom-[27%]",
     iconBg: "from-[#00b8ff] to-[#4b22ff]",
@@ -179,7 +178,7 @@ const heroCards = [
   {
     icon: Brain,
     title: "AI Automation",
-    href: "/services/ai-digital-transformation",
+    href: "/services/ai-digital-transformation/",
     text: "Smarter business workflows",
     pos: "right-[3%] bottom-[16%]",
     iconBg: "from-[#ff2f7d] to-[#4b22ff]",
@@ -598,6 +597,7 @@ function HeroFloatingCard({
 }) {
   return (
     <Link
+      prefetch={false}
       href={href}
       aria-label={`Explore ${title}`}
       className={`group absolute ${pos} z-40 hidden w-[215px] rounded-[28px] bg-white/95 p-[14px] shadow-[0_18px_40px_rgba(35,27,84,0.14)] ring-1 ring-white/80 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_rgba(35,27,84,0.19)] lg:block`}
@@ -660,36 +660,22 @@ function ProcessStep({
 }
 
 export default function Home() {
-  const router = useRouter();
   const [showConsultation, setShowConsultation] = useState(false);
 
   const openConsultation = () => {
     setShowConsultation(true);
   };
 
-  const prefetchPortfolio = () => {
-    router.prefetch("/portfolio");
-  };
-
-  useEffect(() => {
-    const prefetchTimer = window.setTimeout(() => {
-      router.prefetch("/portfolio");
-    }, 250);
-
-    return () => {
-      window.clearTimeout(prefetchTimer);
-    };
-  }, [router]);
 
   return (
     <main className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
       {/* HERO SECTION */}
       <section className="relative overflow-hidden bg-[#fbfaff] lg:min-h-[650px]">
         <Image
-          src={`${imgPath}hero-bg-glow.png`}
+          src={`${imgPath}hero-bg-glow.webp`}
           alt=""
           fill
-          priority
+          loading="eager"
           unoptimized
           className="pointer-events-none object-cover object-center opacity-95"
         />
@@ -750,7 +736,8 @@ export default function Home() {
               </button>
 
               <Link
-                href="/portfolio"
+                prefetch={false}
+                href="/portfolio/"
                 className="inline-flex min-h-[48px] w-full items-center justify-center rounded-[10px] border border-[#dfe3f1] bg-white px-6 text-[14px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(16,24,60,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#4b22ff] hover:text-[#4b22ff] sm:w-auto sm:px-7"
               >
                 View Our Work <span className="ml-4 text-[#4b22ff]">→</span>
@@ -787,7 +774,7 @@ export default function Home() {
           {/* RIGHT VISUAL */}
           <div className="relative min-h-[360px] sm:min-h-[470px] lg:min-h-[570px]">
             <Image
-              src={`${imgPath}hero-3d-m.png`}
+              src={`${imgPath}hero-3d-m.webp`}
               alt="MITOMS 3D M"
               width={760}
               height={650}
@@ -797,7 +784,7 @@ export default function Home() {
             />
 
             <Image
-              src={`${imgPath}hero-orb-pink.png`}
+              src={`${imgPath}hero-orb-pink.webp`}
               alt=""
               width={70}
               height={70}
@@ -806,7 +793,7 @@ export default function Home() {
             />
 
             <Image
-              src={`${imgPath}hero-orb-blue.png`}
+              src={`${imgPath}hero-orb-blue.webp`}
               alt=""
               width={55}
               height={55}
@@ -815,7 +802,7 @@ export default function Home() {
             />
 
             <Image
-              src={`${imgPath}hero-orb-blue.png`}
+              src={`${imgPath}hero-orb-blue.webp`}
               alt=""
               width={65}
               height={65}
@@ -824,7 +811,7 @@ export default function Home() {
             />
 
             <Image
-              src={`${imgPath}hero-orb-pink.png`}
+              src={`${imgPath}hero-orb-pink.webp`}
               alt=""
               width={65}
               height={65}
@@ -981,6 +968,7 @@ export default function Home() {
             const Icon = item.icon;
             return (
               <Link
+                prefetch={false}
                 key={item.no}
                 href={item.href}
                 aria-label={`Explore ${item.title}`}
@@ -1281,11 +1269,8 @@ export default function Home() {
               </button>
 
               <Link
-                href="/portfolio"
-                prefetch
-                onPointerEnter={prefetchPortfolio}
-                onFocus={prefetchPortfolio}
-                onTouchStart={prefetchPortfolio}
+                href="/portfolio/"
+                prefetch={false}
                 className="inline-flex h-[48px] w-full touch-manipulation items-center justify-center rounded-[8px] border border-white/30 bg-white/[0.03] px-5 text-[13px] font-semibold text-white backdrop-blur transition-all duration-200 hover:-translate-y-1 hover:bg-white/10 sm:w-auto sm:min-w-[158px]"
               >
                 View Our Work

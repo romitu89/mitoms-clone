@@ -5,9 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "node scripts/clean-build.mjs && next build",
-    "build:hostinger": "node scripts/clean-build.mjs && next build",
+    "build:hostinger": "npm run check && npm run build",
     "lint": "eslint",
-    "clean": "node scripts/clean-build.mjs"
+    "clean": "node scripts/clean-build.mjs",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run lint && npm run typecheck"
   },
   "dependencies": {
     "lucide-react": "^1.23.0",

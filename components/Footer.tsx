@@ -175,6 +175,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 min-w-0 lg:col-span-1">
             <Link
+              prefetch={false}
               href="/"
               aria-label="MITOMS home"
               className="group inline-flex max-w-full items-center gap-3 transition-transform duration-300 hover:-translate-y-1"
@@ -212,7 +213,8 @@ export default function Footer() {
             <ul className="space-y-3 text-[14px] text-white/78 sm:text-[15px] sm:text-white/82">
               <li>
                 <Link
-                  href="/about"
+                  prefetch={false}
+                  href="/about/"
                   className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
                   <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
@@ -222,7 +224,8 @@ export default function Footer() {
 
               <li>
                 <Link
-                  href="/portfolio"
+                  prefetch={false}
+                  href="/portfolio/"
                   className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
                   <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
@@ -232,7 +235,8 @@ export default function Footer() {
 
               <li>
                 <Link
-                  href="/services"
+                  prefetch={false}
+                  href="/services/"
                   className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
                   <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
@@ -242,7 +246,8 @@ export default function Footer() {
 
               <li>
                 <Link
-                  href="/contact"
+                  prefetch={false}
+                  href="/contact/"
                   className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
                   <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
@@ -259,7 +264,8 @@ export default function Footer() {
             <ul className="space-y-3 text-[14px] text-white/78 sm:text-[15px] sm:text-white/82">
               <li>
                 <Link
-                  href="/services/web-development"
+                  prefetch={false}
+                  href="/services/web-development/"
                   className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
                   <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
@@ -269,7 +275,8 @@ export default function Footer() {
 
               <li>
                 <Link
-                  href="/services/mobile-app-development"
+                  prefetch={false}
+                  href="/services/mobile-app-development/"
                   className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
                   <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
@@ -279,7 +286,8 @@ export default function Footer() {
 
               <li>
                 <Link
-                  href="/services/ui-ux-design"
+                  prefetch={false}
+                  href="/services/ui-ux-design/"
                   className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
                   <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
@@ -289,7 +297,8 @@ export default function Footer() {
 
               <li>
                 <Link
-                  href="/services/cloud-solutions"
+                  prefetch={false}
+                  href="/services/cloud-solutions/"
                   className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
                   <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
@@ -336,14 +345,16 @@ export default function Footer() {
 
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 md:justify-end">
             <Link
-              href="/privacy-policy"
+              prefetch={false}
+              href="/privacy-policy/"
               className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
             >
               Privacy Policy
             </Link>
 
             <Link
-              href="/terms"
+              prefetch={false}
+              href="/terms/"
               className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
             >
               Terms

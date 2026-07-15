@@ -450,7 +450,7 @@ export default function AboutPage() {
                 </button>
 
                 <Link
-                  href="/portfolio"
+                  href="/portfolio/"
                   className="group inline-flex min-h-[48px] w-full items-center justify-center gap-3 rounded-[10px] border border-[#dfe3f1] bg-white px-6 text-[14px] font-bold text-[#081232] shadow-[0_8px_22px_rgba(16,24,60,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#4b22ff] hover:text-[#4b22ff] sm:w-auto sm:px-7"
                 >
                   Explore Our Work
@@ -848,7 +848,7 @@ export default function AboutPage() {
               </p>
 
               <Link
-                href="/services"
+                href="/services/"
                 className="group mt-7 inline-flex min-h-[50px] w-full items-center justify-center gap-3 rounded-[13px] bg-[#081232] px-6 text-[13px] font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#4b22ff] sm:mt-8 sm:w-auto sm:px-7"
               >
                 Explore Our Services

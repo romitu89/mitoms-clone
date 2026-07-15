@@ -6,10 +6,10 @@ cd "$(dirname "$0")"
 rm -f MITOMS-PublicHTML-Build.zip
 
 printf '%s\n' "Installing project dependencies..."
-# npm ci
+npm ci --no-audit --no-fund
 
 printf '%s\n' "Creating a clean static Next.js build..."
-npm run build
+npm run build:hostinger
 
 if [ ! -f out/index.html ]; then
   printf '%s\n' "Build output is incomplete: out/index.html was not created." >&2
