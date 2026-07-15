@@ -158,9 +158,15 @@ export default function Navbar() {
   }, [desktopServicesOpen, isOpen]);
 
   useEffect(() => {
-    setIsOpen(false);
-    setMobileServicesOpen(false);
-    setDesktopServicesOpen(false);
+    const animationFrameId = window.requestAnimationFrame(() => {
+      setIsOpen(false);
+      setMobileServicesOpen(false);
+      setDesktopServicesOpen(false);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(animationFrameId);
+    };
   }, [pathname]);
 
   useEffect(() => {
