@@ -427,16 +427,41 @@ export default function WebDevelopmentPage() {
                 />
               </div>
 
-              <h1 className="mt-6 max-w-[650px] text-[36px] font-bold leading-[1.09] tracking-[-0.05em] text-[#081232] sm:mt-7 sm:text-[52px] lg:text-[66px]">
-                Websites Built to
-                <span className="mt-2 block">
+              <h1 className="mt-6 max-w-[700px] overflow-visible font-bold tracking-[-0.045em] text-[#081232] sm:mt-7">
+                {/* Mobile: three balanced lines, without a single-word orphan */}
+                <span className="block whitespace-nowrap text-[32px] leading-[1.08] min-[390px]:text-[34px] sm:hidden">
+                  Websites Built to
+                </span>
+
+                <span className="mt-2 block whitespace-nowrap text-[32px] leading-[1.08] min-[390px]:text-[34px] sm:hidden">
+                  Perform, Scale
+                </span>
+
+                <span className="mt-1 flex items-baseline whitespace-nowrap text-[32px] leading-[1.08] min-[390px]:text-[34px] sm:hidden">
+                  and{" "}
+                  <TypewriterText
+                    text="Convert"
+                    speed={125}
+                    delay={300}
+                    nowrap
+                    className="ml-2 overflow-visible bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff2f7d] bg-clip-text pb-[0.06em] pr-[0.08em] tracking-[-0.015em] text-transparent"
+                    cursorClassName="bg-[#ff2f7d]"
+                  />
+                </span>
+
+                {/* Tablet and desktop: two balanced lines */}
+                <span className="hidden whitespace-nowrap text-[43px] leading-[1.08] sm:block lg:text-[48px]">
+                  Websites Built to
+                </span>
+
+                <span className="mt-2 hidden items-baseline whitespace-nowrap text-[43px] leading-[1.08] sm:flex lg:text-[48px]">
                   Perform, Scale and{" "}
                   <TypewriterText
                     text="Convert"
                     speed={125}
                     delay={300}
                     nowrap
-                    className="overflow-visible pb-[0.06em] pr-[0.08em] tracking-[-0.015em] bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff2f7d] bg-clip-text text-transparent"
+                    className="ml-3 overflow-visible bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff2f7d] bg-clip-text pb-[0.06em] pr-[0.08em] tracking-[-0.015em] text-transparent"
                     cursorClassName="bg-[#ff2f7d]"
                   />
                 </span>
@@ -620,7 +645,7 @@ export default function WebDevelopmentPage() {
                 />
               </p>
 
-              <h2 className="mt-4 max-w-[580px] text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 max-w-[580px] text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 More Than a Website.
                 <TypewriterText
                   text="A Digital Growth Platform."
@@ -702,7 +727,7 @@ export default function WebDevelopmentPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 Web Solutions Designed Around{" "}
                 <TypewriterText
                   text="Your Business"
@@ -788,11 +813,11 @@ export default function WebDevelopmentPage() {
 
               <h2 className="mt-4 overflow-visible font-bold tracking-[-0.035em]">
                 {/* Mobile: balanced two-line heading */}
-                <span className="block whitespace-nowrap text-[25px] leading-[1.16] min-[390px]:text-[27px] sm:hidden">
+                <span className="block whitespace-nowrap text-[26px] leading-[1.15] min-[390px]:text-[28px] sm:hidden">
                   Modern Technologies for
                 </span>
 
-                <span className="mt-1 flex justify-center overflow-visible pb-[0.1em] text-[25px] leading-[1.16] min-[390px]:text-[27px] sm:hidden">
+                <span className="mt-1 flex justify-center overflow-visible pb-[0.1em] text-[26px] leading-[1.15] min-[390px]:text-[28px] sm:hidden">
                   <TypewriterText
                     text="Reliable Web Development"
                     speed={105}
@@ -804,7 +829,7 @@ export default function WebDevelopmentPage() {
                 </span>
 
                 {/* Tablet and desktop */}
-                <span className="hidden text-[38px] leading-[1.16] sm:block lg:text-[42px]">
+                <span className="hidden text-[40px] leading-[1.15] sm:block lg:text-[44px]">
                   Modern Technologies for
                   <br />
                   <TypewriterText
@@ -866,7 +891,7 @@ export default function WebDevelopmentPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 From Initial Idea to{" "}
                 <TypewriterText
                   text="Successful Launch"
@@ -933,7 +958,7 @@ export default function WebDevelopmentPage() {
                 />
               </p>
 
-              <h2 className="mt-4 max-w-[570px] text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 max-w-[570px] text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 Web Development Focused on{" "}
                 <TypewriterText
                   text="Business Results"
@@ -1004,7 +1029,7 @@ export default function WebDevelopmentPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 Questions About
                 <TypewriterText
                   text="Web Development"
@@ -1088,7 +1113,7 @@ export default function WebDevelopmentPage() {
                   />
                 </p>
 
-                <h2 className="mt-3 max-w-[700px] text-[30px] font-bold tracking-[-0.035em] sm:text-[38px]">
+                <h2 className="mt-3 max-w-[700px] text-[27px] font-bold leading-[1.15] tracking-[-0.035em] sm:text-[39px] lg:text-[42px]">
                   Ready to Create a Website That Supports Your Business Growth?
                 </h2>
 

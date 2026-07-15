@@ -345,7 +345,9 @@ function TypewriterOnce({
     hasStarted && visibleCharacters < text.length;
 
   const layoutClassName =
-    display === "block" ? "grid w-fit" : "inline-grid";
+    display === "block"
+      ? "grid w-fit max-w-full"
+      : "inline-grid max-w-full";
 
   return (
     <span
@@ -585,15 +587,18 @@ export default function ContactPage() {
               />
             </div>
 
-            <h1 className="mt-6 overflow-visible text-[36px] font-bold leading-[1.09] tracking-[-0.045em] text-[#081232] sm:text-[50px] lg:text-[64px]">
-              Have an Idea?
-              <span className="mt-2 block overflow-visible px-[0.08em] pb-[0.1em]">
+            <h1 className="mx-auto mt-6 max-w-[800px] font-bold tracking-[-0.042em] text-[#081232] sm:mt-7">
+              <span className="block text-[clamp(34px,6vw,50px)] leading-[1.08]">
+                Have an Idea?
+              </span>
+
+              <span className="mt-2 block max-w-full overflow-visible px-[0.05em] pb-[0.1em] text-[clamp(30px,6.25vw,53px)] leading-[1.06]">
                 Let&apos;s Build Something{" "}
                 <TypewriterOnce
                   text="Remarkable"
                   speed={120}
                   delay={320}
-                  className="overflow-visible pb-[0.06em] pr-[0.16em] tracking-[-0.012em] bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff2f7d] bg-clip-text text-transparent"
+                  className="max-w-full overflow-visible bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff2f7d] bg-clip-text pb-[0.06em] pr-[0.12em] tracking-[-0.012em] text-transparent"
                   cursorClassName="bg-[#ff2f7d]"
                 />
               </span>
@@ -717,14 +722,14 @@ export default function ContactPage() {
                 />
               </p>
 
-              <h2 className="mt-4 max-w-[440px] text-[31px] font-bold leading-[1.14] tracking-[-0.04em] sm:mt-5 sm:text-[42px] lg:text-[44px]">
+              <h2 className="mt-4 max-w-[440px] text-[31px] font-bold leading-[1.15] tracking-[-0.04em] sm:mt-5 sm:text-[40px] lg:text-[44px]">
                 Your Next Digital
                 <TypewriterOnce
                   text="Success Story"
                   display="block"
                   speed={120}
                   delay={260}
-                  className="mt-1 pb-[0.08em] font-serif text-[40px] font-medium italic leading-[1.05] text-[#ff7ca8] sm:text-[51px] lg:text-[55px]"
+                  className="mt-1 max-w-full pb-[0.08em] font-serif text-[36px] font-medium italic leading-[1.05] text-[#ff7ca8] sm:text-[46px] lg:text-[50px]"
                   cursorClassName="bg-[#ff7ca8]"
                 />
                 Starts Here
@@ -800,7 +805,7 @@ export default function ContactPage() {
                   />
                 </p>
 
-                <h2 className="mt-3 text-[27px] font-bold leading-[1.15] tracking-[-0.035em] text-[#081232] sm:text-[34px] lg:text-[36px]">
+                <h2 className="mt-3 text-[29px] font-bold leading-[1.15] tracking-[-0.035em] text-[#081232] sm:text-[36px] lg:text-[38px]">
                   Tell Us About Your Project
                 </h2>
 
@@ -1377,7 +1382,7 @@ export default function ContactPage() {
               />
             </p>
 
-            <h2 className="mt-4 text-[32px] font-bold tracking-[-0.035em] text-[#081232] sm:text-[42px]">
+            <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
               Start With the Option That{" "}
               <TypewriterOnce
                 text="Works for You"
@@ -1471,7 +1476,7 @@ export default function ContactPage() {
               />
             </p>
 
-            <h2 className="mt-4 text-[32px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px]">
+            <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
               Before You
               <TypewriterOnce
                 text="Contact Us"
@@ -1552,7 +1557,7 @@ export default function ContactPage() {
                 />
               </p>
 
-              <h2 className="mt-3 max-w-[650px] text-[30px] font-bold tracking-[-0.035em] sm:text-[38px]">
+              <h2 className="mt-3 max-w-[650px] text-[27px] font-bold leading-[1.15] tracking-[-0.035em] sm:text-[39px] lg:text-[42px]">
                 Let&apos;s Turn Your Idea Into a Powerful Digital Solution
               </h2>
 

@@ -459,7 +459,7 @@ function ProjectSection({
               </span>
             </div>
 
-            <h2 className="mt-5 text-[31px] font-bold leading-[1.08] tracking-[-0.04em] text-[#081232] sm:mt-6 sm:text-[40px] lg:text-[46px]">
+            <h2 className="mt-5 text-[30px] font-bold leading-[1.12] tracking-[-0.04em] text-[#081232] sm:mt-6 sm:text-[38px] lg:text-[42px]">
               {project.name}
             </h2>
 
@@ -701,12 +701,12 @@ export default function PortfolioPage() {
               </div>
 
               <h1 className="mt-6 max-w-[860px] font-bold tracking-[-0.045em] text-[#081232] sm:mt-7 sm:tracking-[-0.05em]">
-                <span className="block text-[38px] leading-[1.08] min-[430px]:text-[42px] sm:text-[54px] lg:text-[58px] xl:text-[58px] 2xl:text-[62px]">
+                <span className="block text-[34px] leading-[1.08] min-[430px]:text-[38px] sm:text-[46px] lg:text-[50px] xl:text-[48px] 2xl:text-[50px]">
                   Digital Products
                 </span>
 
                 {/* Mobile: keep the complete highlighted phrase on one line */}
-                <span className="mt-2 flex max-w-full overflow-visible pb-[0.14em] text-[29px] leading-[1.08] min-[370px]:text-[31px] min-[430px]:text-[34px] sm:hidden">
+                <span className="mt-2 flex max-w-full overflow-visible pb-[0.14em] text-[28px] leading-[1.08] min-[370px]:text-[30px] min-[430px]:text-[32px] sm:hidden">
                   <TypewriterText
                     text="Built for Real Impact"
                     speed={105}
@@ -718,7 +718,7 @@ export default function PortfolioPage() {
                 </span>
 
                 {/* Tablet and laptop: same gradient as Culture and Healthcare */}
-                <span className="mt-2 hidden overflow-visible pb-[0.12em] text-[48px] leading-[1.08] sm:flex lg:text-[52px] xl:text-[50px] 2xl:text-[54px]">
+                <span className="mt-2 hidden overflow-visible pb-[0.12em] text-[42px] leading-[1.08] sm:flex lg:text-[46px] xl:text-[44px] 2xl:text-[48px]">
                   <TypewriterText
                     text="Built for Real Impact"
                     speed={105}
@@ -914,11 +914,11 @@ export default function PortfolioPage() {
                   />
                 </p>
                 <h2 className="mt-4 max-w-[820px] font-bold tracking-[-0.04em] text-[#081232]">
-                  <span className="block text-[34px] leading-[1.12] sm:text-[43px] lg:text-[48px]">
+                  <span className="block text-[31px] leading-[1.15] sm:text-[40px] lg:text-[44px]">
                     Real Work Across
                   </span>
 
-                  <span className="mt-1 flex overflow-visible pb-[0.1em] text-[34px] leading-[1.12] sm:text-[43px] lg:text-[48px]">
+                  <span className="mt-1 flex overflow-visible pb-[0.1em] text-[31px] leading-[1.15] sm:text-[40px] lg:text-[44px]">
                     <TypewriterText
                       text="Culture and Healthcare"
                       speed={105}
@@ -1013,11 +1013,11 @@ export default function PortfolioPage() {
               </span>
               <h2 className="mt-5 overflow-visible font-bold tracking-[-0.035em] text-[#081232]">
                 {/* Mobile: two balanced lines kept inside the card */}
-                <span className="block whitespace-nowrap text-[20px] leading-[1.16] tracking-[-0.035em] min-[390px]:text-[22px] min-[430px]:text-[23px] sm:hidden">
+                <span className="block whitespace-nowrap text-[20px] leading-[1.16] tracking-[-0.035em] min-[390px]:text-[21px] min-[430px]:text-[22px] sm:hidden">
                   Strategy, Design and
                 </span>
 
-                <span className="mt-1 flex items-baseline whitespace-nowrap text-[20px] leading-[1.16] tracking-[-0.035em] min-[390px]:text-[22px] min-[430px]:text-[23px] sm:hidden">
+                <span className="mt-1 flex items-baseline whitespace-nowrap text-[20px] leading-[1.16] tracking-[-0.035em] min-[390px]:text-[21px] min-[430px]:text-[22px] sm:hidden">
                   Development{" "}
                   <TypewriterText
                     text="Working Together"
@@ -1030,11 +1030,11 @@ export default function PortfolioPage() {
                 </span>
 
                 {/* Tablet and laptop */}
-                <span className="hidden whitespace-nowrap text-[36px] leading-[1.16] sm:block lg:text-[38px] xl:text-[34px] 2xl:text-[36px]">
+                <span className="hidden whitespace-nowrap text-[34px] leading-[1.16] sm:block lg:text-[36px] xl:text-[33px] 2xl:text-[35px]">
                   Strategy, Design and Development
                 </span>
 
-                <span className="mt-1 hidden overflow-visible pb-[0.1em] text-[36px] leading-[1.16] sm:flex lg:text-[38px] xl:text-[34px] 2xl:text-[36px]">
+                <span className="mt-1 hidden overflow-visible pb-[0.1em] text-[34px] leading-[1.16] sm:flex lg:text-[36px] xl:text-[33px] 2xl:text-[35px]">
                   <TypewriterText
                     text="Working Together"
                     speed={105}
@@ -1124,15 +1124,15 @@ export default function PortfolioPage() {
                 </p>
                 <h2 className="mt-3 max-w-[790px] overflow-visible font-bold tracking-[-0.035em]">
                   {/* Mobile */}
-                  <span className="block whitespace-nowrap text-[25px] leading-[1.16] min-[390px]:text-[27px] sm:hidden">
+                  <span className="block whitespace-nowrap text-[24px] leading-[1.16] min-[390px]:text-[26px] sm:hidden">
                     Let&apos;s Build a Digital
                   </span>
 
-                  <span className="mt-1 block whitespace-nowrap text-[25px] leading-[1.16] min-[390px]:text-[27px] sm:hidden">
+                  <span className="mt-1 block whitespace-nowrap text-[24px] leading-[1.16] min-[390px]:text-[26px] sm:hidden">
                     Experience That Supports
                   </span>
 
-                  <span className="mt-1 flex items-baseline whitespace-nowrap text-[25px] leading-[1.16] min-[390px]:text-[27px] sm:hidden">
+                  <span className="mt-1 flex items-baseline whitespace-nowrap text-[24px] leading-[1.16] min-[390px]:text-[26px] sm:hidden">
                     Your{" "}
                     <TypewriterText
                       text="Next Stage of Growth"
@@ -1145,11 +1145,11 @@ export default function PortfolioPage() {
                   </span>
 
                   {/* Tablet and desktop */}
-                  <span className="hidden text-[38px] leading-[1.16] sm:block lg:text-[40px]">
+                  <span className="hidden text-[39px] leading-[1.15] sm:block lg:text-[42px]">
                     Let&apos;s Build a Digital Experience
                   </span>
 
-                  <span className="mt-1 hidden text-[38px] leading-[1.16] sm:block lg:text-[40px]">
+                  <span className="mt-1 hidden text-[39px] leading-[1.15] sm:block lg:text-[42px]">
                     That Supports Your{" "}
                     <TypewriterText
                       text="Next Stage of Growth"

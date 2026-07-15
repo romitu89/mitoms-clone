@@ -258,7 +258,7 @@ function TypewriterText({
     <span
       ref={elementRef}
       aria-label={text}
-      className={`${display === "block" ? "block" : "inline"} ${
+      className={`${display === "block" ? "block max-w-full" : "inline-block max-w-full"} ${
         nowrap ? "whitespace-nowrap" : ""
       } ${className}`}
     >
@@ -415,15 +415,37 @@ export default function AboutPage() {
                 />
               </div>
 
-              <h1 className="mt-6 max-w-[760px] overflow-visible text-[36px] font-bold leading-[1.09] tracking-[-0.05em] text-[#081232] sm:mt-7 sm:text-[52px] lg:text-[66px]">
-                Building Technology
-                <span className="mt-2 block overflow-visible pr-[0.18em]">
+              <h1 className="mt-6 max-w-[760px] overflow-visible font-bold tracking-[-0.045em] text-[#081232] sm:mt-7">
+                {/* Mobile: keep the heading in two balanced lines */}
+                <span className="block whitespace-nowrap text-[31px] leading-[1.08] min-[390px]:text-[34px] sm:hidden">
+                  Building Technology
+                </span>
+
+                <span className="mt-2 flex items-baseline whitespace-nowrap text-[27px] leading-[1.08] min-[390px]:text-[30px] sm:hidden">
                   With{" "}
                   <TypewriterText
                     text="Purpose and Impact"
                     speed={115}
                     delay={260}
-                    className="overflow-visible pb-[0.06em] pr-[0.14em] tracking-[-0.012em] bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff2f7d] bg-clip-text text-transparent"
+                    nowrap
+                    className="ml-2 overflow-visible bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff2f7d] bg-clip-text pb-[0.06em] pr-[0.08em] tracking-[-0.012em] text-transparent"
+                    cursorClassName="bg-[#ff2f7d]"
+                  />
+                </span>
+
+                {/* Tablet and desktop */}
+                <span className="hidden text-[46px] leading-[1.08] sm:block lg:text-[50px]">
+                  Building Technology
+                </span>
+
+                <span className="mt-2 hidden items-baseline overflow-visible text-[46px] leading-[1.08] sm:flex lg:text-[50px]">
+                  With{" "}
+                  <TypewriterText
+                    text="Purpose and Impact"
+                    speed={115}
+                    delay={260}
+                    nowrap
+                    className="ml-3 overflow-visible bg-gradient-to-r from-[#4b22ff] via-[#743cff] to-[#ff2f7d] bg-clip-text pb-[0.06em] pr-[0.12em] tracking-[-0.012em] text-transparent"
                     cursorClassName="bg-[#ff2f7d]"
                   />
                 </span>
@@ -487,7 +509,7 @@ export default function AboutPage() {
                       />
                     </p>
 
-                    <h2 className="mt-4 max-w-[410px] text-[27px] font-bold leading-[1.17] tracking-[-0.04em] sm:mt-5 sm:text-[38px]">
+                    <h2 className="mt-4 max-w-[410px] text-[28px] font-bold leading-[1.16] tracking-[-0.04em] sm:mt-5 sm:text-[36px] lg:text-[40px]">
                       One Team Focused on Building Meaningful Digital Products
                     </h2>
 
@@ -716,7 +738,7 @@ export default function AboutPage() {
                 />
               </p>
 
-              <h2 className="mt-4 max-w-[650px] text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 max-w-[650px] text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 A Technology Partner Built Around{" "}
                 <TypewriterText
                   text="Collaboration and Trust"
@@ -790,7 +812,7 @@ export default function AboutPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 Principles That Guide{" "}
                 <TypewriterText
                   text="Every Project"
@@ -829,7 +851,7 @@ export default function AboutPage() {
                 />
               </p>
 
-              <h2 className="mt-4 max-w-[590px] text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 max-w-[590px] text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 Different Disciplines.
                 <TypewriterText
                   text="One Unified Product Team."
@@ -914,11 +936,11 @@ export default function AboutPage() {
 
                 <h2 className="mt-4 max-w-[720px] overflow-visible font-bold tracking-[-0.04em]">
                   {/* Mobile: balanced three-line layout */}
-                  <span className="block text-[28px] leading-[1.16] min-[390px]:text-[30px] sm:hidden">
+                  <span className="block text-[27px] leading-[1.15] min-[390px]:text-[29px] sm:hidden">
                     A Delivery Approach
                   </span>
 
-                  <span className="mt-1 flex items-baseline overflow-visible text-[28px] leading-[1.16] min-[390px]:text-[30px] sm:hidden">
+                  <span className="mt-1 flex items-baseline overflow-visible text-[27px] leading-[1.15] min-[390px]:text-[29px] sm:hidden">
                     Built for{" "}
                     <TypewriterText
                       text="Clarity and"
@@ -930,7 +952,7 @@ export default function AboutPage() {
                     />
                   </span>
 
-                  <span className="mt-1 flex overflow-visible pb-[0.1em] text-[28px] leading-[1.16] min-[390px]:text-[30px] sm:hidden">
+                  <span className="mt-1 flex overflow-visible pb-[0.1em] text-[27px] leading-[1.15] min-[390px]:text-[29px] sm:hidden">
                     <TypewriterText
                       text="Confidence"
                       speed={110}
@@ -942,11 +964,11 @@ export default function AboutPage() {
                   </span>
 
                   {/* Tablet and laptop */}
-                  <span className="hidden text-[38px] leading-[1.14] sm:block lg:text-[37px] xl:text-[40px]">
+                  <span className="hidden text-[39px] leading-[1.15] sm:block lg:text-[42px] xl:text-[44px]">
                     A Delivery Approach
                   </span>
 
-                  <span className="mt-2 hidden items-baseline whitespace-nowrap text-[38px] leading-[1.14] sm:flex lg:text-[37px] xl:text-[40px]">
+                  <span className="mt-2 hidden items-baseline whitespace-nowrap text-[39px] leading-[1.15] sm:flex lg:text-[42px] xl:text-[44px]">
                     Built for{" "}
                     <TypewriterText
                       text="Clarity and Confidence"
@@ -1020,7 +1042,7 @@ export default function AboutPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 A Collaborative Journey From{" "}
                 <TypewriterText
                   text="Idea to Business Impact"
@@ -1095,7 +1117,7 @@ export default function AboutPage() {
                   />
                 </p>
 
-                <h2 className="mt-3 max-w-[760px] text-[29px] font-bold leading-[1.16] tracking-[-0.035em] sm:text-[38px] lg:text-[40px]">
+                <h2 className="mt-3 max-w-[760px] text-[27px] font-bold leading-[1.15] tracking-[-0.035em] sm:text-[39px] lg:text-[42px]">
                   Looking for a Technology Partner Who Treats Your Vision Like
                   Their Own?
                 </h2>

@@ -482,11 +482,11 @@ export default function AIDigitalTransformationPage() {
 
               <h1 className="mt-6 max-w-[780px] overflow-visible font-bold tracking-[-0.05em] text-[#081232] sm:mt-7">
                 {/* Mobile */}
-                <span className="block text-[35px] leading-[1.1] sm:hidden">
+                <span className="block text-[34px] leading-[1.08] sm:hidden">
                   Smarter Technology
                 </span>
 
-                <span className="mt-1 block overflow-visible pb-[0.08em] pr-[0.12em] text-[35px] leading-[1.1] sm:hidden">
+                <span className="mt-1 block overflow-visible pb-[0.08em] pr-[0.12em] text-[34px] leading-[1.08] sm:hidden">
                   for a More{" "}
                   <TypewriterText
                     text="Intelligent"
@@ -498,7 +498,7 @@ export default function AIDigitalTransformationPage() {
                   />
                 </span>
 
-                <span className="-mt-2 block overflow-visible pb-[0.12em] pr-[0.12em] text-[35px] leading-[1.1] sm:hidden">
+                <span className="-mt-1 block overflow-visible pb-[0.12em] pr-[0.12em] text-[34px] leading-[1.08] sm:hidden">
                   <TypewriterText
                     text="Business"
                     speed={120}
@@ -510,11 +510,11 @@ export default function AIDigitalTransformationPage() {
                 </span>
 
                 {/* Tablet, laptop and desktop */}
-                <span className="hidden whitespace-nowrap text-[46px] leading-[1.1] sm:block lg:text-[50px] xl:text-[56px]">
+                <span className="hidden whitespace-nowrap text-[42px] leading-[1.08] sm:block lg:text-[46px] xl:text-[50px]">
                   Smarter Technology for
                 </span>
 
-                <span className="mt-2 hidden overflow-visible whitespace-nowrap pb-[0.14em] pr-[0.12em] text-[46px] leading-[1.1] sm:block lg:text-[50px] xl:text-[56px]">
+                <span className="mt-2 hidden overflow-visible whitespace-nowrap pb-[0.14em] pr-[0.12em] text-[42px] leading-[1.08] sm:block lg:text-[46px] xl:text-[50px]">
                   a More{" "}
                   <TypewriterText
                     text="Intelligent Business"
@@ -705,7 +705,7 @@ export default function AIDigitalTransformationPage() {
                 />
               </p>
 
-              <h2 className="mt-4 max-w-[620px] text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 max-w-[620px] text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 AI Solutions Created for
                 <TypewriterText
                   text="Real Business Challenges"
@@ -786,7 +786,7 @@ export default function AIDigitalTransformationPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 Intelligent Solutions That Create{" "}
                 <TypewriterText
                   text="Practical Value"
@@ -1099,13 +1099,13 @@ export default function AIDigitalTransformationPage() {
                 />
               </p>
 
-              <h2 className="mt-4 max-w-[740px] font-bold tracking-[-0.04em] text-[#081232]">
+              <h2 className="mt-4 max-w-[740px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232]">
                 {/* Mobile */}
-                <span className="block text-[29px] leading-[1.15] sm:hidden">
+                <span className="block text-[31px] leading-[1.15] sm:hidden">
                   AI Transformation Focused
                 </span>
 
-                <span className="mt-1 flex text-[29px] leading-[1.15] sm:hidden">
+                <span className="mt-1 flex text-[31px] leading-[1.15] sm:hidden">
                   on{" "}
                   <TypewriterText
                     text="Measurable Outcomes"
@@ -1118,11 +1118,11 @@ export default function AIDigitalTransformationPage() {
                 </span>
 
                 {/* Tablet, laptop and desktop */}
-                <span className="hidden whitespace-nowrap text-[34px] leading-[1.15] sm:block lg:text-[38px] xl:text-[42px]">
+                <span className="hidden whitespace-nowrap text-[40px] leading-[1.15] sm:block lg:text-[42px] xl:text-[44px]">
                   AI Transformation Focused
                 </span>
 
-                <span className="mt-2 hidden items-baseline whitespace-nowrap text-[34px] leading-[1.15] sm:flex lg:text-[38px] xl:text-[42px]">
+                <span className="mt-2 hidden items-baseline whitespace-nowrap text-[40px] leading-[1.15] sm:flex lg:text-[42px] xl:text-[44px]">
                   on{" "}
                   <TypewriterText
                     text="Measurable Outcomes"
@@ -1194,7 +1194,7 @@ export default function AIDigitalTransformationPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 Questions About
                 <TypewriterText
                   text="AI Transformation"
@@ -1278,7 +1278,7 @@ export default function AIDigitalTransformationPage() {
                   />
                 </p>
 
-                <h2 className="mt-3 max-w-[740px] text-[30px] font-bold tracking-[-0.035em] sm:text-[38px]">
+                <h2 className="mt-3 max-w-[740px] text-[27px] font-bold leading-[1.15] tracking-[-0.035em] sm:text-[39px] lg:text-[42px]">
                   Ready to Discover Where AI Can Create Value for Your Business?
                 </h2>
 

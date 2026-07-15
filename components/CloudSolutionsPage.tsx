@@ -447,7 +447,7 @@ export default function CloudSolutionsPage() {
                 />
               </div>
 
-              <h1 className="mt-6 max-w-[680px] text-[36px] font-bold leading-[1.09] tracking-[-0.05em] text-[#081232] sm:mt-7 sm:text-[52px] lg:text-[66px]">
+              <h1 className="mt-6 max-w-[680px] text-[34px] font-bold leading-[1.08] tracking-[-0.045em] text-[#081232] sm:mt-7 sm:text-[46px] lg:text-[50px]">
                 Cloud Infrastructure
                 <span className="mt-2 block">
                   Built to Scale With{" "}
@@ -641,11 +641,11 @@ export default function CloudSolutionsPage() {
 
               <h2 className="mt-4 max-w-[650px] font-bold tracking-[-0.04em] text-[#081232]">
                 {/* Mobile */}
-                <span className="block text-[30px] leading-[1.14] sm:hidden">
+                <span className="block text-[31px] leading-[1.15] sm:hidden">
                   Modern Infrastructure
                 </span>
 
-                <span className="mt-1 block text-[30px] leading-[1.14] sm:hidden">
+                <span className="mt-1 block text-[31px] leading-[1.15] sm:hidden">
                   for{" "}
                   <TypewriterText
                     text="Modern Digital"
@@ -657,7 +657,7 @@ export default function CloudSolutionsPage() {
                   />
                 </span>
 
-                <span className="mt-1 flex text-[30px] leading-[1.14] sm:hidden">
+                <span className="mt-1 flex text-[31px] leading-[1.15] sm:hidden">
                   <TypewriterText
                     text="Businesses"
                     speed={105}
@@ -669,11 +669,11 @@ export default function CloudSolutionsPage() {
                 </span>
 
                 {/* Tablet and desktop */}
-                <span className="hidden text-[40px] leading-[1.16] sm:block lg:text-[44px]">
+                <span className="hidden text-[40px] leading-[1.15] sm:block lg:text-[44px]">
                   Modern Infrastructure for
                 </span>
 
-                <span className="mt-1 hidden text-[40px] leading-[1.16] sm:block lg:text-[44px]">
+                <span className="mt-1 hidden text-[40px] leading-[1.15] sm:block lg:text-[44px]">
                   <TypewriterText
                     text="Modern Digital Businesses"
                     speed={105}
@@ -753,7 +753,7 @@ export default function CloudSolutionsPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 Complete Cloud Solutions for{" "}
                 <TypewriterText
                   text="Every Stage"
@@ -834,11 +834,11 @@ export default function CloudSolutionsPage() {
 
               <h2 className="mt-4 max-w-[650px] font-bold tracking-[-0.04em] text-[#081232]">
                 {/* Mobile */}
-                <span className="block text-[30px] leading-[1.14] sm:hidden">
+                <span className="block text-[31px] leading-[1.15] sm:hidden">
                   Infrastructure That
                 </span>
 
-                <span className="mt-1 block text-[30px] leading-[1.14] sm:hidden">
+                <span className="mt-1 block text-[31px] leading-[1.15] sm:hidden">
                   Remains{" "}
                   <TypewriterText
                     text="Available"
@@ -850,7 +850,7 @@ export default function CloudSolutionsPage() {
                   />
                 </span>
 
-                <span className="mt-1 flex text-[30px] leading-[1.14] sm:hidden">
+                <span className="mt-1 flex text-[31px] leading-[1.15] sm:hidden">
                   <TypewriterText
                     text="and Efficient"
                     speed={105}
@@ -862,11 +862,11 @@ export default function CloudSolutionsPage() {
                 </span>
 
                 {/* Tablet and laptop: keep both lines balanced */}
-                <span className="hidden whitespace-nowrap text-[34px] leading-[1.14] sm:block lg:text-[38px] xl:text-[42px]">
+                <span className="hidden whitespace-nowrap text-[40px] leading-[1.15] sm:block lg:text-[42px] xl:text-[44px]">
                   Infrastructure That Remains
                 </span>
 
-                <span className="mt-2 hidden text-[34px] leading-[1.14] sm:block lg:text-[38px] xl:text-[42px]">
+                <span className="mt-2 hidden text-[40px] leading-[1.15] sm:block lg:text-[42px] xl:text-[44px]">
                   <TypewriterText
                     text="Available and Efficient"
                     speed={105}
@@ -945,11 +945,11 @@ export default function CloudSolutionsPage() {
               </p>
 
               <h2 className="mt-4 font-bold tracking-[-0.04em]">
-                <span className="block text-[28px] leading-[1.16] sm:hidden">
+                <span className="block text-[28px] leading-[1.15] sm:hidden">
                   Modern Technologies
                 </span>
 
-                <span className="mt-1 block text-[28px] leading-[1.16] sm:hidden">
+                <span className="mt-1 block text-[28px] leading-[1.15] sm:hidden">
                   for{" "}
                   <TypewriterText
                     text="Reliable Cloud"
@@ -961,7 +961,7 @@ export default function CloudSolutionsPage() {
                   />
                 </span>
 
-                <span className="mt-1 flex justify-center text-[28px] leading-[1.16] sm:hidden">
+                <span className="mt-1 flex justify-center text-[28px] leading-[1.15] sm:hidden">
                   <TypewriterText
                     text="Infrastructure"
                     speed={105}
@@ -972,11 +972,11 @@ export default function CloudSolutionsPage() {
                   />
                 </span>
 
-                <span className="hidden text-[38px] leading-[1.16] sm:block lg:text-[44px]">
+                <span className="hidden text-[40px] leading-[1.15] sm:block lg:text-[44px]">
                   Modern Technologies for
                 </span>
 
-                <span className="mt-2 hidden justify-center text-[38px] leading-[1.16] sm:flex lg:text-[44px]">
+                <span className="mt-2 hidden justify-center text-[40px] leading-[1.15] sm:flex lg:text-[44px]">
                   <TypewriterText
                     text="Reliable Cloud Infrastructure"
                     speed={105}
@@ -1014,7 +1014,7 @@ export default function CloudSolutionsPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 From Infrastructure Assessment to{" "}
                 <TypewriterText
                   text="Cloud Optimization"
@@ -1081,7 +1081,7 @@ export default function CloudSolutionsPage() {
                 />
               </p>
 
-              <h2 className="mt-4 max-w-[590px] text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 max-w-[590px] text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 Cloud Solutions Designed for{" "}
                 <TypewriterText
                   text="Long-Term Reliability"
@@ -1151,7 +1151,7 @@ export default function CloudSolutionsPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 Questions About
                 <TypewriterText
                   text="Cloud Solutions"
@@ -1235,7 +1235,7 @@ export default function CloudSolutionsPage() {
                   />
                 </p>
 
-                <h2 className="mt-3 max-w-[720px] text-[30px] font-bold tracking-[-0.035em] sm:text-[38px]">
+                <h2 className="mt-3 max-w-[720px] text-[27px] font-bold leading-[1.15] tracking-[-0.035em] sm:text-[39px] lg:text-[42px]">
                   Ready to Build a More Scalable and Reliable Infrastructure?
                 </h2>
 

@@ -467,7 +467,7 @@ export default function TermsAndConditionsPage() {
                 />
               </div>
 
-              <h1 className="mt-7 max-w-[760px] overflow-visible text-[43px] font-bold leading-[1.08] tracking-[-0.055em] text-[#081232] sm:text-[56px] lg:text-[66px]">
+              <h1 className="mt-7 max-w-[760px] overflow-visible text-[34px] font-bold leading-[1.08] tracking-[-0.045em] text-[#081232] sm:text-[46px] lg:text-[50px]">
                 Clear Terms for
                 <span className="mt-2 flex overflow-visible pb-[0.22em] leading-[1.14]">
                   <TypewriterText
@@ -613,7 +613,7 @@ export default function TermsAndConditionsPage() {
                 />
               </p>
 
-              <h2 className="mt-4 overflow-visible text-[34px] font-bold tracking-[-0.04em] text-[#081232] sm:text-[44px]">
+              <h2 className="mt-4 overflow-visible text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 <span className="block">The Important Points,</span>
 
                 <span className="mt-1 flex justify-center overflow-visible pb-[0.1em]">
@@ -837,7 +837,7 @@ export default function TermsAndConditionsPage() {
                   />
                 </p>
 
-                <h2 className="mt-3 max-w-[730px] overflow-visible text-[31px] font-bold tracking-[-0.035em] sm:text-[40px]">
+                <h2 className="mt-3 max-w-[730px] overflow-visible text-[27px] font-bold leading-[1.15] tracking-[-0.035em] sm:text-[39px] lg:text-[42px]">
                   <span className="block">Have a Question About These Terms</span>
 
                   <span className="mt-1 block overflow-visible pb-[0.08em]">

@@ -474,7 +474,7 @@ export default function ITConsultingPage() {
                 />
               </div>
 
-              <h1 className="mt-6 max-w-[720px] text-[35px] font-bold leading-[1.1] tracking-[-0.05em] text-[#081232] sm:mt-7 sm:text-[50px] lg:text-[58px] xl:text-[64px]">
+              <h1 className="mt-6 max-w-[720px] text-[34px] font-bold leading-[1.08] tracking-[-0.045em] text-[#081232] sm:mt-7 sm:text-[46px] lg:text-[50px]">
                 Technology Decisions
                 <span className="mt-2 block">
                   That Move Your Business{" "}
@@ -669,11 +669,11 @@ export default function ITConsultingPage() {
 
               <h2 className="mt-4 max-w-[680px] overflow-visible font-bold tracking-[-0.035em] text-[#081232]">
                 {/* Mobile: fixed three-line layout */}
-                <span className="block whitespace-nowrap text-[27px] leading-[1.16] min-[390px]:text-[29px] sm:hidden">
+                <span className="block whitespace-nowrap text-[29px] leading-[1.15] min-[390px]:text-[31px] sm:hidden">
                   Build a Smarter
                 </span>
 
-                <span className="mt-1 flex items-baseline whitespace-nowrap text-[27px] leading-[1.16] min-[390px]:text-[29px] sm:hidden">
+                <span className="mt-1 flex items-baseline whitespace-nowrap text-[29px] leading-[1.15] min-[390px]:text-[31px] sm:hidden">
                   Technology{" "}
                   <TypewriterText
                     text="Roadmap"
@@ -685,7 +685,7 @@ export default function ITConsultingPage() {
                   />
                 </span>
 
-                <span className="mt-1 block overflow-visible pb-[0.1em] text-[27px] leading-[1.16] min-[390px]:text-[29px] sm:hidden">
+                <span className="mt-1 block overflow-visible pb-[0.1em] text-[29px] leading-[1.15] min-[390px]:text-[31px] sm:hidden">
                   <TypewriterText
                     text="for Your Business"
                     speed={105}
@@ -697,11 +697,11 @@ export default function ITConsultingPage() {
                 </span>
 
                 {/* Tablet and desktop */}
-                <span className="hidden text-[38px] leading-[1.16] sm:block lg:text-[44px]">
+                <span className="hidden text-[40px] leading-[1.15] sm:block lg:text-[44px]">
                   Build a Smarter Technology
                 </span>
 
-                <span className="mt-1 hidden text-[38px] leading-[1.16] sm:block lg:text-[44px]">
+                <span className="mt-1 hidden text-[40px] leading-[1.15] sm:block lg:text-[44px]">
                   <TypewriterText
                     text="Roadmap for Your Business"
                     speed={105}
@@ -782,11 +782,11 @@ export default function ITConsultingPage() {
 
               <h2 className="mt-4 font-bold tracking-[-0.04em] text-[#081232]">
                 {/* Mobile */}
-                <span className="block text-[27px] leading-[1.16] sm:hidden">
+                <span className="block text-[29px] leading-[1.15] sm:hidden">
                   Practical Consulting
                 </span>
 
-                <span className="mt-1 flex items-baseline justify-center text-[27px] leading-[1.16] sm:hidden">
+                <span className="mt-1 flex items-baseline justify-center text-[29px] leading-[1.15] sm:hidden">
                   for Every{" "}
                   <TypewriterText
                     text="Technology"
@@ -798,7 +798,7 @@ export default function ITConsultingPage() {
                   />
                 </span>
 
-                <span className="mt-1 flex justify-center text-[27px] leading-[1.16] sm:hidden">
+                <span className="mt-1 flex justify-center text-[29px] leading-[1.15] sm:hidden">
                   <TypewriterText
                     text="Challenge"
                     speed={105}
@@ -810,11 +810,11 @@ export default function ITConsultingPage() {
                 </span>
 
                 {/* Tablet and desktop */}
-                <span className="hidden text-[38px] leading-[1.16] sm:inline lg:text-[44px]">
+                <span className="hidden text-[40px] leading-[1.15] sm:inline lg:text-[44px]">
                   Practical Consulting for Every{" "}
                 </span>
 
-                <span className="hidden text-[38px] leading-[1.16] sm:inline lg:text-[44px]">
+                <span className="hidden text-[40px] leading-[1.15] sm:inline lg:text-[44px]">
                   <TypewriterText
                     text="Technology Challenge"
                     speed={105}
@@ -893,7 +893,7 @@ export default function ITConsultingPage() {
                   />
                 </p>
 
-                <h2 className="mt-4 max-w-[640px] text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+                <h2 className="mt-4 max-w-[640px] text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                   Turn Technology Challenges Into{" "}
                   <TypewriterText
                     text="Business Opportunities"
@@ -964,11 +964,11 @@ export default function ITConsultingPage() {
 
               <h2 className="mt-4 font-bold tracking-[-0.04em]">
                 {/* Mobile */}
-                <span className="block text-[28px] leading-[1.16] sm:hidden">
+                <span className="block text-[28px] leading-[1.15] sm:hidden">
                   Technology Expertise
                 </span>
 
-                <span className="mt-1 block text-[28px] leading-[1.16] sm:hidden">
+                <span className="mt-1 block text-[28px] leading-[1.15] sm:hidden">
                   Across{" "}
                   <TypewriterText
                     text="Your Digital"
@@ -980,7 +980,7 @@ export default function ITConsultingPage() {
                   />
                 </span>
 
-                <span className="mt-1 flex justify-center text-[28px] leading-[1.16] sm:hidden">
+                <span className="mt-1 flex justify-center text-[28px] leading-[1.15] sm:hidden">
                   <TypewriterText
                     text="Environment"
                     speed={105}
@@ -992,11 +992,11 @@ export default function ITConsultingPage() {
                 </span>
 
                 {/* Tablet and desktop */}
-                <span className="hidden text-[38px] leading-[1.16] sm:block lg:text-[44px]">
+                <span className="hidden text-[40px] leading-[1.15] sm:block lg:text-[44px]">
                   Technology Expertise Across
                 </span>
 
-                <span className="mt-2 hidden justify-center text-[38px] leading-[1.16] sm:flex lg:text-[44px]">
+                <span className="mt-2 hidden justify-center text-[40px] leading-[1.15] sm:flex lg:text-[44px]">
                   <TypewriterText
                     text="Your Digital Environment"
                     speed={105}
@@ -1036,11 +1036,11 @@ export default function ITConsultingPage() {
 
               <h2 className="mt-4 font-bold tracking-[-0.04em] text-[#081232]">
                 {/* Mobile: exactly two balanced lines */}
-                <span className="block whitespace-nowrap text-[24px] leading-[1.16] min-[390px]:text-[27px] sm:hidden">
+                <span className="block whitespace-nowrap text-[24px] leading-[1.15] min-[390px]:text-[27px] sm:hidden">
                   From Technology Assessment
                 </span>
 
-                <span className="mt-2 flex items-baseline justify-center whitespace-nowrap text-[24px] leading-[1.16] min-[390px]:text-[27px] sm:hidden">
+                <span className="mt-2 flex items-baseline justify-center whitespace-nowrap text-[24px] leading-[1.15] min-[390px]:text-[27px] sm:hidden">
                   to{" "}
                   <TypewriterText
                     text="Successful Implementation"
@@ -1053,11 +1053,11 @@ export default function ITConsultingPage() {
                 </span>
 
                 {/* Tablet and desktop */}
-                <span className="hidden text-[38px] leading-[1.16] sm:inline lg:text-[44px]">
+                <span className="hidden text-[40px] leading-[1.15] sm:inline lg:text-[44px]">
                   From Technology Assessment to{" "}
                 </span>
 
-                <span className="hidden text-[38px] leading-[1.16] sm:inline lg:text-[44px]">
+                <span className="hidden text-[40px] leading-[1.15] sm:inline lg:text-[44px]">
                   <TypewriterText
                     text="Successful Implementation"
                     speed={105}
@@ -1125,11 +1125,11 @@ export default function ITConsultingPage() {
 
               <h2 className="mt-4 max-w-[700px] overflow-visible font-bold tracking-[-0.035em] text-[#081232]">
                 {/* Mobile */}
-                <span className="block whitespace-nowrap text-[27px] leading-[1.16] min-[390px]:text-[29px] sm:hidden">
+                <span className="block whitespace-nowrap text-[29px] leading-[1.15] min-[390px]:text-[31px] sm:hidden">
                   Technology Consulting
                 </span>
 
-                <span className="mt-1 flex items-baseline whitespace-nowrap text-[27px] leading-[1.16] min-[390px]:text-[29px] sm:hidden">
+                <span className="mt-1 flex items-baseline whitespace-nowrap text-[29px] leading-[1.15] min-[390px]:text-[31px] sm:hidden">
                   Focused on{" "}
                   <TypewriterText
                     text="Practical Results"
@@ -1142,11 +1142,11 @@ export default function ITConsultingPage() {
                 </span>
 
                 {/* Tablet, laptop and desktop: balanced two-line layout */}
-                <span className="hidden whitespace-nowrap text-[34px] leading-[1.16] sm:block lg:text-[38px] xl:text-[42px]">
+                <span className="hidden whitespace-nowrap text-[40px] leading-[1.15] sm:block lg:text-[42px] xl:text-[44px]">
                   Technology Consulting
                 </span>
 
-                <span className="mt-1 hidden items-baseline whitespace-nowrap text-[34px] leading-[1.16] sm:flex lg:text-[38px] xl:text-[42px]">
+                <span className="mt-1 hidden items-baseline whitespace-nowrap text-[40px] leading-[1.15] sm:flex lg:text-[42px] xl:text-[44px]">
                   Focused on{" "}
                   <TypewriterText
                     text="Practical Results"
@@ -1218,7 +1218,7 @@ export default function ITConsultingPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 Questions About
                 <TypewriterText
                   text="IT Consulting"
@@ -1302,7 +1302,7 @@ export default function ITConsultingPage() {
                   />
                 </p>
 
-                <h2 className="mt-3 max-w-[740px] text-[30px] font-bold tracking-[-0.035em] sm:text-[38px]">
+                <h2 className="mt-3 max-w-[740px] text-[27px] font-bold leading-[1.15] tracking-[-0.035em] sm:text-[39px] lg:text-[42px]">
                   Need a Clear Technology Roadmap for Your Business?
                 </h2>
 

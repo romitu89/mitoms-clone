@@ -455,7 +455,7 @@ export default function MobileAppDevelopmentPage() {
                 />
               </div>
 
-              <h1 className="mt-6 max-w-[700px] overflow-visible text-[36px] font-bold leading-[1.09] tracking-[-0.05em] text-[#081232] sm:mt-7 sm:text-[52px] lg:text-[66px]">
+              <h1 className="mt-6 max-w-[700px] overflow-visible text-[34px] font-bold leading-[1.08] tracking-[-0.045em] text-[#081232] sm:mt-7 sm:text-[46px] lg:text-[50px]">
                 Mobile Experiences
                 <span className="mt-2 block overflow-visible pr-[0.18em]">
                   Users Love to{" "}
@@ -648,7 +648,7 @@ export default function MobileAppDevelopmentPage() {
                 />
               </p>
 
-              <h2 className="mt-4 max-w-[600px] text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 max-w-[600px] text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 From an App Idea to a
                 <TypewriterText
                   text="Complete Digital Product"
@@ -729,7 +729,7 @@ export default function MobileAppDevelopmentPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 Applications Designed Around{" "}
                 <TypewriterText
                   text="Real User Needs"
@@ -810,11 +810,11 @@ export default function MobileAppDevelopmentPage() {
 
               <h2 className="mt-4 max-w-[650px] overflow-visible font-bold tracking-[-0.035em] text-[#081232]">
                 {/* Mobile: balanced two-line layout */}
-                <span className="block whitespace-nowrap text-[25px] leading-[1.16] min-[390px]:text-[27px] sm:hidden">
+                <span className="block whitespace-nowrap text-[27px] leading-[1.15] min-[390px]:text-[29px] sm:hidden">
                   Everything Your Mobile
                 </span>
 
-                <span className="mt-1 flex items-baseline whitespace-nowrap text-[25px] leading-[1.16] min-[390px]:text-[27px] sm:hidden">
+                <span className="mt-1 flex items-baseline whitespace-nowrap text-[27px] leading-[1.15] min-[390px]:text-[29px] sm:hidden">
                   Product{" "}
                   <TypewriterText
                     text="Needs to Perform"
@@ -827,11 +827,11 @@ export default function MobileAppDevelopmentPage() {
                 </span>
 
                 {/* Tablet, laptop and desktop */}
-                <span className="hidden whitespace-nowrap text-[36px] leading-[1.16] sm:block lg:text-[38px] xl:text-[40px]">
+                <span className="hidden whitespace-nowrap text-[39px] leading-[1.15] sm:block lg:text-[42px] xl:text-[44px]">
                   Everything Your Mobile
                 </span>
 
-                <span className="mt-1 hidden items-baseline whitespace-nowrap text-[36px] leading-[1.16] sm:flex lg:text-[38px] xl:text-[40px]">
+                <span className="mt-1 hidden items-baseline whitespace-nowrap text-[39px] leading-[1.15] sm:flex lg:text-[42px] xl:text-[44px]">
                   Product{" "}
                   <TypewriterText
                     text="Needs to Perform"
@@ -910,7 +910,7 @@ export default function MobileAppDevelopmentPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[27px] font-bold leading-[1.16] tracking-[-0.04em] sm:text-[38px] lg:text-[44px]">
+              <h2 className="mt-4 text-[28px] font-bold leading-[1.15] tracking-[-0.04em] sm:text-[40px] lg:text-[44px]">
                 <span className="block sm:inline">Modern Technologies</span>
                 <span className="hidden sm:inline"> for</span>
 
@@ -976,7 +976,7 @@ export default function MobileAppDevelopmentPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 From Product Concept to{" "}
                 <TypewriterText
                   text="App Store Launch"
@@ -1043,7 +1043,7 @@ export default function MobileAppDevelopmentPage() {
                 />
               </p>
 
-              <h2 className="mt-4 max-w-[580px] text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 max-w-[580px] text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 Mobile Applications Built for{" "}
                 <TypewriterText
                   text="Long-Term Growth"
@@ -1114,7 +1114,7 @@ export default function MobileAppDevelopmentPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 Questions About
                 <TypewriterText
                   text="Mobile Development"
@@ -1198,7 +1198,7 @@ export default function MobileAppDevelopmentPage() {
                   />
                 </p>
 
-                <h2 className="mt-3 max-w-[720px] text-[30px] font-bold tracking-[-0.035em] sm:text-[38px]">
+                <h2 className="mt-3 max-w-[720px] text-[27px] font-bold leading-[1.15] tracking-[-0.035em] sm:text-[39px] lg:text-[42px]">
                   Ready to Transform Your App Idea Into a Real Product?
                 </h2>
 

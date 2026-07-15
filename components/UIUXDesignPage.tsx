@@ -462,7 +462,7 @@ export default function UIUXDesignPage() {
                 />
               </div>
 
-              <h1 className="mt-6 max-w-[720px] overflow-visible text-[36px] font-bold leading-[1.09] tracking-[-0.05em] text-[#081232] sm:mt-7 sm:text-[52px] lg:text-[66px]">
+              <h1 className="mt-6 max-w-[720px] overflow-visible text-[34px] font-bold leading-[1.08] tracking-[-0.045em] text-[#081232] sm:mt-7 sm:text-[46px] lg:text-[50px]">
                 Digital Experiences
                 <span className="mt-2 block overflow-visible pr-[0.18em]">
                   Designed Around{" "}
@@ -655,7 +655,7 @@ export default function UIUXDesignPage() {
                 />
               </p>
 
-              <h2 className="mt-4 max-w-[600px] text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 max-w-[600px] text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 Beautiful Interfaces With
                 <TypewriterText
                   text="Clear Business Purpose"
@@ -736,7 +736,7 @@ export default function UIUXDesignPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 User Experiences for Every{" "}
                 <TypewriterText
                   text="Digital Product"
@@ -815,7 +815,7 @@ export default function UIUXDesignPage() {
                 />
               </p>
 
-              <h2 className="mt-4 max-w-[580px] text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 max-w-[580px] text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 Experiences That Feel
                 <TypewriterText
                   text="Natural and Consistent"
@@ -900,11 +900,11 @@ export default function UIUXDesignPage() {
 
               <h2 className="mt-4 font-bold tracking-[-0.04em]">
                 {/* Mobile: controlled, balanced line breaks */}
-                <span className="block text-[26px] leading-[1.16] sm:hidden">
+                <span className="block text-[28px] leading-[1.15] sm:hidden">
                   Everything Required
                 </span>
 
-                <span className="mt-1 block text-[26px] leading-[1.16] sm:hidden">
+                <span className="mt-1 block text-[28px] leading-[1.15] sm:hidden">
                   to Turn{" "}
                   <TypewriterText
                     text="Ideas Into"
@@ -916,7 +916,7 @@ export default function UIUXDesignPage() {
                   />
                 </span>
 
-                <span className="mt-1 flex justify-center text-[26px] leading-[1.16] sm:hidden">
+                <span className="mt-1 flex justify-center text-[28px] leading-[1.15] sm:hidden">
                   <TypewriterText
                     text="Clear Interfaces"
                     speed={105}
@@ -928,11 +928,11 @@ export default function UIUXDesignPage() {
                 </span>
 
                 {/* Tablet and desktop */}
-                <span className="hidden text-[38px] leading-[1.16] sm:block lg:text-[44px]">
+                <span className="hidden text-[40px] leading-[1.15] sm:block lg:text-[44px]">
                   Everything Required to Turn
                 </span>
 
-                <span className="mt-2 hidden justify-center text-[38px] leading-[1.16] sm:flex lg:text-[44px]">
+                <span className="mt-2 hidden justify-center text-[40px] leading-[1.15] sm:flex lg:text-[44px]">
                   <TypewriterText
                     text="Ideas Into Clear Interfaces"
                     speed={105}
@@ -971,7 +971,7 @@ export default function UIUXDesignPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 From Product Idea to{" "}
                 <TypewriterText
                   text="Development-Ready Design"
@@ -1037,7 +1037,7 @@ export default function UIUXDesignPage() {
                 />
               </p>
 
-              <h2 className="mt-4 max-w-[590px] text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 max-w-[590px] text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 UI/UX Design Connected to{" "}
                 <TypewriterText
                   text="Real Product Development"
@@ -1107,7 +1107,7 @@ export default function UIUXDesignPage() {
                 />
               </p>
 
-              <h2 className="mt-4 text-[29px] font-bold leading-[1.16] tracking-[-0.035em] text-[#081232] sm:text-[38px] lg:text-[42px]">
+              <h2 className="mt-4 text-[31px] font-bold leading-[1.15] tracking-[-0.04em] text-[#081232] sm:text-[40px] lg:text-[44px]">
                 Questions About
                 <TypewriterText
                   text="UI/UX Design"
@@ -1191,7 +1191,7 @@ export default function UIUXDesignPage() {
                   />
                 </p>
 
-                <h2 className="mt-3 max-w-[720px] text-[30px] font-bold tracking-[-0.035em] sm:text-[38px]">
+                <h2 className="mt-3 max-w-[720px] text-[27px] font-bold leading-[1.15] tracking-[-0.035em] sm:text-[39px] lg:text-[42px]">
                   Ready to Create an Experience Your Users Will Enjoy?
                 </h2>
 
