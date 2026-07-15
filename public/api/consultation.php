@@ -11,7 +11,7 @@ const CONSULTATION_TO_EMAIL = 'sales@mitoms.com';
 const FROM_EMAIL = 'sales@mitoms.com';
 const FROM_NAME = 'MITOMS Website';
 const CONSULTATION_CC_EMAILS = [
-    'sreejith@mitioms.com',
+    'sreejith@mitoms.com',
     'akash@mitoms.com',
     'romit@mitoms.com',
 ];
