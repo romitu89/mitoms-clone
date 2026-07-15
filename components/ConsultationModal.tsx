@@ -399,7 +399,7 @@ export default function ConsultationModal({
     setSubmitError("");
 
     try {
-      const response = await fetch("/api/consultation", {
+      const response = await fetch("/api/consultation.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

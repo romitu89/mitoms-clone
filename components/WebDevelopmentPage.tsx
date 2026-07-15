@@ -27,8 +27,6 @@ import {
   ShieldCheck,
   ShoppingCart,
   Smartphone,
-  Sparkles,
-  Users,
   Workflow,
   Wrench,
   Zap,

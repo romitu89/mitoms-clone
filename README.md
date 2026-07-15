@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MITOMS website: Next.js static frontend + PHP backend
 
-## Getting Started
+This is the complete editable source project prepared for Hostinger shared hosting where a persistent Node.js server is unavailable.
 
-First, run the development server:
+## Architecture
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Next.js is used locally to develop and generate a static export.
+- The production frontend is generated in `out/`.
+- The consultation forms submit to `public/api/consultation.php`.
+- Hostinger runs only the generated static files and PHP endpoint.
+
+## Build on Windows
+
+Double-click:
+
+```text
+build-hostinger.bat
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The script installs dependencies, runs the production build, and creates:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+MITOMS-PublicHTML-Build.zip
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Upload and extract that generated ZIP directly inside Hostinger's `public_html` folder.
 
-## Learn More
+## Build manually
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm install
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Then zip everything **inside** `out/`, including `.htaccess`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Email configuration
 
-## Deploy on Vercel
+Edit these constants in `public/api/consultation.php` before building:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```php
+const CONSULTATION_TO_EMAIL = 'sales@mitoms.com';
+const FROM_EMAIL = 'sales@mitoms.com';
+const FROM_NAME = 'MITOMS Website';
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The mailbox should exist on Hostinger before the contact form is tested.
+
+See `HOSTINGER-PHP-DEPLOYMENT.txt` for complete instructions.

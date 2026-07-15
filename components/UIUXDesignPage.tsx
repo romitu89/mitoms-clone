@@ -7,15 +7,10 @@ import {
   AppWindow,
   ArrowRight,
   Check,
-  CheckCircle2,
   ChevronDown,
-  Code2,
   Eye,
-  Gauge,
   Layers3,
   LayoutDashboard,
-  Lightbulb,
-  MessageSquareText,
   MonitorSmartphone,
   MousePointerClick,
   Palette,
@@ -27,10 +22,8 @@ import {
   Smartphone,
   Sparkles,
   Target,
-  Type,
   Users,
   Workflow,
-  Zap,
 } from "lucide-react";
 import ConsultationModal from "./ConsultationModal";
 

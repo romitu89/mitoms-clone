@@ -13,14 +13,11 @@ import {
   ChevronDown,
   Cloud,
   Code2,
-  Cpu,
   Database,
   Eye,
   FileText,
   Gauge,
-  Layers3,
   Lightbulb,
-  LockKeyhole,
   MessageSquareText,
   Network,
   RefreshCcw,
@@ -32,7 +29,6 @@ import {
   Target,
   Users,
   Workflow,
-  Zap,
 } from "lucide-react";
 import ConsultationModal from "./ConsultationModal";
 

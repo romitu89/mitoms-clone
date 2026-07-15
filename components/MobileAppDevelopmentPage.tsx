@@ -4,7 +4,6 @@ import { useEffect, useRef, useState, type ElementType } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  
   Apple,
   ArrowRight,
   BarChart3,
@@ -16,10 +15,8 @@ import {
   Cloud,
   Code2,
   CreditCard,
-  Database,
   Fingerprint,
   Gauge,
-  Layers3,
   LayoutDashboard,
   LockKeyhole,
   MessageSquareText,
@@ -32,12 +29,10 @@ import {
   ShieldCheck,
   ShoppingBag,
   Smartphone,
-  Sparkles,
   TabletSmartphone,
   Users,
   Workflow,
   Wrench,
-  Zap,
 } from "lucide-react";
 import ConsultationModal from "./ConsultationModal";
 
