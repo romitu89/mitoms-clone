@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -7,13 +8,13 @@ declare(strict_types=1);
  * created for your domain in Hostinger.
  */
 const CONSULTATION_TO_EMAIL = 'sales@mitoms.com';
+const FROM_EMAIL = 'sales@mitoms.com';
+const FROM_NAME = 'MITOMS Website';
 const CONSULTATION_CC_EMAILS = [
     'sreejith@mitioms.com',
     'akash@mitoms.com',
     'romit@mitoms.com',
 ];
-const FROM_EMAIL = 'sales@mitoms.com';
-const FROM_NAME = 'MITOMS Website';
 
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store, max-age=0');

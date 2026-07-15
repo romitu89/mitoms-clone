@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "build:hostinger": "next build",
-    "lint": "eslint"
+    "build": "node scripts/clean-build.mjs && next build",
+    "build:hostinger": "node scripts/clean-build.mjs && next build",
+    "lint": "eslint",
+    "clean": "node scripts/clean-build.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.23.0",
