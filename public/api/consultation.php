@@ -7,6 +7,11 @@ declare(strict_types=1);
  * created for your domain in Hostinger.
  */
 const CONSULTATION_TO_EMAIL = 'sales@mitoms.com';
+const CONSULTATION_CC_EMAILS = [
+    'sreejith@mitioms.com',
+    'akash@mitoms.com',
+    'romit@mitoms.com',
+];
 const FROM_EMAIL = 'sales@mitoms.com';
 const FROM_NAME = 'MITOMS Website';
 
@@ -228,6 +233,7 @@ $leadHeaders = [
     'Content-Type: text/plain; charset=UTF-8',
     'From: ' . $fromName . ' <' . $fromEmail . '>',
     'Reply-To: ' . $replyTo,
+    'Cc: ' . implode(', ', CONSULTATION_CC_EMAILS),
     'X-Mailer: PHP/' . PHP_VERSION,
 ];
 
