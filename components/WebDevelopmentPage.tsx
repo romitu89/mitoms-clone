@@ -32,6 +32,7 @@ import {
   Zap,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import type { ReactNode } from "react";
 import ConsultationModal from "./ConsultationModal";
 
 const capabilities = [
@@ -245,6 +246,43 @@ const faqs = [
 ];
 
 
+
+function useStartWhenVisible<T extends HTMLElement>(threshold = 0.16) {
+  const elementRef = useRef<T>(null);
+  const [hasStarted, setHasStarted] = useState(false);
+
+  useEffect(() => {
+    const element = elementRef.current;
+
+    if (!element || hasStarted) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        setHasStarted(true);
+        observer.disconnect();
+      },
+      {
+        threshold,
+        rootMargin: "0px 0px -5% 0px",
+      },
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [hasStarted, threshold]);
+
+  return { elementRef, hasStarted };
+}
+
 function TypewriterText({
   text,
   speed = 105,
@@ -360,6 +398,34 @@ function TypewriterText({
         )}
       </span>
     </span>
+  );
+}
+
+
+function Reveal({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  const { elementRef, hasStarted } =
+    useStartWhenVisible<HTMLDivElement>(0.1);
+
+  return (
+    <div
+      ref={elementRef}
+      style={{ transitionDelay: `${delay}ms` }}
+      className={`${className} transition-all duration-700 ease-out ${
+        hasStarted
+          ? "translate-y-0 opacity-100"
+          : "translate-y-7 opacity-0"
+      }`}
+    >
+      {children}
+    </div>
   );
 }
 
@@ -500,7 +566,7 @@ export default function WebDevelopmentPage() {
                 </Link>
               </div>
 
-              <div className="mt-8 grid w-full max-w-[620px] auto-rows-fr grid-cols-2 gap-3 sm:mt-10 xl:grid-cols-[repeat(4,minmax(0,1fr))] xl:gap-2 2xl:gap-3">
+              <div className="mt-8 grid w-full max-w-[620px] auto-rows-fr grid-cols-2 gap-2.5 sm:mt-10 sm:gap-3 xl:grid-cols-[repeat(4,minmax(0,1fr))] xl:gap-2 2xl:gap-3">
                 {[
                   {
                     icon: MonitorSmartphone,
@@ -524,13 +590,13 @@ export default function WebDevelopmentPage() {
                   return (
                     <div
                       key={item.title}
-                      className="flex h-full w-full min-w-0 overflow-hidden rounded-[15px] border border-[#e7e2f5] bg-white/85 px-3 py-3.5 shadow-[0_10px_28px_rgba(34,24,88,0.05)] backdrop-blur sm:rounded-[16px] sm:px-4 sm:py-4 xl:items-center xl:gap-1.5 xl:px-2 xl:py-3 2xl:gap-2.5 2xl:px-3 2xl:py-4"
+                      className="flex min-h-[76px] h-full w-full min-w-0 items-center gap-2.5 overflow-hidden rounded-[14px] border border-[#e7e2f5] bg-white/85 px-3 py-3 shadow-[0_10px_28px_rgba(34,24,88,0.05)] backdrop-blur sm:min-h-[82px] sm:gap-3 sm:rounded-[16px] sm:px-4 sm:py-4 xl:min-h-0 xl:gap-1.5 xl:px-2 xl:py-3 2xl:gap-2.5 2xl:px-3 2xl:py-4"
                     >
                       <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[12px] bg-[#f0ecff] text-[#4b22ff] xl:h-7 xl:w-7 xl:rounded-[10px] 2xl:h-9 2xl:w-9 2xl:rounded-[12px]">
                         <Icon size={17} className="xl:h-[14px] xl:w-[14px] 2xl:h-[17px] 2xl:w-[17px]" />
                       </div>
 
-                      <span className="min-w-0 flex-1 whitespace-normal [overflow-wrap:anywhere] text-[12px] font-bold leading-5 text-[#24304f] xl:text-[10px] xl:leading-[1.25] 2xl:text-[12px] 2xl:leading-5">
+                      <span className="min-w-0 flex-1 whitespace-nowrap text-[12px] font-bold leading-5 text-[#24304f] xl:text-[10px] xl:leading-[1.25] 2xl:text-[12px] 2xl:leading-5">
                         {item.title}
                       </span>
                     </div>
@@ -540,10 +606,10 @@ export default function WebDevelopmentPage() {
             </div>
 
             {/* Hero visual */}
-            <div className="relative min-h-[380px] min-w-0 sm:min-h-[470px] lg:min-h-[530px]">
-              <div className="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[#cfc5ff] sm:h-[400px] sm:w-[400px] lg:h-[460px] lg:w-[460px]" />
+            <div className="relative mt-1 min-h-[300px] min-w-0 sm:mt-0 sm:min-h-[470px] lg:min-h-[530px]">
+              <div className="pointer-events-none absolute left-1/2 top-1/2 hidden h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[#cfc5ff] sm:block sm:h-[400px] sm:w-[400px] lg:h-[460px] lg:w-[460px]" />
 
-              <div className="pointer-events-none absolute left-1/2 top-1/2 h-[250px] w-[250px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(75,34,255,0.13),transparent_67%)] sm:h-[330px] sm:w-[330px] lg:h-[380px] lg:w-[380px]" />
+              <div className="pointer-events-none absolute left-1/2 top-1/2 hidden h-[250px] w-[250px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(75,34,255,0.13),transparent_67%)] sm:block sm:h-[330px] sm:w-[330px] lg:h-[380px] lg:w-[380px]" />
 
               <Image
                 src="/images/home/laptop.webp"
@@ -555,7 +621,8 @@ export default function WebDevelopmentPage() {
                 className="absolute left-1/2 top-1/2 z-20 h-auto w-full max-w-full -translate-x-1/2 -translate-y-1/2 object-contain drop-shadow-[0_30px_45px_rgba(32,23,92,0.18)] sm:w-[92%] lg:w-[88%] xl:max-w-[620px]"
               />
 
-              <div className="absolute left-[1%] top-[9%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
+              <div style={{ animationDelay: "0s" }}
+                className="web-float-card absolute left-[1%] top-[9%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
                 <div className="flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#4b22ff] to-[#7b5cff] text-white">
                     <Gauge size={21} />
@@ -573,7 +640,8 @@ export default function WebDevelopmentPage() {
                 </div>
               </div>
 
-              <div className="absolute right-[0%] top-[18%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
+              <div style={{ animationDelay: "0.7s" }}
+                className="web-float-card absolute right-[0%] top-[18%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
                 <div className="flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#ff2f7d] to-[#ff7ca8] text-white">
                     <MousePointerClick size={21} />
@@ -591,7 +659,8 @@ export default function WebDevelopmentPage() {
                 </div>
               </div>
 
-              <div className="absolute bottom-[8%] left-[4%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
+              <div style={{ animationDelay: "1.4s" }}
+                className="web-float-card absolute bottom-[8%] left-[4%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
                 <div className="flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#00b8ff] to-[#4b22ff] text-white">
                     <Smartphone size={21} />
@@ -609,7 +678,8 @@ export default function WebDevelopmentPage() {
                 </div>
               </div>
 
-              <div className="absolute bottom-[2%] right-[2%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
+              <div style={{ animationDelay: "2.1s" }}
+                className="web-float-card absolute bottom-[2%] right-[2%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
                 <div className="flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#743cff] to-[#ff2f7d] text-white">
                     <BarChart3 size={21} />
@@ -685,14 +755,14 @@ export default function WebDevelopmentPage() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              {capabilities.map((item) => {
+              {capabilities.map((item, index) => {
                 const Icon = item.icon;
 
                 return (
-                  <div
-                    key={item.title}
-                    className="group rounded-[21px] border border-[#e4dff0] bg-white p-5 shadow-[0_10px_30px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#cec4ff] hover:shadow-[0_18px_40px_rgba(75,34,255,0.09)]"
-                  >
+                  <Reveal key={item.title} delay={index * 80} className="h-full">
+                    <div
+                      className="group h-full rounded-[21px] border border-[#e4dff0] bg-white p-5 shadow-[0_10px_30px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#cec4ff] hover:shadow-[0_18px_40px_rgba(75,34,255,0.09)]"
+                    >
                     <div
                       className={`flex h-12 w-12 items-center justify-center rounded-[15px] bg-gradient-to-br ${item.gradient} text-white shadow-[0_10px_24px_rgba(75,34,255,0.18)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105`}
                     >
@@ -706,7 +776,8 @@ export default function WebDevelopmentPage() {
                     <p className="mt-2 text-[14px] font-medium leading-6 text-[#27314f]/84">
                       {item.description}
                     </p>
-                  </div>
+                    </div>
+                  </Reveal>
                 );
               })}
             </div>
@@ -746,14 +817,14 @@ export default function WebDevelopmentPage() {
             </div>
 
             <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {solutions.map((item) => {
+              {solutions.map((item, index) => {
                 const Icon = item.icon;
 
                 return (
-                  <div
-                    key={item.number}
-                    className="group relative overflow-hidden rounded-[21px] border border-[#e4dff1] bg-white p-5 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(75,34,255,0.12)] sm:rounded-[24px] sm:p-7"
-                  >
+                  <Reveal key={item.number} delay={(index % 3) * 90} className="h-full">
+                    <div
+                      className="group relative h-full overflow-hidden rounded-[21px] border border-[#e4dff1] bg-white p-5 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(75,34,255,0.12)] sm:rounded-[24px] sm:p-7"
+                    >
                     <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#4b22ff]/5 blur-3xl transition-colors duration-500 group-hover:bg-[#ff2f7d]/8" />
 
                     <div className="relative flex items-start justify-between">
@@ -786,7 +857,8 @@ export default function WebDevelopmentPage() {
                         className="transition-transform duration-300 group-hover/link:translate-x-1.5"
                       />
                     </button>
-                  </div>
+                    </div>
+                  </Reveal>
                 );
               })}
             </div>
@@ -850,29 +922,37 @@ export default function WebDevelopmentPage() {
             </div>
 
             <div className="relative z-10 mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-              <TechnologyGroup
+              <Reveal delay={0} className="h-full">
+                <TechnologyGroup
                 icon={Code2}
                 title="Frontend"
                 technologies={frontendTechnologies}
               />
+              </Reveal>
 
-              <TechnologyGroup
+              <Reveal delay={90} className="h-full">
+                <TechnologyGroup
                 icon={Server}
                 title="Backend"
                 technologies={backendTechnologies}
               />
+              </Reveal>
 
-              <TechnologyGroup
+              <Reveal delay={180} className="h-full">
+                <TechnologyGroup
                 icon={Database}
                 title="Database"
                 technologies={databaseTechnologies}
               />
+              </Reveal>
 
-              <TechnologyGroup
+              <Reveal delay={270} className="h-full">
+                <TechnologyGroup
                 icon={Cloud}
                 title="Cloud and DevOps"
                 technologies={cloudTechnologies}
               />
+              </Reveal>
             </div>
           </div>
         </section>
@@ -910,14 +990,14 @@ export default function WebDevelopmentPage() {
             </div>
 
             <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {process.map((item) => {
+              {process.map((item, index) => {
                 const Icon = item.icon;
 
                 return (
-                  <div
-                    key={item.number}
-                    className="group relative rounded-[23px] border border-[#e4dff0] bg-white p-6 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_22px_48px_rgba(75,34,255,0.11)]"
-                  >
+                  <Reveal key={item.number} delay={(index % 3) * 90} className="h-full">
+                    <div
+                      className="group relative h-full rounded-[23px] border border-[#e4dff0] bg-white p-6 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_22px_48px_rgba(75,34,255,0.11)]"
+                    >
                     <div className="flex items-center justify-between">
                       <div className="flex h-[66px] w-[66px] items-center justify-center rounded-full bg-gradient-to-br from-[#4b22ff] to-[#ff2f7d] text-white shadow-[0_14px_30px_rgba(75,34,255,0.22)] transition-transform duration-300 group-hover:rotate-6 group-hover:scale-105">
                         <Icon size={27} />
@@ -935,7 +1015,8 @@ export default function WebDevelopmentPage() {
                     <p className="mt-3 text-[15px] font-medium leading-7 text-[#27314f]/86">
                       {item.description}
                     </p>
-                  </div>
+                    </div>
+                  </Reveal>
                 );
               })}
             </div>
@@ -992,10 +1073,10 @@ export default function WebDevelopmentPage() {
 
             <div className="grid gap-4 sm:grid-cols-2">
               {benefits.map((benefit, index) => (
-                <div
-                  key={benefit}
-                  className="group flex min-h-[96px] items-center gap-4 rounded-[19px] border border-[#e3deef] bg-white p-5 shadow-[0_10px_30px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#cec4ff] hover:shadow-[0_18px_40px_rgba(75,34,255,0.09)]"
-                >
+                <Reveal key={benefit} delay={(index % 2) * 80}>
+                  <div
+                    className="group flex min-h-[96px] items-center gap-4 rounded-[19px] border border-[#e3deef] bg-white p-5 shadow-[0_10px_30px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#cec4ff] hover:shadow-[0_18px_40px_rgba(75,34,255,0.09)]"
+                  >
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[13px] bg-[#f0ecff] text-[11px] font-bold text-[#4b22ff]">
                     {String(index + 1).padStart(2, "0")}
                   </div>
@@ -1010,7 +1091,8 @@ export default function WebDevelopmentPage() {
                       {benefit}
                     </p>
                   </div>
-                </div>
+                  </div>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -1095,7 +1177,8 @@ export default function WebDevelopmentPage() {
 
         {/* FINAL CTA */}
         <section className="px-4 pb-8 sm:px-6 lg:px-10">
-          <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[22px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff2f7d_125%)] px-5 py-10 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:rounded-[26px] sm:px-8 sm:py-12 lg:px-14">
+          <Reveal>
+            <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[22px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff2f7d_125%)] px-5 py-10 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:rounded-[26px] sm:px-8 sm:py-12 lg:px-14">
             <div className="pointer-events-none absolute -left-20 -top-28 h-72 w-72 rounded-full bg-[#1685ff]/20 blur-[90px]" />
 
             <div className="pointer-events-none absolute -bottom-28 right-[-40px] h-80 w-80 rounded-full bg-[#ff2f7d]/35 blur-[95px]" />
@@ -1136,7 +1219,8 @@ export default function WebDevelopmentPage() {
                 />
               </button>
             </div>
-          </div>
+            </div>
+          </Reveal>
         </section>
       </main>
 
@@ -1144,6 +1228,29 @@ export default function WebDevelopmentPage() {
         isOpen={showConsultation}
         onClose={() => setShowConsultation(false)}
       />
+
+      <style>{`
+        .web-float-card {
+          animation: webFloat 6.8s ease-in-out infinite;
+          will-change: transform;
+        }
+
+        @keyframes webFloat {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0);
+          }
+          50% {
+            transform: translate3d(0, -10px, 0);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .web-float-card {
+            animation: none !important;
+          }
+        }
+      `}</style>
     </>
   );
 }

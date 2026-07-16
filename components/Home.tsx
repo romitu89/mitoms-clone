@@ -587,6 +587,7 @@ function HeroFloatingCard({
   text,
   pos,
   iconBg,
+  animationDelay = "0s",
 }: {
   icon: LucideIcon;
   title: string;
@@ -594,13 +595,15 @@ function HeroFloatingCard({
   text: string;
   pos: string;
   iconBg: string;
+  animationDelay?: string;
 }) {
   return (
     <Link
       prefetch={false}
       href={href}
       aria-label={`Explore ${title}`}
-      className={`group absolute ${pos} z-40 hidden w-[215px] rounded-[28px] bg-white/95 p-[14px] shadow-[0_18px_40px_rgba(35,27,84,0.14)] ring-1 ring-white/80 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_rgba(35,27,84,0.19)] lg:block`}
+      style={{ animationDelay }}
+      className={`home-hero-float-card group absolute ${pos} z-40 hidden w-[215px] rounded-[28px] bg-white/95 p-[14px] shadow-[0_18px_40px_rgba(35,27,84,0.14)] ring-1 ring-white/80 backdrop-blur transition-all duration-300 hover:shadow-[0_24px_50px_rgba(35,27,84,0.19)] lg:block`}
     >
       <div className="flex items-center gap-3">
         <div
@@ -659,8 +662,70 @@ function ProcessStep({
   );
 }
 
+
+function useScrollReveal<T extends HTMLElement>() {
+  const rootRef = useRef<T>(null);
+
+  useEffect(() => {
+    const root = rootRef.current;
+
+    if (!root) {
+      return;
+    }
+
+    const elements = Array.from(
+      root.querySelectorAll<HTMLElement>("[data-scroll-reveal]"),
+    );
+
+    root.classList.add("scroll-reveal-ready");
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reducedMotion) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return () => {
+        root.classList.remove("scroll-reveal-ready");
+      };
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -7% 0px",
+      },
+    );
+
+    elements.forEach((element) => {
+      const order = Number(element.dataset.revealOrder ?? "0");
+      const delay = Math.min(Math.max(order, 0), 6) * 80;
+      element.style.setProperty("--scroll-reveal-delay", `${delay}ms`);
+      observer.observe(element);
+    });
+
+    return () => {
+      observer.disconnect();
+      root.classList.remove("scroll-reveal-ready");
+    };
+  }, []);
+
+  return rootRef;
+}
+
 export default function Home() {
   const [showConsultation, setShowConsultation] = useState(false);
+  const pageRef = useScrollReveal<HTMLElement>();
 
   const openConsultation = () => {
     setShowConsultation(true);
@@ -668,7 +733,7 @@ export default function Home() {
 
 
   return (
-    <main className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
+    <main ref={pageRef} className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
       {/* HERO SECTION */}
       <section className="relative overflow-hidden bg-[#fbfaff] lg:min-h-[650px]">
         <Image
@@ -745,12 +810,14 @@ export default function Home() {
             </div>
 
             <div className="mt-9 grid max-w-[620px] grid-cols-2 gap-3 sm:mt-12 sm:grid-cols-4 lg:mt-14">
-              {stats.map((item) => {
+              {stats.map((item, index) => {
                 const Icon = item.icon;
 
                 return (
                   <div
                     key={item.label}
+                    data-scroll-reveal
+                    data-reveal-order={index}
                     className="stat-card flex min-h-[88px] min-w-0 items-center gap-2.5 rounded-[16px] border border-[#e9e6f5] bg-white/75 px-3 py-3.5 shadow-[0_8px_24px_rgba(34,24,88,0.05)] backdrop-blur sm:min-h-[92px] sm:gap-3 sm:rounded-[18px] sm:px-4 sm:py-4"
                   >
                     <div className="stat-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] bg-[#f1edff] text-[#542cff]">
@@ -819,8 +886,12 @@ export default function Home() {
               className="hero-orb hero-orb-four pointer-events-none absolute right-[10%] top-[58%] z-30 w-[28px] select-none mix-blend-multiply drop-shadow-[0_10px_18px_rgba(255,47,125,0.28)] sm:right-[13%] sm:top-[56%] sm:w-[42px]"
             />
 
-            {heroCards.map((card) => (
-              <HeroFloatingCard key={card.title} {...card} />
+            {heroCards.map((card, index) => (
+              <HeroFloatingCard
+                key={card.title}
+                {...card}
+                animationDelay={`${index * 0.45}s`}
+              />
             ))}
           </div>
         </div>
@@ -832,7 +903,7 @@ export default function Home() {
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_13%_48%,rgba(71,26,255,0.22),transparent_20%),radial-gradient(circle_at_46%_47%,rgba(255,43,126,0.14),transparent_18%),radial-gradient(circle_at_83%_50%,rgba(0,87,255,0.18),transparent_20%)]" />
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(1,8,30,0.75),rgba(3,13,45,0.2),rgba(1,8,30,0.75))]" />
 
-          <div className="relative z-20 text-center">
+          <div data-scroll-reveal className="relative z-20 text-center">
             <p className="text-[13px] font-bold uppercase tracking-[0.34em] text-[#d75cff] drop-shadow-[0_0_12px_rgba(215,92,255,0.85)]">
               <TypewriterText
                 segments={[
@@ -930,8 +1001,10 @@ export default function Home() {
             </svg>
 
             <div className="grid grid-cols-1 gap-x-6 gap-y-12 min-[430px]:grid-cols-2 lg:grid-cols-6 lg:gap-x-7">
-              {process.map((item) => (
-                <ProcessStep key={item.no} {...item} />
+              {process.map((item, index) => (
+                <div key={item.no} data-scroll-reveal data-reveal-order={index}>
+                  <ProcessStep {...item} />
+                </div>
               ))}
             </div>
           </div>
@@ -940,7 +1013,7 @@ export default function Home() {
 
       {/* SERVICES - WHAT WE DO */}
       <section className="mx-auto max-w-[1320px] px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-20">
-        <div className="text-center">
+        <div data-scroll-reveal className="text-center">
           <p className="text-[13px] font-bold uppercase tracking-[0.28em] text-[#ff2f7d]">
             <TypewriterText
               segments={[
@@ -964,7 +1037,7 @@ export default function Home() {
         </div>
 
         <div className="mt-9 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-          {services.map((item) => {
+          {services.map((item, index) => {
             const Icon = item.icon;
             return (
               <Link
@@ -972,6 +1045,8 @@ export default function Home() {
                 key={item.no}
                 href={item.href}
                 aria-label={`Explore ${item.title}`}
+                data-scroll-reveal
+                data-reveal-order={index}
                 className="group relative min-h-[340px] overflow-hidden rounded-2xl border border-[#dfe4f5] bg-[#020b2b] p-5 text-white shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl sm:min-h-[360px] sm:p-6"
               >
                 {/* Brighter Background Image */}
@@ -1009,7 +1084,7 @@ export default function Home() {
 
         <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 lg:grid-cols-[0.68fr_1.32fr] lg:gap-6">
           {/* LEFT CONTENT */}
-          <div className="lg:pl-2">
+          <div data-scroll-reveal="left" className="lg:pl-2">
             <p className="text-[12px] font-bold uppercase tracking-[0.28em] text-[#5b35ff]">
               <TypewriterText
                 segments={[
@@ -1074,7 +1149,7 @@ export default function Home() {
           </div>
 
           {/* RIGHT ORBIT DIAGRAM */}
-          <div className="impact-orbit relative min-h-[430px] md:min-h-[510px]">
+          <div data-scroll-reveal="right" className="impact-orbit relative min-h-[430px] md:min-h-[510px]">
             {/* Dotted orbit */}
             <div className="impact-orbit-ring absolute left-1/2 top-[42%] h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[2px] border-dashed border-[#d4c9ff]" />
 
@@ -1228,7 +1303,7 @@ export default function Home() {
             bg-gradient-to-r from-[#1eb8ff] via-[#7b3cff] to-[#ff2f7d]
             shadow-[0_0_10px_#1eb8ff,0_0_22px_#6a4dff,0_0_36px_#ff2f7d,0_6px_28px_rgba(255,47,125,.55)]" />
 
-          <div className="relative z-10 grid items-center gap-6 lg:grid-cols-[1.15fr_0.85fr_1.3fr] lg:gap-7">
+          <div data-scroll-reveal className="relative z-10 grid items-center gap-6 lg:grid-cols-[1.15fr_0.85fr_1.3fr] lg:gap-7">
             {/* Left heading */}
             <div className="lg:pr-8">
               <h2 className="text-[22px] font-bold tracking-[-0.025em] sm:text-[27px]">
@@ -1431,6 +1506,45 @@ export default function Home() {
           filter: saturate(1.08) contrast(1.04);
         }
 
+
+        .scroll-reveal-ready [data-scroll-reveal] {
+          opacity: 0;
+          transform: translate3d(0, 28px, 0);
+          transition:
+            opacity 700ms ease-out,
+            transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+          transition-delay: var(--scroll-reveal-delay, 0ms);
+          will-change: opacity, transform;
+        }
+
+        .scroll-reveal-ready [data-scroll-reveal="left"] {
+          transform: translate3d(-30px, 0, 0);
+        }
+
+        .scroll-reveal-ready [data-scroll-reveal="right"] {
+          transform: translate3d(30px, 0, 0);
+        }
+
+        .scroll-reveal-ready [data-scroll-reveal].is-visible {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+
+        .home-hero-float-card {
+          animation: homeHeroCardFloat 7s ease-in-out infinite;
+          will-change: transform;
+        }
+
+        @keyframes homeHeroCardFloat {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0) rotate(0deg);
+          }
+          50% {
+            transform: translate3d(0, -10px, 0) rotate(0.8deg);
+          }
+        }
+
         .hero-orb-one {
           animation: heroOrbHangLeft 5.8s ease-in-out infinite;
         }
@@ -1512,9 +1626,16 @@ export default function Home() {
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .hero-orb {
+          .hero-orb,
+          .home-hero-float-card {
             animation: none !important;
             transform: none !important;
+          }
+
+          .scroll-reveal-ready [data-scroll-reveal] {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
           }
         }
       `}</style>

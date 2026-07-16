@@ -397,7 +397,7 @@ function TechnologyCard({
   items: string[];
 }) {
   return (
-    <div className="rounded-[19px] border border-white/10 bg-white/[0.055] p-5 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.08] sm:rounded-[22px] sm:p-6">
+    <div data-service-reveal className="rounded-[19px] border border-white/10 bg-white/[0.055] p-5 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.08] sm:rounded-[22px] sm:p-6">
       <div className="flex items-center gap-3">
         <div className="flex h-12 w-12 items-center justify-center rounded-[15px] bg-gradient-to-br from-[#4b22ff] to-[#ff2f7d] text-white shadow-[0_12px_25px_rgba(75,34,255,0.24)]">
           <Icon size={22} />
@@ -427,9 +427,59 @@ export default function MobileAppDevelopmentPage() {
     setShowConsultation(true);
   };
 
+  const pageRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const page = pageRef.current;
+
+    if (!page) {
+      return;
+    }
+
+    const elements = Array.from(
+      page.querySelectorAll<HTMLElement>("[data-service-reveal]"),
+    );
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reduceMotion) {
+      elements.forEach((element) => {
+        element.dataset.revealVisible = "true";
+      });
+
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          const element = entry.target as HTMLElement;
+          element.dataset.revealVisible = "true";
+          observer.unobserve(element);
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -5% 0px",
+      },
+    );
+
+    elements.forEach((element) => observer.observe(element));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <>
-      <main className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
+      <main ref={pageRef} className="w-full overflow-x-clip bg-white font-sans text-[#07112f] antialiased">
         {/* HERO SECTION */}
         <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-14 pt-10 sm:px-6 sm:pb-18 sm:pt-12 lg:px-10 lg:pb-24 lg:pt-11">
           <div className="pointer-events-none absolute -left-32 top-[-80px] h-[430px] w-[430px] rounded-full bg-[#4b22ff]/10 blur-[125px]" />
@@ -503,7 +553,7 @@ export default function MobileAppDevelopmentPage() {
                 </Link>
               </div>
 
-              <div className="mt-8 grid max-w-[620px] grid-cols-2 gap-3 sm:mt-10 sm:grid-cols-4">
+              <div className="mt-8 grid w-full max-w-[620px] auto-rows-fr grid-cols-2 gap-2.5 sm:mt-10 sm:gap-3 xl:grid-cols-[repeat(4,minmax(0,1fr))] xl:gap-2 2xl:gap-3">
                 {[
                   {
                     icon: Apple,
@@ -527,13 +577,14 @@ export default function MobileAppDevelopmentPage() {
                   return (
                     <div
                       key={item.title}
-                      className="flex min-w-0 items-center gap-2.5 rounded-[15px] border border-[#e7e2f5] bg-white/85 px-3 py-3.5 shadow-[0_10px_28px_rgba(34,24,88,0.05)] backdrop-blur sm:gap-3 sm:rounded-[16px] sm:px-4 sm:py-4"
+                  data-service-reveal
+                      className="flex min-h-[76px] h-full w-full min-w-0 items-center gap-2.5 overflow-hidden rounded-[14px] border border-[#e7e2f5] bg-white/85 px-3 py-3 shadow-[0_10px_28px_rgba(34,24,88,0.05)] backdrop-blur sm:min-h-[82px] sm:gap-3 sm:rounded-[16px] sm:px-4 sm:py-4 xl:min-h-0 xl:gap-1.5 xl:px-2 xl:py-3 2xl:gap-2.5 2xl:px-3 2xl:py-4"
                     >
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[12px] bg-[#f0ecff] text-[#4b22ff]">
-                        <Icon size={17} />
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[12px] bg-[#f0ecff] text-[#4b22ff] xl:h-7 xl:w-7 xl:rounded-[10px] 2xl:h-9 2xl:w-9 2xl:rounded-[12px]">
+                        <Icon size={17} className="xl:h-[14px] xl:w-[14px] 2xl:h-[17px] 2xl:w-[17px]" />
                       </div>
 
-                      <span className="min-w-0 text-[12px] font-bold leading-5 text-[#24304f] sm:text-[12px]">
+                      <span className="min-w-0 flex-1 whitespace-normal [overflow-wrap:anywhere] text-[12px] font-bold leading-4 text-[#24304f] sm:leading-5 xl:text-[10px] xl:leading-[1.25] 2xl:text-[12px] 2xl:leading-5">
                         {item.title}
                       </span>
                     </div>
@@ -543,10 +594,10 @@ export default function MobileAppDevelopmentPage() {
             </div>
 
             {/* RIGHT VISUAL */}
-            <div className="relative min-h-[390px] sm:min-h-[470px] lg:min-h-[540px]">
-              <div className="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[#cfc5ff] sm:h-[400px] sm:w-[400px] lg:h-[460px] lg:w-[460px]" />
+            <div className="relative mt-1 min-h-[300px] min-w-0 sm:mt-0 sm:min-h-[470px] lg:min-h-[540px]">
+              <div className="pointer-events-none absolute left-1/2 top-1/2 hidden h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[#cfc5ff] sm:block sm:h-[400px] sm:w-[400px] lg:h-[460px] lg:w-[460px]" />
 
-              <div className="pointer-events-none absolute left-1/2 top-1/2 h-[250px] w-[250px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(75,34,255,0.14),transparent_67%)] sm:h-[330px] sm:w-[330px] lg:h-[380px] lg:w-[380px]" />
+              <div className="pointer-events-none absolute left-1/2 top-1/2 hidden h-[250px] w-[250px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(75,34,255,0.14),transparent_67%)] sm:block sm:h-[330px] sm:w-[330px] lg:h-[380px] lg:w-[380px]" />
 
               <Image
                 src="/images/home/mobile.webp"
@@ -558,7 +609,8 @@ export default function MobileAppDevelopmentPage() {
                 className="absolute left-1/2 top-1/2 z-20 w-[88%] max-w-[560px] -translate-x-1/2 -translate-y-1/2 object-contain drop-shadow-[0_30px_45px_rgba(32,23,92,0.18)] sm:w-[82%]"
               />
 
-              <div className="absolute left-[0%] top-[8%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
+              <div style={{ animationDelay: "0s" }}
+                className="mobileapp-float-card absolute left-[0%] top-[8%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
                 <div className="flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#4b22ff] to-[#7b5cff] text-white">
                     <Gauge size={21} />
@@ -576,7 +628,8 @@ export default function MobileAppDevelopmentPage() {
                 </div>
               </div>
 
-              <div className="absolute right-[0%] top-[18%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
+              <div style={{ animationDelay: "0.7s" }}
+                className="mobileapp-float-card absolute right-[0%] top-[18%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
                 <div className="flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#ff2f7d] to-[#ff7ca8] text-white">
                     <Paintbrush size={21} />
@@ -594,7 +647,8 @@ export default function MobileAppDevelopmentPage() {
                 </div>
               </div>
 
-              <div className="absolute bottom-[8%] left-[3%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
+              <div style={{ animationDelay: "1.4s" }}
+                className="mobileapp-float-card absolute bottom-[8%] left-[3%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
                 <div className="flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#00b8ff] to-[#4b22ff] text-white">
                     <Cloud size={21} />
@@ -612,7 +666,8 @@ export default function MobileAppDevelopmentPage() {
                 </div>
               </div>
 
-              <div className="absolute bottom-[2%] right-[1%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
+              <div style={{ animationDelay: "2.1s" }}
+                className="mobileapp-float-card absolute bottom-[2%] right-[1%] z-30 hidden w-[215px] rounded-[22px] border border-[#e5e0f1] bg-white/95 p-4 shadow-[0_18px_42px_rgba(35,27,84,0.11)] backdrop-blur lg:block">
                 <div className="flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#743cff] to-[#ff2f7d] text-white">
                     <Rocket size={21} />
@@ -693,6 +748,7 @@ export default function MobileAppDevelopmentPage() {
                 return (
                   <div
                     key={item.title}
+                  data-service-reveal
                     className="group rounded-[21px] border border-[#e4dff0] bg-white p-5 shadow-[0_10px_30px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#cec4ff] hover:shadow-[0_18px_40px_rgba(75,34,255,0.09)]"
                   >
                     <div
@@ -754,6 +810,7 @@ export default function MobileAppDevelopmentPage() {
                 return (
                   <div
                     key={item.number}
+                  data-service-reveal
                     className="group relative overflow-hidden rounded-[21px] border border-[#e4dff1] bg-white p-5 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(75,34,255,0.12)] sm:rounded-[24px] sm:p-7"
                   >
                     <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#4b22ff]/5 blur-3xl transition-colors duration-500 group-hover:bg-[#ff2f7d]/8" />
@@ -871,6 +928,7 @@ export default function MobileAppDevelopmentPage() {
                 return (
                   <div
                     key={feature.title}
+                  data-service-reveal
                     className="group flex min-h-[100px] items-center gap-4 rounded-[20px] border border-[#e3deef] bg-white p-5 shadow-[0_10px_30px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#cec4ff] hover:shadow-[0_18px_40px_rgba(75,34,255,0.09)]"
                   >
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[15px] bg-[#f0ecff] text-[#4b22ff] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105">
@@ -1001,6 +1059,7 @@ export default function MobileAppDevelopmentPage() {
                 return (
                   <div
                     key={item.number}
+                  data-service-reveal
                     className="group relative rounded-[23px] border border-[#e4dff0] bg-white p-6 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_22px_48px_rgba(75,34,255,0.11)]"
                   >
                     <div className="flex items-center justify-between">
@@ -1079,6 +1138,7 @@ export default function MobileAppDevelopmentPage() {
               {benefits.map((benefit, index) => (
                 <div
                   key={benefit}
+                  data-service-reveal
                   className="group flex min-h-[96px] items-center gap-4 rounded-[19px] border border-[#e3deef] bg-white p-5 shadow-[0_10px_30px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#cec4ff] hover:shadow-[0_18px_40px_rgba(75,34,255,0.09)]"
                 >
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[13px] bg-[#f0ecff] text-[11px] font-bold text-[#4b22ff]">
@@ -1150,6 +1210,7 @@ export default function MobileAppDevelopmentPage() {
               {faqs.map((item, index) => (
                 <details
                   key={item.question}
+                  data-service-reveal
                   className="group rounded-[18px] border border-[#e4dff1] bg-white p-4 shadow-[0_10px_30px_rgba(34,24,85,0.05)] open:border-[#cfc5ff] open:shadow-[0_16px_38px_rgba(75,34,255,0.08)] sm:rounded-[20px] sm:p-5"
                 >
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-3 sm:gap-5">
@@ -1180,7 +1241,7 @@ export default function MobileAppDevelopmentPage() {
 
         {/* FINAL CTA */}
         <section className="px-4 pb-8 sm:px-6 lg:px-10">
-          <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[22px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff2f7d_125%)] px-5 py-10 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:rounded-[26px] sm:px-8 sm:py-12 lg:px-14">
+          <div data-service-reveal className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[22px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff2f7d_125%)] px-5 py-10 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:rounded-[26px] sm:px-8 sm:py-12 lg:px-14">
             <div className="pointer-events-none absolute -left-20 -top-28 h-72 w-72 rounded-full bg-[#1685ff]/20 blur-[90px]" />
 
             <div className="pointer-events-none absolute -bottom-28 right-[-40px] h-80 w-80 rounded-full bg-[#ff2f7d]/35 blur-[95px]" />
@@ -1229,6 +1290,48 @@ export default function MobileAppDevelopmentPage() {
         isOpen={showConsultation}
         onClose={() => setShowConsultation(false)}
       />
+
+      <style>{`
+        [data-service-reveal] {
+          opacity: 0;
+          transform: translate3d(0, 28px, 0);
+          transition:
+            opacity 700ms ease-out,
+            transform 700ms ease-out;
+        }
+
+        [data-service-reveal][data-reveal-visible="true"] {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+
+        .mobileapp-float-card {
+          animation: mobileappFloat 6.8s ease-in-out infinite;
+          will-change: transform;
+        }
+
+        @keyframes mobileappFloat {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0);
+          }
+          50% {
+            transform: translate3d(0, -10px, 0);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          [data-service-reveal] {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+          }
+
+          .mobileapp-float-card {
+            animation: none !important;
+          }
+        }
+      `}</style>
     </>
   );
 }

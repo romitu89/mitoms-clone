@@ -254,15 +254,33 @@ function TypewriterText({
   const isTyping =
     hasStarted && visibleCharacters < text.length;
 
+  const layoutClassName =
+    display === "block"
+      ? "grid w-fit max-w-full"
+      : "inline-grid max-w-full align-baseline";
+
+  const whitespaceClassName = nowrap
+    ? "whitespace-nowrap"
+    : "whitespace-normal";
+
   return (
     <span
       ref={elementRef}
       aria-label={text}
-      className={`${display === "block" ? "block max-w-full" : "inline-block max-w-full"} ${
-        nowrap ? "whitespace-nowrap" : ""
-      } ${className}`}
+      className={`${layoutClassName} ${whitespaceClassName}`}
     >
-      <span aria-hidden="true">
+      {/* Reserve the final text width and height before typing starts. */}
+      <span
+        aria-hidden="true"
+        className={`invisible col-start-1 row-start-1 ${whitespaceClassName} ${className}`}
+      >
+        {text}
+      </span>
+
+      <span
+        aria-hidden="true"
+        className={`col-start-1 row-start-1 ${whitespaceClassName} ${className}`}
+      >
         {text.slice(0, visibleCharacters)}
 
         {isTyping && (
@@ -364,7 +382,7 @@ function ValueCard({
   gradient,
 }: ValueCard) {
   return (
-    <article className="group rounded-[24px] border border-[#e5e0f1] bg-white p-6 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:border-[#cec4ff] hover:shadow-[0_24px_50px_rgba(75,34,255,0.12)]">
+    <article data-scroll-reveal className="group rounded-[24px] border border-[#e5e0f1] bg-white p-6 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:border-[#cec4ff] hover:shadow-[0_24px_50px_rgba(75,34,255,0.12)]">
       <div
         className={`flex h-[52px] w-[52px] items-center justify-center rounded-[17px] bg-gradient-to-br ${gradient} text-white shadow-[0_12px_26px_rgba(75,34,255,0.20)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105`}
       >
@@ -382,8 +400,70 @@ function ValueCard({
   );
 }
 
+
+function useScrollReveal<T extends HTMLElement>() {
+  const rootRef = useRef<T>(null);
+
+  useEffect(() => {
+    const root = rootRef.current;
+
+    if (!root) {
+      return;
+    }
+
+    const elements = Array.from(
+      root.querySelectorAll<HTMLElement>("[data-scroll-reveal]"),
+    );
+
+    root.classList.add("scroll-reveal-ready");
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reducedMotion) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return () => {
+        root.classList.remove("scroll-reveal-ready");
+      };
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -7% 0px",
+      },
+    );
+
+    elements.forEach((element) => {
+      const order = Number(element.dataset.revealOrder ?? "0");
+      const delay = Math.min(Math.max(order, 0), 6) * 80;
+      element.style.setProperty("--scroll-reveal-delay", `${delay}ms`);
+      observer.observe(element);
+    });
+
+    return () => {
+      observer.disconnect();
+      root.classList.remove("scroll-reveal-ready");
+    };
+  }, []);
+
+  return rootRef;
+}
+
 export default function AboutPage() {
   const [showConsultation, setShowConsultation] = useState(false);
+  const pageRef = useScrollReveal<HTMLElement>();
 
   const openConsultation = () => {
     setShowConsultation(true);
@@ -391,7 +471,7 @@ export default function AboutPage() {
 
   return (
     <>
-      <main className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
+      <main ref={pageRef} className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
         {/* HERO */}
         <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-12 pt-10 sm:px-6 sm:pb-16 sm:pt-12 lg:px-10 lg:pb-20 lg:pt-11">
           <div className="pointer-events-none absolute -left-40 -top-32 h-[500px] w-[500px] rounded-full bg-[#4b22ff]/10 blur-[135px]" />
@@ -557,7 +637,7 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <div className="absolute left-[0%] top-[6%] z-30 hidden rounded-[18px] border border-[#e3def1] bg-white px-4 py-3 shadow-[0_18px_42px_rgba(35,27,84,0.11)] sm:block">
+              <div style={{ animationDelay: "0s" }} className="about-hero-float-card absolute left-[0%] top-[6%] z-30 hidden rounded-[18px] border border-[#e3def1] bg-white px-4 py-3 shadow-[0_18px_42px_rgba(35,27,84,0.11)] sm:block">
                 <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#ff2f7d]">
                   <TypewriterText
                     text="Our Focus"
@@ -573,7 +653,7 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              <div className="absolute bottom-[5%] right-[-1%] z-30 hidden rounded-[18px] border border-[#e3def1] bg-white px-4 py-3 shadow-[0_18px_42px_rgba(35,27,84,0.11)] sm:block">
+              <div style={{ animationDelay: "0.7s" }} className="about-hero-float-card absolute bottom-[5%] right-[-1%] z-30 hidden rounded-[18px] border border-[#e3def1] bg-white px-4 py-3 shadow-[0_18px_42px_rgba(35,27,84,0.11)] sm:block">
                 <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#4b22ff]">
                   <TypewriterText
                     text="Our Approach"
@@ -596,12 +676,14 @@ export default function AboutPage() {
         <section className="relative z-20 px-4 sm:px-6 lg:px-10">
           <div className="mx-auto max-w-[1320px] -translate-y-1 rounded-[26px] border border-[#e4dff0] bg-white p-4 shadow-[0_22px_60px_rgba(35,25,88,0.10)] sm:p-5">
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {stats.map((item) => {
+              {stats.map((item, index) => {
                 const Icon = item.icon;
 
                 return (
                   <div
                     key={item.label}
+                    data-scroll-reveal
+                    data-reveal-order={index}
                     className="group flex min-h-[118px] items-center gap-4 rounded-[20px] border border-[#ebe7f4] bg-[#fbfaff] px-5 py-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#cec4ff] hover:bg-white hover:shadow-[0_14px_34px_rgba(75,34,255,0.09)]"
                   >
                     <div className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-[17px] bg-gradient-to-br from-[#4b22ff] to-[#ff2f7d] text-white shadow-[0_12px_26px_rgba(75,34,255,0.20)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105">
@@ -633,7 +715,7 @@ export default function AboutPage() {
 
           <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 sm:gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14">
             {/* Visual */}
-            <div className="relative pb-6">
+            <div data-scroll-reveal="left" className="relative pb-6">
               {/* Back card */}
               <div className="relative min-h-[390px] w-full overflow-hidden rounded-[24px] bg-[linear-gradient(145deg,#07112f_0%,#20105c_55%,#7d1d72_100%)] shadow-[0_30px_70px_rgba(15,12,57,0.20)] sm:min-h-[430px] sm:w-[92%] sm:rounded-[30px]">
                 <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-[#00b8ff]/25 blur-[90px]" />
@@ -727,7 +809,7 @@ export default function AboutPage() {
             </div>
 
             {/* Story copy */}
-            <div>
+            <div data-scroll-reveal="right">
               <p className="text-[12px] font-bold uppercase tracking-[0.28em] text-[#4b22ff]">
                 <TypewriterText
                   text="Our Story"
@@ -801,7 +883,7 @@ export default function AboutPage() {
         {/* VALUES */}
         <section className="bg-[#fbfaff] px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-24">
           <div className="mx-auto max-w-[1320px]">
-            <div className="mx-auto max-w-[800px] text-center">
+            <div data-scroll-reveal className="mx-auto max-w-[800px] text-center">
               <p className="text-[12px] font-bold uppercase tracking-[0.28em] text-[#ff2f7d]">
                 <TypewriterText
                   text="Our Values"
@@ -841,7 +923,7 @@ export default function AboutPage() {
         {/* CAPABILITIES */}
         <section className="px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-24">
           <div className="mx-auto grid max-w-[1320px] gap-10 sm:gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-14">
-            <div>
+            <div data-scroll-reveal="left">
               <p className="text-[12px] font-bold uppercase tracking-[0.28em] text-[#4b22ff]">
                 <TypewriterText
                   text="What We Bring Together"
@@ -889,6 +971,8 @@ export default function AboutPage() {
                 return (
                   <article
                     key={item.title}
+                    data-scroll-reveal
+                    data-reveal-order={index}
                     className="group rounded-[22px] border border-[#e3deef] bg-white p-6 shadow-[0_10px_30px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#cec4ff] hover:shadow-[0_18px_40px_rgba(75,34,255,0.09)]"
                   >
                     <div className="flex items-start justify-between">
@@ -923,7 +1007,7 @@ export default function AboutPage() {
             <div className="pointer-events-none absolute inset-0 opacity-[0.10] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:24px_24px]" />
 
             <div className="relative z-10 grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-              <div>
+              <div data-scroll-reveal="left">
                 <p className="text-[12px] font-bold uppercase tracking-[0.3em] text-[#d75cff]">
                   <TypewriterText
                     text="Why MITOMS"
@@ -1005,6 +1089,8 @@ export default function AboutPage() {
                 {reasons.map((reason, index) => (
                   <div
                     key={reason}
+                    data-scroll-reveal
+                    data-reveal-order={index}
                     className="flex min-w-0 overflow-hidden items-center gap-3 rounded-[19px] border border-white/10 bg-white/[0.055] p-4 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.085] xl:gap-4 xl:p-5"
                   >
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[13px] bg-gradient-to-br from-[#4b22ff] to-[#ff2f7d] text-[11px] font-bold text-white">
@@ -1031,7 +1117,7 @@ export default function AboutPage() {
         {/* PROCESS */}
         <section className="px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-24">
           <div className="mx-auto max-w-[1320px]">
-            <div className="mx-auto max-w-[800px] text-center">
+            <div data-scroll-reveal className="mx-auto max-w-[800px] text-center">
               <p className="text-[12px] font-bold uppercase tracking-[0.28em] text-[#4b22ff]">
                 <TypewriterText
                   text="How We Work"
@@ -1063,12 +1149,14 @@ export default function AboutPage() {
               <div className="pointer-events-none absolute left-[11%] right-[11%] top-[34px] hidden h-px bg-gradient-to-r from-[#4b22ff] via-[#ff2f7d] to-[#4b22ff] opacity-25 lg:block" />
 
               <div className="relative grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                {process.map((item) => {
+                {process.map((item, index) => {
                   const Icon = item.icon;
 
                   return (
                     <article
                       key={item.number}
+                      data-scroll-reveal
+                      data-reveal-order={index}
                       className="group rounded-[23px] border border-[#e3deef] bg-white p-6 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_22px_48px_rgba(75,34,255,0.11)]"
                     >
                       <div className="flex items-center justify-between">
@@ -1105,7 +1193,7 @@ export default function AboutPage() {
 
             <div className="pointer-events-none absolute inset-0 opacity-[0.10] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:22px_22px]" />
 
-            <div className="relative z-10 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+            <div data-scroll-reveal className="relative z-10 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
               <div>
                 <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#ff7ca8]">
                   <TypewriterText
@@ -1149,6 +1237,60 @@ export default function AboutPage() {
         isOpen={showConsultation}
         onClose={() => setShowConsultation(false)}
       />
+
+      <style>{`
+
+        .scroll-reveal-ready [data-scroll-reveal] {
+          opacity: 0;
+          transform: translate3d(0, 28px, 0);
+          transition:
+            opacity 700ms ease-out,
+            transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+          transition-delay: var(--scroll-reveal-delay, 0ms);
+          will-change: opacity, transform;
+        }
+
+        .scroll-reveal-ready [data-scroll-reveal="left"] {
+          transform: translate3d(-30px, 0, 0);
+        }
+
+        .scroll-reveal-ready [data-scroll-reveal="right"] {
+          transform: translate3d(30px, 0, 0);
+        }
+
+        .scroll-reveal-ready [data-scroll-reveal].is-visible {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+
+        .about-hero-float-card {
+          animation: aboutHeroCardFloat 7.2s ease-in-out infinite;
+          will-change: transform;
+        }
+
+        @keyframes aboutHeroCardFloat {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0) rotate(0deg);
+          }
+          50% {
+            transform: translate3d(0, -9px, 0) rotate(0.7deg);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .about-hero-float-card {
+            animation: none !important;
+            transform: none !important;
+          }
+
+          .scroll-reveal-ready [data-scroll-reveal] {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+          }
+        }
+      `}</style>
     </>
   );
 }

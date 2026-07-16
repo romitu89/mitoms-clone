@@ -322,9 +322,15 @@ function TypewriterText({
   );
 }
 
-function DesktopFrame({ project }: { project: Project }) {
+function DesktopFrame({
+  project,
+  className = "",
+}: {
+  project: Project;
+  className?: string;
+}) {
   return (
-    <div className="relative overflow-hidden rounded-[24px] border border-white/15 bg-[#090D25] p-2.5 shadow-[0_32px_90px_rgba(8,10,42,0.38)] sm:p-3">
+    <div className={`relative overflow-hidden rounded-[24px] border border-white/15 bg-[#090D25] p-2.5 shadow-[0_32px_90px_rgba(8,10,42,0.38)] sm:p-3 ${className}`}>
       <div className="flex h-9 items-center gap-2 rounded-t-[15px] border-b border-white/10 bg-white/[0.08] px-4">
         <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
         <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
@@ -349,9 +355,15 @@ function DesktopFrame({ project }: { project: Project }) {
   );
 }
 
-function MobileFrame({ project }: { project: Project }) {
+function MobileFrame({
+  project,
+  className = "",
+}: {
+  project: Project;
+  className?: string;
+}) {
   return (
-    <div className="relative mx-auto w-full max-w-[230px] rounded-[30px] border-[5px] border-[#10152F] bg-[#10152F] p-[3px] shadow-[0_24px_60px_rgba(11,14,48,0.28)] sm:max-w-[280px] sm:rounded-[36px] sm:border-[6px] lg:max-w-[310px] xl:max-w-[330px] xl:rounded-[42px] xl:border-[7px] xl:p-[4px] xl:shadow-[0_34px_80px_rgba(11,14,48,0.30)]">
+    <div className={`relative mx-auto w-full max-w-[230px] rounded-[30px] border-[5px] border-[#10152F] bg-[#10152F] p-[3px] shadow-[0_24px_60px_rgba(11,14,48,0.28)] sm:max-w-[280px] sm:rounded-[36px] sm:border-[6px] lg:max-w-[310px] xl:max-w-[330px] xl:rounded-[42px] xl:border-[7px] xl:p-[4px] xl:shadow-[0_34px_80px_rgba(11,14,48,0.30)] ${className}`}>
       <div className="absolute left-1/2 top-[6px] z-20 h-[13px] w-[68px] -translate-x-1/2 rounded-full bg-[#10152F] sm:top-[8px] sm:h-[16px] sm:w-[82px] xl:top-[9px] xl:h-[18px] xl:w-[92px]" />
 
       <div className="relative aspect-[497/743] overflow-hidden rounded-[22px] bg-white sm:rounded-[27px] xl:rounded-[31px]">
@@ -674,12 +686,74 @@ function ProjectSection({
   );
 }
 
+
+function useScrollReveal<T extends HTMLElement>() {
+  const rootRef = useRef<T>(null);
+
+  useEffect(() => {
+    const root = rootRef.current;
+
+    if (!root) {
+      return;
+    }
+
+    const elements = Array.from(
+      root.querySelectorAll<HTMLElement>("[data-scroll-reveal]"),
+    );
+
+    root.classList.add("scroll-reveal-ready");
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reducedMotion) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return () => {
+        root.classList.remove("scroll-reveal-ready");
+      };
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -7% 0px",
+      },
+    );
+
+    elements.forEach((element) => {
+      const order = Number(element.dataset.revealOrder ?? "0");
+      const delay = Math.min(Math.max(order, 0), 6) * 80;
+      element.style.setProperty("--scroll-reveal-delay", `${delay}ms`);
+      observer.observe(element);
+    });
+
+    return () => {
+      observer.disconnect();
+      root.classList.remove("scroll-reveal-ready");
+    };
+  }, []);
+
+  return rootRef;
+}
+
 export default function PortfolioPage() {
   const [showConsultation, setShowConsultation] = useState(false);
+  const pageRef = useScrollReveal<HTMLElement>();
 
   return (
     <>
-      <main className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
+      <main ref={pageRef} className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
         {/* HERO */}
         <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-14 pt-10 sm:px-6 sm:pb-18 sm:pt-12 lg:px-10 lg:pb-24 lg:pt-11">
           <div className="pointer-events-none absolute -left-40 -top-36 h-[520px] w-[520px] rounded-full bg-[#4B22FF]/12 blur-[140px]" />
@@ -784,9 +858,11 @@ export default function PortfolioPage() {
                     color:
                       "bg-gradient-to-r from-[#4B22FF] via-[#7B3CFF] to-[#FF2F7D] bg-clip-text text-transparent",
                   },
-                ].map((item) => (
+                ].map((item, index) => (
                   <div
                     key={item.label}
+                    data-scroll-reveal
+                    data-reveal-order={index}
                     className="flex h-full min-w-0 flex-col justify-center overflow-hidden rounded-[17px] border border-[#e5e0f1] bg-white/75 px-2.5 py-4 shadow-[0_10px_28px_rgba(35,25,88,0.05)] backdrop-blur sm:px-3 xl:px-2.5 2xl:px-4"
                   >
                     <p
@@ -805,18 +881,18 @@ export default function PortfolioPage() {
             {/* HERO COLLAGE */}
             <div className="relative mx-auto min-h-[300px] w-full max-w-[820px] sm:min-h-[500px] xl:min-h-[570px]">
               <div className="absolute left-1/2 top-[58px] z-20 w-[96%] -translate-x-1/2 sm:left-[2%] sm:top-[9%] sm:w-[88%] sm:translate-x-0">
-                <DesktopFrame project={projects[0]} />
+                <DesktopFrame project={projects[0]} className="portfolio-hero-main-frame" />
               </div>
 
               <div className="absolute bottom-[0%] left-[3%] z-30 hidden w-[24%] min-w-[125px] rotate-[-5deg] sm:block lg:min-w-[130px]">
-                <MobileFrame project={projects[1]} />
+                <MobileFrame project={projects[1]} className="portfolio-hero-phone portfolio-hero-phone-left" />
               </div>
 
               <div className="absolute bottom-[1%] right-[0%] z-30 hidden w-[24%] min-w-[125px] rotate-[5deg] sm:block lg:min-w-[130px]">
-                <MobileFrame project={projects[2]} />
+                <MobileFrame project={projects[2]} className="portfolio-hero-phone portfolio-hero-phone-right" />
               </div>
 
-              <div className="absolute right-0 top-0 z-40 max-w-[210px] rounded-[15px] border border-[#e2ddec] bg-white px-3 py-2.5 shadow-[0_14px_34px_rgba(35,27,84,0.12)] sm:right-[1%] sm:top-[1%] sm:max-w-none sm:rounded-[18px] sm:px-4 sm:py-3 sm:shadow-[0_18px_42px_rgba(35,27,84,0.12)]">
+              <div className="portfolio-hero-badge absolute right-0 top-0 z-40 max-w-[210px] rounded-[15px] border border-[#e2ddec] bg-white px-3 py-2.5 shadow-[0_14px_34px_rgba(35,27,84,0.12)] sm:right-[1%] sm:top-[1%] sm:max-w-none sm:rounded-[18px] sm:px-4 sm:py-3 sm:shadow-[0_18px_42px_rgba(35,27,84,0.12)]">
                 <div className="flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-[13px] bg-gradient-to-br from-[#4B22FF] to-[#FF2F7D] text-white shadow-[0_10px_22px_rgba(75,34,255,0.20)]">
                     <BadgeCheck size={20} />
@@ -838,7 +914,7 @@ export default function PortfolioPage() {
         {/* CAPABILITIES */}
         <section className="px-4 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-24">
           <div className="mx-auto max-w-[1320px]">
-            <div className="mx-auto max-w-[780px] text-center">
+            <div data-scroll-reveal className="mx-auto max-w-[780px] text-center">
               <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#FF2F7D]">
                 <TypewriterText
                   text="How We Create Value"
@@ -871,12 +947,14 @@ export default function PortfolioPage() {
             </div>
 
             <div className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 xl:grid-cols-4">
-              {capabilities.map((capability) => {
+              {capabilities.map((capability, index) => {
                 const Icon = capability.icon;
 
                 return (
                   <article
                     key={capability.title}
+                    data-scroll-reveal
+                    data-reveal-order={index}
                     className="group rounded-[21px] border border-[#e4dff0] bg-white p-5 sm:rounded-[23px] sm:p-6 shadow-[0_12px_34px_rgba(35,25,88,0.05)] transition-all duration-300 hover:-translate-y-2 hover:border-[#cec4ff] hover:shadow-[0_22px_48px_rgba(75,34,255,0.11)]"
                   >
                     <div
@@ -903,7 +981,7 @@ export default function PortfolioPage() {
           className="bg-[#fbfaff] px-4 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-24"
         >
           <div className="mx-auto max-w-[1320px]">
-            <div className="flex flex-col justify-between gap-6 xl:flex-row xl:items-end">
+            <div data-scroll-reveal className="flex flex-col justify-between gap-6 xl:flex-row xl:items-end">
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#FF2F7D]">
                   <TypewriterText
@@ -942,6 +1020,8 @@ export default function PortfolioPage() {
               {projects.map((project, index) => (
                 <div
                   key={project.name}
+                  data-scroll-reveal
+                  data-reveal-order={index}
                   className={index === 0 ? "" : "mt-16 sm:mt-20 lg:mt-24"}
                 >
                   {/* Clear case-study marker */}
@@ -999,7 +1079,7 @@ export default function PortfolioPage() {
 
         {/* DELIVERY NOTE */}
         <section className="px-4 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-24">
-          <div className="mx-auto grid max-w-[1320px] gap-8 rounded-[24px] border border-[#e2ddec] bg-white p-5 shadow-[0_22px_70px_rgba(30,20,80,0.07)] sm:rounded-[30px] sm:p-8 lg:p-10 xl:grid-cols-[0.9fr_1.1fr] xl:items-center xl:p-12">
+          <div data-scroll-reveal className="mx-auto grid max-w-[1320px] gap-8 rounded-[24px] border border-[#e2ddec] bg-white p-5 shadow-[0_22px_70px_rgba(30,20,80,0.07)] sm:rounded-[30px] sm:p-8 lg:p-10 xl:grid-cols-[0.9fr_1.1fr] xl:items-center xl:p-12">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full bg-[linear-gradient(90deg,#f1edff,#fff0f5)] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#FF2F7D]">
                 <Network size={14} className="text-[#FF2F7D]" />
@@ -1112,7 +1192,7 @@ export default function PortfolioPage() {
             <div className="pointer-events-none absolute -bottom-28 right-[-40px] h-80 w-80 rounded-full bg-[#ff2f7d]/35 blur-[95px]" />
             <div className="pointer-events-none absolute inset-0 opacity-[0.10] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:22px_22px]" />
 
-            <div className="relative z-10 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+            <div data-scroll-reveal className="relative z-10 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-[#FF7CA8]">
                   <TypewriterText
@@ -1199,6 +1279,96 @@ export default function PortfolioPage() {
         isOpen={showConsultation}
         onClose={() => setShowConsultation(false)}
       />
+
+      <style>{`
+
+        .scroll-reveal-ready [data-scroll-reveal] {
+          opacity: 0;
+          transform: translate3d(0, 28px, 0);
+          transition:
+            opacity 700ms ease-out,
+            transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+          transition-delay: var(--scroll-reveal-delay, 0ms);
+          will-change: opacity, transform;
+        }
+
+        .scroll-reveal-ready [data-scroll-reveal="left"] {
+          transform: translate3d(-30px, 0, 0);
+        }
+
+        .scroll-reveal-ready [data-scroll-reveal="right"] {
+          transform: translate3d(30px, 0, 0);
+        }
+
+        .scroll-reveal-ready [data-scroll-reveal].is-visible {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+
+        .portfolio-hero-main-frame {
+          animation: portfolioMainFrameFloat 8.4s ease-in-out infinite;
+          will-change: transform;
+        }
+
+        .portfolio-hero-phone {
+          animation: portfolioPhoneFloat 7.4s ease-in-out infinite;
+          will-change: transform;
+        }
+
+        .portfolio-hero-phone-right {
+          animation-delay: 0.8s;
+        }
+
+        .portfolio-hero-badge {
+          animation: portfolioBadgeFloat 6.8s ease-in-out infinite;
+          will-change: transform;
+        }
+
+        @keyframes portfolioMainFrameFloat {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0);
+          }
+          50% {
+            transform: translate3d(0, -7px, 0);
+          }
+        }
+
+        @keyframes portfolioPhoneFloat {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0) rotate(0deg);
+          }
+          50% {
+            transform: translate3d(0, -10px, 0) rotate(0.7deg);
+          }
+        }
+
+        @keyframes portfolioBadgeFloat {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0);
+          }
+          50% {
+            transform: translate3d(0, -9px, 0);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .portfolio-hero-main-frame,
+          .portfolio-hero-phone,
+          .portfolio-hero-badge {
+            animation: none !important;
+            transform: none !important;
+          }
+
+          .scroll-reveal-ready [data-scroll-reveal] {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+          }
+        }
+      `}</style>
     </>
   );
 }
