@@ -193,6 +193,17 @@ export default function Navbar() {
     setMobileServicesOpen(false);
   };
 
+  const toggleMobileMenu = () => {
+    setDesktopServicesOpen(false);
+
+    if (isOpen) {
+      closeMobileMenu();
+      return;
+    }
+
+    setIsOpen(true);
+  };
+
   const handleNavigationClick = (
     event: ReactMouseEvent<HTMLAnchorElement>,
     href: string,
@@ -229,7 +240,7 @@ export default function Navbar() {
     <>
       <header
         ref={headerRef}
-        className={`sticky top-0 z-50 border-b backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-500 ${
+        className={`relative sticky top-0 z-50 border-b backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-500 ${
           isScrolled
             ? "border-[#cfc4e8] bg-[linear-gradient(90deg,rgba(235,229,250,0.98),rgba(248,232,242,0.98))] shadow-[0_14px_38px_rgba(48,30,104,0.14)]"
             : "border-[#ebe8f5]/70 bg-white/95 shadow-[0_8px_30px_rgba(21,17,65,0.04)]"
@@ -327,10 +338,10 @@ export default function Navbar() {
               <div
                 role="menu"
                 onMouseEnter={() => setDesktopServicesOpen(true)}
-                className={`absolute left-1/2 top-full w-[min(680px,calc(100vw-3rem))] -translate-x-1/2 pt-4 transition-all duration-300 ${
+                className={`absolute left-1/2 top-full w-[min(680px,calc(100vw-3rem))] origin-top -translate-x-1/2 pt-4 transition-all duration-300 ${
                   desktopServicesOpen
-                    ? "pointer-events-auto visible translate-y-0 opacity-100"
-                    : "pointer-events-none invisible translate-y-3 opacity-0"
+                    ? "pointer-events-auto visible translate-y-0 scale-100 opacity-100"
+                    : "pointer-events-none invisible translate-y-3 scale-[0.97] opacity-0"
                 }`}
               >
                 <div className="relative overflow-hidden rounded-[26px] border border-[#e7e2f5] bg-white p-5 shadow-[0_28px_80px_rgba(20,15,60,0.18)]">
@@ -495,7 +506,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={openConsultation}
-            className="hidden shrink-0 cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D] px-5 py-3 text-[14px] font-semibold text-white shadow-[0_12px_28px_rgba(75,34,255,0.24)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(255,49,93,0.25)] xl:flex 2xl:px-7 2xl:text-sm"
+            className="navbar-desktop-cta hidden shrink-0 cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-r from-[#4B22FF] via-[#743CFF] to-[#FF2F7D] px-5 py-3 text-[14px] font-semibold text-white shadow-[0_12px_28px_rgba(75,34,255,0.24)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(255,49,93,0.25)] xl:flex 2xl:px-7 2xl:text-sm"
           >
             Get Free Consultation
             <ArrowRight size={18} />
@@ -504,7 +515,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            onClick={() => setIsOpen((current) => !current)}
+            onClick={toggleMobileMenu}
             aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-controls="mobile-navigation"
             aria-expanded={isOpen}
@@ -514,13 +525,17 @@ export default function Navbar() {
           </button>
         </div>
 
+        <div className="navbar-accent-line pointer-events-none absolute inset-x-0 bottom-[-1px] hidden h-[2px] overflow-hidden xl:block">
+          <span className="block h-full w-[34%] rounded-full bg-gradient-to-r from-transparent via-[#743CFF] to-[#FF2F7D]" />
+        </div>
+
         {/* Mobile Navigation */}
         {isOpen && (
           <div
             id="mobile-navigation"
-            className="max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-[#ebe8f5] bg-white shadow-[0_20px_45px_rgba(23,18,67,0.08)] sm:max-h-[calc(100dvh-5.5rem)] xl:hidden"
+            className="absolute inset-x-0 top-full z-50 max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain border-t border-[#ebe8f5] bg-white/98 shadow-[0_20px_45px_rgba(23,18,67,0.14)] backdrop-blur-xl sm:max-h-[calc(100dvh-5.5rem)] xl:hidden"
           >
-            <div className="flex flex-col px-4 py-4 sm:px-6 sm:py-5">
+            <div className="flex flex-col px-4 py-3 sm:px-6 sm:py-4">
               {/* Mobile Home */}
               <Link
                 prefetch={false}
@@ -531,7 +546,7 @@ export default function Navbar() {
                     closeMobileMenu: true,
                   })
                 }
-                className={`border-b border-[#ece8f5] py-4 text-[15px] font-semibold transition-colors ${
+                className={`border-b border-[#ece8f5] py-3.5 text-[15px] font-semibold transition-colors ${
                   isActive("/")
                     ? "text-[#4B22FF]"
                     : "text-[#07112F]"
@@ -587,7 +602,11 @@ export default function Navbar() {
                     }
                     aria-expanded={mobileServicesOpen}
                     aria-controls="mobile-services-submenu"
-                    className="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-lg transition-colors hover:bg-[#f3efff] hover:text-[#4B22FF]"
+                    className={`flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-lg transition-colors hover:bg-[#f3efff] hover:text-[#4B22FF] ${
+                      mobileServicesOpen
+                        ? "bg-[#f3efff] text-[#4B22FF]"
+                        : ""
+                    }`}
                   >
                     <ChevronDown
                       size={18}
@@ -599,58 +618,53 @@ export default function Navbar() {
                 </div>
 
                 {mobileServicesOpen && (
-                  <div id="mobile-services-submenu" className="space-y-2 pb-4">
-                    {services.map((service) => {
-                      const Icon = service.icon;
-                      const serviceIsActive = isActive(service.href);
+                  <div
+                    id="mobile-services-submenu"
+                    className="pb-3 pt-1"
+                  >
+                    <div className="grid grid-cols-2 gap-2">
+                      {services.map((service) => {
+                        const Icon = service.icon;
+                        const serviceIsActive = isActive(service.href);
 
-                      return (
-                        <Link
-                          prefetch={false}
-                          key={service.title}
-                          href={service.href}
-                          aria-current={
-                            serviceIsActive ? "page" : undefined
-                          }
-                          onClick={(event) =>
-                            handleNavigationClick(event, service.href, {
-                              closeMobileMenu: true,
-                            })
-                          }
-                          className={`flex items-center gap-3 rounded-[14px] border px-3 py-3 transition-all duration-300 ${
-                            serviceIsActive
-                              ? "border-[#cec4ff] bg-[#f3efff] shadow-[0_8px_20px_rgba(75,34,255,0.08)]"
-                              : "border-transparent bg-[#faf9ff]"
-                          }`}
-                        >
-                          <div
-                            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-[12px] bg-gradient-to-br ${service.iconBg} text-white`}
+                        return (
+                          <Link
+                            prefetch={false}
+                            key={service.title}
+                            href={service.href}
+                            aria-current={
+                              serviceIsActive ? "page" : undefined
+                            }
+                            onClick={(event) =>
+                              handleNavigationClick(event, service.href, {
+                                closeMobileMenu: true,
+                              })
+                            }
+                            className={`group/mobile-service flex min-h-[76px] min-w-0 items-center gap-2.5 rounded-[13px] border px-3 py-2.5 transition-all duration-300 ${
+                              serviceIsActive
+                                ? "border-[#cec4ff] bg-[#f3efff] shadow-[0_8px_20px_rgba(75,34,255,0.08)]"
+                                : "border-[#eeeaf7] bg-[#faf9ff] active:scale-[0.98]"
+                            }`}
                           >
-                            <Icon size={19} />
-                          </div>
+                            <span
+                              className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-[11px] bg-gradient-to-br ${service.iconBg} text-white shadow-[0_7px_16px_rgba(75,34,255,0.15)]`}
+                            >
+                              <Icon size={17} />
+                            </span>
 
-                          <div className="min-w-0 flex-1">
-                            <p
-                              className={`text-[13px] font-semibold ${
+                            <span
+                              className={`min-w-0 flex-1 text-[11px] font-bold leading-4 ${
                                 serviceIsActive
                                   ? "text-[#4B22FF]"
                                   : "text-[#081232]"
                               }`}
                             >
                               {service.title}
-                            </p>
-
-                            <p className="mt-0.5 break-words text-[11px] font-medium leading-5 text-[#27314F]/80">
-                              {service.description}
-                            </p>
-                          </div>
-
-                          {serviceIsActive && (
-                            <span className="h-2 w-2 shrink-0 rounded-full bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D]" />
-                          )}
-                        </Link>
-                      );
-                    })}
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
 
                     <Link
                       prefetch={false}
@@ -660,10 +674,10 @@ export default function Navbar() {
                           closeMobileMenu: true,
                         })
                       }
-                      className={`flex items-center justify-center gap-2 rounded-[12px] border py-3 text-[12px] font-bold transition-colors ${
+                      className={`mt-2.5 flex min-h-[42px] items-center justify-center gap-2 rounded-[12px] border text-[12px] font-bold transition-all ${
                         currentPath === "/services"
                           ? "border-[#4B22FF] bg-[#f3efff] text-[#4B22FF]"
-                          : "border-[#ded8f4] text-[#4B22FF]"
+                          : "border-[#ded8f4] bg-white text-[#4B22FF] active:scale-[0.99]"
                       }`}
                     >
                       View All Services
@@ -685,7 +699,7 @@ export default function Navbar() {
                     closeMobileMenu: true,
                   })
                 }
-                className={`border-b border-[#ece8f5] py-4 text-[15px] font-semibold transition-colors ${
+                className={`border-b border-[#ece8f5] py-3.5 text-[15px] font-semibold transition-colors ${
                   isActive("/portfolio/")
                     ? "text-[#4B22FF]"
                     : "text-[#07112F]"
@@ -712,7 +726,7 @@ export default function Navbar() {
                     closeMobileMenu: true,
                   })
                 }
-                className={`border-b border-[#ece8f5] py-4 text-[15px] font-semibold transition-colors ${
+                className={`border-b border-[#ece8f5] py-3.5 text-[15px] font-semibold transition-colors ${
                   isActive("/about/")
                     ? "text-[#4B22FF]"
                     : "text-[#07112F]"
@@ -739,7 +753,7 @@ export default function Navbar() {
                     closeMobileMenu: true,
                   })
                 }
-                className={`border-b border-[#ece8f5] py-4 text-[15px] font-semibold transition-colors ${
+                className={`border-b border-[#ece8f5] py-3.5 text-[15px] font-semibold transition-colors ${
                   isActive("/contact/")
                     ? "text-[#4B22FF]"
                     : "text-[#07112F]"
@@ -758,7 +772,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={openConsultation}
-                className="mt-5 flex min-h-[50px] w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D] px-5 py-3.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(75,34,255,0.20)]"
+                className="mt-4 flex min-h-[46px] w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#4B22FF] to-[#FF2F7D] px-5 py-3 text-[13px] font-semibold text-white shadow-[0_12px_28px_rgba(75,34,255,0.20)] active:scale-[0.99]"
               >
                 Get Free Consultation
                 <ArrowRight size={18} />
@@ -768,10 +782,75 @@ export default function Navbar() {
         )}
       </header>
 
+      {isOpen && (
+        <button
+          type="button"
+          aria-label="Close navigation menu"
+          onPointerDown={closeMobileMenu}
+          className="fixed inset-0 z-40 cursor-default bg-[#07112F]/20 backdrop-blur-[1px] xl:hidden"
+        />
+      )}
+
       <ConsultationModal
         isOpen={showConsultation}
         onClose={() => setShowConsultation(false)}
       />
+
+      <style>{`
+        .navbar-accent-line > span {
+          animation: navbarAccentSweep 7s ease-in-out infinite;
+          will-change: transform;
+        }
+
+        .navbar-desktop-cta {
+          background-size: 180% 180%;
+          animation: navbarGradientShift 7s ease-in-out infinite;
+        }
+
+        .navbar-desktop-cta svg {
+          animation: navbarArrowNudge 2.4s ease-in-out infinite;
+        }
+
+        @keyframes navbarAccentSweep {
+          0%,
+          100% {
+            transform: translateX(-15%);
+            opacity: 0.35;
+          }
+          50% {
+            transform: translateX(220%);
+            opacity: 0.9;
+          }
+        }
+
+        @keyframes navbarGradientShift {
+          0%,
+          100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+
+        @keyframes navbarArrowNudge {
+          0%,
+          100% {
+            transform: translateX(0);
+          }
+          50% {
+            transform: translateX(3px);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .navbar-accent-line > span,
+          .navbar-desktop-cta,
+          .navbar-desktop-cta svg {
+            animation: none !important;
+          }
+        }
+      `}</style>
     </>
   );
 }
