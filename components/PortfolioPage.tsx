@@ -835,7 +835,7 @@ export default function PortfolioPage() {
                 </a>
               </div>
 
-              <div className="mt-9 grid w-full max-w-[680px] auto-rows-fr grid-cols-2 gap-3 sm:mt-10 sm:grid-cols-[repeat(4,minmax(0,1fr))] xl:gap-2 2xl:gap-3">
+              <div className="mt-9 grid w-full max-w-[680px] auto-rows-fr grid-cols-2 gap-2.5 sm:mt-10 sm:gap-3 xl:grid-cols-[repeat(4,minmax(0,1fr))] xl:gap-2 2xl:gap-3">
                 {[
                   {
                     value: "03",
@@ -863,10 +863,10 @@ export default function PortfolioPage() {
                     key={item.label}
                     data-scroll-reveal
                     data-reveal-order={index}
-                    className="flex h-full min-w-0 flex-col justify-center overflow-hidden rounded-[17px] border border-[#e5e0f1] bg-white/75 px-2.5 py-4 shadow-[0_10px_28px_rgba(35,25,88,0.05)] backdrop-blur sm:px-3 xl:px-2.5 2xl:px-4"
+                    className="flex min-h-[94px] h-full min-w-0 flex-col justify-center overflow-hidden rounded-[15px] border border-[#e5e0f1] bg-white/75 px-3 py-3.5 shadow-[0_10px_28px_rgba(35,25,88,0.05)] backdrop-blur sm:min-h-[100px] sm:rounded-[17px] sm:px-4 sm:py-4 xl:min-h-0 xl:px-2.5 2xl:px-4"
                   >
                     <p
-                      className={`max-w-full whitespace-nowrap pb-[0.12em] text-[16px] font-bold leading-[1.08] tracking-[-0.02em] sm:text-[18px] xl:text-[16px] 2xl:text-[18px] ${item.value === "Web + App" ? "xl:text-[15px] xl:tracking-[-0.045em] 2xl:text-[18px]" : ""} ${item.color}`}
+                      className={`max-w-full whitespace-nowrap pb-[0.12em] text-[16px] font-bold leading-[1.08] tracking-[-0.02em] sm:text-[18px] xl:text-[16px] 2xl:text-[18px] ${item.value === "Web + App" ? "text-[15px] tracking-[-0.035em] sm:text-[17px] xl:text-[15px] xl:tracking-[-0.045em] 2xl:text-[18px]" : ""} ${item.color}`}
                     >
                       {item.value}
                     </p>
@@ -881,7 +881,7 @@ export default function PortfolioPage() {
             {/* HERO COLLAGE */}
             <div className="relative mx-auto min-h-[300px] w-full max-w-[820px] sm:min-h-[500px] xl:min-h-[570px]">
               <div className="absolute left-1/2 top-[58px] z-20 w-[96%] -translate-x-1/2 sm:left-[2%] sm:top-[9%] sm:w-[88%] sm:translate-x-0">
-                <DesktopFrame project={projects[0]} className="portfolio-hero-main-frame" />
+                <DesktopFrame project={projects[0]} />
               </div>
 
               <div className="absolute bottom-[0%] left-[3%] z-30 hidden w-[24%] min-w-[125px] rotate-[-5deg] sm:block lg:min-w-[130px]">
@@ -1305,11 +1305,6 @@ export default function PortfolioPage() {
           transform: translate3d(0, 0, 0);
         }
 
-        .portfolio-hero-main-frame {
-          animation: portfolioMainFrameFloat 8.4s ease-in-out infinite;
-          will-change: transform;
-        }
-
         .portfolio-hero-phone {
           animation: portfolioPhoneFloat 7.4s ease-in-out infinite;
           will-change: transform;
@@ -1322,16 +1317,6 @@ export default function PortfolioPage() {
         .portfolio-hero-badge {
           animation: portfolioBadgeFloat 6.8s ease-in-out infinite;
           will-change: transform;
-        }
-
-        @keyframes portfolioMainFrameFloat {
-          0%,
-          100% {
-            transform: translate3d(0, 0, 0);
-          }
-          50% {
-            transform: translate3d(0, -7px, 0);
-          }
         }
 
         @keyframes portfolioPhoneFloat {
@@ -1355,7 +1340,6 @@ export default function PortfolioPage() {
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .portfolio-hero-main-frame,
           .portfolio-hero-phone,
           .portfolio-hero-badge {
             animation: none !important;
