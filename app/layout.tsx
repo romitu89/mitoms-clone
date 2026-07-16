@@ -5,6 +5,7 @@ import "./globals.css";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import ScrollToTop from "../components/ScrollToTop";
+import CustomCursor from "../components/CustomCursor";
 import GoogleAnalytics from "../components/seo/GoogleAnalytics";
 import JsonLd from "../components/seo/JsonLd";
 import { SITE, organizationSchema, websiteSchema } from "../lib/seo";
@@ -13,39 +14,75 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#030817" },
+    {
+      media: "(prefers-color-scheme: light)",
+      color: "#ffffff",
+    },
+    {
+      media: "(prefers-color-scheme: dark)",
+      color: "#030817",
+    },
   ],
   colorScheme: "light",
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
+
   title: {
     default: SITE.defaultTitle,
     template: `%s | ${SITE.name}`,
   },
+
   description: SITE.defaultDescription,
   applicationName: SITE.name,
-  authors: [{ name: SITE.legalName, url: `${SITE.url}/` }],
+
+  authors: [
+    {
+      name: SITE.legalName,
+      url: `${SITE.url}/`,
+    },
+  ],
+
   creator: SITE.legalName,
   publisher: SITE.legalName,
   category: "technology",
   referrer: "origin-when-cross-origin",
+
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
+
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
-      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      {
+        url: "/favicon.ico",
+        sizes: "any",
+      },
+      {
+        url: "/favicon-32x32.png",
+        type: "image/png",
+        sizes: "32x32",
+      },
+      {
+        url: "/favicon-16x16.png",
+        type: "image/png",
+        sizes: "16x16",
+      },
     ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+
+    apple: [
+      {
+        url: "/apple-touch-icon.png",
+        sizes: "180x180",
+      },
+    ],
   },
+
   manifest: "/manifest.webmanifest",
+
   openGraph: {
     type: "website",
     locale: SITE.locale,
@@ -53,6 +90,7 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: SITE.defaultTitle,
     description: SITE.defaultDescription,
+
     images: [
       {
         url: SITE.ogImage,
@@ -63,18 +101,24 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: SITE.defaultTitle,
     description: SITE.defaultDescription,
     images: [SITE.ogImage],
   },
+
   verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
-    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    ? {
+        google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+      }
     : undefined,
+
   robots: {
     index: true,
     follow: true,
+
     googleBot: {
       index: true,
       follow: true,
@@ -94,7 +138,11 @@ export default function RootLayout({
     <html lang={SITE.language}>
       <head>
         <JsonLd data={[organizationSchema, websiteSchema]} />
-        <Script id="disable-scroll-restoration" strategy="beforeInteractive">
+
+        <Script
+          id="disable-scroll-restoration"
+          strategy="beforeInteractive"
+        >
           {`
             if ("scrollRestoration" in window.history) {
               window.history.scrollRestoration = "manual";
@@ -104,10 +152,16 @@ export default function RootLayout({
       </head>
 
       <body>
+        <CustomCursor />
+
         <ScrollToTop />
+
         <Navbar />
+
         {children}
+
         <Footer />
+
         <GoogleAnalytics />
       </body>
     </html>
