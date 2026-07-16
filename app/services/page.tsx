@@ -364,7 +364,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
         {service.title}
       </h2>
 
-      <p className="relative mt-3 text-[14px] font-medium leading-7 text-[#34405F]/88 sm:text-[15px]">
+      <p className="relative mt-3 text-[15px] font-medium leading-7 text-[#34405F]/94 sm:text-[16px]">
         {service.description}
       </p>
 
@@ -375,7 +375,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
               size={16}
               className="mt-1 shrink-0 text-[#FF2F7D]"
             />
-            <span className="min-w-0 text-[12px] font-semibold leading-5 text-[#3A4663]/82">
+            <span className="min-w-0 text-[13px] font-semibold leading-6 text-[#3A4663]/92">
               {highlight}
             </span>
           </div>
@@ -440,7 +440,7 @@ export default function ServicesPage() {
                 />
               </h1>
 
-              <p className="mt-6 max-w-[630px] text-[16px] font-medium leading-7 text-[#27314F]/90 sm:mt-7 sm:text-[17px] sm:leading-8">
+              <p className="mt-6 max-w-[630px] text-[16px] font-medium leading-7 text-[#27314F]/94 sm:mt-7 sm:text-[17px] sm:leading-8">
                 From product strategy and user experience to engineering, cloud
                 and AI, MITOMS brings the capabilities required to design,
                 build and improve modern digital solutions.
@@ -582,15 +582,9 @@ export default function ServicesPage() {
                 />
               </p>
               <h2 className="mt-4 font-bold leading-[1.14] tracking-[-0.038em] text-[#081232]">
-                <TypewriterText
-                  text="Complete Digital Capabilities,"
-                  display="block"
-                  speed={72}
-                  delay={120}
-                  wrapperClassName="mx-auto"
-                  className="max-w-full text-center text-[clamp(25px,3.15vw,36px)] leading-[1.14]"
-                  cursorClassName="bg-[#4B22FF]"
-                />
+                <span className="mx-auto block max-w-full text-center text-[clamp(25px,3.15vw,36px)] leading-[1.14]">
+                  Complete Digital Capabilities,
+                </span>
 
                 <TypewriterText
                   text="Built Around Your Business"
@@ -602,7 +596,7 @@ export default function ServicesPage() {
                   cursorClassName="bg-[#FF2F7D]"
                 />
               </h2>
-              <p className="mx-auto mt-5 max-w-[700px] text-[16px] font-medium leading-7 text-[#34405F]/86">
+              <p className="mx-auto mt-5 max-w-[700px] text-[16px] font-medium leading-7 text-[#34405F]/92">
                 Choose a focused service or combine multiple capabilities into
                 one connected delivery plan.
               </p>
@@ -641,7 +635,7 @@ export default function ServicesPage() {
                     cursorClassName="bg-[#FF2F7D]"
                   />
                 </h2>
-                <p className="mt-6 max-w-[570px] text-[16px] font-medium leading-8 text-[#34405F]/86">
+                <p className="mt-6 max-w-[570px] text-[16px] font-medium leading-8 text-[#34405F]/92">
                   Every engagement follows a clear path, while remaining flexible
                   enough for your product, organisation and priorities.
                 </p>
@@ -678,7 +672,7 @@ export default function ServicesPage() {
                       <h3 className="mt-5 text-[19px] font-bold text-[#081232]">
                         {step.title}
                       </h3>
-                      <p className="mt-3 text-[14px] font-medium leading-7 text-[#34405F]/84">
+                      <p className="mt-3 text-[15px] font-medium leading-7 text-[#34405F]/92">
                         {step.text}
                       </p>
                     </article>
@@ -800,7 +794,7 @@ export default function ServicesPage() {
                         <strong className="block text-[16px] text-[#4B22FF] sm:text-[18px]">
                           {top}
                         </strong>
-                        <span className="mt-1 block text-[11px] font-semibold text-[#34405F]/76 sm:text-[12px]">
+                        <span className="mt-1 block text-[12px] font-semibold text-[#34405F]/88 sm:text-[13px]">
                           {bottom}
                         </span>
                       </div>
@@ -829,7 +823,7 @@ export default function ServicesPage() {
                   cursorClassName="bg-[#4B22FF]"
                 />
               </h2>
-              <p className="mt-6 max-w-[650px] text-[16px] font-medium leading-8 text-[#34405F]/86">
+              <p className="mt-6 max-w-[650px] text-[16px] font-medium leading-8 text-[#34405F]/92">
                 We connect every design and technology decision to the people who
                 will use the product and the outcome your organisation needs.
               </p>
@@ -846,7 +840,7 @@ export default function ServicesPage() {
                           size={16}
                           className="mt-1 shrink-0 text-[#FF2F7D]"
                         />
-                        <p className="min-w-0 text-[13px] font-bold leading-6 text-[#27314F]/88">
+                        <p className="min-w-0 text-[14px] font-bold leading-6 text-[#27314F]/94">
                           {advantage}
                         </p>
                       </div>
