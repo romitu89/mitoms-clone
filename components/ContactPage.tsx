@@ -21,6 +21,7 @@ import {
   User,
   Zap,
 } from "lucide-react";
+import { useBidirectionalScrollReveal } from "./useBidirectionalScrollReveal";
 
 const services = [
   "Website Development",
@@ -408,6 +409,7 @@ export default function ContactPage() {
   const [fieldErrors, setFieldErrors] = useState<FormFieldErrors>({});
   const formRef = useRef<HTMLFormElement>(null);
   const formStartedAtRef = useRef<number>(0);
+  const pageRef = useBidirectionalScrollReveal<HTMLElement>();
 
   const updateFieldError = (field: FormFieldName, error: string) => {
     setFieldErrors((current) => {
@@ -560,7 +562,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
+    <main ref={pageRef} className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
       {/* HERO SECTION */}
       <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-16 pt-10 sm:px-6 sm:pb-20 sm:pt-12 lg:px-10 lg:pb-28 lg:pt-11">
         {/* Background glows */}
@@ -574,7 +576,7 @@ export default function ContactPage() {
         <div className="pointer-events-none absolute inset-0 opacity-[0.25] [background-image:radial-gradient(circle_at_1px_1px,rgba(75,34,255,0.14)_1px,transparent_1px)] [background-size:25px_25px]" />
 
         <div className="relative mx-auto max-w-[1320px]">
-          <div className="mx-auto max-w-[800px] text-center">
+          <div data-bidirectional-reveal className="mx-auto max-w-[800px] text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-[#ddd6ff] bg-white/75 px-4 py-2 shadow-[0_8px_24px_rgba(75,34,255,0.06)] backdrop-blur">
               <MessageSquareText size={15} className="text-[#4b22ff]" />
 
@@ -613,11 +615,11 @@ export default function ContactPage() {
 
           {/* Contact cards */}
           <div className="mt-10 grid gap-4 sm:mt-12 md:grid-cols-3 md:gap-5">
-            {contactCards.map((item) => {
+            {contactCards.map((item, index) => {
               const Icon = item.icon;
 
               const content = (
-                <div className="group flex h-full min-w-0 items-center gap-4 rounded-[20px] border border-[#e7e2f5] bg-white/90 p-4 shadow-[0_14px_40px_rgba(38,27,104,0.07)] backdrop-blur transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_50px_rgba(75,34,255,0.12)] sm:gap-5 sm:rounded-[22px] sm:p-5">
+                <div data-bidirectional-reveal data-reveal-order={index} className="group flex h-full min-w-0 items-center gap-4 rounded-[20px] border border-[#e7e2f5] bg-white/90 p-4 shadow-[0_14px_40px_rgba(38,27,104,0.07)] backdrop-blur transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_50px_rgba(75,34,255,0.12)] sm:gap-5 sm:rounded-[22px] sm:p-5">
                   <div
                     className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] bg-gradient-to-br ${item.iconBg} text-white shadow-[0_12px_26px_rgba(75,34,255,0.20)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105`}
                   >
@@ -668,7 +670,7 @@ export default function ContactPage() {
 
         <div className="relative mx-auto grid max-w-[1320px] overflow-hidden rounded-[24px] border border-[#e4dff3] bg-white shadow-[0_30px_90px_rgba(19,14,65,0.12)] sm:rounded-[30px] lg:grid-cols-[0.86fr_1.14fr]">
           {/* LEFT INFORMATION */}
-          <div className="relative overflow-hidden bg-[linear-gradient(145deg,#06112f_0%,#18104f_45%,#5c175c_78%,#ff2f7d_145%)] p-5 text-white sm:p-8 lg:min-h-[760px] lg:p-12">
+          <div data-bidirectional-reveal className="relative overflow-hidden bg-[linear-gradient(145deg,#06112f_0%,#18104f_45%,#5c175c_78%,#ff2f7d_145%)] p-5 text-white sm:p-8 lg:min-h-[760px] lg:p-12">
             <div className="pointer-events-none absolute -left-28 top-24 h-72 w-72 rounded-full bg-[#00b8ff]/25 blur-[95px]" />
 
             <div className="pointer-events-none absolute -bottom-20 -right-16 h-80 w-80 rounded-full bg-[#ff2f7d]/35 blur-[95px]" />
@@ -789,7 +791,7 @@ export default function ContactPage() {
           </div>
 
           {/* RIGHT FORM */}
-          <div className="relative min-w-0 bg-[#fbfaff] p-5 sm:p-8 lg:p-12">
+          <div data-bidirectional-reveal className="relative min-w-0 bg-[#fbfaff] p-5 sm:p-8 lg:p-12">
             <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#4b22ff]/8 blur-[90px]" />
 
             <div className="pointer-events-none absolute -bottom-24 left-[-70px] h-64 w-64 rounded-full bg-[#ff2f7d]/8 blur-[90px]" />
@@ -1372,7 +1374,7 @@ export default function ContactPage() {
       {/* QUICK HELP */}
       <section className="bg-[#fbfaff] px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-20">
         <div className="mx-auto max-w-[1320px]">
-          <div className="mx-auto max-w-[720px] text-center">
+          <div data-bidirectional-reveal className="mx-auto max-w-[720px] text-center">
             <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#ff2f7d]">
               <TypewriterOnce
                 text="How Can We Help?"
@@ -1423,13 +1425,15 @@ export default function ContactPage() {
                 href: "mailto:sales@mitoms.com?subject=Business Partnership",
                 gradient: "from-[#ff2f7d] to-[#743cff]",
               },
-            ].map((item) => {
+            ].map((item, index) => {
               const Icon = item.icon;
 
               return (
                 <a
                   key={item.title}
                   href={item.href}
+                  data-bidirectional-reveal
+                  data-reveal-order={index}
                   className="group relative overflow-hidden rounded-[21px] border border-[#e4dff2] bg-white p-5 shadow-[0_12px_34px_rgba(35,25,88,0.06)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(75,34,255,0.12)] sm:rounded-[24px] sm:p-7"
                 >
                   <div className="pointer-events-none absolute -right-14 -top-16 h-44 w-44 rounded-full bg-[#4b22ff]/5 blur-3xl transition-all duration-500 group-hover:bg-[#ff2f7d]/8" />
@@ -1466,7 +1470,7 @@ export default function ContactPage() {
       {/* FAQ */}
       <section className="px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-24">
         <div className="mx-auto grid max-w-[1180px] gap-12 lg:grid-cols-[0.72fr_1.28fr]">
-          <div>
+          <div data-bidirectional-reveal>
             <p className="text-[12px] font-bold uppercase tracking-[0.26em] text-[#4b22ff]">
               <TypewriterOnce
                 text="Common Questions"
@@ -1509,6 +1513,8 @@ export default function ContactPage() {
             {frequentlyAskedQuestions.map((item, index) => (
               <details
                 key={item.question}
+                data-bidirectional-reveal
+                data-reveal-order={index}
                 className="group rounded-[18px] border border-[#e4dff1] bg-white p-4 shadow-[0_10px_30px_rgba(34,24,85,0.05)] open:border-[#cfc5ff] open:shadow-[0_16px_38px_rgba(75,34,255,0.08)] sm:rounded-[20px] sm:p-5"
               >
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-3 sm:gap-5">
@@ -1539,7 +1545,7 @@ export default function ContactPage() {
 
       {/* FINAL CTA */}
       <section className="px-4 pb-8 sm:px-6 lg:px-10">
-        <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[22px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff2f7d_125%)] px-5 py-10 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:rounded-[26px] sm:px-8 sm:py-12 lg:px-14">
+        <div data-bidirectional-reveal className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[22px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff2f7d_125%)] px-5 py-10 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:rounded-[26px] sm:px-8 sm:py-12 lg:px-14">
           <div className="pointer-events-none absolute -left-20 -top-28 h-72 w-72 rounded-full bg-[#00b8ff]/20 blur-[90px]" />
 
           <div className="pointer-events-none absolute -bottom-28 right-[-40px] h-80 w-80 rounded-full bg-[#ff2f7d]/35 blur-[95px]" />

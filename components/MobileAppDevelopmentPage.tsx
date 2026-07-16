@@ -35,6 +35,7 @@ import {
   Wrench,
 } from "lucide-react";
 import ConsultationModal from "./ConsultationModal";
+import { useBidirectionalScrollReveal } from "./useBidirectionalScrollReveal";
 
 const capabilities = [
   {
@@ -427,55 +428,7 @@ export default function MobileAppDevelopmentPage() {
     setShowConsultation(true);
   };
 
-  const pageRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const page = pageRef.current;
-
-    if (!page) {
-      return;
-    }
-
-    const elements = Array.from(
-      page.querySelectorAll<HTMLElement>("[data-service-reveal]"),
-    );
-
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (reduceMotion) {
-      elements.forEach((element) => {
-        element.dataset.revealVisible = "true";
-      });
-
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return;
-          }
-
-          const element = entry.target as HTMLElement;
-          element.dataset.revealVisible = "true";
-          observer.unobserve(element);
-        });
-      },
-      {
-        threshold: 0.1,
-        rootMargin: "0px 0px -5% 0px",
-      },
-    );
-
-    elements.forEach((element) => observer.observe(element));
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+  const pageRef = useBidirectionalScrollReveal<HTMLElement>();
 
   return (
     <>
@@ -1292,18 +1245,6 @@ export default function MobileAppDevelopmentPage() {
       />
 
       <style>{`
-        [data-service-reveal] {
-          opacity: 0;
-          transform: translate3d(0, 28px, 0);
-          transition:
-            opacity 700ms ease-out,
-            transform 700ms ease-out;
-        }
-
-        [data-service-reveal][data-reveal-visible="true"] {
-          opacity: 1;
-          transform: translate3d(0, 0, 0);
-        }
 
         .mobileapp-float-card {
           animation: mobileappFloat 6.8s ease-in-out infinite;
@@ -1321,11 +1262,6 @@ export default function MobileAppDevelopmentPage() {
         }
 
         @media (prefers-reduced-motion: reduce) {
-          [data-service-reveal] {
-            opacity: 1 !important;
-            transform: none !important;
-            transition: none !important;
-          }
 
           .mobileapp-float-card {
             animation: none !important;

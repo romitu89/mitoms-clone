@@ -9,6 +9,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import ConsultationModal from "./ConsultationModal";
+import { useBidirectionalScrollReveal } from "./useBidirectionalScrollReveal";
 import {
   Star,
   Rocket,
@@ -663,69 +664,9 @@ function ProcessStep({
 }
 
 
-function useScrollReveal<T extends HTMLElement>() {
-  const rootRef = useRef<T>(null);
-
-  useEffect(() => {
-    const root = rootRef.current;
-
-    if (!root) {
-      return;
-    }
-
-    const elements = Array.from(
-      root.querySelectorAll<HTMLElement>("[data-scroll-reveal]"),
-    );
-
-    root.classList.add("scroll-reveal-ready");
-
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (reducedMotion) {
-      elements.forEach((element) => element.classList.add("is-visible"));
-      return () => {
-        root.classList.remove("scroll-reveal-ready");
-      };
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return;
-          }
-
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        });
-      },
-      {
-        threshold: 0.12,
-        rootMargin: "0px 0px -7% 0px",
-      },
-    );
-
-    elements.forEach((element) => {
-      const order = Number(element.dataset.revealOrder ?? "0");
-      const delay = Math.min(Math.max(order, 0), 6) * 80;
-      element.style.setProperty("--scroll-reveal-delay", `${delay}ms`);
-      observer.observe(element);
-    });
-
-    return () => {
-      observer.disconnect();
-      root.classList.remove("scroll-reveal-ready");
-    };
-  }, []);
-
-  return rootRef;
-}
-
 export default function Home() {
   const [showConsultation, setShowConsultation] = useState(false);
-  const pageRef = useScrollReveal<HTMLElement>();
+  const pageRef = useBidirectionalScrollReveal<HTMLElement>();
 
   const openConsultation = () => {
     setShowConsultation(true);

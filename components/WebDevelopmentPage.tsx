@@ -32,8 +32,9 @@ import {
   Zap,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import ConsultationModal from "./ConsultationModal";
+import { useBidirectionalScrollReveal } from "./useBidirectionalScrollReveal";
 
 const capabilities = [
   {
@@ -247,42 +248,6 @@ const faqs = [
 
 
 
-function useStartWhenVisible<T extends HTMLElement>(threshold = 0.16) {
-  const elementRef = useRef<T>(null);
-  const [hasStarted, setHasStarted] = useState(false);
-
-  useEffect(() => {
-    const element = elementRef.current;
-
-    if (!element || hasStarted) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) {
-          return;
-        }
-
-        setHasStarted(true);
-        observer.disconnect();
-      },
-      {
-        threshold,
-        rootMargin: "0px 0px -5% 0px",
-      },
-    );
-
-    observer.observe(element);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [hasStarted, threshold]);
-
-  return { elementRef, hasStarted };
-}
-
 function TypewriterText({
   text,
   speed = 105,
@@ -411,18 +376,11 @@ function Reveal({
   delay?: number;
   className?: string;
 }) {
-  const { elementRef, hasStarted } =
-    useStartWhenVisible<HTMLDivElement>(0.1);
-
   return (
     <div
-      ref={elementRef}
-      style={{ transitionDelay: `${delay}ms` }}
-      className={`${className} transition-all duration-700 ease-out ${
-        hasStarted
-          ? "translate-y-0 opacity-100"
-          : "translate-y-7 opacity-0"
-      }`}
+      data-bidirectional-reveal
+      style={{ "--mitoms-reveal-delay": `${delay}ms` } as CSSProperties}
+      className={className}
     >
       {children}
     </div>
@@ -464,10 +422,11 @@ function TechnologyGroup({
 
 export default function WebDevelopmentPage() {
   const [showConsultation, setShowConsultation] = useState(false);
+  const pageRef = useBidirectionalScrollReveal<HTMLElement>();
 
   return (
     <>
-      <main className="w-full overflow-x-clip bg-white font-sans text-[#07112f] antialiased">
+      <main ref={pageRef} className="w-full overflow-x-clip bg-white font-sans text-[#07112f] antialiased">
         {/* HERO */}
         <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-14 pt-10 sm:px-6 sm:pb-18 sm:pt-12 lg:px-10 lg:pb-24 lg:pt-11">
           <div className="pointer-events-none absolute -left-32 top-[-80px] h-[430px] w-[430px] rounded-full bg-[#4b22ff]/10 blur-[125px]" />

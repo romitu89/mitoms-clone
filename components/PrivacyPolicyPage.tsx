@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import ConsultationModal from "./ConsultationModal";
+import { useBidirectionalScrollReveal } from "./useBidirectionalScrollReveal";
 
 const policyDetails = {
   companyName: "MITOMS Technologies",
@@ -389,11 +390,12 @@ function PrivacySummaryCard({
 }
 
 export default function PrivacyPolicyPage() {
+  const pageRef = useBidirectionalScrollReveal<HTMLElement>();
   const [showConsultation, setShowConsultation] = useState(false);
 
   return (
     <>
-      <main className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
+      <main ref={pageRef} className="overflow-hidden bg-white font-sans text-[#07112f] antialiased">
         {/* HERO */}
         <section className="relative overflow-hidden bg-[#fbfaff] px-4 pb-20 pt-10 sm:px-6 sm:pt-12 lg:px-10 lg:pb-24 lg:pt-11">
           <div className="pointer-events-none absolute -left-40 -top-32 h-[500px] w-[500px] rounded-full bg-[#4b22ff]/10 blur-[135px] motion-safe:animate-[pulse_6s_ease-in-out_infinite]" />
@@ -530,7 +532,7 @@ export default function PrivacyPolicyPage() {
         </section>
 
         {/* SUMMARY */}
-        <section className="px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+        <section data-bidirectional-reveal className="px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="mx-auto max-w-[1320px]">
             <div className="mx-auto max-w-[780px] text-center">
               <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#ff2f7d]">
@@ -566,7 +568,7 @@ export default function PrivacyPolicyPage() {
         </section>
 
         {/* POLICY CONTENT */}
-        <section className="bg-[#fbfaff] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+        <section data-bidirectional-reveal className="bg-[#fbfaff] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="mx-auto grid max-w-[1320px] gap-10 lg:grid-cols-[300px_1fr]">
             <aside className="lg:sticky lg:top-28 lg:self-start">
               <div className="rounded-[24px] border border-[#e3deef] bg-white p-5 shadow-[0_12px_34px_rgba(35,25,88,0.06)]">
@@ -733,7 +735,7 @@ export default function PrivacyPolicyPage() {
         </section>
 
         {/* FINAL CTA */}
-        <section className="px-5 py-8 sm:px-8 lg:px-10">
+        <section data-bidirectional-reveal className="px-5 py-8 sm:px-8 lg:px-10">
           <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[28px] bg-[linear-gradient(105deg,#061330_0%,#17104b_42%,#5e155b_75%,#ff2f7d_125%)] px-7 py-12 text-white shadow-[0_24px_60px_rgba(11,10,48,0.24)] sm:px-10 lg:px-14">
             <div className="pointer-events-none absolute -left-20 -top-28 h-72 w-72 rounded-full bg-[#00b8ff]/20 blur-[90px]" />
             <div className="pointer-events-none absolute -bottom-28 right-[-40px] h-80 w-80 rounded-full bg-[#ff2f7d]/35 blur-[95px]" />
