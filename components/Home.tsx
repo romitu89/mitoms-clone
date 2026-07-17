@@ -155,6 +155,7 @@ const heroCards = [
   {
     icon: Code2,
     title: "Web Development",
+    mobileTitle: "Web",
     href: "/services/web-development/",
     text: "Modern scalable websites",
     pos: "left-[16%] top-[4%]",
@@ -163,6 +164,7 @@ const heroCards = [
   {
     icon: Smartphone,
     title: "Mobile Apps",
+    mobileTitle: "Mobile",
     href: "/services/mobile-app-development/",
     text: "iOS & Android solutions",
     pos: "right-[0%] top-[21%]",
@@ -171,6 +173,7 @@ const heroCards = [
   {
     icon: Cloud,
     title: "Cloud Solutions",
+    mobileTitle: "Cloud",
     href: "/services/cloud-solutions/",
     text: "Secure cloud architecture",
     pos: "left-[6%] bottom-[27%]",
@@ -179,6 +182,7 @@ const heroCards = [
   {
     icon: Brain,
     title: "AI Automation",
+    mobileTitle: "AI",
     href: "/services/ai-digital-transformation/",
     text: "Smarter business workflows",
     pos: "right-[3%] bottom-[16%]",
@@ -626,6 +630,40 @@ function HeroFloatingCard({
   );
 }
 
+function HeroMobileCard({
+  icon: Icon,
+  title,
+  href,
+  iconBg,
+  animationDelay = "0s",
+}: {
+  icon: LucideIcon;
+  title: string;
+  href: string;
+  iconBg: string;
+  animationDelay?: string;
+}) {
+  return (
+    <Link
+      prefetch={false}
+      href={href}
+      aria-label={`Explore ${title}`}
+      style={{ animationDelay }}
+      className="home-hero-mobile-card group flex min-h-[70px] min-w-0 items-center gap-3 rounded-[18px] border border-white/80 bg-white/95 px-3 py-3 shadow-[0_12px_28px_rgba(35,27,84,0.14)] backdrop-blur transition-shadow duration-300 hover:shadow-[0_18px_34px_rgba(35,27,84,0.2)]"
+    >
+      <span
+        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-gradient-to-br ${iconBg} text-white shadow-[0_8px_18px_rgba(75,34,255,0.22)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105`}
+      >
+        <Icon className="h-5 w-5" />
+      </span>
+
+      <span className="min-w-0 text-[13px] font-bold leading-tight text-[#081232] transition-colors duration-300 group-hover:text-[#4b22ff]">
+        {title}
+      </span>
+    </Link>
+  );
+}
+
 function ProcessStep({
   icon: Icon,
   no,
@@ -780,7 +818,7 @@ export default function Home() {
           </div>
 
           {/* RIGHT VISUAL */}
-          <div className="relative min-h-[360px] sm:min-h-[470px] lg:min-h-[570px]">
+          <div className="relative min-h-[430px] sm:min-h-[470px] lg:min-h-[570px]">
             <Image
               src={`${imgPath}hero-3d-m.webp`}
               alt="MITOMS 3D M"
@@ -834,6 +872,20 @@ export default function Home() {
                 animationDelay={`${index * 0.45}s`}
               />
             ))}
+
+            {/* Mobile hero service cards */}
+            <div className="absolute inset-x-0 bottom-1 z-40 grid grid-cols-2 gap-3 px-1 sm:hidden">
+              {heroCards.map((card, index) => (
+                <HeroMobileCard
+                  key={`mobile-${card.title}`}
+                  icon={card.icon}
+                  title={card.mobileTitle}
+                  href={card.href}
+                  iconBg={card.iconBg}
+                  animationDelay={`${index * 0.4}s`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -1476,6 +1528,11 @@ export default function Home() {
           will-change: transform;
         }
 
+        .home-hero-mobile-card {
+          animation: homeHeroCardFloat 6.4s ease-in-out infinite;
+          will-change: transform;
+        }
+
         @keyframes homeHeroCardFloat {
           0%,
           100% {
@@ -1568,7 +1625,8 @@ export default function Home() {
 
         @media (prefers-reduced-motion: reduce) {
           .hero-orb,
-          .home-hero-float-card {
+          .home-hero-float-card,
+          .home-hero-mobile-card {
             animation: none !important;
             transform: none !important;
           }

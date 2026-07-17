@@ -515,14 +515,15 @@ export default function ServicesPage() {
               />
 
               <div className="absolute inset-x-0 bottom-0 z-30 grid grid-cols-2 gap-2.5 sm:grid-cols-3 xl:hidden">
-                {services.map((service) => {
+                {services.map((service, index) => {
                   const Icon = service.icon;
 
                   return (
                     <Link
                       key={service.shortTitle}
                       href={service.href}
-                      className="flex min-w-0 items-center gap-2 rounded-[14px] border border-[#E5E0F1] bg-white/95 px-3 py-3 shadow-[0_12px_30px_rgba(35,27,84,0.09)] backdrop-blur"
+                      style={{ animationDelay: `${index * 0.35}s` }}
+                      className="services-float-card flex min-w-0 items-center gap-2 rounded-[14px] border border-[#E5E0F1] bg-white/95 px-3 py-3 shadow-[0_12px_30px_rgba(35,27,84,0.09)] backdrop-blur"
                     >
                       <span
                         className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px] bg-gradient-to-br ${service.gradient} text-white`}
