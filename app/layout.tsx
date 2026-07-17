@@ -5,7 +5,6 @@ import "./globals.css";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import ScrollToTop from "../components/ScrollToTop";
-import CustomCursor from "../components/CustomCursor";
 import GoogleAnalytics from "../components/seo/GoogleAnalytics";
 import JsonLd from "../components/seo/JsonLd";
 import { SITE, organizationSchema, websiteSchema } from "../lib/seo";
@@ -152,7 +151,7 @@ export default function RootLayout({
       </head>
 
       <body>
-        <CustomCursor />
+        {/* <CustomCursor /> */}
 
         <ScrollToTop />
 

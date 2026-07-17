@@ -6,7 +6,7 @@ cd "$(dirname "$0")"
 rm -f MITOMS-PublicHTML-Build.zip
 
 printf '%s\n' "Installing project dependencies..."
-npm ci --no-audit --no-fund
+# npm ci --no-audit --no-fund
 
 printf '%s\n' "Creating a clean static Next.js build..."
 npm run build:hostinger

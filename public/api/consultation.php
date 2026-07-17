@@ -197,9 +197,9 @@ if (!in_array($service, $allowedServices, true)) {
     respond(['success' => false, 'message' => 'Please select a valid service.'], 400);
 }
 
-if (text_length($message) < 10) {
-    respond(['success' => false, 'message' => 'Please provide a little more information about your requirement.'], 400);
-}
+// if (text_length($message) < 10) {
+//     respond(['success' => false, 'message' => 'Please provide a little more information about your requirement.'], 400);
+// }
 
 if (!rate_limit('ip:' . client_ip(), 4, 900) || !rate_limit('email:' . $email, 3, 3600)) {
     respond(['success' => false, 'message' => 'Too many requests. Please try again later.'], 429);
