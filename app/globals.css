@@ -10,3 +10,34 @@ body {
   color: #07112f;
 }
 
+/*
+ * Ultra-wide screens only.
+ *
+ * Nothing below 1900px is changed. The existing mobile, tablet, laptop and
+ * normal desktop layouts remain exactly as they are.
+ *
+ * On wider screens, standard rem-based typography and spacing increase only
+ * slightly, while the main reusable page containers use more of the available
+ * width. No zoom, transform, wrapper or component-level changes are used.
+ */
+@media (min-width: 1900px) {
+  html {
+    font-size: clamp(17px, calc(0.154vw + 14.08px), 19px);
+  }
+
+  .max-w-\[1320px\] {
+    max-width: clamp(1580px, 78vw, 2380px);
+  }
+
+  .max-w-\[1380px\] {
+    max-width: clamp(1640px, 80vw, 2450px);
+  }
+
+  .max-w-\[1440px\] {
+    max-width: clamp(1700px, 82vw, 2520px);
+  }
+
+  .max-w-\[1180px\] {
+    max-width: clamp(1420px, 72vw, 2100px);
+  }
+}
