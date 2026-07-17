@@ -7,7 +7,6 @@ import {
   CheckCircle2,
   ChevronDown,
   Mail,
-  MessageSquareText,
   Phone,
   Sparkles,
   User,
@@ -377,7 +376,7 @@ export default function ConsultationModal({
     };
 
     const validationErrors = getFieldValidationErrors(payload);
-    const firstInvalidField = ["name", "phone", "email", "service", "message"].find(
+    const firstInvalidField = ["name", "phone", "email", "service"].find(
       (field) => validationErrors[field as FormFieldName],
     ) as FormFieldName | undefined;
 
@@ -859,55 +858,17 @@ export default function ConsultationModal({
 
                   <label className="group block">
                     <div className="relative">
-                      <MessageSquareText
-                        size={18}
-                        className={`absolute left-4 top-5 transition ${
-                          fieldErrors.message
-                            ? "text-[#d11a4d]"
-                            : "text-[#776d96] group-focus-within:text-[#4b22ff]"
-                        }`}
-                      />
                       <textarea
                         required
                         name="message"
                         minLength={30}
                         maxLength={3000}
                         rows={5}
-                        aria-invalid={Boolean(fieldErrors.message)}
-                        aria-describedby={fieldErrors.message ? "consultation-message-error" : undefined}
-                        onInput={(event) => {
-                          const value = event.currentTarget.value;
-                          updateFieldError(
-                            "message",
-                            value.trim().length >= 30
-                              ? getMessageFieldError(value)
-                              : "",
-                          );
-                        }}
-                        onBlur={(event) =>
-                          updateFieldError(
-                            "message",
-                            getMessageFieldError(event.currentTarget.value),
-                          )
-                        }
                         placeholder="Tell us briefly about your project, goals and timeline..."
-                        className={`w-full resize-none rounded-[16px] border bg-white py-4 pl-12 pr-4 text-sm font-semibold leading-6 text-[#081232] outline-none transition placeholder:text-[#71809f]/55 ${
-                          fieldErrors.message
-                            ? "border-[#e11d48] bg-[#fff7f9] shadow-[0_0_0_3px_rgba(225,29,72,0.08)] focus:border-[#e11d48]"
-                            : "border-[#e2def1] focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
-                        }`}
+                        className={`w-full resize-none rounded-[16px] border bg-white py-4 pl-12 pr-4 text-sm font-semibold leading-6 text-[#081232] outline-none transition placeholder:text-[#71809f]/55` }
                       />
                     </div>
-                    {fieldErrors.message && (
-                      <p
-                        id="consultation-message-error"
-                        role="alert"
-                        className="mt-1.5 flex items-start gap-1.5 text-[11px] font-bold leading-5 text-[#d11a4d]"
-                      >
-                        <span aria-hidden="true">•</span>
-                        {fieldErrors.message}
-                      </p>
-                    )}
+                   
                   </label>
 
                   {submitError && (

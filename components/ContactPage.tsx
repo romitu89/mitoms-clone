@@ -505,7 +505,7 @@ export default function ContactPage() {
     };
 
     const validationErrors = getFieldValidationErrors(payload);
-    const firstInvalidField = ["name", "email", "phone", "company", "service", "message"].find(
+    const firstInvalidField = ["name", "email", "phone", "company", "service"].find(
       (field) => validationErrors[field as FormFieldName],
     ) as FormFieldName | undefined;
 
@@ -1223,60 +1223,22 @@ export default function ContactPage() {
                   {/* Message */}
                   <label className="group block">
                     <span className="mb-2 block text-[13px] font-bold text-[#202b48]">
-                      Project Details <span className="text-[#ff2f7d]">*</span>
+                      Project Details 
                     </span>
 
                     <div className="relative">
-                      <MessageSquareText
-                        size={18}
-                        className={`absolute left-4 top-5 transition-colors ${
-                          fieldErrors.message
-                            ? "text-[#d11a4d]"
-                            : "text-[#786f98] group-focus-within:text-[#4b22ff]"
-                        }`}
-                      />
-
                       <textarea
                         required
                         name="message"
                         minLength={30}
                         maxLength={3000}
                         rows={6}
-                        aria-invalid={Boolean(fieldErrors.message)}
-                        aria-describedby={fieldErrors.message ? "contact-message-error" : undefined}
-                        onInput={(event) => {
-                          const value = event.currentTarget.value;
-                          updateFieldError(
-                            "message",
-                            value.trim().length >= 30
-                              ? getMessageFieldError(value)
-                              : "",
-                          );
-                        }}
-                        onBlur={(event) =>
-                          updateFieldError(
-                            "message",
-                            getMessageFieldError(event.currentTarget.value),
-                          )
-                        }
                         placeholder="Tell us about your project, goals, required features and expected timeline..."
-                        className={`w-full resize-none rounded-[14px] border bg-white py-3.5 pl-11 pr-3 text-[12px] font-semibold leading-6 text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 sm:rounded-[15px] sm:py-4 sm:pl-12 sm:pr-4 sm:text-[14px] ${
-                          fieldErrors.message
-                            ? "border-[#e11d48] bg-[#fff7f9] shadow-[0_0_0_3px_rgba(225,29,72,0.08)] focus:border-[#e11d48]"
-                            : "border-[#e1ddec] focus:border-[#6d45ff] focus:shadow-[0_0_0_4px_rgba(75,34,255,0.08)]"
-                        }`}
+                        className={`w-full resize-none rounded-[14px] border bg-white py-3.5 pl-11 pr-3 text-[12px] font-semibold leading-6 text-[#081232] outline-none transition-all placeholder:font-medium placeholder:text-[#71809f]/50 sm:rounded-[15px] sm:py-4 sm:pl-12 sm:pr-4 sm:text-[14px]
+                          `}
                       />
                     </div>
-                    {fieldErrors.message && (
-                      <p
-                        id="contact-message-error"
-                        role="alert"
-                        className="mt-1.5 flex items-start gap-1.5 text-[12px] font-bold leading-5 text-[#d11a4d]"
-                      >
-                        <span aria-hidden="true">•</span>
-                        {fieldErrors.message}
-                      </p>
-                    )}
+                   
                   </label>
 
                   <button
