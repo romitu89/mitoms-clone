@@ -313,7 +313,7 @@ export default function Footer() {
             <h3 className="mb-4 text-[16px] font-bold text-white sm:mb-5 sm:text-lg">Contact</h3>
 
             <ul className="flex flex-wrap items-center gap-x-5 gap-y-3 text-[14px] text-white/78 sm:text-[15px] sm:text-white/82 lg:flex-col lg:items-start">
-              <li className="min-w-0">India</li>
+              <li className="min-w-0">Delhi NCR, Ghaziabad, Uttar Pradesh, India – 201005</li>
 
               <li>
                 <a

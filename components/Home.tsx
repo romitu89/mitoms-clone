@@ -25,6 +25,8 @@ import {
   Brain,
   Server,
   BarChart3,
+  Quote,
+  BadgeCheck,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -187,6 +189,66 @@ const heroCards = [
     text: "Smarter business workflows",
     pos: "right-[3%] bottom-[16%]",
     iconBg: "from-[#ff2f7d] to-[#4b22ff]",
+  },
+];
+
+
+type Testimonial = {
+  name: string;
+  role: string;
+  company: string;
+  initials: string;
+  quote: string;
+  project: string;
+  highlights: string[];
+  accent: string;
+};
+
+const testimonials: Testimonial[] = [
+  {
+    name: "Anup Kunhiraman",
+    role: "CEO",
+    company: "Artmilap",
+    initials: "AM",
+    quote:
+      "MITOMS understood the product vision behind Artmilap and translated a complex cultural platform into a clear, usable digital experience. The team stayed responsive, handled feedback thoughtfully and kept the work moving with transparency.",
+    project: "Culture & Community Platform",
+    highlights: [
+      "Product understanding",
+      "Responsive collaboration",
+      "Clear delivery",
+    ],
+    accent: "from-[#6b3cff] to-[#a855f7]",
+  },
+  {
+    name: "Rajesh",
+    role: "Owner",
+    company: "Avanika",
+    initials: "AV",
+    quote:
+      "MITOMS helped turn our ideas into a polished digital presence that feels aligned with our brand. The process was structured, communication was clear and the final result was practical, responsive and easy to use.",
+    project: "Brand Website",
+    highlights: [
+      "Brand alignment",
+      "Clear communication",
+      "Responsive experience",
+    ],
+    accent: "from-[#ff2f7d] to-[#ff6aa5]",
+  },
+  {
+    name: "Sohar",
+    role: "Owner",
+    company: "Sohar Dental Laboratory",
+    initials: "SD",
+    quote:
+      "MITOMS delivered a modern and responsive website aligned with our business requirements. The team understood the specialised nature of our services and created a clear, professional digital presence.",
+    project: "Specialised Industry Website",
+    highlights: [
+      "Industry understanding",
+      "Responsive build",
+      "Professional presence",
+    ],
+    accent: "from-[#00aeea] to-[#4b22ff]",
   },
 ];
 
@@ -664,6 +726,240 @@ function HeroMobileCard({
   );
 }
 
+
+function TestimonialSection() {
+  const [trackIndex, setTrackIndex] = useState(0);
+  const [transitionEnabled, setTransitionEnabled] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  const visibleIndex = trackIndex % testimonials.length;
+  const sliderItems = [...testimonials, testimonials[0]];
+
+  useEffect(() => {
+    if (isPaused || prefersReducedMotion) {
+      return;
+    }
+
+    const intervalId = window.setInterval(() => {
+      setTransitionEnabled(true);
+      setTrackIndex((current) => current + 1);
+    }, 6200);
+
+    return () => {
+      window.clearInterval(intervalId);
+    };
+  }, [isPaused, prefersReducedMotion]);
+
+  const handleTrackTransitionEnd = () => {
+    if (trackIndex !== testimonials.length) {
+      return;
+    }
+
+    setTransitionEnabled(false);
+    setTrackIndex(0);
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        setTransitionEnabled(true);
+      });
+    });
+  };
+
+  return (
+    <section
+      aria-labelledby="client-testimonials-heading"
+      className="testimonial-stable-section relative overflow-hidden px-4 py-7 sm:px-6 sm:py-9 lg:px-10 lg:py-12"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_25%,rgba(75,34,255,0.065),transparent_27%),radial-gradient(circle_at_91%_75%,rgba(255,47,125,0.065),transparent_29%)]" />
+
+      <div className="relative mx-auto max-w-[1320px]">
+        <div className="grid items-center gap-7 lg:grid-cols-[0.78fr_1.22fr] lg:gap-10">
+          <div className="lg:pr-2">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#ded7ff] bg-white/90 px-3.5 py-2 shadow-[0_8px_24px_rgba(75,34,255,0.06)] backdrop-blur">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#6b45ff]/45" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#5b35ff]" />
+              </span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#5b35ff]">
+                Client Stories
+              </span>
+            </div>
+
+            <h2
+              id="client-testimonials-heading"
+              className="mt-4 max-w-[540px] text-[29px] font-bold leading-[1.14] tracking-[-0.04em] text-[#081232] sm:text-[37px] lg:text-[40px]"
+            >
+              Built for results.
+              <TypewriterText
+                display="block"
+                className="mt-1 overflow-visible pb-[0.12em] pr-[0.08em]"
+                speed={105}
+                delay={220}
+                cursorClassName="bg-[#ff2f7d]"
+                segments={[
+                  {
+                    text: "Remembered for trust.",
+                    className:
+                      "bg-gradient-to-r from-[#4b22ff] via-[#763cff] to-[#ff2f7d] bg-clip-text text-transparent",
+                  },
+                ]}
+              />
+            </h2>
+
+            <p className="mt-4 max-w-[510px] text-[15px] font-medium leading-7 text-[#34405f]/86 sm:text-[16px]">
+              Behind every successful launch is a strong working relationship.
+              These stories reflect how we listen, communicate and stay
+              accountable from the first idea to final delivery.
+            </p>
+
+            <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 text-[12px] font-bold text-[#34405f]/74">
+              <span className="inline-flex items-center gap-2">
+                <BadgeCheck className="h-4 w-4 text-[#4b22ff]" />
+                Genuine project feedback
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <Star className="h-4 w-4 fill-[#ffb800] text-[#ffb800]" />
+                Clear, dependable delivery
+              </span>
+            </div>
+          </div>
+
+          <div
+            className="relative"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onFocusCapture={() => setIsPaused(true)}
+            onBlurCapture={() => setIsPaused(false)}
+          >
+            <div className="relative overflow-hidden rounded-[22px] border border-white/15 bg-[linear-gradient(135deg,#07183f_0%,#15164d_52%,#52145f_118%)] p-4 text-white shadow-[0_22px_58px_rgba(23,18,79,0.23)] sm:rounded-[24px] sm:p-5 lg:p-6">
+              <div className="pointer-events-none absolute -left-24 -top-28 h-64 w-64 rounded-full bg-[#00b8ff]/15 blur-[85px]" />
+              <div className="pointer-events-none absolute -bottom-32 -right-20 h-72 w-72 rounded-full bg-[#ff2f7d]/26 blur-[90px]" />
+              <div className="pointer-events-none absolute inset-0 opacity-[0.09] [background-image:radial-gradient(circle_at_1px_1px,#ffffff_1px,transparent_1px)] [background-size:22px_22px]" />
+
+              <div className="relative z-10 flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-[13px] bg-white/[0.09] text-[#ff73aa] ring-1 ring-white/10 backdrop-blur">
+                    <Quote className="h-[18px] w-[18px] fill-current" />
+                  </div>
+
+                  <div>
+                    <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-white/54">
+                      In their own words
+                    </p>
+                    <p className="mt-1 text-[11px] font-bold text-white/88 sm:text-[12px]">
+                      A real MITOMS client experience
+                    </p>
+                  </div>
+                </div>
+
+                <div
+                  className="hidden shrink-0 items-center gap-1 min-[430px]:flex"
+                  aria-label="5 out of 5 stars"
+                >
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <Star
+                      key={index}
+                      className="h-3.5 w-3.5 fill-[#ffc83d] text-[#ffc83d] sm:h-4 sm:w-4"
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="relative mt-4 h-[260px] overflow-hidden min-[430px]:h-[245px] sm:mt-5 sm:h-[250px] lg:h-[260px]">
+                <div
+                  className="h-full will-change-transform"
+                  style={{
+                    transform: `translate3d(0, -${trackIndex * 100}%, 0)`,
+                    transition:
+                      transitionEnabled && !prefersReducedMotion
+                        ? "transform 820ms cubic-bezier(0.16, 1, 0.3, 1)"
+                        : "none",
+                  }}
+                  onTransitionEnd={handleTrackTransitionEnd}
+                >
+                  {sliderItems.map((testimonial, index) => (
+                    <article
+                      key={`${testimonial.company}-${index}`}
+                      aria-hidden={index !== trackIndex}
+                      className="flex h-full shrink-0 flex-col justify-between"
+                    >
+                      <div>
+                        <blockquote className="max-w-[790px] text-[15px] font-semibold leading-[1.5] tracking-[-0.018em] text-white min-[430px]:text-[16px] sm:text-[18px] sm:leading-[1.52] lg:text-[20px]">
+                          “{testimonial.quote}”
+                        </blockquote>
+
+                        <div className="mt-3 hidden flex-wrap gap-2 sm:flex">
+                          {testimonial.highlights.map((highlight) => (
+                            <span
+                              key={highlight}
+                              className="rounded-full border border-white/12 bg-[#24265f] px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.1em] text-white/74 lg:px-3 lg:py-1.5 lg:text-[10px]"
+                            >
+                              {highlight}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="mt-4 flex items-center justify-between gap-3 border-t border-white/10 pt-3 sm:gap-4 sm:pt-4">
+                        <div className="flex min-w-0 items-center gap-3">
+                          <div
+                            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-gradient-to-br ${testimonial.accent} text-[11px] font-black text-white shadow-[0_10px_22px_rgba(0,0,0,0.22)] sm:h-12 sm:w-12 sm:text-[12px]`}
+                          >
+                            {testimonial.initials}
+                          </div>
+
+                          <div className="min-w-0">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <h3 className="text-[14px] font-bold text-white sm:text-[15px]">
+                                {testimonial.name}
+                              </h3>
+                              <span className="rounded-full border border-white/12 bg-[#25265d] px-2 py-0.5 text-[8px] font-bold uppercase tracking-[0.12em] text-white/64 sm:text-[9px]">
+                                {testimonial.role}
+                              </span>
+                            </div>
+                            <p className="mt-1 truncate text-[11px] font-semibold text-white/60 sm:text-[12px]">
+                              {testimonial.company}
+                              <span className="sm:hidden"> · {testimonial.project}</span>
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="hidden max-w-[210px] shrink-0 text-right sm:block">
+                          <p className="text-[8px] font-bold uppercase tracking-[0.16em] text-[#ff7ca8] lg:text-[9px]">
+                            Project
+                          </p>
+                          <p className="mt-1 text-[10px] font-bold leading-4 text-white/72 lg:text-[11px] lg:leading-5">
+                            {testimonial.project}
+                          </p>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+
+              <div className="relative z-10 mt-3 flex items-center gap-4 sm:mt-4">
+                <div className="h-[3px] flex-1 overflow-hidden rounded-full bg-white/10">
+                  <span
+                    key={visibleIndex}
+                    className="testimonial-progress block h-full origin-left rounded-full bg-gradient-to-r from-[#00b8ff] via-[#7b3cff] to-[#ff2f7d]"
+                  />
+                </div>
+
+                <span className="min-w-[42px] text-right text-[10px] font-bold tracking-[0.14em] text-white/48">
+                  {String(visibleIndex + 1).padStart(2, "0")} / 03
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
 function ProcessStep({
   icon: Icon,
   no,
@@ -1005,7 +1301,7 @@ export default function Home() {
       </section>
 
       {/* SERVICES - WHAT WE DO */}
-      <section className="mx-auto max-w-[1320px] px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-20">
+      <section className="services-stable-section mx-auto max-w-[1320px] px-4 py-14 sm:px-6 sm:py-18 lg:px-10 lg:py-20">
         <div data-scroll-reveal className="text-center">
           <p className="text-[13px] font-bold uppercase tracking-[0.28em] text-[#ff2f7d]">
             <TypewriterText
@@ -1038,8 +1334,6 @@ export default function Home() {
                 key={item.no}
                 href={item.href}
                 aria-label={`Explore ${item.title}`}
-                data-scroll-reveal
-                data-reveal-order={index}
                 className="group relative min-h-[340px] overflow-hidden rounded-2xl border border-[#dfe4f5] bg-[#020b2b] p-5 text-white shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl sm:min-h-[360px] sm:p-6"
               >
                 {/* Brighter Background Image */}
@@ -1070,6 +1364,8 @@ export default function Home() {
           })}
         </div>
       </section>
+
+      <TestimonialSection />
 
       {/* ========== IMPACT - सिर्फ Build & Implement का टेक्स्ट ठीक किया ========== */}
       <section className="relative overflow-hidden px-4 pb-12 pt-10 sm:px-6 sm:pb-14 lg:px-10">
@@ -1500,6 +1796,11 @@ export default function Home() {
         }
 
 
+        .services-stable-section,
+        .testimonial-stable-section {
+          overflow-anchor: none;
+        }
+
         .scroll-reveal-ready [data-scroll-reveal] {
           opacity: 0;
           transform: translate3d(0, 28px, 0);
@@ -1623,12 +1924,31 @@ export default function Home() {
           }
         }
 
+
+        .testimonial-progress {
+          animation: testimonialProgress 6.2s linear forwards;
+        }
+
+        @keyframes testimonialProgress {
+          from {
+            transform: scaleX(0);
+          }
+          to {
+            transform: scaleX(1);
+          }
+        }
+
         @media (prefers-reduced-motion: reduce) {
           .hero-orb,
           .home-hero-float-card,
           .home-hero-mobile-card {
             animation: none !important;
             transform: none !important;
+          }
+
+          .testimonial-progress {
+            animation: none !important;
+            transform: scaleX(1) !important;
           }
 
           .scroll-reveal-ready [data-scroll-reveal] {
