@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
-  AlertTriangle,
   ArrowRight,
   Baby,
   CheckCircle2,
@@ -27,9 +26,13 @@ import ConsultationModal from "./ConsultationModal";
 import { useBidirectionalScrollReveal } from "./useBidirectionalScrollReveal";
 
 const policyDetails = {
-  companyName: "MITOMS Technologies",
-  contactEmail: "privacy@mitoms.com",
-  lastUpdated: "12 July 2026",
+  legalName: "MITOMS TECHNOLOGIES PRIVATE LIMITED",
+  brandName: "MITOMS",
+  cin: "U62012UP2023PTC192943",
+  registeredLocation:
+    "Shalimar Garden Extension, Sahibabad, Ghaziabad, Uttar Pradesh, India - 201005",
+  contactEmail: "sales@mitoms.com",
+  lastUpdated: "23 July 2026",
 };
 
 type SummaryCard = {
@@ -87,16 +90,19 @@ const sections: PolicySection[] = [
     title: "Information We Collect",
     icon: Database,
     paragraphs: [
-      "We collect information that you choose to provide when you contact us, request a consultation, submit a project enquiry or otherwise communicate with MITOMS Technologies.",
-      "We may also receive limited technical information when you visit our website so that the site can operate securely and effectively.",
+      "We collect information that you choose to provide when you contact us, request a consultation, submit a project enquiry or otherwise communicate with MITOMS.",
+      "We also receive limited technical and usage information when you visit our website so that we can operate the site, understand performance and protect our systems.",
     ],
     bullets: [
       "Name, email address, phone number and company details",
-      "Project requirements, messages and files you choose to submit",
-      "Communication history relating to your enquiry or project",
-      "Device, browser, approximate location, IP address and website usage information",
-      "Cookie or similar technology information, where applicable",
+      "Selected service, estimated budget and optional project description",
+      "Messages, attachments and communication history you choose to provide",
+      "IP address, browser, device, operating system and approximate location",
+      "Pages visited, referral source, timestamps and website interaction information",
+      "Cookie and analytics identifiers, where enabled and permitted",
     ],
+    note:
+      "Please do not submit passwords, payment-card information, government identification numbers, health records or other highly sensitive information through a general website form.",
   },
   {
     id: "how-we-use-information",
@@ -104,35 +110,37 @@ const sections: PolicySection[] = [
     title: "How We Use Information",
     icon: Settings2,
     paragraphs: [
-      "We use personal information only for legitimate business purposes connected with our website, enquiries, services and client relationships.",
+      "We use personal information for business purposes connected with our website, enquiries, proposals, services, client relationships and legal responsibilities, as permitted by applicable law.",
     ],
     bullets: [
       "Responding to enquiries and consultation requests",
       "Preparing proposals, estimates and project recommendations",
-      "Delivering and supporting our services",
-      "Managing client communication and business relationships",
-      "Improving website performance, usability and security",
-      "Detecting misuse, fraud, technical problems or security threats",
-      "Meeting applicable legal, regulatory or contractual obligations",
+      "Sending acknowledgement or confirmation emails after a form submission",
+      "Delivering, managing and supporting agreed services",
+      "Managing client communication, invoices and business records",
+      "Improving website performance, usability and content",
+      "Detecting spam, misuse, fraud, technical problems or security threats",
+      "Meeting contractual, accounting, tax, regulatory and legal obligations",
     ],
   },
   {
     id: "cookies",
     number: "03",
-    title: "Cookies and Similar Technologies",
+    title: "Cookies and Google Analytics",
     icon: Cookie,
     paragraphs: [
-      "Our website may use necessary cookies and similar technologies to remember preferences, maintain functionality, understand website performance and improve the visitor experience.",
-      "Where consent is required, optional cookies should only be used after you make a choice through the available cookie controls.",
+      "Our website may use essential cookies and similar technologies required for normal functionality, security and user preferences.",
+      "We use Google Analytics to understand general website traffic and interactions. Google Analytics may collect pseudonymous usage information through cookies or similar technologies, such as pages visited, device and browser details, approximate location and referral information.",
+      "We do not intentionally send names, email addresses, phone numbers or other directly identifying form information to Google Analytics. Where consent is required, optional analytics should only operate after an appropriate choice has been made.",
     ],
     bullets: [
-      "Essential cookies required for core website functionality",
-      "Preference cookies that remember selected settings",
-      "Analytics cookies used to understand website usage, if enabled",
-      "Third-party service cookies, where those services are integrated",
+      "Essential technologies needed for website operation and security",
+      "Preference technologies that remember selected settings, where used",
+      "Google Analytics technologies used to measure website usage",
+      "Browser or device controls that may allow cookies to be blocked or deleted",
     ],
     note:
-      "Update this section to match the exact analytics, advertising, chat, form and embedded services used on the live website.",
+      "Blocking some technologies may affect limited website functionality. Analytics preferences may also be managed through any cookie controls made available on the website.",
   },
   {
     id: "sharing-information",
@@ -140,15 +148,19 @@ const sections: PolicySection[] = [
     title: "When We Share Information",
     icon: Share2,
     paragraphs: [
-      "We do not sell personal information. We may share information only where reasonably necessary for our operations, service delivery, security or legal responsibilities.",
+      "We do not sell personal information. We share information only where reasonably necessary to operate our business, respond to you, deliver services, maintain security or comply with law.",
     ],
     bullets: [
-      "Trusted hosting, cloud, email, analytics or technical service providers",
+      "Hostinger and related hosting or infrastructure providers",
+      "Email systems used to deliver website enquiries and confirmations",
+      "Google Analytics and supporting measurement services",
       "Professional advisers such as legal, accounting or security specialists",
-      "Project partners or contractors working under confidentiality obligations",
+      "Project partners or contractors working under appropriate obligations",
       "Authorities or other parties where disclosure is legally required",
       "A successor organisation in connection with a merger, acquisition or business transfer",
     ],
+    note:
+      "Our consultation forms are submitted to a PHP-based endpoint hosted with our website provider and are delivered to authorised MITOMS email recipients.",
   },
   {
     id: "data-security",
@@ -160,11 +172,12 @@ const sections: PolicySection[] = [
       "No method of internet transmission or electronic storage is completely secure, so absolute security cannot be guaranteed.",
     ],
     bullets: [
-      "Access controls and account permissions",
-      "Secure hosting and encrypted connections where appropriate",
+      "Encrypted website connections where available",
+      "Access controls and limited account permissions",
+      "Input validation, spam controls and request-rate protections on forms",
       "System monitoring, maintenance and software updates",
       "Confidentiality expectations for employees and service providers",
-      "Data minimisation and limited retention practices",
+      "Data minimisation and retention controls where practical",
     ],
   },
   {
@@ -173,8 +186,9 @@ const sections: PolicySection[] = [
     title: "How Long We Keep Information",
     icon: Clock3,
     paragraphs: [
-      "We retain personal information only for as long as reasonably necessary for the purpose for which it was collected, including business, contractual, security, accounting and legal requirements.",
-      "Retention periods may differ depending on the nature of the information, the relationship and any applicable obligation.",
+      "We keep personal information only for as long as reasonably necessary for the purpose for which it was collected and for relevant business, contractual, security, accounting, tax and legal requirements.",
+      "Enquiry and project records may be retained while we respond, prepare a proposal, manage a client relationship or maintain required business records. Analytics information is retained according to the settings applied in the relevant analytics account.",
+      "When information is no longer reasonably required, we may delete, anonymise or securely archive it, subject to applicable obligations and technical limitations.",
     ],
   },
   {
@@ -183,28 +197,28 @@ const sections: PolicySection[] = [
     title: "Your Privacy Rights and Choices",
     icon: UserCheck,
     paragraphs: [
-      "Depending on your location and applicable law, you may have rights relating to the personal information we hold about you.",
+      "Depending on your location and the law that applies, you may have rights relating to the personal information we hold about you.",
     ],
     bullets: [
-      "Request access to personal information",
+      "Request information about personal data we process",
       "Request correction of inaccurate or incomplete information",
-      "Request deletion where legally available",
-      "Object to or restrict certain processing",
+      "Request deletion or erasure where legally available",
       "Withdraw consent where processing depends on consent",
-      "Request a portable copy of certain information",
-      "Complain to an appropriate data protection authority",
+      "Raise a concern or request grievance redressal",
+      "Nominate another person to exercise available rights where applicable",
+      "Complain to an appropriate data-protection authority where available",
     ],
     note:
-      "We may need to verify your identity before completing a privacy request. Some rights may be limited by applicable law or legitimate business requirements.",
+      "We may need to verify your identity and request before taking action. Some requests may be limited by legal, contractual, security or record-keeping obligations.",
   },
   {
     id: "international-transfers",
     number: "08",
-    title: "International Data Transfers",
+    title: "International Data Processing",
     icon: Globe2,
     paragraphs: [
-      "Our service providers, project teams or technology systems may operate in more than one country. Information may therefore be processed outside the country where it was originally collected.",
-      "Where required, we use appropriate contractual, organisational or technical safeguards for international transfers.",
+      "Some hosting, analytics, email, cloud or technical service providers may operate systems in more than one country. Information may therefore be processed outside the country where it was originally collected.",
+      "Where required, we use service-provider terms, contractual protections and reasonable organisational or technical measures for such processing, subject to applicable law.",
     ],
   },
   {
@@ -213,8 +227,8 @@ const sections: PolicySection[] = [
     title: "Third-Party Links and Services",
     icon: Link2,
     paragraphs: [
-      "Our website may contain links to third-party websites, platforms or services. Their privacy practices are controlled by those third parties and not by MITOMS Technologies.",
-      "We encourage you to review the privacy information of any external service before providing personal information.",
+      "Our website may contain links to third-party websites, social networks, platforms or services. Their privacy practices and content are controlled by those third parties and not by MITOMS.",
+      "We encourage you to review the privacy information of any external service before providing personal information or using its features.",
     ],
   },
   {
@@ -223,8 +237,8 @@ const sections: PolicySection[] = [
     title: "Children's Privacy",
     icon: Baby,
     paragraphs: [
-      "Our website and services are intended for businesses and general professional audiences. They are not intentionally directed to children, and we do not knowingly collect personal information from children through this website.",
-      "Please contact us if you believe a child has provided personal information so that we can review the situation and take appropriate action.",
+      "Our website and services are intended for businesses and professional audiences and are not intentionally directed to persons under 18 years of age.",
+      "We do not knowingly collect personal information from children through this website. Please contact us if you believe a child has provided information so that we can review and take appropriate action.",
     ],
   },
   {
@@ -233,18 +247,27 @@ const sections: PolicySection[] = [
     title: "Updates to This Privacy Policy",
     icon: RefreshCcw,
     paragraphs: [
-      "We may update this Privacy Policy when our services, website features, legal obligations or data practices change.",
-      "The latest version will be posted on this page with an updated revision date. Material changes may also be communicated through an appropriate additional notice.",
+      "We may update this Privacy Policy when our website, services, technology providers, legal obligations or data practices change.",
+      "The latest version will be posted on this page with an updated revision date. Material changes may also be communicated through an additional notice where appropriate.",
     ],
   },
   {
     id: "contact-us",
     number: "12",
-    title: "Contact Us",
+    title: "Company and Privacy Contact",
     icon: Mail,
     paragraphs: [
-      "For privacy questions, concerns or requests, contact MITOMS Technologies using the details below or through our website contact page.",
+      "MITOMS TECHNOLOGIES PRIVATE LIMITED is responsible for the website and the personal information described in this policy.",
+      "For privacy questions, corrections, deletion requests or grievances, contact us using the email address below or through our website contact page.",
+      "Registered location: Shalimar Garden Extension, Sahibabad, Ghaziabad, Uttar Pradesh, India - 201005.",
     ],
+    bullets: [
+      "CIN: U62012UP2023PTC192943",
+      "Privacy and business email: sales@mitoms.com",
+      "Website: https://mitoms.com/",
+    ],
+    note:
+      "Use the subject line 'Privacy Request' and include enough information for us to identify and respond to your request. Do not send passwords or highly sensitive documents by email unless specifically requested through a secure method.",
   },
 ];
 
@@ -431,8 +454,8 @@ export default function PrivacyPolicyPage() {
               </h1>
 
               <p className="mt-7 max-w-[640px] text-[16px] font-medium leading-8 text-[#27314f]/90 sm:text-[17px]">
-                This policy explains what {policyDetails.companyName} may
-                collect, why we use it, when it may be shared and the choices
+                This policy explains what {policyDetails.brandName} may collect, why we use it,
+                when it may be shared and the choices
                 available to you.
               </p>
 
@@ -604,20 +627,23 @@ export default function PrivacyPolicyPage() {
             </aside>
 
             <div className="space-y-5">
-              <div className="rounded-[24px] border border-[#eadff0] bg-[linear-gradient(105deg,#fff8fb,#f7f4ff)] p-6 shadow-[0_12px_32px_rgba(75,34,255,0.05)] sm:p-7">
+              <div className="rounded-[24px] border border-[#ded7f3] bg-[linear-gradient(105deg,#f8f5ff,#fff7fb)] p-6 shadow-[0_12px_32px_rgba(75,34,255,0.05)] sm:p-7">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-[#fff0f5] text-[#ff2f7d]">
-                    <AlertTriangle size={21} />
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-[#f0ecff] text-[#4b22ff]">
+                    <ShieldCheck size={21} />
                   </div>
+
                   <div>
                     <h2 className="text-[16px] font-bold text-[#081232]">
-                      Please review this policy before publishing
+                      Privacy Contact and Company Details
                     </h2>
+
                     <p className="mt-2 text-[14px] font-medium leading-7 text-[#27314f]/86">
-                      This page is a general website template. Update it so it
-                      accurately describes the tools, forms, cookies, hosting
-                      providers, analytics services and data practices actually
-                      used by your business.
+                      {policyDetails.legalName} · CIN {policyDetails.cin}
+                      <br />
+                      {policyDetails.registeredLocation}
+                      <br />
+                      Privacy enquiries: {policyDetails.contactEmail}
                     </p>
                   </div>
                 </div>
@@ -699,7 +725,7 @@ export default function PrivacyPolicyPage() {
                         >
                           <div>
                             <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#ff2f7d]">
-                              Email
+                              Privacy Email
                             </p>
                             <p className="mt-2 break-all text-[13px] font-bold text-[#081232] group-hover:text-[#4b22ff]">
                               {policyDetails.contactEmail}

@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
-  AlertTriangle,
   ArrowRight,
   Ban,
   BriefcaseBusiness,
@@ -33,9 +32,13 @@ import ConsultationModal from "./ConsultationModal";
 import { useBidirectionalScrollReveal } from "./useBidirectionalScrollReveal";
 
 const termsDetails = {
-  companyName: "MITOMS Technologies",
-  contactEmail: "legal@mitoms.com",
-  lastUpdated: "12 July 2026",
+  legalName: "MITOMS TECHNOLOGIES PRIVATE LIMITED",
+  displayName: "MITOMS",
+  cin: "U62012UP2023PTC192943",
+  registeredLocation:
+    "SMG-1, Shalimar Garden Extension, Sahibabad, Ghaziabad, Loni, Uttar Pradesh, India - 201005",
+  contactEmail: "sales@mitoms.com",
+  lastUpdated: "23 July 2026",
 };
 
 type SummaryCard = {
@@ -93,18 +96,18 @@ const sections: TermsSection[] = [
     title: "Acceptance of These Terms",
     icon: FileCheck2,
     paragraphs: [
-      "By accessing or using this website, you agree to these Terms and Conditions. If you do not agree, please stop using the website.",
-      "These website terms apply separately from any proposal, statement of work, master services agreement, support agreement or other contract entered into with MITOMS Technologies.",
+      "By accessing or using this website, you agree to these Terms and Conditions. If you do not agree with them, please stop using the website.",
+      "These website terms are separate from any proposal, quotation, statement of work, master services agreement, non-disclosure agreement, support agreement or other written contract entered into with MITOMS.",
     ],
   },
   {
     id: "about-website",
     number: "02",
-    title: "About This Website",
+    title: "About MITOMS and This Website",
     icon: Globe2,
     paragraphs: [
-      "This website provides general information about MITOMS Technologies, our capabilities, services, portfolio concepts and ways to contact our team.",
-      "Website content is provided for general information and does not, by itself, create a client relationship, professional engagement, binding quotation or commitment to deliver services.",
+      "This website is operated by MITOMS TECHNOLOGIES PRIVATE LIMITED, CIN U62012UP2023PTC192943, with its registered location in Shalimar Garden Extension, Sahibabad, Ghaziabad, Uttar Pradesh, India.",
+      "The website provides general information about our capabilities, services, work, business approach and ways to contact our team. Website content does not, by itself, create a client relationship, binding quotation or commitment to deliver services.",
     ],
   },
   {
@@ -113,8 +116,8 @@ const sections: TermsSection[] = [
     title: "Services, Proposals and Project Agreements",
     icon: BriefcaseBusiness,
     paragraphs: [
-      "Any project scope, timeline, price, deliverable, dependency, acceptance process, support commitment or ownership arrangement must be confirmed in a separate written agreement.",
-      "Where there is a conflict between these website terms and a signed project agreement, the signed project agreement will control for that project.",
+      "Project scope, timelines, prices, deliverables, dependencies, approvals, support commitments and ownership arrangements are confirmed through a written proposal, quotation, order form or project agreement.",
+      "Where a signed project agreement conflicts with these website terms, the signed project agreement will control for that particular engagement.",
     ],
     bullets: [
       "Project scope and deliverables",
@@ -131,13 +134,13 @@ const sections: TermsSection[] = [
     title: "Your Responsibilities",
     icon: UserCheck,
     paragraphs: [
-      "You agree to provide accurate information when submitting an enquiry and to use the website lawfully and responsibly.",
+      "You agree to provide accurate information when submitting an enquiry and to use the website and our communication channels lawfully and responsibly.",
     ],
     bullets: [
       "Do not submit false, misleading or unauthorised information",
       "Do not upload malware, harmful code or unlawful material",
       "Do not attempt to interfere with website security or availability",
-      "Do not access systems, data or areas without permission",
+      "Do not access systems, data or restricted areas without permission",
       "Do not use the website to violate another person's rights",
       "Keep confidential any access credentials issued for a client service",
     ],
@@ -156,7 +159,7 @@ const sections: TermsSection[] = [
       "Copying or republishing protected content without authorisation",
       "Impersonation, fraud, harassment or unlawful communication",
       "Introducing viruses, ransomware, spyware or other malicious software",
-      "Using website content to misrepresent an affiliation with MITOMS Technologies",
+      "Using website content to misrepresent an affiliation with MITOMS",
     ],
   },
   {
@@ -165,11 +168,11 @@ const sections: TermsSection[] = [
     title: "Intellectual Property",
     icon: Copyright,
     paragraphs: [
-      "Unless otherwise stated, the website design, text, graphics, branding, interface elements, code, illustrations and other content are owned by or licensed to MITOMS Technologies and are protected by applicable intellectual-property laws.",
+      "Unless otherwise stated, the website design, text, graphics, branding, interface elements, code, illustrations and other content are owned by or licensed to MITOMS and are protected by applicable intellectual-property laws.",
       "You may view and use the website for legitimate personal or business evaluation. No ownership rights are transferred by allowing access to the website.",
     ],
     note:
-      "Client-project ownership, source-code rights, design files, reusable components, third-party materials and portfolio rights should be addressed in the relevant signed project agreement.",
+      "Client-project ownership, source-code rights, design files, reusable components, third-party materials and portfolio rights will be governed by the relevant signed project agreement.",
   },
   {
     id: "client-materials",
@@ -177,8 +180,8 @@ const sections: TermsSection[] = [
     title: "Client Materials and Instructions",
     icon: Users,
     paragraphs: [
-      "Where a client provides logos, text, images, data, software, credentials or other materials, the client is responsible for confirming that it has the necessary rights and permissions for their intended use.",
-      "We may rely on the accuracy, legality and completeness of materials and instructions supplied by the client unless otherwise agreed in writing.",
+      "Where a client provides logos, text, images, data, software, credentials or other materials, the client confirms that it has the necessary rights and permissions for their intended use.",
+      "MITOMS may rely on the accuracy, legality and completeness of materials and instructions supplied by the client unless otherwise agreed in writing.",
     ],
   },
   {
@@ -188,34 +191,74 @@ const sections: TermsSection[] = [
     icon: CircleDollarSign,
     paragraphs: [
       "Website descriptions do not constitute a fixed-price offer. Pricing is confirmed through a written proposal, quotation, order form or project agreement.",
-      "Invoices, payment dates, deposits, late-payment consequences, taxes, expenses and refund arrangements are governed by the applicable project agreement or invoice terms.",
+      "Unless a written proposal states a different schedule, a standard project may use 40% advance payment to begin work, 30% after the first major milestone and 30% before final deployment or source-code handover.",
+    ],
+    bullets: [
+      "Applicable taxes are added as required by law",
+      "Third-party licences, hosting, domains, paid APIs and similar costs may be billed separately",
+      "Work may be paused when an invoice remains overdue",
+      "Final files, deployment or ownership transfer may depend on payment of outstanding amounts",
     ],
     note:
-      "Before publication, align this section with your actual invoicing, tax, cancellation and refund practices.",
+      "The payment schedule stated in the accepted proposal, invoice or signed agreement will always take priority over this general website description.",
+  },
+  {
+    id: "cancellation-refunds",
+    number: "09",
+    title: "Cancellation, Refunds and Project Pauses",
+    icon: RefreshCcw,
+    paragraphs: [
+      "A project may be cancelled by written notice, subject to the commercial terms agreed for that engagement.",
+      "Payments relating to completed work, approved milestones and non-refundable third-party expenses are not refundable. Any amount received for work that has not started may be considered for refund after deducting completed work, committed resources, applicable taxes and unavoidable charges.",
+    ],
+    bullets: [
+      "Cancellation requests must be made in writing",
+      "Work completed up to the cancellation date remains payable",
+      "Third-party purchases and committed external expenses are non-refundable",
+      "Extended client delays may require a revised timeline, restart fee or new schedule",
+    ],
+    note:
+      "Project-specific cancellation and refund terms in an accepted proposal or signed agreement will take priority.",
+  },
+  {
+    id: "delivery-support",
+    number: "10",
+    title: "Delivery, Acceptance and Post-Launch Support",
+    icon: Wrench,
+    paragraphs: [
+      "Delivery dates depend on timely content, credentials, feedback, approvals and other client dependencies. Delays in these inputs may affect the agreed schedule.",
+      "Unless a written agreement states otherwise, completed projects include 30 calendar days of complimentary post-launch technical support for reproducible defects within the agreed project scope.",
+    ],
+    bullets: [
+      "Support covers defects in agreed and delivered functionality",
+      "New features, redesigns, content changes and additional pages are excluded",
+      "Third-party platform, API, hosting or policy changes are excluded",
+      "Ongoing maintenance and enhancement support may be purchased separately",
+    ],
   },
   {
     id: "third-party-services",
-    number: "09",
+    number: "11",
     title: "Third-Party Tools, Links and Services",
     icon: Link2,
     paragraphs: [
       "Our website or services may refer to, integrate with or rely on third-party platforms, libraries, hosting providers, payment services, APIs or websites.",
-      "Third-party services are governed by their own terms, availability, security and privacy practices. We are not responsible for third-party content or changes outside our reasonable control.",
+      "Third-party services are governed by their own terms, availability, pricing, security and privacy practices. MITOMS is not responsible for third-party content or changes outside our reasonable control.",
     ],
   },
   {
     id: "confidentiality",
-    number: "10",
+    number: "12",
     title: "Confidentiality",
     icon: LockKeyhole,
     paragraphs: [
-      "Information shared through a general website enquiry should not be treated as confidential unless confidentiality has been separately agreed in writing.",
-      "Confidential project information is handled according to the applicable non-disclosure agreement, project agreement and reasonable security practices.",
+      "We handle enquiry information responsibly. However, information shared through a general website form or ordinary email should not be treated as legally confidential unless confidentiality has been separately agreed in writing.",
+      "Please avoid sending trade secrets, production credentials or highly sensitive information before a suitable non-disclosure agreement is in place. Confidential project information is handled according to the applicable agreement and reasonable security practices.",
     ],
   },
   {
     id: "availability",
-    number: "11",
+    number: "13",
     title: "Website Availability and Changes",
     icon: Wrench,
     paragraphs: [
@@ -225,39 +268,37 @@ const sections: TermsSection[] = [
   },
   {
     id: "disclaimers",
-    number: "12",
+    number: "14",
     title: "Disclaimers",
     icon: TriangleAlert,
     paragraphs: [
-      "The website and its general content are provided on an as-available basis. To the maximum extent permitted by applicable law, we do not make warranties about completeness, uninterrupted availability, fitness for a particular purpose or the results of relying on general website information.",
-      "Portfolio concepts, illustrations, statistics and examples should not be interpreted as guaranteed results for every project. Actual outcomes depend on scope, data, market conditions, client participation and many other factors.",
+      "The website and its general content are provided on an as-available basis. To the maximum extent permitted by applicable law, we do not make warranties about completeness, uninterrupted availability, fitness for a particular purpose or results obtained from relying on general website information.",
+      "Portfolio examples, illustrations, statistics and testimonials should not be interpreted as guaranteed results for every project. Actual outcomes depend on scope, data, market conditions, client participation and other factors.",
     ],
   },
   {
     id: "liability",
-    number: "13",
+    number: "15",
     title: "Limitation of Liability",
     icon: ShieldCheck,
     paragraphs: [
-      "To the maximum extent permitted by applicable law, MITOMS Technologies will not be liable for indirect, incidental, special, punitive or consequential loss arising only from use of, or inability to use, this website.",
-      "Any liability connected with paid services is governed by the limitation and allocation of risk agreed in the applicable signed contract.",
+      "To the maximum extent permitted by applicable law, MITOMS will not be liable for indirect, incidental, special, punitive or consequential loss arising solely from use of, or inability to use, this website.",
+      "Any liability connected with paid services is governed by the limitations, exclusions and allocation of risk agreed in the applicable signed contract.",
     ],
-    note:
-      "Liability clauses can be restricted or treated differently depending on the jurisdiction, customer type and nature of the service. Obtain legal review before publication.",
   },
   {
     id: "indemnity",
-    number: "14",
+    number: "16",
     title: "Indemnity",
     icon: Handshake,
     paragraphs: [
-      "To the extent permitted by applicable law, you agree to be responsible for losses or claims arising from your unlawful use of the website, violation of these terms or infringement caused by materials you submit.",
+      "To the extent permitted by applicable law, you are responsible for losses or claims arising from your unlawful use of the website, violation of these terms or infringement caused by materials you submit.",
       "Any broader indemnity relating to a client project must be stated in the applicable signed agreement.",
     ],
   },
   {
     id: "termination",
-    number: "15",
+    number: "17",
     title: "Suspension and Termination",
     icon: Clock3,
     paragraphs: [
@@ -267,33 +308,32 @@ const sections: TermsSection[] = [
   },
   {
     id: "governing-law",
-    number: "16",
+    number: "18",
     title: "Governing Law and Disputes",
     icon: Landmark,
     paragraphs: [
-      "The governing law, dispute procedure and competent courts should match the legal entity operating this website and the jurisdiction stated in the final published version.",
-      "Where a separate project agreement applies, its governing-law and dispute-resolution provisions will control for that project.",
+      "These website terms are governed by the laws of India. Subject to applicable law, courts located in Ghaziabad, Uttar Pradesh will have jurisdiction over disputes relating specifically to use of this website.",
+      "Where a separate project agreement applies, its governing-law, jurisdiction and dispute-resolution provisions will control for that project.",
     ],
-    note:
-      "Replace this section with the registered company name, governing state or country, court jurisdiction and any arbitration or mediation process approved by your legal adviser.",
   },
   {
     id: "changes",
-    number: "17",
+    number: "19",
     title: "Changes to These Terms",
     icon: RefreshCcw,
     paragraphs: [
       "We may update these Terms and Conditions when our website, services, business practices or legal requirements change.",
-      "The updated version will be published on this page with a revised date. Continued use after an update indicates acceptance to the extent permitted by applicable law.",
+      "The latest version will be published on this page with a revised date. Continued use after an update indicates acceptance to the extent permitted by applicable law.",
     ],
   },
   {
     id: "contact",
-    number: "18",
-    title: "Contact Us",
+    number: "20",
+    title: "Contact and Company Information",
     icon: Mail,
     paragraphs: [
-      "For questions about these Terms and Conditions, contact MITOMS Technologies using the details below or through the website contact page.",
+      "For questions about these Terms and Conditions, project agreements or legal correspondence, contact MITOMS using the details below or through our website contact page.",
+      "Legal entity: MITOMS TECHNOLOGIES PRIVATE LIMITED. CIN: U62012UP2023PTC192943. Registered location: Shalimar Garden Extension, Sahibabad, Ghaziabad, Uttar Pradesh, India - 201005.",
     ],
   },
 ];
@@ -484,7 +524,7 @@ export default function TermsAndConditionsPage() {
               </h1>
 
               <p className="mt-7 max-w-[650px] text-[16px] font-medium leading-8 text-[#27314f]/90 sm:text-[17px]">
-                These terms explain the rules for using the {termsDetails.companyName} website
+                These terms explain the rules for using the {termsDetails.legalName} website
                 and how website information relates to proposals, projects and
                 separate service agreements.
               </p>
@@ -680,23 +720,34 @@ export default function TermsAndConditionsPage() {
 
             {/* SECTIONS */}
             <div className="space-y-5">
-              <div className="rounded-[24px] border border-[#eadff0] bg-[linear-gradient(105deg,#fff8fb,#f7f4ff)] p-6 shadow-[0_12px_32px_rgba(75,34,255,0.05)] sm:p-7">
+              <div className="rounded-[24px] border border-[#ded7f1] bg-[linear-gradient(105deg,#fff8fb,#f7f4ff)] p-6 shadow-[0_12px_32px_rgba(75,34,255,0.05)] sm:p-7">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-[#fff0f5] text-[#ff2f7d]">
-                    <AlertTriangle size={21} />
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-[#f0ecff] text-[#4b22ff]">
+                    <Landmark size={21} />
                   </div>
 
-                  <div>
-                    <h2 className="text-[16px] font-bold text-[#081232]">
-                      Review before publishing
+                  <div className="min-w-0">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#ff2f7d]">
+                      Company Information
+                    </p>
+
+                    <h2 className="mt-1 text-[16px] font-bold text-[#081232]">
+                      {termsDetails.legalName}
                     </h2>
 
-                    <p className="mt-2 text-[14px] font-medium leading-7 text-[#27314f]/86">
-                      This is a general website template. Replace the legal
-                      email, registered entity, governing law, payment terms,
-                      refund rules and service-specific language so the page
-                      accurately reflects your actual business.
-                    </p>
+                    <div className="mt-3 space-y-1.5 text-[13px] font-semibold leading-6 text-[#27314f]/82">
+                      <p>CIN: {termsDetails.cin}</p>
+                      <p>Registered location: {termsDetails.registeredLocation}</p>
+                      <p>
+                        Business and legal enquiries:{" "}
+                        <a
+                          href={`mailto:${termsDetails.contactEmail}`}
+                          className="font-bold text-[#4b22ff] hover:text-[#ff2f7d]"
+                        >
+                          {termsDetails.contactEmail}
+                        </a>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -780,7 +831,7 @@ export default function TermsAndConditionsPage() {
                         >
                           <div>
                             <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#ff2f7d]">
-                              Legal Email
+                              Business & Legal Email
                             </p>
 
                             <p className="mt-2 break-all text-[13px] font-bold text-[#081232] group-hover:text-[#4b22ff]">

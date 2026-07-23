@@ -150,7 +150,7 @@ export default function RootLayout({
         </Script>
       </head>
 
-      <body>
+      <body suppressHydrationWarning>
         {/* <CustomCursor /> */}
 
         <ScrollToTop />
