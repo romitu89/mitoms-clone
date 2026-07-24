@@ -43,6 +43,7 @@ type Project = {
   impact: string;
   link: string;
   linkLabel: string;
+  caseStudyHref: string;
   image: string;
   imageAlt: string;
   imageMode: "desktop" | "mobile";
@@ -69,6 +70,7 @@ const projects: Project[] = [
       "The platform creates a central digital ecosystem for artist discovery, cultural learning, community participation and professional opportunities. It helps artists improve visibility while making it easier for learners and organisers to discover talent, book sessions and participate in India's creative community.",
     link: "https://artmilap.com/",
     linkLabel: "Visit Artmilap",
+    caseStudyHref: "/case-studies/artmilap/",
     image: `${imagePath}artmilap.webp`,
     imageAlt: "Artmilap culture and artist networking platform homepage",
     imageMode: "desktop",
@@ -109,6 +111,7 @@ const projects: Project[] = [
       "The website gives Elevate Care a clear and professional digital presence, improves access to service information, supports customer enquiries and helps build trust through quality-care information, testimonials and recruitment content.",
     link: "https://elevatecare.mitoms.com/",
     linkLabel: "Visit Elevate Care",
+    caseStudyHref: "/case-studies/elevate-care/",
     image: `${imagePath}elevate-care.webp`,
     imageAlt: "Elevate Care healthcare services mobile website",
     imageMode: "mobile",
@@ -149,6 +152,7 @@ const projects: Project[] = [
       "The website strengthens the laboratory's credibility, presents its dental-restoration expertise clearly and gives dentists and prospective business clients a convenient way to understand the organisation and submit enquiries.",
     link: "https://sohardental.com/",
     linkLabel: "Visit Sohar Dental",
+    caseStudyHref: "/case-studies/sohar-dental-laboratory/",
     image: `${imagePath}sohar-dental.webp`,
     imageAlt: "Sohar Dental Laboratory mobile corporate website",
     imageMode: "mobile",
@@ -517,7 +521,7 @@ function ProjectSection({
               <a
                 href={project.link}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className={`group inline-flex w-full items-center justify-center gap-3 rounded-[12px] bg-gradient-to-r ${project.accent} px-5 py-3.5 text-[13px] font-bold text-white shadow-[0_12px_30px_rgba(75,34,255,0.22)] transition-all duration-300 hover:-translate-y-1 sm:w-auto sm:px-6`}
               >
                 {project.linkLabel}
@@ -526,6 +530,17 @@ function ProjectSection({
                   className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                 />
               </a>
+
+              <Link
+                href={project.caseStudyHref}
+                className="group inline-flex w-full items-center justify-center gap-3 rounded-[12px] border border-[#ded8ec] bg-white px-5 py-3.5 text-center text-[13px] font-bold text-[#081232] transition-all duration-300 hover:-translate-y-1 hover:border-[#4B22FF] hover:text-[#4B22FF] sm:w-auto sm:px-6"
+              >
+                Read Full Case Study
+                <ArrowRight
+                  size={16}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </Link>
 
               <Link
                 href="/contact/"

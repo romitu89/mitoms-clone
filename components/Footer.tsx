@@ -247,6 +247,39 @@ export default function Footer() {
               <li>
                 <Link
                   prefetch={false}
+                  href="/case-studies/"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
+                >
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
+                  Case Studies
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  prefetch={false}
+                  href="/insights/"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
+                >
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
+                  Insights
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  prefetch={false}
+                  href="/locations/"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
+                >
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
+                  Locations
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  prefetch={false}
                   href="/contact/"
                   className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
                 >
@@ -305,6 +338,28 @@ export default function Footer() {
                   Cloud Solutions
                 </Link>
               </li>
+
+              <li>
+                <Link
+                  prefetch={false}
+                  href="/services/ai-digital-transformation/"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
+                >
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
+                  AI Development
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  prefetch={false}
+                  href="/services/it-consulting/"
+                  className="group/link relative inline-flex items-center transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#743cff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030817]"
+                >
+                  <span className="absolute -left-4 h-1.5 w-1.5 rounded-full bg-[#743cff] opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:shadow-[0_0_10px_#743cff]" />
+                  IT Consulting
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -313,7 +368,15 @@ export default function Footer() {
             <h3 className="mb-4 text-[16px] font-bold text-white sm:mb-5 sm:text-lg">Contact</h3>
 
             <ul className="flex flex-wrap items-center gap-x-5 gap-y-3 text-[14px] text-white/78 sm:text-[15px] sm:text-white/82 lg:flex-col lg:items-start">
-              <li className="min-w-0">Delhi NCR, Ghaziabad, Uttar Pradesh, India – 201005</li>
+              <li className="min-w-0">
+                <Link
+                  prefetch={false}
+                  href="/locations/ghaziabad/web-development-company/"
+                  className="transition-colors duration-300 hover:text-white"
+                >
+                  Delhi NCR, Ghaziabad, Uttar Pradesh, India – 201005
+                </Link>
+              </li>
 
               <li>
                 <a

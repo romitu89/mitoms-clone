@@ -28,9 +28,8 @@ import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import ConsultationModal from "../../components/ConsultationModal";
 
-const pageTitle = "Software Development Services | MITOMS Technologies";
 const pageDescription =
-  "Explore MITOMS Technologies services for web development, mobile app development, UI/UX design, cloud solutions, AI transformation and IT consulting.";
+  "Explore MITOMS services for web development, mobile app development, UI/UX design, cloud solutions, AI transformation and IT consulting in India.";
 
 const servicesSchema = {
   "@context": "https://schema.org",
@@ -398,9 +397,6 @@ export default function ServicesPage() {
 
   return (
     <>
-      <title>{pageTitle}</title>
-      <meta name="description" content={pageDescription} />
-      <link rel="canonical" href="https://mitoms.com/services/" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }}

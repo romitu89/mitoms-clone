@@ -475,7 +475,7 @@ export default function AIDigitalTransformationPage() {
                 <Brain size={15} className="text-[#4b22ff]" />
 
                 <TypewriterText
-                  text="AI & Digital Transformation"
+                  text="AI Development Company in India"
                   speed={82}
                   delay={100}
                   className="text-[12px] font-bold uppercase tracking-[0.22em] text-[#4b22ff]"
@@ -531,9 +531,9 @@ export default function AIDigitalTransformationPage() {
               </h1>
 
               <p className="mt-5 max-w-[620px] text-[16px] font-medium leading-7 text-[#27314f]/90 sm:mt-7 sm:text-[17px] sm:leading-[1.8]">
-                We help businesses use artificial intelligence, automation and
-                data to simplify operations, improve experiences and create new
-                opportunities for sustainable growth.
+                MITOMS is an AI development company in India helping businesses
+                use artificial intelligence, automation and data to simplify
+                operations and improve digital experiences.
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-4">

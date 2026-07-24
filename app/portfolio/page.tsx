@@ -7,7 +7,7 @@ import {
   createWebPageSchema,
 } from "../../lib/seo";
 
-const title = "Software, Website and Mobile App Portfolio";
+const title = "Web Development and Mobile App Portfolio";
 const description =
   "Explore websites, mobile applications and digital products designed and developed by MITOMS Technologies across culture, healthcare and professional services.";
 

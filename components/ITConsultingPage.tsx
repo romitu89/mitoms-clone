@@ -469,7 +469,7 @@ export default function ITConsultingPage() {
                 <Compass size={15} className="text-[#4b22ff]" />
 
                 <TypewriterText
-                  text="IT Consulting Services"
+                  text="IT Consulting Company in India"
                   speed={85}
                   delay={100}
                   className="text-[12px] font-bold uppercase tracking-[0.22em] text-[#4b22ff]"
@@ -493,9 +493,9 @@ export default function ITConsultingPage() {
               </h1>
 
               <p className="mt-5 max-w-[620px] text-[16px] font-medium leading-7 text-[#27314f]/90 sm:mt-7 sm:text-[17px] sm:leading-[1.8]">
-                We help businesses plan, modernize and optimize technology with
-                practical strategies that improve performance, reduce risk and
-                support long-term growth.
+                MITOMS is an IT consulting company in India helping businesses
+                plan, modernize and optimize technology with practical strategies
+                that improve performance and reduce risk.
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-4">

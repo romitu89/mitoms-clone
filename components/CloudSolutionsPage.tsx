@@ -441,7 +441,7 @@ export default function CloudSolutionsPage() {
                 <Cloud size={15} className="text-[#4b22ff]" />
 
                 <TypewriterText
-                  text="Cloud Solutions"
+                  text="Cloud Consulting and Migration in India"
                   speed={90}
                   delay={100}
                   nowrap
@@ -466,8 +466,9 @@ export default function CloudSolutionsPage() {
               </h1>
 
               <p className="mt-5 max-w-[610px] text-[16px] font-medium leading-7 text-[#27314f]/90 sm:mt-7 sm:text-[17px] sm:leading-[1.8]">
-                We help businesses migrate, modernize and manage applications
-                using secure, scalable and reliable cloud infrastructure.
+                MITOMS provides cloud consulting and migration services in India,
+                helping businesses modernize and manage applications on secure,
+                scalable and reliable infrastructure.
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-4">

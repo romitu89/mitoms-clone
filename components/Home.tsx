@@ -332,9 +332,15 @@ function AnimatedCounter({
   }, [hasStarted, target]);
 
   return (
-    <span ref={elementRef}>
-      {count}
-      {suffix}
+    <span ref={elementRef} aria-label={`${target}${suffix}`}>
+      <span aria-hidden="true">
+        {count}
+        {suffix}
+      </span>
+      <span className="sr-only">
+        {target}
+        {suffix}
+      </span>
     </span>
   );
 }
@@ -1058,9 +1064,9 @@ export default function Home() {
             </h1>
 
             <p className="mt-6 max-w-[575px] text-[16px] font-medium leading-7 text-[#27314f]/92 sm:mt-8 sm:text-[17px] sm:leading-[1.8]">
-              We partner with forward-thinking businesses to design, build and
-              scale digital products and solutions that create measurable growth
-              and lasting impact.
+              MITOMS is a custom software development company in India helping
+              forward-thinking businesses design, build and scale websites,
+              mobile apps and digital products that create lasting value.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 lg:gap-6">
@@ -1326,7 +1332,7 @@ export default function Home() {
         </div>
 
         <div className="mt-9 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-          {services.map((item, index) => {
+          {services.map((item) => {
             const Icon = item.icon;
             return (
               <Link

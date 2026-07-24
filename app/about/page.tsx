@@ -7,7 +7,7 @@ import {
   createWebPageSchema,
 } from "../../lib/seo";
 
-const title = "About Our Software Development Company";
+const title = "About MITOMS Technologies";
 const description =
   "Learn about MITOMS Technologies, our values, delivery approach and commitment to building reliable digital products and technology solutions for businesses.";
 

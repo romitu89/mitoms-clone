@@ -450,7 +450,7 @@ export default function MobileAppDevelopmentPage() {
                 <Smartphone size={15} className="text-[#4b22ff]" />
 
                 <TypewriterText
-                  text="Mobile App Development"
+                  text="Mobile App Development Company in India"
                   speed={85}
                   delay={100}
                   className="text-[12px] font-bold uppercase tracking-[0.22em] text-[#4b22ff]"
@@ -474,9 +474,9 @@ export default function MobileAppDevelopmentPage() {
               </h1>
 
               <p className="mt-5 max-w-[600px] text-[16px] font-medium leading-7 text-[#27314f]/90 sm:mt-7 sm:text-[17px] sm:leading-[1.8]">
-                We design and develop secure, scalable and engaging mobile
-                applications that connect businesses with their customers and
-                simplify everyday digital interactions.
+                MITOMS is a mobile app development company in India creating
+                secure, scalable iOS, Android and cross-platform applications
+                for customer and business workflows.
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-4">

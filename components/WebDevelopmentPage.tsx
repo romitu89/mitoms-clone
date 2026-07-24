@@ -444,7 +444,7 @@ export default function WebDevelopmentPage() {
                 <Code2 size={15} className="text-[#4b22ff]" />
 
                 <TypewriterText
-                  text="Web Development Services"
+                  text="Web Development Company in India"
                   speed={85}
                   delay={100}
                   className="text-[12px] font-bold uppercase tracking-[0.22em] text-[#4b22ff]"
@@ -493,9 +493,9 @@ export default function WebDevelopmentPage() {
               </h1>
 
               <p className="mt-5 max-w-[600px] text-[16px] font-medium leading-7 text-[#27314f]/90 sm:mt-7 sm:text-[17px] sm:leading-[1.8]">
-                We design and develop fast, responsive and scalable websites
-                that communicate your brand, support your operations and create
-                better digital experiences for your customers.
+                MITOMS is a web development company in India creating fast,
+                responsive and scalable websites and web applications that
+                support business operations and customer growth.
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-4">

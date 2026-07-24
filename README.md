@@ -1,33 +1,37 @@
 # MITOMS Technologies Website
 
-SEO-optimized Next.js static website prepared for fast deployment on Hostinger shared hosting.
+Existing MITOMS Next.js website enhanced with technical SEO, search-focused content and static-export validation while preserving the current visual design and functionality.
 
 ## Architecture
 
-- Next.js App Router is used for development and static generation.
-- The production website is exported to `out/`.
-- Hostinger serves the static files directly; no persistent Node.js server is required.
-- Consultation forms submit to `public/api/consultation.php`.
-- Apache rules in `public/.htaccess` handle HTTPS/non-www redirects, compression, caching and security headers.
+- Next.js App Router for development and static generation
+- Static production export to `out/`
+- No persistent Node.js server required on Hostinger
+- Consultation forms submit to `public/api/consultation.php`
+- Apache `.htaccess` handles redirects, compression, caching and security headers
 
-## Included SEO and performance features
+## SEO implementation
 
-- Unique page titles, descriptions and canonical URLs
-- Open Graph and Twitter sharing metadata
-- Organization, WebSite, WebPage, Breadcrumb, Service and ItemList JSON-LD
+- Unique titles, descriptions and canonical URLs
+- Open Graph and Twitter metadata
+- Organization, ProfessionalService, WebSite, WebPage, Breadcrumb, Service, FAQ, Article, CreativeWork and ItemList JSON-LD
 - Generated `robots.txt`, `sitemap.xml` and web manifest
-- Search-engine-safe 404 page
-- Optimized WebP website images and social sharing image
-- Reduced route prefetching for a lighter initial page load
-- Static asset caching and Brotli/Gzip compression rules
-- Optional Google Search Console and GA4 environment variables
+- Search-safe 404 page
+- Legacy indexed URL redirects
+- Local Ghaziabad and Delhi NCR landing pages
+- Detailed case studies and search-intent insights
+- Crawlable internal links
+- Static HTML content for primary page information
+- Post-build validation for titles, descriptions, canonicals, H1s, JSON-LD, sitemap and links
 
 ## Requirements
 
 - Node.js 20.9 or newer
 - npm
 
-## Build on Windows
+Do not copy `node_modules` between Windows and Linux. Always create a clean installation for the operating system performing the build.
+
+## Recommended Windows build
 
 Double-click:
 
@@ -35,24 +39,38 @@ Double-click:
 build-hostinger.bat
 ```
 
-The script performs a clean dependency installation, runs ESLint and TypeScript checks, builds the static website and creates:
+It performs:
 
-```text
-MITOMS-PublicHTML-Build.zip
-```
+1. `npm ci`
+2. ESLint and TypeScript checks
+3. Clean Next.js static export
+4. SEO validation of generated HTML
+5. Creation of `MITOMS-PublicHTML-Build.zip`
 
-## Build manually
+## Manual build
 
 ```bash
 npm ci
 npm run build:hostinger
 ```
 
-The generated website is placed in `out/`.
+The generated site is placed in `out/`.
+
+To run only source checks:
+
+```bash
+npm run check
+```
+
+To validate an existing `out/` build:
+
+```bash
+npm run seo:validate
+```
 
 ## Environment variables
 
-Copy `.env.example` to `.env.local` and add values only when required:
+Copy `.env.example` to `.env.local` or `.env.production` when required:
 
 ```env
 NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=
@@ -63,7 +81,7 @@ Rebuild after changing either value.
 
 ## Contact email configuration
 
-Before building, review these constants in `public/api/consultation.php`:
+Review these constants before deployment in `public/api/consultation.php`:
 
 ```php
 const CONSULTATION_TO_EMAIL = 'sales@mitoms.com';
@@ -71,13 +89,15 @@ const FROM_EMAIL = 'sales@mitoms.com';
 const FROM_NAME = 'MITOMS Website';
 ```
 
-The sender mailbox should exist in Hostinger.
+The sender mailbox must exist on Hostinger. Use authenticated SMTP later if PHP `mail()` delivery is unreliable.
 
 ## Deployment
 
-Upload and extract the contents of `MITOMS-PublicHTML-Build.zip` directly inside `public_html`. Do not upload the source-code ZIP to `public_html`.
+Upload and extract the contents of `MITOMS-PublicHTML-Build.zip` directly inside `public_html`. Do not upload the source ZIP or `node_modules` to `public_html`.
 
-Read these files before launch:
+Read before launch:
 
 - `HOSTINGER-PHP-DEPLOYMENT.txt`
 - `SEO-NEXT-STEPS.md`
+- `SEO-KEYWORD-PLAN.md`
+- `SEO-IMPLEMENTATION-REPORT.md`

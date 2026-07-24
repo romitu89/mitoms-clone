@@ -485,7 +485,7 @@ export default function UIUXDesignPage() {
                 <PenTool size={15} className="text-[#4b22ff]" />
 
                 <TypewriterText
-                  text="UI/UX Design Services"
+                  text="UI/UX Design Company in India"
                   speed={85}
                   delay={100}
                   className="text-[12px] font-bold uppercase tracking-[0.22em] text-[#4b22ff]"
@@ -509,9 +509,9 @@ export default function UIUXDesignPage() {
               </h1>
 
               <p className="mt-5 max-w-[610px] text-[16px] font-medium leading-7 text-[#27314f]/90 sm:mt-7 sm:text-[17px] sm:leading-[1.8]">
-                We design intuitive websites, mobile applications and digital
-                products that are easy to understand, visually engaging and
-                aligned with real business goals.
+                MITOMS is a UI/UX design company in India creating intuitive
+                websites, mobile applications and digital products that are easy
+                to understand and aligned with real business goals.
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-4">
